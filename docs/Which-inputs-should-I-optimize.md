@@ -68,28 +68,29 @@ Figure 4 below depicts an example of Vehicle Fleet Mix input file. Only three ro
 
 
 
-### **2. Subsidies for transit and on-demand rideshare users**
+### **2. Transit and on-demand ride incentives**
 
 #### 2.1. Description
 
-In an effort to encourage the use of sustainable transportation alternatives to private vehicles, SFDOT has asked you to allocate subsidies to incentivize citizens to use public transit and/or on-demand ridesharing.
+In an effort to encourage the use of sustainable transportation alternatives to private vehicles, SFBl is considering providing incentives to promote mass transit in Sioux Faux. SFBL is exploring options for citizens lacking access to quality transit or means to pay fares, including defraying the cost of certain qualified transit trips  and/or on-demand rides. 
 
-The **travel modes** and connectivity options to subsidize can be chosen from the following:
+You may choose to defray the cost of on-demand rides and/or transit based on either age group, income group, or both. %, up to a total amount constrained by SFDOT's budget
+To do so, the range of qualifying socio-demographic characteristics and value of the incentive provided to each group must be defined for passengers using each of the following modes of transportation to complete a trip: 
   * "ride-hail": use of on-demand rideshare as the main transport mode for the trip
   * "drive_transit": use of the personal car as an access/egress mode to/from transit (bus)
   * "walk_transit": walking as an access/egress mode to/from transit (bus)
   * "walk": walking as the main mode for the trip
 
-Qualification for a subsidy can be based on **age** and/or **income**. You can find the distributions of Sioux Faux's population over age and income on the page [**INSERT LINK**].
+Qualification for an incentive can be based on **age** and/or **income**. You can find the distributions of Sioux Faux's population over age and income on the page [**INSERT LINK**].
 
-Subsidies for one mode do not disqualify subsidizing travel for another mode. Additionally, the price of each leg in a multimodal trip will be adjusted by the amount of subsidy allocated to the qualifying agent undertaking the trip. That is, for each trip (i.e. travel from the agent's origin to the goal activity), the best route for each multimodal type will include subsidies in the overall cost of the trip. This generalized cost will then factor into agent decision-making.
+Incentives for one mode do not disqualify providing incentives for another mode. Additionally, the price of each leg in a multimodal trip will be adjusted by the amount of incentive allocated to the qualifying agent undertaking the trip. That is, for each trip (i.e. travel from the agent's origin to the goal activity), the best route for each multimodal type will include subsidies in the overall cost of the trip. This generalized cost will then factor into agent decision-making.
 
 #### 2.2. Technical Details:
 Your recommendation is to be submitted in a file named `ModeSubsidies.csv` according to the format specified in Table 2. See Figure 5 for an example.
 
 | Column Name | Data Type |Description | Validation Criteria |
 | :---: |:--- | :--- | :----|
-| `mode` | [`Subsidizable`](#subsidizable)| Mode to subsidize. | None |
+| `mode` | [`Subsidizable`](#subsidizable)| Mode to provide incentive to. | None |
 | `age` | [`Range`](#range) | The range of ages of agents that qualify for this subsidy. | Must be greater than 0 and less than 120 (the maximum age of any resident in Sioux Faux)|
 | `income` | [`Range`](#range) | The range of individual incomes (in $US) of agents that qualify for this subsidy | Must be greater than 0. |
 | `amount` | `Float` | The amount (in $US/person) to subsidize this entry's `mode`| Must be greater than 0.|
@@ -99,7 +100,7 @@ Your recommendation is to be submitted in a file named `ModeSubsidies.csv` accor
 #### 2.3. Example:
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_Subsidies.png)
-***Figure 5: Example of Mode Subsidy Input***
+***Figure 5: Example of Mode Incentive Input***
 
 Figure 5 depicts an example input file describing the following situation:
 
@@ -182,7 +183,7 @@ For each new bus fare that you want to introduce, you need to specify the amount
 
 | Column Name | Description | Validation Criteria |
 | :---: | :--- | :----|
-| `agencyId`| `String` | Agency identifier | Must equal agency Id found under `agencyId` in `agencies.txt` of corresponding GTFS file for transit agency with `agency_name` designated by parent directory of `gtfs_data` in starter kit `/reference-data` directory. Note that for Sioux Faux, SFBL is the only agency operating in the city (`agencId`="217"). Therefore, any entry in the .csv file will have "217" under `agencyId`.|
+| `agencyId`| `String` | Agency identifier | Must equal agency Id found under `agencyId` in `agencies.txt` of corresponding GTFS file for transit agency with `agency_name` designated by parent directory of `gtfs_data` in starter kit `/reference-data` directory. Note that for Sioux Faux, SFBL is the only agency operating in the city (`agencyId`="217"). Therefore, any entry in the .csv file will have "217" under `agencyId`.|
 | `routeId` | `String` | The route that will have its fare specified. | A route can only have its fare set once. The `routeId` name must exist in the `routes.txt` file corresponding to the GTFS data for the agency specified by this entry's `agencyId`|
 | `age` | [`Range`](#range) | The range of ages of agents that this fare pertains to. | Must be greater than 0 and less than 120 (the maximum age of any resident in Sioux Faux)|
 | `amount` | `Float` | The amount (in $US) to charge an agent in the corresponding fare group. | Must be greater than 0.|
