@@ -37,3 +37,6 @@ Read:
   * the description of inputs
   * the description of outputs
   * A note on what and how to submit
+  
+  ## Author
+  Valentine Golfier-Vetterli
