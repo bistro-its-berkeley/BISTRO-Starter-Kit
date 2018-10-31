@@ -11,7 +11,7 @@ Before you can get started, some explanations on the challenge are needed. Even 
 Read:
   * **Introduction to the Urban Transportation Optimization Problem** First, read the Introduction to the Urban Transportation Optimization Problem (insert link). It will give you a general understanding of the problem you need to solve and the related optimization challenges. 
   
-  * **Worked example** Toy problem with Beamville?
+  * **Worked example** Run one simulationwith the 1k scenario
 
   * **The Problem statement of Phase 1** Presenation of the scenario.
   
