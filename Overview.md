@@ -13,7 +13,7 @@ Read:
   
   * **Worked example** Toy problem with Beamville?
 
-  * **the Problem statement of Phase 1** Presenation of the scenario.
+  * **The Problem statement of Phase 1** Presenation of the scenario.
   
   * **How to submit?** link to the md file
   
