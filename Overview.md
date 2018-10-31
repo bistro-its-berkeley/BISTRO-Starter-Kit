@@ -11,11 +11,11 @@ Before you can get started, some explanations on the challenge are needed. Even 
 Read:
   * **Introduction to the Urban Transportation Optimization Problem** First, read the Introduction to the Urban Transportation Optimization Problem (insert link). It will give you a general understanding of the problem you need to solve and the related optimization challenges. 
   
-  * **Worked example** Run one simulationwith the 1k scenario
+  * **Worked example** Run one simulation with the 1k scenario and show the expected outputs
 
-  * **The Problem statement of Phase 1** Presenation of the scenario.
+  * **The Problem statement of Phase 1** Presentation of the scenario
   
-  * **How to submit?** link to the md file
+  * **How to submit?** link to the md. file
   
   * **The technical starter-kit** Installation and run of the BEAM simulator
  
@@ -36,7 +36,7 @@ Read:
   * a worked example
   * the description of inputs
   * the description of outputs
-  * A note on what and how to submit
+  * a note on what and how to submit
   
   ## Author
   Valentine Golfier-Vetterli
