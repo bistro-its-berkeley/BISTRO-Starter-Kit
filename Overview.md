@@ -28,7 +28,7 @@ Read:
 
 ## What can I find in this repository?
 
-* Documentation folder
+* Documentation folder 
   * the Quick introduction on the Urban Transportation Optimization problem (link)
   * the Technical starter kit (Install + run Beam)
   * the Problem statement of the Hackathon
