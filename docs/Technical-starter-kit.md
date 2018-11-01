@@ -9,6 +9,7 @@ https://github.com/sfwatergit/BeamCompetitions
 After you unzip the archive, you will see a directory that looks like this when partially expanded:
 
 ![Competition Repository](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/CompetitionRepository.png "Competition Repository")
+
 ***Figure 1: Competition Repository***
  
 # Overview of the repository
@@ -37,6 +38,7 @@ You have a set of four available buses to pick from, each of them having differe
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/BusTypes.png "Figure 3: Set of available bus types")
 ***Figure 3: Set of available bus types***
+
 
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/BusCosts.png "Figure 3: Costs of available bus types")
