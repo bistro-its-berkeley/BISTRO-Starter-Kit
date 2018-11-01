@@ -4,7 +4,7 @@ Introduction sentence
 
 ## What is BEAM?
 
-BEAM stands for Behavior, Energy, Autonomy, and Mobility.
+BEAM stands for Behavior, Energy, Autonomy, and Mobility. *To be completed*
 
 To read more documentation on BEAM, click [here](https://beam.readthedocs.io/en/latest/about.html#overview).
 
