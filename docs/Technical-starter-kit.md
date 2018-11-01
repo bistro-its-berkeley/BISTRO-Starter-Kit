@@ -50,13 +50,13 @@ Currently, the number of buses transiting on each route is trip-based. For each 
 
 In an effort to promote the use of and access to public transportation, you may define subsidies for the users walking or using on-demand rideshare as a last-mile solution to access transit. Those subsidies will be based on the following age and/or income ranges:
 
- * Subsidies for taking transit 
-   * Children under 10 years old (excluded)
-   * Seniors from 50 years old (and younger than 75 years old) and earning less than 20’000$/year
- * Subsidies for using on-demand rideshare as a last-mile-solution to access transit 
-   * People earning less than 40’000$/year
-   * People earning between 40’000$/year and 50’000$/year (excluded)
-   * People earning between 50’000$/year and 60’000$/year (excluded)
+  * Subsidies for walking to transit 
+    * Children under 10 years old (excluded)
+    * Seniors from 50 years old (and younger than 75 years old) and earning less than 20’000$/year
+  * Subsidies for using on-demand rideshare to access transit 
+    * People earning less than 40’000$/year
+    * People earning between 40’000$/year and 50’000$/year (excluded)
+    * People earning between 50’000$/year and 60’000$/year (excluded)
  
 You will be able to change the subsidies amounts [$/person] in the input file *submission-inputs/ModeSubsidies.csv* shown below. 
 
