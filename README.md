@@ -21,7 +21,7 @@ Read:
  
 
 ## What do I have to do?
-
+*to be completed*
 1. Problem solving
 2. Submission
 3. Goal
