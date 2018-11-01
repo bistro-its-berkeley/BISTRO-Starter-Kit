@@ -32,6 +32,7 @@ Read:
 
 * Documentation folder 
   * the [Quick introduction on the Urban Transportation Optimization problem](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md)
+  * a note on [how to run a simulation]()
   * a description of the [inputs to optimize](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Which-inputs-should-I-optimize%3F.md)
   * a description of the outputs and the scoring function [link](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Understanding%20the%20outputs%20and%20the%20scoring%20function) -*to be completed*
   * the Problem statement of the Hackathon - *to be added*
