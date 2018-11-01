@@ -5,7 +5,7 @@ This document aims at giving you an overview of the challenge framework. It desc
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Overview%20Challenge%20Framework.png)
 
 
-## What is BEAM?
+## The simulator: : What is BEAM?
 
 BEAM stands for Behavior, Energy, Autonomy, and Mobility. - *To be completed*
 
