@@ -7,8 +7,6 @@ This document aims at giving you an overview of the challenge framework. It desc
 
 ## The simulation of daily urban travels
 
-### What are we simulating?
-
 2-3 sentence from the pb statement *To be completed*
 
 ### What is BEAM?
