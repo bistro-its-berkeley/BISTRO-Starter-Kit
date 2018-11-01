@@ -3,16 +3,6 @@
 
 To be able to optimize the transportation system of Sious Faux, you will need to test some different input-policies  by running an agent-based simulation with the BEAM simulator. This document gives you the steps for installing BEAM and understanding what the inputs and outputs of the simulation are and where they are stored.
 
-## Installing BEAM
-*this paragraph might go in some other document*
-Clone the following GitHub repository in your GitHub Desktop:
-https://github.com/sfwatergit/BeamCompetitions
-
-After you unzip the archive, you will see a directory that looks like this when partially expanded:
-
-![Competition Repository](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/CompetitionRepository.png "Competition Repository")
-
-***Figure 1: Competition Repository***
  
 ## Overview of the repository
 
