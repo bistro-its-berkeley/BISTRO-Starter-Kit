@@ -15,7 +15,9 @@ Read:
   
   * **The inputs to optimize** [link](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Which-inputs-should-I-optimize%3F.md)
   
-  * **The outputs** [link](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Understanding%20the%20outputs%20and%20the%20scoring%20function)
+  * **The outputs description** [link](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Understanding%20the%20outputs%20and%20the%20scoring%20function)
+  
+  * **The tutorial on how to run a simulation**
   
   * **Worked example** Run the simulation with the base scenario and show the expected outputs
   
