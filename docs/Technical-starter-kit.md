@@ -9,8 +9,7 @@ https://github.com/sfwatergit/BeamCompetitions
 After you unzip the archive, you will see a directory that looks like this when partially expanded:
 
 ![Competition Repository](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/CompetitionRepository.png "Competition Repository") 
-
-#### Figure 1: Competition Repository
+##### Figure 1: Competition Repository
  
 # Overview of the repository
 
