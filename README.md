@@ -21,8 +21,6 @@ Read:
   
   * **How to submit?** [link](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/What_and_how_to_submit)
   
-  * **The technical starter-kit** Installation and run of the BEAM simulator
- 
 
 ## What do I have to do?
 *to be completed*
