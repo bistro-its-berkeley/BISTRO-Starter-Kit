@@ -37,8 +37,9 @@ Read:
   * a description of the [outputs and the scoring function](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Understanding%20the%20outputs%20and%20the%20scoring%20function) -*to be completed*
   * the Problem statement of the Hackathon - *to be added*
   * the [Problem statement of Phase 1](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Problem_statement_Phase%20I.pdf) - *to be updated*
-  * a simulation example: the baseline scenario - *might be removed*
   * a note on [what and how to submit](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/What_and_how_to_submit) -*to be completed*
+  
+  * a simulation example: the baseline scenario - *might be removed*
  
 
 ## Author
