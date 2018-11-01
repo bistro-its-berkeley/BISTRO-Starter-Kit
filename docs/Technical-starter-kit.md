@@ -8,7 +8,8 @@ https://github.com/sfwatergit/BeamCompetitions
 
 After you unzip the archive, you will see a directory that looks like this when partially expanded:
 
-![Competition Repository](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/CompetitionRepository.png "Competition Repository") Figure 1: Competition Repository
+![Competition Repository](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/CompetitionRepository.png "Competition Repository") 
+Figure 1: Competition Repository
  
 # Overview of the repository
 
@@ -26,16 +27,19 @@ To help the Sioux Faux Department of Transportation (SFDOT) combat congestion an
 
 * **Bus fleet composition**
 
-The submission input file *VehicleFleetMix.csv* describes the status of the bus fleet (see Fig.1). Currently, SFBL (*agencyID* = 217) is operating twelve bus lines in Sioux Faux. For four of them, you can decide which type of bus (i.e. *vehicleTypeId*) should be assigned to service each of these four bus routes (i.e. *routeID*). There can be only **one type of bus per route**. 
+The submission input file *VehicleFleetMix.csv* describes the status of the bus fleet (see Fig.2). Currently, SFBL (*agencyID* = 217) is operating twelve bus lines in Sioux Faux. For four of them, you can decide which type of bus (i.e. *vehicleTypeId*) should be assigned to service each of these four bus routes (i.e. *routeID*). There can be only **one type of bus per route**. 
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_VehicleFleetMix.png "*Figure 1: Input1 - composition of the bus fleet")
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_VehicleFleetMix.png "*Figure 2: Input1 - composition of the bus fleet")
+Figure 2: Input1 - composition of the bus fleet
 
 You have a set of four available buses to pick from, each of them having different technical properties (*fixed-data/siouxfalls/vehicleTypes.csv*, see Fig.2) and costs (*fixed-data/siouxfalls/ vehicleCosts.csv*, see Fig.3). Based on these characteristics, you have to choose between keeping the currently operated bus types (see Figure 1 above) or purchasinf new types of buses.
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/BusTypes.png "Figure 2: Set of available bus types")
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/BusTypes.png "Figure 3: Set of available bus types")
+Figure 3: Set of available bus types
 
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/BusCosts.png "Figure 3: Costs of available bus types")
+Figure 4: Costs of available bus types
 
 Note:
 Currently, the number of buses transiting on each route is trip-based. For each new trip made along the route, a new bus is used. The simulation do not reflect the cycles made by buses in reality.
@@ -57,6 +61,7 @@ You will be able to change the subsidies amounts [$/person] in the input file *s
 Then give the syntax for a range. These are defined as in mathematical notation where ( and ) indicate inclusive and [ and ] indicate exclusive upper and lower bounds, respectively.
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_Subsidies.png "Figure 4: Input2 - Subsidies for transit and on-deamdn rideshare users")
+Figure 5: Input2 - Subsidies for transit and on-deamdn rideshare users
 
 
 Format, where to be placed, what they signify (cf.pb statement)
