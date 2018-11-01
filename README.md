@@ -9,11 +9,15 @@ In this repo you will find background material, sample files and support scripts
 Before you can get started, some explanations on the challenge are needed. Even if you will not have to deal with complex transit analysis (the BEAM simulator will do it for you!), understanding a few transportation concepts and the general working of the simulator will help you to grasp the framework of the challenge. 
 
 Read:
-  * **Introduction to the Urban Transportation Optimization Problem** First, read the Introduction to the Urban Transportation Optimization Problem (insert link). It will give you a general understanding of the problem you need to solve and the related optimization challenges. 
+  * **Introduction to the Urban Transportation Optimization Problem** First, read the quick [introduction on the Urban Transportation Optimization problem](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md). It will give you a general understanding of the problem you need to solve and the related optimization challenges. 
+
+  * **The Problem statement of Phase 1** Presentation of the Sioux-Faux case [link](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Problem_statement_Phase%20I.pdf)
+  
+  * **The inputs to optimize** [link](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Technical-starter-kit.md)
+  
+  * **The outputs** [link](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Understanding%20the%20outputs%20and%20the%20scoring%20function)
   
   * **Worked example** Run one simulation with the 1k scenario and show the expected outputs
-
-  * **The Problem statement of Phase 1** Presentation of the scenario
   
   * **How to submit?** link to the md. file
   
@@ -31,10 +35,11 @@ Read:
 * Documentation folder 
   * the [Quick introduction on the Urban Transportation Optimization problem](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md)
   * a description of the [inputs to optimize](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Technical-starter-kit.md) -*might be renamed*
+  * A description of the outputs and the scoring function [link](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Understanding%20the%20outputs%20and%20the%20scoring%20function)
   * the Problem statement of the Hackathon - *to be added*
   * the [Problem statement of Phase 1](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Problem_statement_Phase%20I.pdf) - *to be updated*
   * a simulation example: the baseline scenario - *might be removed*
-  * a note on [what and how to submit](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/What_and_how_to_submit)
+  * a note on [what and how to submit](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/What_and_how_to_submit) -*to be completed*
  
   
   ## Author
