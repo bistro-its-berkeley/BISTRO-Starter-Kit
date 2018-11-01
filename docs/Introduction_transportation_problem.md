@@ -15,13 +15,15 @@ To read more documentation on BEAM, click [here](https://beam.readthedocs.io/en/
 
 ## What are the outputs of BEAM? 
 
-Once all agents of the system have chosen their optimal transportation modes to attend their daily activities, the system reaches what we call an *equilibrium state*. The quality of the new policy-based transportation system can then be evaluated based on the new system performance over the day compared to the base-policy scenario. Three outputs are evaluated here:
+Once all agents of the system have chosen their optimal transportation modes to attend their daily activities, the system reaches what we call an *equilibrium state*. Based on this equilibrium state, the simulator gives back a serie of outputs concerning the individuals and the system in general. 
 
-* How much *congestion* did the agents experienced during the day?
+The quality of the new policy-based transportation system is evaluated based on the new system performance over the day compared to the base-policy scenario. The performance is measured thanks to a scoring function S which computes the weighted sum of three groups of outputs:
+
+* How much *congestion* did the agents experience during the day?
 * What *level of service* did the transportation system offer to agents?
 * What *costs* were incurred by the city?
 
-These three elements are gathered and weighted in a scoring function S. The bigger the score, the more performant the system.
+The bigger the score, the more performant the system.
 
 ## Optimizing the policy  
 
