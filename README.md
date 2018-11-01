@@ -41,6 +41,6 @@ Read:
   * a simulation example: the baseline scenario - *might be removed*
   * a note on [what and how to submit](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/What_and_how_to_submit) -*to be completed*
  
-  
-  ## Author
+
+## Author
   Valentine Golfier-Vetterli
