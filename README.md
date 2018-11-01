@@ -29,14 +29,15 @@ Read:
 ## What can I find in this repository?
 
 * Documentation folder 
-  * the Quick introduction on the Urban Transportation Optimization problem (link)
-  * the Technical starter kit (Install + run Beam)
-  * the Problem statement of the Hackathon
-  * the Problem statement of Phase 1
-  * a worked example
+  * the [Quick introduction on the Urban Transportation Optimization problem](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md)
+  * the [Technical starter kit](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Technical-starter-kit.md)
+  * the Problem statement of the Hackathon *to be added*
+  * the Problem statement of Phase 1 *to be added*
+  * a worked example *might be removed*
   * the description of inputs
   * the description of outputs
-  * a note on what and how to submit
+  * a note on what and how to submit *to  be added*
+  [here](https://beam.readthedocs.io/en/latest/about.html#overview)
   
   ## Author
   Valentine Golfier-Vetterli
