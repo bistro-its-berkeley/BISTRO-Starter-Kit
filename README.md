@@ -15,7 +15,7 @@ Read:
   
   * **The inputs to optimize** [link](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Which-inputs-should-I-optimize%3F.md)
   
-  * **The outputs description** [link](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Understanding%20the%20outputs%20and%20the%20scoring%20function)
+  * **The outputs description** [link](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md)
   
   * **The tutorial on how to run a simulation** [link](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/How_to_run_a_simulation%3F.md)
   
@@ -34,7 +34,7 @@ Read:
   * the [Quick introduction on the Urban Transportation Optimization problem](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md)
   * a note on [how to run a simulation](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/How_to_run_a_simulation%3F.md)
   * a description of the [inputs to optimize](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Which-inputs-should-I-optimize%3F.md)
-  * a description of the [outputs and the scoring function](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Understanding%20the%20outputs%20and%20the%20scoring%20function) -*to be completed*
+  * a description of the [outputs and the scoring function](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md) -*to be completed*
   * the Problem statement of the Hackathon - *to be added*
   * the [Problem statement of Phase 1](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Problem_statement_Phase%20I.pdf) - *to be updated*
   * a note on [what and how to submit](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/What_and_how_to_submit) -*to be completed*
