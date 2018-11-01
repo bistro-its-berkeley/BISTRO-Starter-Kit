@@ -11,7 +11,7 @@ Before you can get started, some explanations on the challenge are needed. Even 
 Read:
   * **Introduction to the Urban Transportation Optimization Problem** First, read the quick [introduction on the Urban Transportation Optimization problem](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md). It will give you a general understanding of the problem you need to solve and the related optimization challenges. 
 
-  * **The Problem statement of Phase 1** Presentation of the Sioux-Faux case [link](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Problem_statement_Phase%20I.pdf)
+  * **The Problem statement of the Hackathon** Presentation of the Sioux-Faux case
   
   * **The inputs to optimize** [link](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Technical-starter-kit.md)
   
