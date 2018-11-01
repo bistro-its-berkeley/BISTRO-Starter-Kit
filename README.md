@@ -31,11 +31,9 @@ Read:
 * Documentation folder 
   * the [Quick introduction on the Urban Transportation Optimization problem](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md)
   * the [Technical starter kit](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Technical-starter-kit.md) -*might be renamed*
-  * the Problem statement of the Hackathon - *to be updated*
-  * the Problem statement of Phase 1 - *to be updated*
+  * the Problem statement of the Hackathon - *to be added*
+  * the [Problem statement of Phase 1](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Problem_statement_Phase%20I.pdf) - *to be updated*
   * a simulation example: the baseline scenario - *might be removed*
-  * the description of inputs
-  * the description of outputs
   * a note on [what and how to submit](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/What_and_how_to_submit)
  
   
