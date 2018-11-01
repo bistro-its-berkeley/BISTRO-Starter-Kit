@@ -64,14 +64,12 @@ In an effort to promote the use of and access to public transportation, you may 
  
 You will be able to change the subsidies amounts [$/person] in the input file *submission-inputs/ModeSubsidies.csv* shown below. 
 
-Then give the syntax for a range. These are defined as in mathematical notation where ( and ) indicate inclusive and [ and ] indicate exclusive upper and lower bounds, respectively.
-
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_Subsidies.png "Figure 4: Input2 - Subsidies for transit and on-deamdn rideshare users")
 ***Figure 5: Input2 - Subsidies for transit and on-deamdn rideshare users***
 
 
-Format, where to be placed, what they signify (cf.pb statement)
+---------------------
 
-For more detailed general inputs documentation in BEAM, see Model Inputs.
-
+Note to myself: (Format, where to be placed, what they signify (cf.pb statement)
+Then give the syntax for a range. These are defined as in mathematical notation where ( and ) indicate inclusive and [ and ] indicate exclusive upper and lower bounds, respectively.)
 
