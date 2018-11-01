@@ -4,13 +4,14 @@ Introduction sentence
 
 ## What is BEAM?
 
-BEAM stands for Behavior, Energy, Autonomy, and Mobility. *To be completed*
+BEAM stands for Behavior, Energy, Autonomy, and Mobility. - *To be completed*
 
 To read more documentation on BEAM, click [here](https://beam.readthedocs.io/en/latest/about.html#overview).
 
 ## What are the inputs of BEAM?
 
-(combination of inputs on public transit operations and public transit financial aspects)
+- *To be completed*
+Combination of inputs on public transit operations and public transit financial aspects.
 
 
 ## What are the outputs of BEAM and how are they used to evaluate the transportation system? 
