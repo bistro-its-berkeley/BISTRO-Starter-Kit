@@ -15,11 +15,17 @@ After you unzip the archive, you will see a directory that looks like this when 
 
 1. Open your Terminal.
 
-2. Make sure you are located in the Competition GitHub repository by computing *cd* + the *absolute path of the competition repository* in the command line.
+2. Make sure you are located in the Competition GitHub repository by computing:
 
-3. Download Gradle by running the following command: *./gradlew :run /PappArgs="['--config','fixed-inputs/siouxfalls/siouxfalls-1k.conf]"*
+*cd* + the *absolute path of the competition repository* in the command line.
 
-4. Launch a simulation by running the following command: ./gradlew run --args='--config fixed-data/siouxfalls/siouxfalls-1k.conf'
+3. Download Gradle by running the following command: 
+
+*./gradlew :run /PappArgs="['--config','fixed-inputs/siouxfalls/siouxfalls-1k.conf]"*
+
+4. Launch a simulation by running the following command:
+
+./gradlew run --args='--config fixed-data/siouxfalls/siouxfalls-1k.conf'
 
 A progress bar is appearing in the terminal: Congratulations, you are running the simulation with BEAM! 
 
