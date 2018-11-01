@@ -19,7 +19,7 @@ Read:
   
   * **Worked example** Run one simulation with the 1k scenario and show the expected outputs
   
-  * **How to submit?** link to the md. file
+  * **How to submit?** [link](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/What_and_how_to_submit)
   
   * **The technical starter-kit** Installation and run of the BEAM simulator
  
