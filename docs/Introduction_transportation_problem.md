@@ -1,6 +1,9 @@
-# A quick introduction to the Transportation Optimization Problem
+# A quick introduction to the Transportation Systems Challenge Framework
 
-Introduction sentence
+This document aims at giving you an overview of the challenge framework. It describes the main components of the challenge, i.e. the daily travel simulation host by BEAM, its inputs, outputs and the way it interacts with the optimization algorithm you have to develop.   
+
+![Alt text](/Users/vgolfi/Documents/GitHub/Uber-Prize-Starter-Kit-/Images/Overview Challenge Framework.png)
+
 
 ## What is BEAM?
 
