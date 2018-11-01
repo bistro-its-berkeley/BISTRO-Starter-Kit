@@ -26,6 +26,6 @@ The quality of the new policy-based transportation system is evaluated based on 
 
 The bigger the score, the more performant the system.
 
-## Optimizing the policy  
+## What is the goal of the optimization challenge?  
 
 The Uber Prize optimization problem consists of developping an optimization algorithm to find the best policy, i.e. the best policy-inputs combination, that will maximize the scoring function S.
