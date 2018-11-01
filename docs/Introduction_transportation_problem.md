@@ -7,11 +7,11 @@ This document aims at giving you an overview of the challenge framework. It desc
 
 ## The simulation of daily urban travels
 
-**What are we simulated?**
+### What are we simulating?
 
 2-3 sentence from the pb statement *To be completed*
 
-**What is BEAM?**
+### What is BEAM?
 BEAM stands for Behavior, Energy, Autonomy, and Mobility. - *To be completed*
 
 To read more documentation on BEAM, click [here](https://beam.readthedocs.io/en/latest/about.html#overview).
