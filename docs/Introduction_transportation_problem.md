@@ -15,7 +15,7 @@ To read more documentation on BEAM, click [here](https://beam.readthedocs.io/en/
 
 ## What are the outputs of BEAM? 
 
-Once all agents of the system have chosen their optimal transportation modes to attend their daily activities, the system reaches what we call an *equilibrium state*. The quality of the new policy-based transportation system can then be evaluated based on the new system performance over the day compared to the base-policy scenario. Three elements are evaluated here:
+Once all agents of the system have chosen their optimal transportation modes to attend their daily activities, the system reaches what we call an *equilibrium state*. The quality of the new policy-based transportation system can then be evaluated based on the new system performance over the day compared to the base-policy scenario. Three outputs are evaluated here:
 
 * How much *congestion* did the agents experienced during the day?
 * What *level of service* did the transportation system offer to agents?
