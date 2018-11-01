@@ -17,7 +17,7 @@ Read:
   
   * **The outputs** [link](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Understanding%20the%20outputs%20and%20the%20scoring%20function)
   
-  * **Worked example** Run one simulation with the 1k scenario and show the expected outputs
+  * **Worked example** Run the simulation with the base scenario and show the expected outputs
   
   * **How to submit?** [link](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/What_and_how_to_submit)
   
