@@ -5,19 +5,24 @@ This document aims at giving you an overview of the challenge framework. It desc
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Overview%20Challenge%20Framework.png)
 
 
-## The simulator: : What is BEAM?
+## The simulation of daily urban travels
 
+**What are we simulated?**
+
+2-3 sentence from the pb statement *To be completed*
+
+**What is BEAM?**
 BEAM stands for Behavior, Energy, Autonomy, and Mobility. - *To be completed*
 
 To read more documentation on BEAM, click [here](https://beam.readthedocs.io/en/latest/about.html#overview).
 
-## What are the inputs of BEAM?
+## What are the inputs of the simulation?
 
 - *To be completed*
 Combination of inputs on public transit operations and public transit financial aspects.
 
 
-## What are the outputs of BEAM and how are they used to evaluate the transportation system? 
+## What are the outputs of the simulation? how are they used to evaluate the transportation system? 
 
 Once all agents of the system have chosen their optimal transportation modes to attend their daily activities, the system reaches what we call an *equilibrium state*. Based on this equilibrium state, the simulator gives back a serie of outputs concerning the individuals and the system in general. 
 
