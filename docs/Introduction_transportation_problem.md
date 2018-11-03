@@ -4,13 +4,14 @@ This document aims at giving you an overview of the challenge framework. It desc
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Overview%20Challenge%20Framework.png)
 
-
 ## The simulation of daily urban travels
 
-2-3 sentence from the pb statement *To be completed*
+The overall goal of the first phase of the Uber Prize is to find the *best policy* that will *optimize the quality of the  transportation systems* in Sioux Faux. A *policy* is a combination of inputs on public transit operations and public transit financial aspects. Further explanations on input parameters can be found below ("The simulation inputs").
+
+To test a policy, we want to simulate the daily travels of a population of simulated individuals called *Agents*. During one day, the agents who make decisions about what transportation mode(s) to use to travel to and from their daily activities 
 
 ### What is BEAM?
-BEAM stands for Behavior, Energy, Autonomy, and Mobility. - *To be completed*
+The simulatir BEAM stands for Behavior, Energy, Autonomy, and Mobility. - *To be completed*
 
 To read more documentation on BEAM, click [here](https://beam.readthedocs.io/en/latest/about.html#overview).
 
