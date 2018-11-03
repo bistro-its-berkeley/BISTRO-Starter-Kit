@@ -1,6 +1,6 @@
 # Uber-Prize-Starter-Kit
 
-This is a starter-kit Repo for the **Uber Prize challenge** on **Crowd AI**. 
+This is a starter-kit Repository for the **Uber Prize challenge** on **Crowd AI**. 
 
 In this repo you will find background material, sample files and support scripts that help you to get started with the challenge.
 
