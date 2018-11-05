@@ -30,8 +30,8 @@ The *scoring function* is a weighted sum of several components:
 
 * Measures of the **Budget** incurred by the city:
   * **operational cost**, \[$]: total costs incurred by SFBL operations including amortized fixed costs (*Budget : Operational Costs (Fixed)*), the cost of fuel consumed (*Budget : Operational Costs (Fuel)*), and variable costs (*Budget : Operational Costs (Variable, Hourly)*). The rates for each of these factors for motorized vehicles is specified in the fixed-data/siouxfalls/vehicleTypes.csv file (see. page on the [inputs](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Which-inputs-should-I-optimize%3F.md))
-  * **incentives used**(*Budget: Subsidies Paid*, \[$]): total incentives used by agents.
-  * **incentives unused**(*Budget: Subsidies Unpaid*, \[$]): total incentives available but unused by agents. 
+  * **incentives used** (*Budget: Subsidies Paid*, \[$]): total incentives used by agents.
+  * **incentives unused** (*Budget: Subsidies Unpaid*, \[$]): total incentives available but unused by agents. 
   * **revenues**, (\[$]): total bus fares collected **SID?**
 
 If you want to know more about the mathematical formulation of each of these scoring function components, read section 4 and  4.3 of the [Sioux Faux Hackhaton problem statement]() **link**.
@@ -80,9 +80,9 @@ The *summaryStats.csv* document gathers all raw outputs of the simulation. Their
 * *totalVehicleDelay*: total hours of delay experienced by all motorized vehicles of the system during the simulation \[hours]
 * *vehicleHoursTraveled_BODY-TYPE-DEFAULT*: **SID?**
 * *vehicleHoursTraveled_BUS-DEFAULT*: total time traveled by bus of type "DEFAULT" during the day \[vehicle.hours] 
-* *vehicleHoursTraveled_BUS-SMALL-HD*:total time traveled by bus of type "SMALL-HD" during the day \[vehicle.hours] 
+* *vehicleHoursTraveled_BUS-SMALL-HD*: total time traveled by bus of type "SMALL-HD" during the day \[vehicle.hours] 
 * *vehicleHoursTraveled_BUS-STD-ART*: total time traveled by bus of type "STD-ART" during the day \[vehicle.hours] 
-* *vehicleHoursTraveled_CAR-TYPE-DEFAULT*: : total time traveled by car of type "DEFAULT" during the day \[vehicle.hours] 
+* *vehicleHoursTraveled_CAR-TYPE-DEFAULT*: total time traveled by car of type "DEFAULT" during the day \[vehicle.hours] 
 * *vehicleMilesTraveled_BODY-TYPE-DEFAULT*: total time traveled by bus of type "DEFAULT" during the day \[vehicle.hours] 
 * *vehicleMilesTraveled_BUS-DEFAULT*: total miles traveled by bus of type "DEFAULT" \[vehicle.miles]
 * *vehicleMilesTraveled_BUS-SMALL-HD*: total miles traveled by bus of type "SMALL-HD" \[vehicle.miles]
