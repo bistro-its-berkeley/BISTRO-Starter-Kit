@@ -10,13 +10,13 @@ The repository contains all required inputs to run the simulation for Sioux Faux
 
 ### The fixed inputs 
 
-The folder *fixed-data/siouxfalls* encloses, for each Sioux Faux scenario, all fixed inputs necessary for one instance of the simulation. They describe the configuration of the simulation parameters, the configuration of the transportation network, the agents’ desired activity plans and attributes, the households’ attributes and the vehicles characteristics.
+The folder `fixed-data/siouxfalls` encloses, for each Sioux Faux scenario, all fixed inputs necessary for one instance of the simulation. They describe the configuration of the simulation parameters, the configuration of the transportation network, the agents’ desired activity plans and attributes, the households’ attributes and the vehicles characteristics.
 
 You will not have to change these parameters.
 
 ### The inputs to optimize
 
-To help the Sioux Faux Department of Transportation (SFDOT) combat congestion and improve overall mobility in Sioux Faux, you will prepare a set of inputs to the simulation engine, which represent the following transportation system interventions: the bus fleet composition and subsidies for transit and on-demand rideshare. These to-be-optimized inputs can be found in a csv format in the *submission-inputs* folder.
+To help the Sioux Faux Department of Transportation (SFDOT) combat congestion and improve overall mobility in Sioux Faux, you will prepare a set of inputs to the simulation engine, which represent the following transportation system interventions: the bus fleet composition and subsidies for transit and on-demand rideshare. These to-be-optimized inputs can be found in a csv format in the `submission-inputs` folder.
 
 * **Bus fleet composition**
 
@@ -26,7 +26,7 @@ The submission input file *VehicleFleetMix.csv* describes the status of the bus 
 
 ***Figure 2: Input1 - composition of the bus fleet***
 
-You have a set of four available buses to pick from, each of them having different technical properties (*fixed-data/siouxfalls/vehicleTypes.csv*, see Fig.2) and costs (*fixed-data/siouxfalls/ vehicleCosts.csv*, see Fig.3). Based on these characteristics, you have to choose between keeping the currently operated bus types (see Figure 1 above) or purchasinf new types of buses.
+You have a set of four available buses to pick from, each of them having different technical properties (`fixed-data/siouxfalls/vehicleTypes.csv`, see Fig.2) and costs (`fixed-data/siouxfalls/ vehicleCosts.csv`, see Fig.3). Based on these characteristics, you have to choose between keeping the currently operated bus types (see Figure 1 above) or purchasing new types of buses.
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/BusTypes.png "Figure 3: Set of available bus types")
 ***Figure 3: Set of available bus types***
@@ -52,7 +52,7 @@ In an effort to promote the use of and access to public transportation, you may 
     * People earning between 40’000$/year and 50’000$/year (excluded)
     * People earning between 50’000$/year and 60’000$/year (excluded)
  
-You will be able to change the subsidies amounts [$/person] in the input file *submission-inputs/ModeSubsidies.csv* shown below. 
+You will be able to change the subsidies amounts [$/person] in the input file `submission-inputs/ModeSubsidies.csv` shown below. 
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_Subsidies.png "Figure 4: Input2 - Subsidies for transit and on-deamdn rideshare users")
 ***Figure 5: Input2 - Subsidies for transit and on-deamdn rideshare users***
