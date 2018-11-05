@@ -18,10 +18,13 @@ You can find more documentation on BEAM or MATSim [here](https://beam.readthedoc
 
 ## The simulation inputs
 
-- *To be completed*
-Combination of inputs on public transit operations and public transit financial aspects.
+The simulation inputs for BEAM is a combination of inputs on public transit operations and public transit financial aspects.
 
-You can find more information on the Sioux Faux simulation inputs, where their are stored and how to control them in the [inputs to optimize](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Which-inputs-should-I-optimize%3F.md)page.
+The one you will have control on for the Hackathon are:
+* the **bus fleet composition**
+* the **distribution of subsidies** for users using on-demand rideshare or walking to access public transit 
+
+You will find more information on the Sioux Faux simulation inputs, where their are stored and how to control them in the [inputs to optimize](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Which-inputs-should-I-optimize%3F.md) page.
 
 ## The simulation outputs: evaluating the system 
 
@@ -35,7 +38,7 @@ The quality of the new policy-based transportation system is evaluated based on 
 
 The bigger the score, the more performant the system.
 
-You can find more information on the outputs of the simulation, the scoring functino and how to interpret them in the [outputs and the scoring function](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md) page.
+You will find more information on the outputs of the simulation, the scoring functino and how to interpret them in the [outputs and the scoring function](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md) page.
 
 ## What is the goal of the optimization challenge?  
 
