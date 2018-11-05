@@ -14,7 +14,7 @@ By simulating the daily traveling behavior of the whole population, the quality 
 
 ### What is BEAM?
 
-The simulator BEAM stands for Behavior, Energy, Autonomy, and Mobility. It is an extension of the MAtSim model, which is a agent-based transportation simulation framework.
+The simulator BEAM stands for Behavior, Energy, Autonomy, and Mobility. It is an extension of the MAtSim model, which is an agent-based transportation simulation framework.
 
 You can find more documentation on BEAM or MATSim [here](https://beam.readthedocs.io/en/latest/about.html#overview).
 
