@@ -36,17 +36,13 @@ The *scoring function* is a weighted sum of several components:
 
 * **Mode choice**
 
-* **Realized Mode choice**
-
-* **Reference Mode Choice**
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Mode_choice_histogram.png)
 
 * **Ride-hail revenue**
 
 * **Ride-hail stats**
 
 * **Scorestats**
-
-* **Stopwatch**
 
 ## Summary stats
 
