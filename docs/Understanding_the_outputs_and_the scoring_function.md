@@ -38,7 +38,7 @@ If you want to know more about the mathematical formulation of each of these sco
 
 ## Other outputs
 
-Besides the scores, the *output/siouxfalls-1k__\<date>_\<time>* folder contains a few graphs with their corresponding textfiles. Their are listed below.
+Besides the scores, the *output/siouxfalls-1k__\<date>_\<time>* folder contains a few graphs with their corresponding textfiles, describing performance outputs of the system. Their are listed below.
 
 * **Mode choice**
 The mode choice graph describes the overall distribution of chosen modes per agent's preference for each iteration of the simulation. In the exemple shown in Fig.3 below, the simulation ended after 100 iterations. In the simulation, agents received a 20$ subsidy per person. Throughout the iterations, we can see that this incentives to take public transit works: the agents leave progressively leave the car for on-demand rideshare and transit.    
