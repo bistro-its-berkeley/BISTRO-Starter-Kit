@@ -5,6 +5,7 @@
 After the last simulation's iteration, the system reaches an *equilibrium state*: the simulation stops. All the outputs generated during this run are stored in a unique output folder *output/siouxfalls-1k__\<date>_\<time>*. (See figure).
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Output_folder_2.png)
+Figure 1: Outputs of the simulation
 
 The main outputs you should be focusing on are the one located in the *competition* folder. It contains the 
 
