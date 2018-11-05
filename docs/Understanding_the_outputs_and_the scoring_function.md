@@ -21,18 +21,18 @@ Figure 2: Score and subscores
 
 The *scoring function* is a weighted sum of several components: 
 * Measures of **congestion**:
-  * **vehile hours of delay** (*totalVehicleDelay*): total hours of delay experienced by all motorized vehicles of the system during the simulation. Delay is measured as the difference between the free-flow travel time over the path of a vehicle movement and the actual duration of the movement in the simulation. 
-  * **vehicle-miles traveled** (*vehicleMilesTraveled_total*): total miles traveled by all motorized vehicles of the system during the simulation.
+  * **vehile hours of delay** (*Congestion: Vehicle Hours Delay*, \[veh.hours]): total hours of delay experienced by all motorized vehicles of the system during the simulation. Delay is measured as the difference between the free-flow travel time over the path of a vehicle movement and the actual duration of the movement in the simulation. 
+  * **vehicle-miles traveled** (*Congestion: Vehicle Miles Traveled*, \[veh.miles]): total miles traveled by all motorized vehicles of the system during the simulation.
 
 * Measures of **the level of service** of the transportation system:
-  * **travel cost** (*Agent TRavel Costs Including Subsidy*): total trip cost incurred by all agents during the simulation.
-  * **bus crowding** (*agentHoursOnCrowdedTransit*):  the total time in hours spent by agents standing in buses occupied above their seating capacity.
+  * **travel cost** (*Level of Service: Travel expenditures*, \[$]): total trip cost incurred by all agents during the simulation. 
+  * **bus crowding** (*Level of Service: Agent Hours on Crowding Transit*,\[hours]): the total time spent by agents standing in buses occupied above their seating capacity. 
 
-* Measures of the **costs** incurred by the city:
-  * **operational cost** (*O and M costs* + *Fuel Cost* + *Vehicle Purcahse Costs*): total costs incurred by SFBL operations including amortized fixed costs, the cost of fuel consumed, and variable fixed costs. The rates for each of these factors is specified in the vehicle configuration and will be known by contestants when choosing which vehicles to include in the bus fleet.
-  * **incentives used**: total incentives used by agents.
-  * **incentives unused**: total incentives available but unused by agents. 
-  * **revenues**: total bus fares collected
+* Measures of the **Budget** incurred by the city:
+  * **operational cost**, \[$]: total costs incurred by SFBL operations including amortized fixed costs (*Budget : Operational Costs (Fixed)*), the cost of fuel consumed (*Budget : Operational Costs (Fuel)*), and variable costs (*Budget : Operational Costs (Variable, Hourly)*). The rates for each of these factors for motorized vehicles is specified in the fixed-data/siouxfalls/vehicleTypes.csv file (see. page on the [inputs](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Which-inputs-should-I-optimize%3F.md))
+  * **incentives used**(*Budget: Subsidies Paid*, \[$]): total incentives used by agents.
+  * **incentives unused**(*Budget: Subsidies Unpaid*, \[$]): total incentives available but unused by agents. 
+  * **revenues**, (\[$]): total bus fares collected **SID?**
 
 If you want to know more about the mathematical formulation of each of these scoring function components, read section 4 and  4.3 of the [Sioux Faux Hackhaton problem statement]() **link**.
 
