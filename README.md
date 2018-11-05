@@ -18,9 +18,9 @@ We recommend that you proceed through the documentation in the following order:
   
   * **The outputs description**: Then, read the [Understanding the outputs and the scoring function](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md) page to get a better understanding of the outputs of the simulation, where they are stored after a simulation run, what do they describe and how to interpret them. 
   
-  * **The tutorial on how to run a simulation**: Once you are clear about the inputs/outputs you can manipulate, this [How to run a simulation?](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/How_to_run_a_simulation%3F.md) will explain the steps to run a simulation.
+  * **The tutorial on how to run a simulation**: Once you are clear about the inputs/outputs you can manipulate, this [How to run a simulation?](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/How_to_run_a_simulation%3F.md) page will explain the steps to run a simulation.
   
-  * **How to submit?** To finish with, the [How to submit?](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit%3F.md) page explains the steps for submitting your solution.
+  * **How to submit?** To finish with, follow the [How to submit?](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit%3F.md) to submit your solution.
   
 
 ## What do I have to do?
