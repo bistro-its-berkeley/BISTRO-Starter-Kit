@@ -1,8 +1,9 @@
 # Understanding the outputs and the scoring function
+After reading this document, you will have a better understanding of the outputs of the simulation, where they are stored after a simulation run, what do they describe and how to interpret them.
 
 ## Where are the outputs stored?
 
-After the last simulation's iteration, the system reaches an *equilibrium state*: the simulation stops. All the outputs generated during this run are stored in a unique output folder *output/siouxfalls-1k__\<date>_\<time>*. (See figure).
+After the last simulation's iteration, the system reaches an *equilibrium state*: the simulation stops. All the outputs generated during this run are stored in a unique output folder called *output/siouxfalls-1k__\<date>_\<time>*. It ends with the date and time of the simulation you have just ruuned (see figure).
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Output_folder_2.png)
 
@@ -22,7 +23,7 @@ The *scoring function* is a weighted sum of several components:
 * Measures of **congestion**:
   * **vehile hours of delay** (): total hours of delay experienced by all motorized vehicles of the system during the simulation. Delay is measured as the difference between the free-flow travel time over the path of a vehicle movement and the actual duration of the movement in the simulation. 
   * **vehicle-miles traveled**: total miles traveled by all motorized vehicles of the system during the simulation.
-  
+
 * Measures of **the level of service** of the transportation system:
   * **travel cost**: total trip cost incurred by all agents during the simulation.
   * **bus crowding**:  the total time in hours spent by agents standing in buses occupied above their seating capacity.
@@ -37,9 +38,12 @@ If you want to know more about the mathematical formulation of each of these sco
 
 ## Other outputs
 
-* **Mode choice**
+Besides the scores, the *output/siouxfalls-1k__\<date>_\<time>* folder contains a few graphs with their corresponding textfiles. Their are listed below.
 
+* **Mode choice**
+The mode choice graph describes the overall distribution of chosen modes per agent's preference for each iteration of the simulation. In the exemple shown in Fig.3 below, the simulation ended after 100 iterations. In the simulation, agents received a 20$ subsidy per person. Throughout the iterations, we can see that this incentives to take public transit works: the agents leave progressively leave the car for on-demand rideshare and transit.    
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Mode_choice_histogram.png)
+Figure 3: Mode choice of agents for each iteration of the simulation.
 
 * **Ride-hail revenue**
 
