@@ -13,22 +13,33 @@ After you unzip the archive, you will see a directory that looks like this when 
 
 ## Running a simulation
 
-1. Open your Terminal.
+### [Docker](https://www.docker.com/) Container Management and Execution
 
-2. Make sure you are located in the Competition GitHub repository by computing:
+The wrapper around `BeamCompetitions` has a Docker image on [Docker Hub](https://hub.docker.com/) with tag `beammodel/beam-competition:0.0.1-SNAPSHOT`.
 
-*cd* + the *absolute path of the competition repository* in the command line.
-
-3. Download Gradle by running the following command: 
-
-*./gradlew :run /PappArgs="['--config','fixed-inputs/siouxfalls/siouxfalls-1k.conf]"*
-
-4. Launch a simulation by running the following command:
-
-./gradlew run --args='--config fixed-data/siouxfalls/siouxfalls-1k.conf'
-
-A progress bar is appearing in the terminal: Congratulations, you are running the simulation with BEAM! 
+This section details how administrators can manage and execute this image via the Docker toolkit.
 
 
+### Running a Container
 
+Once built and pushed, the container is ready to be executed by the competitors.
 
+To run the container users need to specify the submission folder and output folder and then run the following command:
+` docker run -it --memory=4g --cpus=2  -v "$(pwd)"/submission-inputs:/submission-inputs:ro -v "$(pwd)"/output:/output:rw beammodel/beam-competition:0.0.1-SNAPSHOT --config /fixed-data/siouxfalls/siouxfalls-1k.conf`
+
+If desired, users may pass Java Virtual Machine (JVM) attributes and add JAVA_OPTS `env` arguments to the `docker run` command:
+`docker run -it --memory=4g --cpus=2  -v "$(pwd)"/submission-inputs:/submission-inputs:ro -v "$(pwd)"/output:/output:rw -e JAVA_OPTS='"-Xmx4g" "-Xms2g"' beammodel/beam-competition:0.0.1-SNAPSHOT --config /fixed-data/siouxfalls/siouxfalls-1k.conf`
+
+### Shell Script
+
+For convenience, the `docker run` command is wrapped by a bash script, `competition.sh`.
+
+To run it, users enter `./competition.sh -m 4g -c 2 -s siouxfalls -sz 15k -i "$(pwd)"/submission-inputs/`, where
+
+* `-m` is the memory limit
+* `-c` is the number of cpus
+* `-s` is the scenario name
+* `-sz` is the sample size
+* `-i` is the input folder path.
+
+<b id="f1">1</b> See [www.get.docker.com](http://get.docker.com) for an automated Linux installation. [↩](#a1)
