@@ -5,6 +5,7 @@
 After the last simulation's iteration, the system reaches an *equilibrium state*: the simulation stops. All the outputs generated during this run are stored in a unique output folder *output/siouxfalls-1k__\<date>_\<time>*. (See figure).
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Output_folder_2.png)
+
 Figure 1: Outputs of the simulation
 
 ## Scoring function
@@ -32,6 +33,8 @@ The *scoring function* is a weighted sum of several components:
   * **incentives unused**: total incentives available but unused by agents. 
   * **revenues**: total bus fares collected
 
+If you want to know more about the mathematical formulation of each of these scoring function components, read the section 4.3 of the [Sioux Faux Hackhaton problem statement]() **link**.
+
 ## Other outputs
 
 * **Mode choice**
@@ -45,6 +48,8 @@ The *scoring function* is a weighted sum of several components:
 * **Scorestats**
 
 ## Summary stats
+
+The *summaryStats.csv* document gathers all raw outputs of the simulation. Their meanings are listed below:
 
 * *agentHoursOnCrowdedTransit*: total time spent by agents in a crowded transit vehicle (with people standing) \[hours]
 * *fuelConsumedInMJ_Diesel*:  
