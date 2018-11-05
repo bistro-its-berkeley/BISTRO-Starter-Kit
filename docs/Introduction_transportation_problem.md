@@ -6,9 +6,11 @@ This document aims at giving you an overview of the challenge framework. It desc
 
 ## The simulation of daily urban travels
 
-The overall goal of the first phase of the Uber Prize is to find the *best policy* that will *optimize the quality of the  transportation systems* in Sioux Faux. A *policy* is a combination of inputs on public transit operations and public transit financial aspects. Further explanations on input parameters can be found below ("The simulation inputs").
+The overall goal of the first phase of the Uber Prize is to find the **best policy** that will **optimize the quality of the  transportation system in Sioux Faux**. A *policy* is a combination of inputs on public transit operations and public transit financial aspects.
 
-To test a policy, we want to simulate the daily travels of a population of simulated individuals called *Agents*. This agent-based simulation is hosted by the BEAM simulator. During the simulated day, each *Agent* has a defined *plan*, i.e. a series of activites with specific start times, durations and in a specific order that he wants to attend. Throughout the day, the *Agents* will make decisions about what transportation mode(s) they will use to travel to and from their daily activities. 
+To test a policy, we want to simulate the daily travels of a population of simulated individuals called *Agents*. This agent-based simulation is hosted by the BEAM simulator. During the simulated day, each *Agent* has a defined *Plan*, i.e. a serie of activites with specific start times, durations and in a specific order that he wants to attend. Throughout the day, the *Agents* will make decisions on which transportation modes they will use to travel to and from their daily activities. 
+
+By simulating the daily traveling behavior of the whole population, the quality of the city's transportation system can be evaluated.
 
 ### What is BEAM?
 
@@ -42,4 +44,4 @@ You will find more information on the outputs of the simulation, the scoring fun
 
 ## What is the goal of the optimization challenge?  
 
-The Uber Prize optimization problem consists of developping an optimization algorithm to find the best policy, i.e. the best policy-inputs combination, that will maximize the scoring function S.
+The Uber Prize optimization problem consists of developping an **optimization algorithm** to **find the best policy**, i.e. the best policy-inputs combination, that will **maximize the scoring function S**.
