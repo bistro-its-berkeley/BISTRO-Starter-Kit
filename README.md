@@ -2,7 +2,7 @@
 
 This is a starter-kit Repository for the **Uber Prize challenge** on **Crowd AI**. 
 
-In this repo you will find background material, sample files and support scripts that help you to get started with the challenge.
+In this repo you will find background material that help you to get started with the challenge. 
 
 ## How do I get started?
 
@@ -26,9 +26,12 @@ We recommend that you proceed through the documentation in the following order:
 ## What do I have to do?
 
 You must try to generate the best policy related-inputs combination to optimize the transportation system of Sioux Faux.
-The goal is to create a submission with the **greater score as possible**.
+The goal is to find a solution with the **greater score as possible**.
 
-Once you have a solution, you can submit them through the *Challenge page on crowdAI*. - **TO BE CHANGED**
+Once you have a solution, you can submit:
+* your **best outputs (.zip)**
+* a **brief explanation on your methodology (.doc)**: how did you solve the optimization problem, what did you try, is there some room for improvement?
+* some comments on this starter kit repository (pull requests) if you see any unclear information or have any suggestions for improvements.
 
 ONE OR SEVERAL SUBMISSIONS??? - *To be completed*
 
@@ -45,5 +48,14 @@ ONE OR SEVERAL SUBMISSIONS??? - *To be completed*
   * a note on [what and how to submit](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit%3F.md) -*to be completed*
  
 
-## Author
-  Valentine Golfier-Vetterli
+## Contacts
+
+If you have any questions about the challenge, you can ask them on this FAQ chat:
+* Uchat? **ABHISHEK**
+
+In case of further questions, you can contact:
+* Sif Feygin: sid.feygin@berkeley.edu
+* Valentine Golfier-Vetterli: golfiervalentine@gmail.com
+
+
+
