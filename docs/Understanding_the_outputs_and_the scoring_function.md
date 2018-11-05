@@ -9,18 +9,17 @@ Figure 1: Outputs of the simulation
 
 ## Scoring function
 
-The main outputs you should be focusing on are the one located in the *competition* folder. 
+The main outputs you should be focusing on are the one located in the *competition* folder. It contains: 
 
-It contains: 
 * The [input files](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Which-inputs-should-I-optimize%3F.md) you used for the simulation run
-* The subscores and the general score from the scoring function, which evaluates the quality of the policy-based transportation sytsem 
+* The *subscores* and the *general score* from the scoring function, which evaluates the quality of the policy-based transportation sytsem 
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/The_scoring_function.png)
 Figure 2: Score and subscores
 
 The *scoring function* is a weighted sum of several components: 
 * Measures of **congestion**:
-  * **vehile hours of delay**: total hours of delay experienced by all motorized vehicles of the system during the simulation. Delay is measured as the difference between the free-flow travel time over the path of a vehicle movement and the actual duration of the movement in the simulation. 
+  * **vehile hours of delay** (): total hours of delay experienced by all motorized vehicles of the system during the simulation. Delay is measured as the difference between the free-flow travel time over the path of a vehicle movement and the actual duration of the movement in the simulation. 
   * **vehicle-miles traveled**: total miles traveled by all motorized vehicles of the system during the simulation.
   
 * Measures of **the level of service** of the transportation system:
@@ -33,8 +32,58 @@ The *scoring function* is a weighted sum of several components:
   * **incentives unused**: total incentives available but unused by agents. 
   * **revenues**: total bus fares collected
 
+## Other outputs
 
-## How to interpret the outputs?
+* **Mode choice**
+
+* **Realized Mode choice**
+
+* **Reference Mode Choice**
+
+* **Ride-hail revenue**
+
+* **Ride-hail stats**
+
+* **Scorestats**
+
+* **Stopwatch**
+
+## Summary stats
+
+* *agentHoursOnCrowdedTransit*: total time spent by agents in a crowded transit vehicle (with people standing) \[hours]
+* *fuelConsumedInMJ_Diesel*:  
+* *fuelConsumedInMJ_Food*: ?
+* *fuelConsumedInMJ_Gasoline*
+* *numberOfVehicles_BODY-TYPE-DEFAULT*: number of vehicles in the system 
+* *numberOfVehicles_BUS-DEFAULT*: number of buses of type "DEFAULT" circulating in the system during the day \[units]
+* *numberOfVehicles_BUS-SMALL-HD*: number of buses of type "SMALL-HD" circulating in the system during the day \[units]
+* *numberOfVehicles_BUS-STD-ART*: number of buses of type "STD-ART" circulating in the system during the day \[units]
+* *numberOfVehicles_CAR-TYPE-DEFAULT*: number of cars of type "DEFAULT" circulating in the system during the day \[units]
+* *personTravelTime_car*: total time traveled by car by all agents during the day \[person.hours]
+* *personTravelTime_drive_transit*: total time traveled by public transit (bus) by all agents during the day \[person.hours]
+* *personTravelTime_others*: total time traveled by any  mean different from the bus, the car or walking by all agents during the day \[person.hours]
+* *personTravelTime_ride_hail*: total time traveled by on-demand rideshare by all agents during the day \[person.hours]
+* *personTravelTime_walk*: total time traveled by foot by all agents during the day \[person.hours]
+* *personTravelTime_walk_transit*: total time spent by foot to access public transit by all agents during the day \[person.hours]
+* *totalCostIncludingSubsidy_drive_transit*: **SID?**
+* *totalCostIncludingSubsidy_ride_hail*: **SID?**
+* *totalCostIncludingSubsidy_walk_transit*: **SID?**
+* *totalSubsidy_drive_transit*: total subsidies \[$/person] received by all agents for accessing public transit by car \[$] 
+* *totalSubsidy_ride_hail*: total subsidies \[$/person] received by all agents for accessing public transit by on-demand rideshare \[$] 
+* *totalSubsidy_walk_transit*: total subsidies \[$/person] received by all agents for accessing public transit by foot \[$] 
+* *totalTravelTime*: total time traveled by all agents during the day \[hours]
+* *totalVehicleDelay*: total hours of delay experienced by all motorized vehicles of the system during the simulation \[hours]
+* *vehicleHoursTraveled_BODY-TYPE-DEFAULT*: **SID?**
+* *vehicleHoursTraveled_BUS-DEFAULT*: total time traveled by bus of type "DEFAULT" during the day \[vehicle.hours] 
+* *vehicleHoursTraveled_BUS-SMALL-HD*:total time traveled by bus of type "SMALL-HD" during the day \[vehicle.hours] 
+* *vehicleHoursTraveled_BUS-STD-ART*: total time traveled by bus of type "STD-ART" during the day \[vehicle.hours] 
+* *vehicleHoursTraveled_CAR-TYPE-DEFAULT*: : total time traveled by car of type "DEFAULT" during the day \[vehicle.hours] 
+* *vehicleMilesTraveled_BODY-TYPE-DEFAULT*: total time traveled by bus of type "DEFAULT" during the day \[vehicle.hours] 
+* *vehicleMilesTraveled_BUS-DEFAULT*: total miles traveled by bus of type "DEFAULT" \[vehicle.miles]
+* *vehicleMilesTraveled_BUS-SMALL-HD*: total miles traveled by bus of type "SMALL-HD" \[vehicle.miles]
+* *vehicleMilesTraveled_BUS-STD-ART*: total miles traveled by bus of type "STD-ART" \[vehicle.miles]
+* *vehicleMilesTraveled_CAR-TYPE-DEFAULT*: total miles traveled by car of type "DEFAULT" \[vehicle.miles]
+* *vehicleMilesTraveled_total*: total miles traveled by motorized vehicles \[vehicle.miles]
 
 
 
