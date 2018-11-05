@@ -8,18 +8,20 @@ This document aims at giving you an overview of the challenge framework. It desc
 
 The overall goal of the first phase of the Uber Prize is to find the *best policy* that will *optimize the quality of the  transportation systems* in Sioux Faux. A *policy* is a combination of inputs on public transit operations and public transit financial aspects. Further explanations on input parameters can be found below ("The simulation inputs").
 
-To test a policy, we want to simulate the daily travels of a population of simulated individuals called *Agents*. During one day, the agents who make decisions about what transportation mode(s) to use to travel to and from their daily activities 
+To test a policy, we want to simulate the daily travels of a population of simulated individuals called *Agents*. This agent-based simulation is hosted by the BEAM simulator. During the simulated day, each *Agent* has a defined *plan*, i.e. a series of activites with specific start times, durations and in a specific order that he wants to attend. Throughout the day, the *Agents* will make decisions about what transportation mode(s) they will use to travel to and from their daily activities. 
 
 ### What is BEAM?
-The simulatir BEAM stands for Behavior, Energy, Autonomy, and Mobility. - *To be completed*
 
-To read more documentation on BEAM, click [here](https://beam.readthedocs.io/en/latest/about.html#overview).
+The simulator BEAM stands for Behavior, Energy, Autonomy, and Mobility. It is an extension of the MAtSim model, which is a agent-based transportation simulation framework.
+
+You can find more documentation on BEAM or MATSim [here](https://beam.readthedocs.io/en/latest/about.html#overview).
 
 ## The simulation inputs
 
 - *To be completed*
 Combination of inputs on public transit operations and public transit financial aspects.
 
+You can find more information on the Sioux Faux simulation inputs, where their are stored and how to control them in the [inputs to optimize](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Which-inputs-should-I-optimize%3F.md)page.
 
 ## The simulation outputs: evaluating the system 
 
@@ -32,6 +34,8 @@ The quality of the new policy-based transportation system is evaluated based on 
 * What *costs* were incurred by the city?
 
 The bigger the score, the more performant the system.
+
+You can find more information on the outputs of the simulation, the scoring functino and how to interpret them in the [outputs and the scoring function](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md) page.
 
 ## What is the goal of the optimization challenge?  
 
