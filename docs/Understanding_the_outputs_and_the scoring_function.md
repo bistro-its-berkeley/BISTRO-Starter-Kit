@@ -21,20 +21,20 @@ Figure 2: Score and subscores
 
 The *scoring function* is a weighted sum of several components: 
 * Measures of **congestion**:
-  * **vehile hours of delay** (): total hours of delay experienced by all motorized vehicles of the system during the simulation. Delay is measured as the difference between the free-flow travel time over the path of a vehicle movement and the actual duration of the movement in the simulation. 
-  * **vehicle-miles traveled**: total miles traveled by all motorized vehicles of the system during the simulation.
+  * **vehile hours of delay** (*totalVehicleDelay*): total hours of delay experienced by all motorized vehicles of the system during the simulation. Delay is measured as the difference between the free-flow travel time over the path of a vehicle movement and the actual duration of the movement in the simulation. 
+  * **vehicle-miles traveled** (*vehicleMilesTraveled_total*): total miles traveled by all motorized vehicles of the system during the simulation.
 
 * Measures of **the level of service** of the transportation system:
-  * **travel cost**: total trip cost incurred by all agents during the simulation.
-  * **bus crowding**:  the total time in hours spent by agents standing in buses occupied above their seating capacity.
+  * **travel cost** (*Agent TRavel Costs Including Subsidy*): total trip cost incurred by all agents during the simulation.
+  * **bus crowding** (*agentHoursOnCrowdedTransit*):  the total time in hours spent by agents standing in buses occupied above their seating capacity.
 
 * Measures of the **costs** incurred by the city:
-  * **operational cost**: total costs incurred by SFBL operations including amortized fixed costs, the cost of fuel consumed, and variable fixed costs. The rates for each of these factors is specified in the vehicle configuration and will be known by contestants when choosing which vehicles to include in the bus fleet.
+  * **operational cost** (*O and M costs* + *Fuel Cost* + *Vehicle Purcahse Costs*): total costs incurred by SFBL operations including amortized fixed costs, the cost of fuel consumed, and variable fixed costs. The rates for each of these factors is specified in the vehicle configuration and will be known by contestants when choosing which vehicles to include in the bus fleet.
   * **incentives used**: total incentives used by agents.
   * **incentives unused**: total incentives available but unused by agents. 
   * **revenues**: total bus fares collected
 
-If you want to know more about the mathematical formulation of each of these scoring function components, read the section 4.3 of the [Sioux Faux Hackhaton problem statement]() **link**.
+If you want to know more about the mathematical formulation of each of these scoring function components, read section 4 and  4.3 of the [Sioux Faux Hackhaton problem statement]() **link**.
 
 ## Other outputs
 
@@ -89,7 +89,3 @@ The *summaryStats.csv* document gathers all raw outputs of the simulation. Their
 * *vehicleMilesTraveled_BUS-STD-ART*: total miles traveled by bus of type "STD-ART" \[vehicle.miles]
 * *vehicleMilesTraveled_CAR-TYPE-DEFAULT*: total miles traveled by car of type "DEFAULT" \[vehicle.miles]
 * *vehicleMilesTraveled_total*: total miles traveled by motorized vehicles \[vehicle.miles]
-
-
-
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Measures_of_congestion.png)
