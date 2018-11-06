@@ -9,7 +9,11 @@ You can find the Sioux-Faux road network below (Fig. 1). Currently, the Sioux Fa
 Figure 2: Sioux Faux Network
 
 ## Sioux-Faux sample population
-For the Hackathon, you have access to two sample populations with which you can run simulations: one with 1K individuals and the other one with 15K individuals. We advise you to first use the 1K sample to developp your algorithm due to the shorter running times of the simulations. You can then test it with the 15K population scenario. Note that you submission solution must be runned with the 15K sample population.
+For the Hackathon, you have access to two sample populations with which you can run simulations: 
+* a 1K individuals sample 
+* a 15K individuals sample.
+
+We advise you to first use the 1K sample to developp your algorithm due to the shorter running times of the simulations. You can then test it with the 15K population scenario. Note that you submission solution must be runned with the 15K sample population.
 
 ## Problem statement 
 To get a more thorough description of the Sioux-Faux challenge, you should now read the [Hackathon Problem Statement](**!!!LINK!!!!**).
