@@ -11,7 +11,7 @@ Figure 2: Sioux Faux Network
 ## Sioux-Faux sample population
 For the Hackathon, you have access to two sample populations with which you can run simulations: 
 * a 1K individuals sample 
-* a 15K individuals sample.
+* a 15K individuals sample
 
 We advise you to first use the 1K sample to developp your algorithm due to the shorter running times of the simulations. You can then test it with the 15K population scenario. Note that you submission solution must be runned with the 15K sample population.
 
