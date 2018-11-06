@@ -34,9 +34,9 @@ Once all agents of the system have chosen their optimal transportation modes to 
 
 The quality of the new policy-based transportation system is evaluated based on the new system performance over the day compared to the base-policy scenario. The performance is measured thanks to a scoring function S which computes the weighted sum of three groups of outputs:
 
-* How much *congestion* did the agents experience during the day?
-* What *level of service* did the transportation system offer to agents?
-* What *costs* were incurred by the city?
+* How much *congestion* did the agents experience during the day? (compared to the Business As Usual (BAU) Scenario)
+* What *level of service* did the transportation system offer to agents? (compared to the BAU Scenario)
+* What *costs* were incurred by the city? (compared to the BAU Scenario)
 
 The bigger the score, the more performant the system.
 
