@@ -12,7 +12,7 @@ We recommend that you proceed through the documentation in the following order:
 
   * **Introduction to the Transportation Systems Challenge Framework**: First, read the quick [introduction on the Urban Transportation Optimization problem](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md). It will give you a general understanding of the framework of problem you need to solve and the related optimization challenges. 
 
-  * **The Problem statement of the Hackathon**: Presentation of the Sioux-Faux case for the Hackhaton. **LINK**
+  * **The Problem statement of the Hackathon**: You should then get familiar with the city you will be working for: Sioux-Faux. [The Sioux-Faux case](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/The_Sioux_Faux_case_Hackathon.md) page describes the general problematic in Sioux-Faux.
   
   * **The inputs to optimize**: The [Which inputs should I optimize?](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Which-inputs-should-I-optimize%3F.md) page will give you the steps for installing BEAM and understanding what the inputs of the simulation are, where they are stored and how to modify them. 
   
