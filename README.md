@@ -28,13 +28,12 @@ We recommend that you proceed through the documentation in the following order:
 You must try to generate the best policy related-inputs combination to optimize the transportation system of Sioux Faux.
 The goal is to find a solution with the **greater score as possible**.
 
-Once you have a solution, you can submit:
+Once you have a solution, you should submit:
 * your **best outputs (.zip)**
-* a **brief explanation on your methodology (.doc)**: how did you solve the optimization problem, what did you try, is there some room for improvement?
+* a **brief explanation on your methodology (.doc)**: how did you solve the optimization problem?, what did you try?, is there some room for improvement?
 * some comments on this starter kit repository (pull requests) if you see any unclear information or have any suggestions for improvements.
 
-ONE OR SEVERAL SUBMISSIONS??? - *To be completed*
-
+For info on how to submit, read this [tutorial](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit%3F.md).
 
 ## What can I find in this repository?
 
@@ -45,7 +44,7 @@ ONE OR SEVERAL SUBMISSIONS??? - *To be completed*
   * a description of the [outputs and the scoring function](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md)
   * the Problem statement of the Hackathon - *to be added*
   * the [Problem statement of Phase 1](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Problem_statement_Phase%20I.pdf) - *to be updated*
-  * a note on [what and how to submit](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit%3F.md) -*to be completed*
+  * a note on [what and how to submit](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit%3F.md) 
  
 
 ## Contacts
@@ -56,6 +55,3 @@ If you have any questions about the challenge, you can ask them on this FAQ chat
 In case of further questions, you can contact:
 * Sif Feygin: sid.feygin@berkeley.edu
 * Valentine Golfier-Vetterli: golfiervalentine@gmail.com
-
-
-
