@@ -42,7 +42,9 @@ Currently, the number of buses transiting on each route is trip-based. For each 
 
 * **Subsidies for transit and on-demand rideshare users**
 
-In an effort to promote the use of and access to public transportation, you may define subsidies for the users walking or using on-demand rideshare as a last-mile solution to access transit. Those subsidies will be based on the following age and/or income ranges:
+In an effort to promote the use of and access to public transportation, you may define subsidies for the users walking or using on-demand rideshare as a last-mile solution to access transit. Those subsidies will be based on sociodemographic groups defined by age and/or income ranges. You are free to chose the sociodemographic groups that will get subsidied.
+
+The Figure 5 below gives you an example of an input file with subsidies for specific sociodemographic groups. These are defined as in mathematical notation where ( and ) indicate inclusive and [ and ] indicate exclusive upper and lower bounds, respectively.
 
   * Subsidies for walking to transit 
     * Children under 10 years old (excluded)
@@ -52,7 +54,7 @@ In an effort to promote the use of and access to public transportation, you may 
     * People earning between 40’000$/year and 50’000$/year (excluded)
     * People earning between 50’000$/year and 60’000$/year (excluded)
  
-You will be able to change the subsidies amounts [$/person] in the input file `submission-inputs/ModeSubsidies.csv` shown below. 
+You will be able to change the subsidies amounts \[$/person] and the sociodemographic groups in the input file `submission-inputs/ModeSubsidies.csv` shown below. 
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_Subsidies.png "Figure 4: Input2 - Subsidies for transit and on-deamdn rideshare users")
 ***Figure 5: Input2 - Subsidies for transit and on-deamdn rideshare users***
