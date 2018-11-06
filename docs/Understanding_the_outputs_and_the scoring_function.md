@@ -3,7 +3,7 @@ After reading this document, you will have a better understanding of the outputs
 
 ## Where are the outputs stored?
 
-After the last simulation's iteration, the system reaches an *equilibrium state*: the simulation stops. All the outputs generated during this run are stored in a unique output folder called `output/siouxfalls-1k__\<date>_\<time>`. It ends with the date and time of the simulation you have just ruuned (see figure).
+After the last simulation's iteration, the system reaches an *equilibrium state*: the simulation stops. All the outputs generated during this run are stored in a unique output folder called `output/siouxfalls-1k__\<date>_\<time>`. It ends with the date and time of the simulation you have just runed (see figure).
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Output_folder_2.png)
 
