@@ -20,7 +20,7 @@ To help the Sioux Faux Department of Transportation (SFDOT) combat congestion an
 
 * **Bus fleet composition**
 
-The submission input file *VehicleFleetMix.csv* describes the status of the bus fleet (see Fig.2). Currently, SFBL (*agencyID* = 217) is operating twelve bus lines in Sioux Faux. For four of them, you can decide which type of bus (i.e. *vehicleTypeId*) should be assigned to service each of these four bus routes (i.e. *routeID*). There can be only **one type of bus per route**. 
+The submission input file *VehicleFleetMix.csv* describes the status of the bus fleet (see Fig.2). Currently, SFBL (*agencyID* = 217) operates twelve bus lines in Sioux Faux. For four of them, you can decide which type of bus (i.e. *vehicleTypeId*) should be assigned to service each of these four bus routes (i.e. *routeID*). There can be only **one type of bus per route**. 
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_VehicleFleetMix.png "*Figure 2: Input1 - composition of the bus fleet")
 
