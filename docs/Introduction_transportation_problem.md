@@ -32,8 +32,8 @@ You will find more information on the Sioux Faux simulation inputs, where their 
 
 Once all agents of the system have chosen their optimal transportation modes to attend their daily activities, the system reaches what we call an *equilibrium state*. Based on this equilibrium state, the simulator gives back a serie of outputs concerning the individuals and the system in general. 
 
-The quality of the new policy-based transportation system is evaluated based on the new system performance over the day compared to the Business As Usual Scenario (BAU). The BAU scenario is a situation following the baseline or "current" policy of Sioux Faux. We want to capture **how the new policy will improve the current state of the transportation system**.
-The performance of this new policy-based transportation system is measured thanks to a **scoring function S** which computes the weighted sum of three groups of outputs:
+The quality of the new policy-based transportation system is evaluated based on the new system performance over the day compared to the Business As Usual Scenario (BAU). The BAU scenario is a situation following the baseline or "current" policy of Sioux Faux. We want to capture **how the new policy will improve the current state of the transportation system*.
+The performance of this new policy-based transportation system is measured thanks to a *scoring function S** which computes the weighted sum of three groups of outputs:
 
 * How much *congestion* did the agents experience during the day? 
 * What *level of service* did the transportation system offer to agents? 
@@ -41,7 +41,7 @@ The performance of this new policy-based transportation system is measured thank
 
 The bigger the score, the more performant the system.
 
-You will find more information on the outputs of the simulation, the scoring functino and how to interpret them in the [outputs and the scoring function](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md) page.
+You will find more information on the outputs of the simulation, the scoring function and how to interpret them in the [outputs and the scoring function](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md) page.
 
 ## What is the goal of the optimization challenge?  
 
