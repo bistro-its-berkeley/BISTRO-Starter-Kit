@@ -32,11 +32,12 @@ You will find more information on the Sioux Faux simulation inputs, where their 
 
 Once all agents of the system have chosen their optimal transportation modes to attend their daily activities, the system reaches what we call an *equilibrium state*. Based on this equilibrium state, the simulator gives back a serie of outputs concerning the individuals and the system in general. 
 
-The quality of the new policy-based transportation system is evaluated based on the new system performance over the day compared to the base-policy scenario. The performance is measured thanks to a scoring function S which computes the weighted sum of three groups of outputs:
+The quality of the new policy-based transportation system is evaluated based on the new system performance over the day **compared to the Business As Usual Scenario (BAU)**. THE BAU scenario is a situation following the baseline, "current" policy of Sioux Faux. We want to capture how the new policy will improve the current state of the transportation system.
+Thus, the performance of the new policy-based transportation system is measured thanks to a scoring function S which computes the weighted sum of three groups of outputs:
 
-* How much *congestion* did the agents experience during the day? (compared to the Business As Usual (BAU) Scenario)
-* What *level of service* did the transportation system offer to agents? (compared to the BAU Scenario)
-* What *costs* were incurred by the city? (compared to the BAU Scenario)
+* How much *congestion* did the agents experience during the day? 
+* What *level of service* did the transportation system offer to agents? 
+* What *costs* were incurred by the city? 
 
 The bigger the score, the more performant the system.
 
