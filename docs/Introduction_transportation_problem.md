@@ -2,19 +2,19 @@
 
 This document aims at giving you an overview of the challenge framework. It describes the main components of the challenge, i.e. the daily travel simulation host by BEAM, its inputs, outputs and the way it interacts with the optimization algorithm you have to develop.   
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Overview%20Challenge%20Framework.png)
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Simulation%20Framework.png)
 
 ## The simulation of daily urban travels
 
 The overall goal of the first phase of the Uber Prize is to find the **best policy** that will **optimize the quality of the  transportation system in Sioux Faux**. A *policy* is a combination of inputs on public transit operations and public transit financial aspects.
 
-To test a policy, we want to simulate the daily travels of a population of simulated individuals called *Agents*. This agent-based simulation is hosted by the BEAM simulator. During the simulated day, each *Agent* has a defined *Plan*, i.e. a serie of activites with specific start times, durations and in a specific order that he wants to attend. Throughout the day, the *Agents* will make decisions on which transportation modes they will use to travel to and from their daily activities. 
+To test a policy, we want to simulate the daily travels of a simulated population of individuals called *Agents*. The *agent-based simulation* is hosted by the BEAM simulator. During the simulated day, each *Agent* has a defined *Plan*, i.e. a serie of activites with specific start times, durations and in a specific order that he wants to attend. Throughout the day, the *Agents* will make decisions on which transportation modes they will use to travel to and from their daily activities. 
 
-By simulating the daily traveling behavior of the whole population, the quality of the city's transportation system can be evaluated.
+By simulating the daily travel behavior of the whole population, the quality of the city's transportation system can be evaluated.
 
 ### What is BEAM?
 
-The simulator BEAM stands for Behavior, Energy, Autonomy, and Mobility. It is an extension of the MAtSim model, which is an agent-based transportation simulation framework.
+The simulator BEAM stands for Behavior, Energy, Autonomy, and Mobility. It is an extension of the MAtSim model, which is an agent-based transportation simulation framework. 
 
 You can find more documentation on BEAM or MATSim [here](https://beam.readthedocs.io/en/latest/about.html#overview).
 
