@@ -2,7 +2,7 @@
 
 This document aims at giving you an overview of the challenge framework. It describes the main components of the challenge, i.e. the daily travel simulation host by BEAM, its inputs, outputs and the way it interacts with the optimization algorithm you have to develop.   
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Simulation%20Framework.png)
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Simulation_Framework.png)
 
 ## The simulation of daily urban travels
 
