@@ -14,7 +14,7 @@ For the Hackathon, you have access to two sample populations with which you can 
 * a 10,000 (1K) individuals sample 
 * a 15,000 (15K) individuals sample
 
-It is advised to use the 1K sample to develop your algorithm due to the shorter simulation run times. You can then test it with the 15K population scenario. Note that submissions must be run with the 15K sample population.
+You are advised to use the 1K sample to develop your algorithm due to the shorter simulation run times. You can then test it with the 15K population scenario. Note that submissions must be run with the 15K sample population.
 
 ## Problem statement 
 To get a more thorough description of the Sioux-Faux challenge, please refer to the [Hackathon Problem Statement](**!!!LINK!!!!**).
