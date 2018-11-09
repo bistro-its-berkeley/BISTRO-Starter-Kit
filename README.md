@@ -39,7 +39,7 @@ We recommend that you proceed through the documentation in the following order:
   
   * **The description of the outputs**: Once you're familiar with the inputs, read the [Understanding the outputs and the scoring function](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md) page to get a better understanding of the outputs of the simulation, where they are stored after a simulation run, what they describe, and how to interpret them. Here you will also find details on how the outputs are used to construct the challenge scoring function.
   
-  * **The tutorial on how to run a simulation**: Once you are clear about the inputs you can manipulate, the outputs, and the effects of changes in inputs on the outputs, the [How to run a simulation?](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/How_to_run_a_simulation%3F.md) page will explain the steps to run a simulation.
+  * **The tutorial on how to run a simulation**: Once you are clear about the inputs you can manipulate, the outputs, and the effects of changes in inputs on the outputs, the [How to run a simulation?](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/How_to_run_a_simulation.md) page will explain the steps to run a simulation.
   
   * **How to submit?** To finish, follow the [How to submit?](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit%3F.md) instructions to submit your solution.
   
@@ -59,7 +59,7 @@ For info on how to submit, read this [tutorial](https://github.com/vgolfier/Uber
 
 * Documentation folder 
   * the [brief introduction to the Urban Transportation System Optimization Framework](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md)
-  * a note on [how to run a simulation](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/How_to_run_a_simulation%3F.md)
+  * a note on [how to run a simulation](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/How_to_run_a_simulation.md)
   * a description of the [inputs to optimize](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Which-inputs-should-I-optimize.md)
   * a description of the [outputs and the scoring function](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md)
   * a presentation of [the Sioux-Faux case](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/The_Sioux_Faux_case_Hackathon.md)
