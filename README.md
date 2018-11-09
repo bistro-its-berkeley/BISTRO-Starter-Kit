@@ -33,7 +33,7 @@ We recommend that you proceed through the documentation in the following order:
 
   * **Introduction to the Transportation Systems Challenge Framework**: First, read the quick [introduction on the Urban Transportation Optimization problem](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md). It will give you a general understanding of the framework of problem you need to solve and the related optimization challenges. 
 
-  * **The Problem statement for the Hackathon**: Then, read through the [presentation of the Sioux-Faux case] for the Hackathon, which provides a high-level description of the tasks, as well as information on the outputs and scoring function. **LINK**
+  * **The Problem statement for the internal pilot test**: Then, read through the [presentation of the Sioux-Faux case] for the Hackathon, which provides a high-level description of the tasks, as well as information on the outputs and scoring function. **LINK**
   
   * **The inputs to optimize**: Next, the [Which inputs should I optimize?](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Which-inputs-should-I-optimize%3F.md) page will give you the steps for installing BEAM and understanding what the inputs of the simulation are, where they are stored, and how to modify them.
   
@@ -63,7 +63,7 @@ For info on how to submit, read this [tutorial](https://github.com/vgolfier/Uber
   * a description of the [inputs to optimize](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Which-inputs-should-I-optimize%3F.md)
   * a description of the [outputs and the scoring function](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md)
   * a presentation of [the Sioux-Faux case](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/The_Sioux_Faux_case_Hackathon.md)
-  * the Problem statement of the Hackathon - *to be added*
+  * the Problem statement of the internal pilot test - *to be added*
   * the [Problem statement of Phase 1](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Problem_statement_Phase%20I.pdf) 
   * a note on [what and how to submit](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit%3F.md) 
  
