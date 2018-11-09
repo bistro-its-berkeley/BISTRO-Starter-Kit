@@ -227,8 +227,6 @@ gen### Java template
 # Compiled class file
 *.class
 
-# Log file
-*.log
 
 # BlueJ files
 *.ctxt
@@ -254,3 +252,4 @@ hs_err_pid*
 !.vscode/launch.json
 !.vscode/extensions.json
 
+/docs/Which-inputs-should-I-optimize.md

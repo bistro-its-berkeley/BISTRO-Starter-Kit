@@ -1,7 +1,7 @@
 # Which inputs should I optimize?
 
 
-To optimize the transportation system of Sioux Faux, you will need to write an algorithm that generates different inputs according to a specified format. This document provides information on the configurable inputs available to you.
+To optimize the transportation system of Sioux Faux, you will need to write an algorithm that generates different inputs according to a specified format. This document provides format specifications for the inputs available to you.
  
 ## Overview of the repository
 
@@ -18,19 +18,19 @@ To help the Sioux Faux Department of Transportation (SFDOT) combat congestion an
 The submission input file *VehicleFleetMix.csv* describes the status of the bus fleet (see Fig.2). Currently, SFBL (*agencyID* = 217) operates 12 bus lines in Sioux Faux. During the Pilot Test, you can decide which type of bus (i.e. *vehicleTypeId*) will provide service for each route (*routeID*, see Fig.1 & 2). Each route can utilize only **one type of bus**. 
 
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/sf_route_guide.png)\
+![Route IDs](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/sf_route_guide.png)\
 ***Figure 1: Sioux Faux route IDs guide***
 <br/>
 <br/>
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_VehicleFleetMix.png "*Figure 2: Input1 - composition of the bus fleet")\
-***Figure 2: Input1 - Bus fleet composition***
+![Bus fleet](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_VehicleFleetMix.png "*Figure 2: Input1 - composition of the bus fleet")\
+***Figure 2: Vehicle fleet mix input***
 
 <br/>
 
 SFDOT has four available bus types, each of them with different technical properties (`fixed-data/siouxfalls/vehicleTypes.csv`, see Fig.2) and cost characteristics (`fixed-data/siouxfalls/vehicleCosts.csv`, see Fig.3). Currently, SFDOT owns the minimum number of bus types to provide service for each route, as specifed in the file *submission-inputs/VehicleFleetMix.csv*. Additionally, the number of buses required to service each route is equal to the number of trips: after the a headway has expired, a new bus is used. This does not reflect a realistic scenario combining bus routes into runs, but, for now, it still allows for comparisons to a BAU case.
 
-During the Pilot Study, for each route, you have the opportunity to purchase new types of buses possessing attributes that might improve the level of service for transit along a route (see Figure 2 below). For each bus that you purchase to repplace a DEFAULT bus, the latter is automatically sold (for a selling price of 10'000$ + 20'000 * (0,1) )
+During the Pilot Study, for each route, you have the opportunity to purchase new types of buses possessing attributes that might improve the level of service for transit along a route (see Figure 2 below). For each bus that you purchase to replace a default bus (i.e., buses of the type, BUS-STD-DEFAULT), the latter is automatically sold for a price of 10'000$ + 20'000 * $$\mathcal{N}$$ (0,1).
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Bus_types.png)\
 ***Figure 3: Set of available bus types***
@@ -61,7 +61,7 @@ The choice of utilized socio-demographic qualifier(s), range(s), mode(s), and su
 The Figure 5 below shows an example input file with subsidies for specific socio-demographic groups. 
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_Subsidies.png)
-***Figure 5: Input2 - Subsidies for transit and on-demand rideshare users***
+***Figure 5: Mode Subsidy Input***
 
 The input file describes the following situation:
 
@@ -78,10 +78,13 @@ You will be able to modify the characeristics of the subsidies in the input file
 
 #### **3. Adjustments to the frequency of buses on routes**
 
-The third input you have control on is the buses frequencies. 
+The third input you have control over is the frequency of buses assigned to a route. The format for this AdjustFrequency input is identical to the `frequencies.txt` component of the [GTFS specification](https://developers.google.com/transit/gtfs/reference/#frequenciestxt). The first field in this file, `trip_id`, refers to a corresponding trip identifier in the `trips.txt` [file](https://developers.google.com/transit/gtfs/reference/?csw=1#tripstxt). To understand the geospatial embedding of the Route corresponding to a `route_id`, please refer to Figure 1, above. 
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Bus_frequencies_inputs.png)
+  While we term the behavior of this input as frequency adjustment, in fact, it modifies the SFBL bus headways on a particular route. The adjustment wipes out all non-frequency trips from the route and converts them to frequency trips according to the given headway defined between `start_time` and `end_time`. Here, we require you to provide the `trip_id` in order to derive the stop pattern and travel times. 
+  
+  Per the description of the behavior controlled by the Vehicle Fleet Mix input, adding or removing the number of trips on a route will require more or less buses to be assigned to a route. Ensuring input correctness requires the frequency adjustment to be executed prior to computation of the vehicle purchase costs. Thus, policies that include this input implicitly require vehicle purchases or sales--even when no new inputs are specified in the `VehicleFleetMix.csv` file. Thus, contestants must take care to coordinate modifications to this input with vehicle prices and ensure that they are not inadvertently over-spending exceeding their budgets. 
 
 
-
+![Bus Fequency Input](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Bus_frequencies_inputs.png)
+***Figure 5: Bus Frequency Input***
 

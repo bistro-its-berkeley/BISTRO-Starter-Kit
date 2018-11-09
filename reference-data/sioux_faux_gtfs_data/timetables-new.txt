@@ -1,0 +1,23 @@
+timetable_id,route_id,direction_id,start_date,end_date,monday,tuesday,wednesday,thursday,friday,saturday,sunday,route_label,service_notes,direction_label,orientation
+1,1342,,20140618,20190101,0,0,0,0,0,1,0,Downtown/Southwest Connector,Year Round Service (Saturday only),,horizontal
+2,1342,,20140618,20190101,1,1,1,1,1,0,0,Downtown/Southwest Connector,Year Round Service (Monday-Friday),,horizontal
+3,1343,,20140618,20190101,0,0,0,0,0,1,0,East 10th Street/East 12th Street,Year Round Service (Saturday only),,horizontal
+4,1343,,20140618,20190101,1,1,1,1,1,0,0,East 10th Street/East 12th Street,Year Round Service (Monday-Friday),,horizontal
+5,1349,,20140618,20190101,0,0,0,0,0,1,0,Hayward/West Side,Year Round Service (Saturday only),,horizontal
+6,1349,,20140618,20190101,1,1,1,1,1,0,0,Hayward/West Side,Year Round Service (Monday-Friday),,horizontal
+7,1350,,20140618,20190101,0,0,0,0,0,1,0,Louise Avenue/Empire Mall,Year Round Service (Saturday only),,horizontal
+8,1350,,20140618,20190101,1,1,1,1,1,0,0,Louise Avenue/Empire Mall,Year Round Service (Monday-Friday),,horizontal
+9,1346,,20140618,20190101,0,0,0,0,0,1,0,North Cleveland/East 6th Street/Arrowhead Parkway,Year Round Service (Saturday only),,horizontal
+10,1346,,20140618,20190101,1,1,1,1,1,0,0,North Cleveland/East 6th Street/Arrowhead Parkway,Year Round Service (Monday-Friday),,horizontal
+11,1347,,20140618,20190101,1,1,1,1,1,0,0,North Industrial,Year Round Service (Monday-Friday),,horizontal
+12,1345,,20140618,20190101,0,0,0,0,0,1,0,North Prairie Avenue,Year Round Service (Saturday only),,horizontal
+13,1345,,20140618,20190101,1,1,1,1,1,0,0,North Prairie Avenue,Year Round Service (Monday-Friday),,horizontal
+14,1351,,20140618,20190101,1,1,1,1,1,0,0,Southeast Technical Institute (STI),Year Round Service (Monday-Friday),,horizontal
+15,1340,,20140618,20190101,0,0,0,0,0,1,0,South Kiwanis Avenue/VA Medical Center,Year Round Service (Saturday only),,horizontal
+16,1340,,20140618,20190101,1,1,1,1,1,0,0,South Kiwanis Avenue/VA Medical Center,Year Round Service (Monday-Friday),,horizontal
+17,1344,,20140618,20190101,0,0,0,0,0,1,0,South Phillips Avenue/Avera McKennan Hospital,Year Round Service (Saturday only),,horizontal
+18,1344,,20140618,20190101,1,1,1,1,1,0,0,South Phillips Avenue/Avera McKennan Hospital,Year Round Service (Monday-Friday),,horizontal
+19,1348,,20140618,20190101,0,0,0,0,0,1,0,South Sycamore/East 26th Street,Year Round Service (Saturday only),,horizontal
+20,1348,,20140618,20190101,1,1,1,1,1,0,0,South Sycamore/East 26th Street,Year Round Service (Monday-Friday),,horizontal
+21,1341,,20140618,20190101,0,0,0,0,0,1,0,S. Western/Sanford,Year Round Service (Saturday only),,horizontal
+22,1341,,20140618,20190101,1,1,1,1,1,0,0,S. Western/Sanford,Year Round Service (Monday-Friday),,horizontal

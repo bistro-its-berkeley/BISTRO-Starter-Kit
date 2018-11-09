@@ -1,0 +1,818 @@
+timetable_id,stop_id,stop_sequence,stop_name,connected_routes
+1,767253,1,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+1,767330,2,Minnesota/11th NW corner,3/Downtown/Southwest Connector
+1,767331,3,Minnesota/14th NW corner,3/Downtown/Southwest Connector
+1,767332,4,Minnesota/18th NW corner,3/Downtown/Southwest Connector
+1,767333,5,Minnesota/21st NW corner,3/Downtown/Southwest Connector
+1,767334,6,Minnesota/26th NW corner,3/Downtown/Southwest Connector
+1,767335,7,Minnesota/29th NW corner,3/Downtown/Southwest Connector
+1,767336,8,Minnesota (mid-block)/33rd SW corner,3/Downtown/Southwest Connector
+1,767337,9,Minnesota/37th NW corner,3/Downtown/Southwest Connector
+1,767338,10,Minnesota/41st/NW corner,3/Downtown/Southwest Connector
+1,767339,11,41st/Norton NE corner,3/Downtown/Southwest Connector
+1,767340,12,41st/Grange NE corner,3/Downtown/Southwest Connector
+1,767341,13,41st/West NE corner,3/Downtown/Southwest Connector
+1,767342,14,41st/Western NE corner,3/Downtown/Southwest Connector
+1,767343,15,41st/Holly NE corner,3/Downtown/Southwest Connector
+1,767344,16,41st/Kiwanis NE corner,3/Downtown/Southwest Connector
+1,767345,17,41st/O'Gorman entrance,3/Downtown/Southwest Connector
+1,767346,18,Louise/Empire Mall entrance driveway NW corner,"11/Louise Avenue/Empire Mall, 3/Downtown/Southwest Connector"
+1,767347,19,Louise/Hy-Vee entrance driveway SW corner,"11/Louise Avenue/Empire Mall, 3/Downtown/Southwest Connector"
+1,767270,20,Southwest Center (SWC) SAM's southwest transit hub,"11/Louise Avenue/Empire Mall, 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector"
+1,767271,21,Technology Drive/Technology Circle SE corner,"1/South Kiwanis Avenue/VA Medical Center, 3/Downtown/Southwest Connector"
+1,767272,22,Technology Drive/Valhalla SE corner,"1/South Kiwanis Avenue/VA Medical Center, 3/Downtown/Southwest Connector"
+1,767348,23,47th/Louise SE corner,3/Downtown/Southwest Connector
+1,767349,24,Louise at Target entrance driveway NE corner,3/Downtown/Southwest Connector
+1,767350,25,41st/Westport SW corner,3/Downtown/Southwest Connector
+1,767351,26,41st/adjacent to (east of) Big Sioux River,3/Downtown/Southwest Connector
+1,767352,27,41st/Kiwanis – SW Corner,3/Downtown/Southwest Connector
+1,767353,28,41st/Elmwood SW corner,3/Downtown/Southwest Connector
+1,767354,29,41st/Western SW corner,3/Downtown/Southwest Connector
+1,767355,30,41st/West SW corner,3/Downtown/Southwest Connector
+1,767356,31,41st/Grange SW corner,3/Downtown/Southwest Connector
+1,767357,32,41st/Summit SW corner,3/Downtown/Southwest Connector
+1,767358,33,Minnesota/40th SE corner,3/Downtown/Southwest Connector
+1,767359,34,Minnesota/37th SE corner,3/Downtown/Southwest Connector
+1,767360,35,Minnesota (mid-block/ 33rd NE corner,3/Downtown/Southwest Connector
+1,767361,36,Minnesota/30th SE corner,3/Downtown/Southwest Connector
+1,767362,37,Minnesota (mid-block) 26th SE corner,3/Downtown/Southwest Connector
+1,767363,38,Minnesota/22nd SE corner,3/Downtown/Southwest Connector
+1,767364,39,Minnesota/19th SE corner,3/Downtown/Southwest Connector
+1,767365,40,Minnesota/16th SE corner,3/Downtown/Southwest Connector
+1,767366,41,Minnesota/13th SE corner,3/Downtown/Southwest Connector
+1,767290,42,11th/Dakota SW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 3/Downtown/Southwest Connector"
+1,767253,43,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+2,767253,1,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+2,767330,2,Minnesota/11th NW corner,3/Downtown/Southwest Connector
+2,767331,3,Minnesota/14th NW corner,3/Downtown/Southwest Connector
+2,767332,4,Minnesota/18th NW corner,3/Downtown/Southwest Connector
+2,767333,5,Minnesota/21st NW corner,3/Downtown/Southwest Connector
+2,767334,6,Minnesota/26th NW corner,3/Downtown/Southwest Connector
+2,767335,7,Minnesota/29th NW corner,3/Downtown/Southwest Connector
+2,767336,8,Minnesota (mid-block)/33rd SW corner,3/Downtown/Southwest Connector
+2,767337,9,Minnesota/37th NW corner,3/Downtown/Southwest Connector
+2,767338,10,Minnesota/41st/NW corner,3/Downtown/Southwest Connector
+2,767339,11,41st/Norton NE corner,3/Downtown/Southwest Connector
+2,767340,12,41st/Grange NE corner,3/Downtown/Southwest Connector
+2,767341,13,41st/West NE corner,3/Downtown/Southwest Connector
+2,767342,14,41st/Western NE corner,3/Downtown/Southwest Connector
+2,767343,15,41st/Holly NE corner,3/Downtown/Southwest Connector
+2,767344,16,41st/Kiwanis NE corner,3/Downtown/Southwest Connector
+2,767345,17,41st/O'Gorman entrance,3/Downtown/Southwest Connector
+2,767346,18,Louise/Empire Mall entrance driveway NW corner,"11/Louise Avenue/Empire Mall, 3/Downtown/Southwest Connector"
+2,767347,19,Louise/Hy-Vee entrance driveway SW corner,"11/Louise Avenue/Empire Mall, 3/Downtown/Southwest Connector"
+2,767270,20,Southwest Center (SWC) SAM's southwest transit hub,"11/Louise Avenue/Empire Mall, 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector"
+2,767271,21,Technology Drive/Technology Circle SE corner,"1/South Kiwanis Avenue/VA Medical Center, 3/Downtown/Southwest Connector"
+2,767272,22,Technology Drive/Valhalla SE corner,"1/South Kiwanis Avenue/VA Medical Center, 3/Downtown/Southwest Connector"
+2,767348,23,47th/Louise SE corner,3/Downtown/Southwest Connector
+2,767349,24,Louise at Target entrance driveway NE corner,3/Downtown/Southwest Connector
+2,767350,25,41st/Westport SW corner,3/Downtown/Southwest Connector
+2,767351,26,41st/adjacent to (east of) Big Sioux River,3/Downtown/Southwest Connector
+2,767352,27,41st/Kiwanis – SW Corner,3/Downtown/Southwest Connector
+2,767353,28,41st/Elmwood SW corner,3/Downtown/Southwest Connector
+2,767354,29,41st/Western SW corner,3/Downtown/Southwest Connector
+2,767355,30,41st/West SW corner,3/Downtown/Southwest Connector
+2,767356,31,41st/Grange SW corner,3/Downtown/Southwest Connector
+2,767357,32,41st/Summit SW corner,3/Downtown/Southwest Connector
+2,767358,33,Minnesota/40th SE corner,3/Downtown/Southwest Connector
+2,767359,34,Minnesota/37th SE corner,3/Downtown/Southwest Connector
+2,767360,35,Minnesota (mid-block/ 33rd NE corner,3/Downtown/Southwest Connector
+2,767361,36,Minnesota/30th SE corner,3/Downtown/Southwest Connector
+2,767362,37,Minnesota (mid-block) 26th SE corner,3/Downtown/Southwest Connector
+2,767363,38,Minnesota/22nd SE corner,3/Downtown/Southwest Connector
+2,767364,39,Minnesota/19th SE corner,3/Downtown/Southwest Connector
+2,767365,40,Minnesota/16th SE corner,3/Downtown/Southwest Connector
+2,767366,41,Minnesota/13th SE corner,3/Downtown/Southwest Connector
+2,767290,42,11th/Dakota SW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 3/Downtown/Southwest Connector"
+2,767253,43,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+3,767253,1,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+3,767367,2,10th/Indiana,4/East 10th Street/East 12th Street
+3,767368,3,10th between Cliff and Van Eps,4/East 10th Street/East 12th Street
+3,767369,4,10th/Blauvelt SW corner,4/East 10th Street/East 12th Street
+3,767370,5,10th/Jessica SW corner,4/East 10th Street/East 12th Street
+3,767371,6,10th/St. Paul SW corner,4/East 10th Street/East 12th Street
+3,767372,7,10th/Lowell SW corner,4/East 10th Street/East 12th Street
+3,767373,8,10th/Blaine SW corner,4/East 10th Street/East 12th Street
+3,767374,9,10th/Hy-Vee/Campbell Supply SW corner,4/East 10th Street/East 12th Street
+3,767375,10,10th/Bahnson SW corner,4/East 10th Street/East 12th Street
+3,767376,11,10th/Kmart,4/East 10th Street/East 12th Street
+3,767377,12,12th/Kennedy NW corner,4/East 10th Street/East 12th Street
+3,767378,13,12th/Churchill NW corner,4/East 10th Street/East 12th Street
+3,767379,14,12th/Bahnson NE corner,4/East 10th Street/East 12th Street
+3,767380,15,12th/Sneve NE corner,4/East 10th Street/East 12th Street
+3,767381,16,12/Thompson NE corner,4/East 10th Street/East 12th Street
+3,767382,17,12th/Cleveland NE corner,4/East 10th Street/East 12th Street
+3,767383,18,10th/Cleveland NW corner,4/East 10th Street/East 12th Street
+3,767384,19,10th/Lowell NE corner,4/East 10th Street/East 12th Street
+3,767385,20,10th/Jessica NW corner,4/East 10th Street/East 12th Street
+3,767386,21,10th/Blauvelt NE corner,4/East 10th Street/East 12th Street
+3,767387,22,10th/Cliff NE corner,4/East 10th Street/East 12th Street
+3,767388,23,8th/French NE corner,4/East 10th Street/East 12th Street
+3,767389,24,8th/Indiana NW corner,4/East 10th Street/East 12th Street
+3,767253,25,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+4,767253,1,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+4,767367,2,10th/Indiana,4/East 10th Street/East 12th Street
+4,767368,3,10th between Cliff and Van Eps,4/East 10th Street/East 12th Street
+4,767369,4,10th/Blauvelt SW corner,4/East 10th Street/East 12th Street
+4,767370,5,10th/Jessica SW corner,4/East 10th Street/East 12th Street
+4,767371,6,10th/St. Paul SW corner,4/East 10th Street/East 12th Street
+4,767372,7,10th/Lowell SW corner,4/East 10th Street/East 12th Street
+4,767373,8,10th/Blaine SW corner,4/East 10th Street/East 12th Street
+4,767374,9,10th/Hy-Vee/Campbell Supply SW corner,4/East 10th Street/East 12th Street
+4,767375,10,10th/Bahnson SW corner,4/East 10th Street/East 12th Street
+4,767376,11,10th/Kmart,4/East 10th Street/East 12th Street
+4,767377,12,12th/Kennedy NW corner,4/East 10th Street/East 12th Street
+4,767378,13,12th/Churchill NW corner,4/East 10th Street/East 12th Street
+4,767379,14,12th/Bahnson NE corner,4/East 10th Street/East 12th Street
+4,767380,15,12th/Sneve NE corner,4/East 10th Street/East 12th Street
+4,767381,16,12/Thompson NE corner,4/East 10th Street/East 12th Street
+4,767382,17,12th/Cleveland NE corner,4/East 10th Street/East 12th Street
+4,767383,18,10th/Cleveland NW corner,4/East 10th Street/East 12th Street
+4,767384,19,10th/Lowell NE corner,4/East 10th Street/East 12th Street
+4,767385,20,10th/Jessica NW corner,4/East 10th Street/East 12th Street
+4,767386,21,10th/Blauvelt NE corner,4/East 10th Street/East 12th Street
+4,767387,22,10th/Cliff NE corner,4/East 10th Street/East 12th Street
+4,767388,23,8th/French NE corner,4/East 10th Street/East 12th Street
+4,767389,24,8th/Indiana NW corner,4/East 10th Street/East 12th Street
+4,767253,25,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+5,767253,1,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+5,767254,2,10th (mid-block)/Dakota NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 6/North Prairie Avenue, 8/North Industrial"
+5,767255,3,10th/Spring NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+5,767256,4,10th/Prairie NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+5,767257,5,12th/Grange NW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+5,767258,6,12th/Hawthorne NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+5,767536,7,12th/Western NE corner,10/Hayward/West Side
+5,767537,8,12th/Elmwood NE corner,10/Hayward/West Side
+5,767538,9,12th/Williams NE corner,10/Hayward/West Side
+5,767539,10,10th/Kawanis NW corner,10/Hayward/West Side
+5,767540,11,11th at entrance to Rehab Center for the Blind,10/Hayward/West Side
+5,767541,12,12th (mid-block)/Westport NW corner,10/Hayward/West Side
+5,767542,13,12th/Lyon Blvd NW corner,10/Hayward/West Side
+5,767543,14,12th/Petro NE corner,10/Hayward/West Side
+5,767544,15,12th (north side) east of Marion,10/Hayward/West Side
+5,767545,16,9th (mid-block) /Marion NW corner,10/Hayward/West Side
+5,767546,17,9th/Holbrook NE corner,10/Hayward/West Side
+5,767547,18,Holbrook/Thrush Place SE corner,10/Hayward/West Side
+5,767548,19,Holbrook/Wren Place SE corner,10/Hayward/West Side
+5,767549,20,Holbrook/5th SE corner,10/Hayward/West Side
+5,767550,21,5th/Valley View NE corner,10/Hayward/West Side
+5,767551,22,Valley View/West Grove Place NW corner,10/Hayward/West Side
+5,767552,23,Valley View/9th NW corner,10/Hayward/West Side
+5,767553,24,Valley View/12th NW corner,10/Hayward/West Side
+5,767554,25,Valley View (mid-block)/12th SW corner,10/Hayward/West Side
+5,767555,26,Christopher/Silver Place NW corner,10/Hayward/West Side
+5,767556,27,Christopher/Dardenella NW corner,10/Hayward/West Side
+5,767557,28,Dardenella/Marion SW corner,10/Hayward/West Side
+5,767558,29,Marion (west side) north of entrance to Dunham Park,10/Hayward/West Side
+5,767559,30,26th/Edna SW corner,10/Hayward/West Side
+5,767560,31,26th/Lorraine (mid-block) SE corner,10/Hayward/West Side
+5,767561,32,"26th/Shirley (mid-block, across from existing shelter)",10/Hayward/West Side
+5,767562,33,Shirley/34th NW corner,10/Hayward/West Side
+5,767563,34,Shirley/38th NW corner,10/Hayward/West Side
+5,767564,35,Shirley/West Shirley Place NW corner,10/Hayward/West Side
+5,767565,36,41st/Terry  NE corner,10/Hayward/West Side
+5,767566,37,41st/Marion NE corner,10/Hayward/West Side
+5,767567,38,Marion/37th SE corner,10/Hayward/West Side
+5,767568,39,Marion/34th SE corner,10/Hayward/West Side
+5,767569,40,Marion/26th SE corner (south of driveway into Hy-Vee-driveway nearest to front of Hy-Vee),10/Hayward/West Side
+5,767570,41,Marion/24th SE corner,10/Hayward/West Side
+5,767571,42,Marion/18th SE corner,10/Hayward/West Side
+5,767572,43,Marion/12th SE corner,10/Hayward/West Side
+5,767573,44,12th/Ebenezer SW corner,10/Hayward/West Side
+5,767574,45,12th/Pine Crest Place SW corner,10/Hayward/West Side
+5,767575,46,12th/Lyons SE corner,10/Hayward/West Side
+5,767576,47,Westport/12th (north side),10/Hayward/West Side
+5,767540,48,11th at entrance to Rehab Center for the Blind,10/Hayward/West Side
+5,767577,49,12th/Williams SW corner,10/Hayward/West Side
+5,767578,50,12th/Elmwood SW corner,10/Hayward/West Side
+5,767285,51,12th/Western SE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+5,767286,52,12th/Glendale SE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+5,767287,53,11th/Menlo SW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+5,767288,54,11th/Prairie SW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+5,767289,55,11th/Spring SW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+5,767290,56,11th/Dakota SW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 3/Downtown/Southwest Connector"
+5,767253,57,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+6,767253,1,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+6,767254,2,10th (mid-block)/Dakota NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 6/North Prairie Avenue, 8/North Industrial"
+6,767255,3,10th/Spring NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+6,767256,4,10th/Prairie NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+6,767257,5,12th/Grange NW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+6,767258,6,12th/Hawthorne NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+6,767536,7,12th/Western NE corner,10/Hayward/West Side
+6,767537,8,12th/Elmwood NE corner,10/Hayward/West Side
+6,767538,9,12th/Williams NE corner,10/Hayward/West Side
+6,767539,10,10th/Kawanis NW corner,10/Hayward/West Side
+6,767540,11,11th at entrance to Rehab Center for the Blind,10/Hayward/West Side
+6,767541,12,12th (mid-block)/Westport NW corner,10/Hayward/West Side
+6,767542,13,12th/Lyon Blvd NW corner,10/Hayward/West Side
+6,767543,14,12th/Petro NE corner,10/Hayward/West Side
+6,767544,15,12th (north side) east of Marion,10/Hayward/West Side
+6,767545,16,9th (mid-block) /Marion NW corner,10/Hayward/West Side
+6,767546,17,9th/Holbrook NE corner,10/Hayward/West Side
+6,767547,18,Holbrook/Thrush Place SE corner,10/Hayward/West Side
+6,767548,19,Holbrook/Wren Place SE corner,10/Hayward/West Side
+6,767549,20,Holbrook/5th SE corner,10/Hayward/West Side
+6,767550,21,5th/Valley View NE corner,10/Hayward/West Side
+6,767551,22,Valley View/West Grove Place NW corner,10/Hayward/West Side
+6,767552,23,Valley View/9th NW corner,10/Hayward/West Side
+6,767553,24,Valley View/12th NW corner,10/Hayward/West Side
+6,767554,25,Valley View (mid-block)/12th SW corner,10/Hayward/West Side
+6,767555,26,Christopher/Silver Place NW corner,10/Hayward/West Side
+6,767556,27,Christopher/Dardenella NW corner,10/Hayward/West Side
+6,767557,28,Dardenella/Marion SW corner,10/Hayward/West Side
+6,767558,29,Marion (west side) north of entrance to Dunham Park,10/Hayward/West Side
+6,767559,30,26th/Edna SW corner,10/Hayward/West Side
+6,767560,31,26th/Lorraine (mid-block) SE corner,10/Hayward/West Side
+6,767561,32,"26th/Shirley (mid-block, across from existing shelter)",10/Hayward/West Side
+6,767562,33,Shirley/34th NW corner,10/Hayward/West Side
+6,767563,34,Shirley/38th NW corner,10/Hayward/West Side
+6,767564,35,Shirley/West Shirley Place NW corner,10/Hayward/West Side
+6,767565,36,41st/Terry  NE corner,10/Hayward/West Side
+6,767566,37,41st/Marion NE corner,10/Hayward/West Side
+6,767567,38,Marion/37th SE corner,10/Hayward/West Side
+6,767568,39,Marion/34th SE corner,10/Hayward/West Side
+6,767569,40,Marion/26th SE corner (south of driveway into Hy-Vee-driveway nearest to front of Hy-Vee),10/Hayward/West Side
+6,767570,41,Marion/24th SE corner,10/Hayward/West Side
+6,767571,42,Marion/18th SE corner,10/Hayward/West Side
+6,767572,43,Marion/12th SE corner,10/Hayward/West Side
+6,767573,44,12th/Ebenezer SW corner,10/Hayward/West Side
+6,767574,45,12th/Pine Crest Place SW corner,10/Hayward/West Side
+6,767575,46,12th/Lyons SE corner,10/Hayward/West Side
+6,767576,47,Westport/12th (north side),10/Hayward/West Side
+6,767540,48,11th at entrance to Rehab Center for the Blind,10/Hayward/West Side
+6,767577,49,12th/Williams SW corner,10/Hayward/West Side
+6,767578,50,12th/Elmwood SW corner,10/Hayward/West Side
+6,767285,51,12th/Western SE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+6,767286,52,12th/Glendale SE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+6,767287,53,11th/Menlo SW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+6,767288,54,11th/Prairie SW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+6,767289,55,11th/Spring SW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+6,767290,56,11th/Dakota SW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 3/Downtown/Southwest Connector"
+6,767253,57,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+7,767270,1,Southwest Center (SWC) SAM's southwest transit hub,"11/Louise Avenue/Empire Mall, 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector"
+7,767636,2,57th/Technopolis Drive NE corner,11/Louise Avenue/Empire Mall
+7,767637,3,57th/Solberg NE corner,11/Louise Avenue/Empire Mall
+7,767579,4,57th/Broadband NE corner (entrance to Good Sams),11/Louise Avenue/Empire Mall
+7,767580,5,57th/Marion NE corner,11/Louise Avenue/Empire Mall
+7,767581,6,Marion/55th SW corner,11/Louise Avenue/Empire Mall
+7,767582,7,Marion/St. James SE corner,11/Louise Avenue/Empire Mall
+7,767583,8,49th/Meadowstone Ct. NE corner,11/Louise Avenue/Empire Mall
+7,767584,9,49th/Drexel NE corner,11/Louise Avenue/Empire Mall
+7,767585,10,49th/Holbrook NE corner,11/Louise Avenue/Empire Mall
+7,767586,11,Essex/Mesa Pass (4200 W) NE corner,11/Louise Avenue/Empire Mall
+7,767587,12,Essex/Sertoma NE corner,11/Louise Avenue/Empire Mall
+7,767588,13,Sertoma/46th SE corner,11/Louise Avenue/Empire Mall
+7,767589,14,Sertoma/41st SE corner,11/Louise Avenue/Empire Mall
+7,767590,15,41st/Kuehn Park SW corner,11/Louise Avenue/Empire Mall
+7,767591,16,41st/Holbrook SW corner,11/Louise Avenue/Empire Mall
+7,767592,17,41st/Fairhall SW corner,11/Louise Avenue/Empire Mall
+7,767593,18,41st/Cambridge SW corner,11/Louise Avenue/Empire Mall
+7,767594,19,Marion (mid-block)/41st SW corner,11/Louise Avenue/Empire Mall
+7,767595,20,Marion/46th SW corner,11/Louise Avenue/Empire Mall
+7,767596,21,Cathy (mid-block)/45th SE corner,11/Louise Avenue/Empire Mall
+7,767597,22,45th/Downing SW corner,11/Louise Avenue/Empire Mall
+7,767598,23,Terry/Gateway SE corner,11/Louise Avenue/Empire Mall
+7,767599,24,Terry/41st SE corner,11/Louise Avenue/Empire Mall
+7,767600,25,41st/Gateway SW corner,11/Louise Avenue/Empire Mall
+7,767601,26,Shirley/ShirleyPlace/SE corner,11/Louise Avenue/Empire Mall
+7,767602,27,Shirley/38th NE corner,11/Louise Avenue/Empire Mall
+7,767603,28,34th/Louise SW corner (approximately 100 ft west of intersection),11/Louise Avenue/Empire Mall
+7,767604,29,Louise at Wal-Mart entrance driveway NW corner,11/Louise Avenue/Empire Mall
+7,767346,30,Louise/Empire Mall entrance driveway NW corner,"11/Louise Avenue/Empire Mall, 3/Downtown/Southwest Connector"
+7,767347,31,Louise/Hy-Vee entrance driveway SW corner,"11/Louise Avenue/Empire Mall, 3/Downtown/Southwest Connector"
+7,767270,32,Southwest Center (SWC) SAM's southwest transit hub,"11/Louise Avenue/Empire Mall, 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector"
+8,767270,1,Southwest Center (SWC) SAM's southwest transit hub,"11/Louise Avenue/Empire Mall, 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector"
+8,767636,2,57th/Technopolis Drive NE corner,11/Louise Avenue/Empire Mall
+8,767637,3,57th/Solberg NE corner,11/Louise Avenue/Empire Mall
+8,767579,4,57th/Broadband NE corner (entrance to Good Sams),11/Louise Avenue/Empire Mall
+8,767580,5,57th/Marion NE corner,11/Louise Avenue/Empire Mall
+8,767581,6,Marion/55th SW corner,11/Louise Avenue/Empire Mall
+8,767582,7,Marion/St. James SE corner,11/Louise Avenue/Empire Mall
+8,767583,8,49th/Meadowstone Ct. NE corner,11/Louise Avenue/Empire Mall
+8,767584,9,49th/Drexel NE corner,11/Louise Avenue/Empire Mall
+8,767585,10,49th/Holbrook NE corner,11/Louise Avenue/Empire Mall
+8,767586,11,Essex/Mesa Pass (4200 W) NE corner,11/Louise Avenue/Empire Mall
+8,767587,12,Essex/Sertoma NE corner,11/Louise Avenue/Empire Mall
+8,767588,13,Sertoma/46th SE corner,11/Louise Avenue/Empire Mall
+8,767589,14,Sertoma/41st SE corner,11/Louise Avenue/Empire Mall
+8,767590,15,41st/Kuehn Park SW corner,11/Louise Avenue/Empire Mall
+8,767591,16,41st/Holbrook SW corner,11/Louise Avenue/Empire Mall
+8,767592,17,41st/Fairhall SW corner,11/Louise Avenue/Empire Mall
+8,767593,18,41st/Cambridge SW corner,11/Louise Avenue/Empire Mall
+8,767594,19,Marion (mid-block)/41st SW corner,11/Louise Avenue/Empire Mall
+8,767595,20,Marion/46th SW corner,11/Louise Avenue/Empire Mall
+8,767596,21,Cathy (mid-block)/45th SE corner,11/Louise Avenue/Empire Mall
+8,767597,22,45th/Downing SW corner,11/Louise Avenue/Empire Mall
+8,767598,23,Terry/Gateway SE corner,11/Louise Avenue/Empire Mall
+8,767599,24,Terry/41st SE corner,11/Louise Avenue/Empire Mall
+8,767600,25,41st/Gateway SW corner,11/Louise Avenue/Empire Mall
+8,767601,26,Shirley/ShirleyPlace/SE corner,11/Louise Avenue/Empire Mall
+8,767602,27,Shirley/38th NE corner,11/Louise Avenue/Empire Mall
+8,767603,28,34th/Louise SW corner (approximately 100 ft west of intersection),11/Louise Avenue/Empire Mall
+8,767604,29,Louise at Wal-Mart entrance driveway NW corner,11/Louise Avenue/Empire Mall
+8,767346,30,Louise/Empire Mall entrance driveway NW corner,"11/Louise Avenue/Empire Mall, 3/Downtown/Southwest Connector"
+8,767347,31,Louise/Hy-Vee entrance driveway SW corner,"11/Louise Avenue/Empire Mall, 3/Downtown/Southwest Connector"
+8,767270,32,Southwest Center (SWC) SAM's southwest transit hub,"11/Louise Avenue/Empire Mall, 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector"
+9,767253,1,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+9,771289,2,9th/Phillips – NE Corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767438,3,Phillips/8th SE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767439,4,8th/Railroad,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767440,5,Weber/6th NE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767441,6,Weber/4th SE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767442,7,Weber (east side) at Falls Park Entrance,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767443,8,Weber (east side) at John Morrell's,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767444,9,Rice/Cliff SW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767445,10,Rice/Wayland SW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767446,11,Rice/Jessica SW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767447,12,Rice/Lowell SW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767448,13,Cleveland/1 blk south of Rice,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767449,14,Cleveland at River Ridge Apts,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767450,15,Cleveland/Bunker Place SW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767451,16,Cleveland at Springbrook Estates,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767452,17,6th/Shephard SW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767453,18,Bahnson (mid-block)/6th NE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767454,19,3rd/Montgomery Court SW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767455,20,3rd/Washington High School entrance (west of drive),7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767456,21,6th/Sycamore (mid-block),7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767457,22,6th/Dewberry SW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767458,23,Foss at East Ryan Place,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767459,24,West side of Walmart bldg,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767460,25,Highline Place/Tree Blvd (between Target & Kohls),7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767461,26,Highline Place/Trarget Driveway  (south end of Target),7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767462,27,Century Theaters (east side  near driveway),7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767463,28,Arrowhead Parkway/Sycamore NE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767464,29,Sycamore/8th NE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767465,30,6th/Washington High School driveway (west side of driveway),7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767466,31,6th/Bahnson NE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767467,32,6th/Shepard NW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767468,33,6th/Cleveland NW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767469,34,6th/Lowell NE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767470,35,6th/St. Paul NE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767471,36,Lewis/5th SE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767472,37,3rd/Lewis NW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767473,38,3rd/Wayland NE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767474,39,3rd/Cliff NE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767475,40,3rd/Indiana NE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767476,41,6th/Indiana NE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767477,42,6th/Weber NW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767478,43,6th/Kilian College,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767479,44,Phillips/7th NW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+9,767253,45,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+10,767253,1,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+10,771289,2,9th/Phillips – NE Corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767438,3,Phillips/8th SE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767439,4,8th/Railroad,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767440,5,Weber/6th NE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767441,6,Weber/4th SE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767442,7,Weber (east side) at Falls Park Entrance,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767443,8,Weber (east side) at John Morrell's,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767444,9,Rice/Cliff SW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767445,10,Rice/Wayland SW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767446,11,Rice/Jessica SW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767447,12,Rice/Lowell SW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767448,13,Cleveland/1 blk south of Rice,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767449,14,Cleveland at River Ridge Apts,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767450,15,Cleveland/Bunker Place SW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767451,16,Cleveland at Springbrook Estates,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767452,17,6th/Shephard SW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767453,18,Bahnson (mid-block)/6th NE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767454,19,3rd/Montgomery Court SW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767455,20,3rd/Washington High School entrance (west of drive),7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767456,21,6th/Sycamore (mid-block),7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767457,22,6th/Dewberry SW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767458,23,Foss at East Ryan Place,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767459,24,West side of Walmart bldg,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767460,25,Highline Place/Tree Blvd (between Target & Kohls),7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767461,26,Highline Place/Trarget Driveway  (south end of Target),7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767462,27,Century Theaters (east side  near driveway),7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767463,28,Arrowhead Parkway/Sycamore NE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767464,29,Sycamore/8th NE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767465,30,6th/Washington High School driveway (west side of driveway),7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767466,31,6th/Bahnson NE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767467,32,6th/Shepard NW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767468,33,6th/Cleveland NW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767469,34,6th/Lowell NE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767470,35,6th/St. Paul NE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767471,36,Lewis/5th SE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767472,37,3rd/Lewis NW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767473,38,3rd/Wayland NE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767474,39,3rd/Cliff NE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767475,40,3rd/Indiana NE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767476,41,6th/Indiana NE corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767477,42,6th/Weber NW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767478,43,6th/Kilian College,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767479,44,Phillips/7th NW corner,7/North Cleveland/East 6th Street/Arrowhead Parkway
+10,767253,45,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+11,767253,1,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+11,767254,2,10th (mid-block)/Dakota NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 6/North Prairie Avenue, 8/North Industrial"
+11,767480,3,Minnesota/5th SE corner,8/North Industrial
+11,767481,4,Minesota/1st SE corner,8/North Industrial
+11,767482,5,Minnesota/Brookings SE corner,8/North Industrial
+11,767483,6,Minnesota/Russell SE corner,8/North Industrial
+11,767484,7,North Drive/1st Ave SW corner,8/North Industrial
+11,767485,8,4th Ave/Amidon SE corner,8/North Industrial
+11,767486,9,4th Ave/Presentation NE corner,8/North Industrial
+11,767487,10,4th Ave/Wells Fargo crosswalk,8/North Industrial
+11,767488,11,4th Ave/Cumberland Apts,8/North Industrial
+11,767489,12,4th Ave/48th SE corner,8/North Industrial
+11,767490,13,4th Ave/ 50th SE corner,8/North Industrial
+11,767491,14,4th Ave/52nd SE corner,8/North Industrial
+11,767492,15,4th Ave/54th SE corner,8/North Industrial
+11,767493,16,4th Ave/58th SE corner,8/North Industrial
+11,767494,17,Citibank Building # 1,8/North Industrial
+11,767495,18,Cliff (mid-block)/60th SW corner,8/North Industrial
+11,767496,19,Cliff/54th NW corner,8/North Industrial
+11,767497,20,Cliff/Benson SW corner,8/North Industrial
+11,767498,21,Cliff/Heromsa NW corner,8/North Industrial
+11,767499,22,Cliff/34th NW corner,8/North Industrial
+11,767500,23,Cliff/Amidon NW corner,8/North Industrial
+11,771290,24,Cliff/Chambers,8/North Industrial
+11,767501,25,Cliff/Rice SW corner,8/North Industrial
+11,767502,26,Cliff/3rd NW corner,8/North Industrial
+11,767503,27,Cliff/6th NW corner,8/North Industrial
+11,767504,28,Cliff/8th NW corner,8/North Industrial
+11,767505,29,Cliff/10th NW corner,8/North Industrial
+11,767506,30,10th/Fairfax NE corner,8/North Industrial
+11,767253,31,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+12,767253,1,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+12,767254,2,10th (mid-block)/Dakota NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 6/North Prairie Avenue, 8/North Industrial"
+12,767418,3,8th/Dakota NW corner,6/North Prairie Avenue
+12,767419,4,8th/Spring NE corner,6/North Prairie Avenue
+12,767420,5,8th/Prairie NE corner,6/North Prairie Avenue
+12,767421,6,8th/Grange NE corner,6/North Prairie Avenue
+12,767422,7,8th/Lake NE corner,6/North Prairie Avenue
+12,767423,8,West Ave/7th SE corner,6/North Prairie Avenue
+12,767424,9,West Ave at bus pullout (midway between 6th and Madison),6/North Prairie Avenue
+12,767425,10,Madison (just south of the stadium),6/North Prairie Avenue
+12,767426,11,Western/Sanford PREMIER Center (driveway between Center & Stadium),6/North Prairie Avenue
+12,767427,12,Western/Holly (Howard Wood Field)  SE corner of driveway,6/North Prairie Avenue
+12,767428,13,Russell between West/Western (mid-block),6/North Prairie Avenue
+12,767429,14,Bailey/West SE corner,6/North Prairie Avenue
+12,767430,15,Bailey (mid-block)/Lake SE corner,6/North Prairie Avenue
+12,767431,16,Bailey (Veterens Park)  SE corner,6/North Prairie Avenue
+12,767432,17,Bailey/Walts SW corner,6/North Prairie Avenue
+12,767433,18,Brookings/Duluth SW corner,6/North Prairie Avenue
+12,767434,19,Brookings/Minnesota SW corner,6/North Prairie Avenue
+12,767435,20,Minnesota/2nd NW corner,6/North Prairie Avenue
+12,767436,21,Minnesota/5th NW corner,6/North Prairie Avenue
+12,767437,22,8th/Main SW corner,6/North Prairie Avenue
+12,767253,23,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+13,767253,1,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+13,767254,2,10th (mid-block)/Dakota NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 6/North Prairie Avenue, 8/North Industrial"
+13,767418,3,8th/Dakota NW corner,6/North Prairie Avenue
+13,767419,4,8th/Spring NE corner,6/North Prairie Avenue
+13,767420,5,8th/Prairie NE corner,6/North Prairie Avenue
+13,767421,6,8th/Grange NE corner,6/North Prairie Avenue
+13,767422,7,8th/Lake NE corner,6/North Prairie Avenue
+13,767423,8,West Ave/7th SE corner,6/North Prairie Avenue
+13,767424,9,West Ave at bus pullout (midway between 6th and Madison),6/North Prairie Avenue
+13,767425,10,Madison (just south of the stadium),6/North Prairie Avenue
+13,767426,11,Western/Sanford PREMIER Center (driveway between Center & Stadium),6/North Prairie Avenue
+13,767427,12,Western/Holly (Howard Wood Field)  SE corner of driveway,6/North Prairie Avenue
+13,767428,13,Russell between West/Western (mid-block),6/North Prairie Avenue
+13,767429,14,Bailey/West SE corner,6/North Prairie Avenue
+13,767430,15,Bailey (mid-block)/Lake SE corner,6/North Prairie Avenue
+13,767431,16,Bailey (Veterens Park)  SE corner,6/North Prairie Avenue
+13,767432,17,Bailey/Walts SW corner,6/North Prairie Avenue
+13,767433,18,Brookings/Duluth SW corner,6/North Prairie Avenue
+13,767434,19,Brookings/Minnesota SW corner,6/North Prairie Avenue
+13,767435,20,Minnesota/2nd NW corner,6/North Prairie Avenue
+13,767436,21,Minnesota/5th NW corner,6/North Prairie Avenue
+13,767437,22,8th/Main SW corner,6/North Prairie Avenue
+13,767253,23,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+14,767253,1,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+14,767254,2,10th (mid-block)/Dakota NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 6/North Prairie Avenue, 8/North Industrial"
+14,767255,3,10th/Spring NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+14,767256,4,10th/Prairie NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+14,767257,5,12th/Grange NW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+14,767258,6,12th/Hawthorne NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+14,767605,7,Western/10th SE corner,19/Southeast Technical Institute (STI)
+14,767606,8,Western/Sandy Creek Apts,19/Southeast Technical Institute (STI)
+14,767607,9,Western/across for Children's Inn,19/Southeast Technical Institute (STI)
+14,767608,10,Western/Legion  SE corner,19/Southeast Technical Institute (STI)
+14,767609,11,Madison/Lyndale NE corner,19/Southeast Technical Institute (STI)
+14,767610,12,Madison/Lincoln NE corner,19/Southeast Technical Institute (STI)
+14,767611,13,Madison/Kiwanis NE corner,19/Southeast Technical Institute (STI)
+14,767612,14,Kawanis/Bailey SE corner,19/Southeast Technical Institute (STI)
+14,771292,15,Kiwanis/Hotel,19/Southeast Technical Institute (STI)
+14,767613,16,Russell/Westport NE corner,19/Southeast Technical Institute (STI)
+14,767614,17,Ramkota Hotel,19/Southeast Technical Institute (STI)
+14,767615,18,Maple/Career NE corner,19/Southeast Technical Institute (STI)
+14,767616,19,Career/Innovation SE corner,19/Southeast Technical Institute (STI)
+14,771293,20,Career/Tickman – NE Corner,19/Southeast Technical Institute (STI)
+14,767617,21,Career/Cayman NE corner,19/Southeast Technical Institute (STI)
+14,767618,22,University Center (parking lot west of Administration bldg.),19/Southeast Technical Institute (STI)
+14,771294,23,Walmart,19/Southeast Technical Institute (STI)
+14,771295,24,University Center,19/Southeast Technical Institute (STI)
+14,767619,25,Career/Benson SW corner,19/Southeast Technical Institute (STI)
+14,767620,26,Career/Tickman SW corner,19/Southeast Technical Institute (STI)
+14,767621,27,Career/Pat NW corner,19/Southeast Technical Institute (STI)
+14,767622,28,Career/Northridge Apts (north side of driveway),19/Southeast Technical Institute (STI)
+14,767623,29,STI in front of George S. Mickelson Education Center,19/Southeast Technical Institute (STI)
+14,785280,30,Russell and Louise SW Corner,19/Southeast Technical Institute (STI)
+14,767624,31,Kiwanis/Brookings NW corner,19/Southeast Technical Institute (STI)
+14,767625,32,Madison/Garfield SW corner,19/Southeast Technical Institute (STI)
+14,767626,33,Madison/Holly SW corner,19/Southeast Technical Institute (STI)
+14,767627,34,Madison/Western SW corner,19/Southeast Technical Institute (STI)
+14,767628,35,Western/Children's Inn,19/Southeast Technical Institute (STI)
+14,767629,36,Western/Northwestern Apts,19/Southeast Technical Institute (STI)
+14,767630,37,Western/11th NW corner,19/Southeast Technical Institute (STI)
+14,767285,38,12th/Western SE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+14,767286,39,12th/Glendale SE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+14,767287,40,11th/Menlo SW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+14,767288,41,11th/Prairie SW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+14,767289,42,11th/Spring SW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+14,767290,43,11th/Dakota SW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 3/Downtown/Southwest Connector"
+14,767253,44,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+15,767253,1,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+15,767254,2,10th (mid-block)/Dakota NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 6/North Prairie Avenue, 8/North Industrial"
+15,767255,3,10th/Spring NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+15,767256,4,10th/Prairie NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+15,767257,5,12th/Grange NW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+15,767258,6,12th/Hawthorne NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+15,771291,7,Western/12th – SW Corner,1/South Kiwanis Avenue/VA Medical Center
+15,767259,8,Western/Ashley Circle NW corner,1/South Kiwanis Avenue/VA Medical Center
+15,767260,9,Western/18th NW corner,1/South Kiwanis Avenue/VA Medical Center
+15,767261,10,Western/22nd NW corner,1/South Kiwanis Avenue/VA Medical Center
+15,767634,11,VA Medical Center entrance southbound,1/South Kiwanis Avenue/VA Medical Center
+15,767262,12,26th/Williams NE corner,1/South Kiwanis Avenue/VA Medical Center
+15,767263,13,Kiwanis/Oak NW corner,1/South Kiwanis Avenue/VA Medical Center
+15,767264,14,Kiwanis/33rd NW corner,1/South Kiwanis Avenue/VA Medical Center
+15,767265,15,Kiwanis/37th NW corner,1/South Kiwanis Avenue/VA Medical Center
+15,767266,16,Kiwanis/39th NW corner,1/South Kiwanis Avenue/VA Medical Center
+15,767267,17,Kiwanis/41st SW corner (mid-block ),1/South Kiwanis Avenue/VA Medical Center
+15,767268,18,Kiwanis/Kiwanis Circle NW corner,1/South Kiwanis Avenue/VA Medical Center
+15,767269,19,49th/Oxbox NE corner,"1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford"
+15,767270,20,Southwest Center (SWC) SAM's southwest transit hub,"11/Louise Avenue/Empire Mall, 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector"
+15,767271,21,Technology Drive/Technology Circle SE corner,"1/South Kiwanis Avenue/VA Medical Center, 3/Downtown/Southwest Connector"
+15,767272,22,Technology Drive/Valhalla SE corner,"1/South Kiwanis Avenue/VA Medical Center, 3/Downtown/Southwest Connector"
+15,767273,23,49th/Oxbow SW corner,1/South Kiwanis Avenue/VA Medical Center
+15,767274,24,Kiwanis/46th SE corner,1/South Kiwanis Avenue/VA Medical Center
+15,767275,25,Kiwanis/Park Place SE corner,1/South Kiwanis Avenue/VA Medical Center
+15,767276,26,Kiwanis/39th SE corner,1/South Kiwanis Avenue/VA Medical Center
+15,767277,27,Kiwanis/37th SE corner,1/South Kiwanis Avenue/VA Medical Center
+15,767278,28,Kiwanis/33rd SE corner,1/South Kiwanis Avenue/VA Medical Center
+15,767279,29,Kiwanis/Oak SE corner,1/South Kiwanis Avenue/VA Medical Center
+15,767280,30,26th/Williams SW corner,1/South Kiwanis Avenue/VA Medical Center
+15,767281,31,VA Medical Center entrance northbound,1/South Kiwanis Avenue/VA Medical Center
+15,767282,32,Western/20th SE corner,1/South Kiwanis Avenue/VA Medical Center
+15,767283,33,Western/18th SE corner,1/South Kiwanis Avenue/VA Medical Center
+15,767284,34,Western/15th SE corner,1/South Kiwanis Avenue/VA Medical Center
+15,767285,35,12th/Western SE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+15,767286,36,12th/Glendale SE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+15,767287,37,11th/Menlo SW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+15,767288,38,11th/Prairie SW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+15,767289,39,11th/Spring SW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+15,767290,40,11th/Dakota SW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 3/Downtown/Southwest Connector"
+15,767253,41,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+16,767253,1,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+16,767254,2,10th (mid-block)/Dakota NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 6/North Prairie Avenue, 8/North Industrial"
+16,767255,3,10th/Spring NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+16,767256,4,10th/Prairie NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+16,767257,5,12th/Grange NW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+16,767258,6,12th/Hawthorne NE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+16,771291,7,Western/12th – SW Corner,1/South Kiwanis Avenue/VA Medical Center
+16,767259,8,Western/Ashley Circle NW corner,1/South Kiwanis Avenue/VA Medical Center
+16,767260,9,Western/18th NW corner,1/South Kiwanis Avenue/VA Medical Center
+16,767261,10,Western/22nd NW corner,1/South Kiwanis Avenue/VA Medical Center
+16,767634,11,VA Medical Center entrance southbound,1/South Kiwanis Avenue/VA Medical Center
+16,767262,12,26th/Williams NE corner,1/South Kiwanis Avenue/VA Medical Center
+16,767263,13,Kiwanis/Oak NW corner,1/South Kiwanis Avenue/VA Medical Center
+16,767264,14,Kiwanis/33rd NW corner,1/South Kiwanis Avenue/VA Medical Center
+16,767265,15,Kiwanis/37th NW corner,1/South Kiwanis Avenue/VA Medical Center
+16,767266,16,Kiwanis/39th NW corner,1/South Kiwanis Avenue/VA Medical Center
+16,767267,17,Kiwanis/41st SW corner (mid-block ),1/South Kiwanis Avenue/VA Medical Center
+16,767268,18,Kiwanis/Kiwanis Circle NW corner,1/South Kiwanis Avenue/VA Medical Center
+16,767269,19,49th/Oxbox NE corner,"1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford"
+16,767270,20,Southwest Center (SWC) SAM's southwest transit hub,"11/Louise Avenue/Empire Mall, 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector"
+16,767271,21,Technology Drive/Technology Circle SE corner,"1/South Kiwanis Avenue/VA Medical Center, 3/Downtown/Southwest Connector"
+16,767272,22,Technology Drive/Valhalla SE corner,"1/South Kiwanis Avenue/VA Medical Center, 3/Downtown/Southwest Connector"
+16,767273,23,49th/Oxbow SW corner,1/South Kiwanis Avenue/VA Medical Center
+16,767274,24,Kiwanis/46th SE corner,1/South Kiwanis Avenue/VA Medical Center
+16,767275,25,Kiwanis/Park Place SE corner,1/South Kiwanis Avenue/VA Medical Center
+16,767276,26,Kiwanis/39th SE corner,1/South Kiwanis Avenue/VA Medical Center
+16,767277,27,Kiwanis/37th SE corner,1/South Kiwanis Avenue/VA Medical Center
+16,767278,28,Kiwanis/33rd SE corner,1/South Kiwanis Avenue/VA Medical Center
+16,767279,29,Kiwanis/Oak SE corner,1/South Kiwanis Avenue/VA Medical Center
+16,767280,30,26th/Williams SW corner,1/South Kiwanis Avenue/VA Medical Center
+16,767281,31,VA Medical Center entrance northbound,1/South Kiwanis Avenue/VA Medical Center
+16,767282,32,Western/20th SE corner,1/South Kiwanis Avenue/VA Medical Center
+16,767283,33,Western/18th SE corner,1/South Kiwanis Avenue/VA Medical Center
+16,767284,34,Western/15th SE corner,1/South Kiwanis Avenue/VA Medical Center
+16,767285,35,12th/Western SE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+16,767286,36,12th/Glendale SE corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+16,767287,37,11th/Menlo SW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+16,767288,38,11th/Prairie SW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+16,767289,39,11th/Spring SW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center"
+16,767290,40,11th/Dakota SW corner,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 3/Downtown/Southwest Connector"
+16,767253,41,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+17,767253,1,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+17,767390,2,2nd Ave/13th NW corner,"5/South Phillips Avenue/Avera McKennan Hospital, 9/South Sycamore/East 26th Street"
+17,767391,3,2nd Ave/15th NW corner,5/South Phillips Avenue/Avera McKennan Hospital
+17,767392,4,18th/3rd Ave SW corner,5/South Phillips Avenue/Avera McKennan Hospital
+17,767393,5,18th/7th Ave SW corner,5/South Phillips Avenue/Avera McKennan Hospital
+17,767394,6,20th/7th Ave at Avera Clinic (mid-block),5/South Phillips Avenue/Avera McKennan Hospital
+17,767395,7,20th/Physicians Office Bldg (between driveways),5/South Phillips Avenue/Avera McKennan Hospital
+17,767396,8,20th/Cliff SW corner,5/South Phillips Avenue/Avera McKennan Hospital
+17,767397,9,Cliff/23rd NW corner,5/South Phillips Avenue/Avera McKennan Hospital
+17,767398,10,26th/Sherman SW corner,5/South Phillips Avenue/Avera McKennan Hospital
+17,767399,11,26th/Blauvelt SW corner,5/South Phillips Avenue/Avera McKennan Hospital
+17,767400,12,Blauvelt/Wayland NW corner,5/South Phillips Avenue/Avera McKennan Hospital
+17,767401,13,Blauvelt/33rd NW corner,5/South Phillips Avenue/Avera McKennan Hospital
+17,767402,14,Cliff/33rd SW corner (mid-block),5/South Phillips Avenue/Avera McKennan Hospital
+17,767403,15,Cliff/38th NW corner,5/South Phillips Avenue/Avera McKennan Hospital
+17,767404,16,41st/Cliff NW corner (mid-block),5/South Phillips Avenue/Avera McKennan Hospital
+17,767405,17,41st/800 address (mid-block),5/South Phillips Avenue/Avera McKennan Hospital
+17,767406,18,41st/4th Ave NE corner,5/South Phillips Avenue/Avera McKennan Hospital
+17,767407,19,41st/1st Ave NE corner,5/South Phillips Avenue/Avera McKennan Hospital
+17,767408,20,Phillips/38th SE corner,5/South Phillips Avenue/Avera McKennan Hospital
+17,767409,21,Phillips/33rd SE corner,5/South Phillips Avenue/Avera McKennan Hospital
+17,767410,22,Phillips/30th SE corner,5/South Phillips Avenue/Avera McKennan Hospital
+17,767411,23,Phillips/28th SE corner,5/South Phillips Avenue/Avera McKennan Hospital
+17,767412,24,Phillips/26th SE corner,5/South Phillips Avenue/Avera McKennan Hospital
+17,767413,25,Phillips/24th SE corner,5/South Phillips Avenue/Avera McKennan Hospital
+17,767414,26,Phillips/20th SE corner,5/South Phillips Avenue/Avera McKennan Hospital
+17,767415,27,Phillips/18th SE corner,5/South Phillips Avenue/Avera McKennan Hospital
+17,767416,28,Phillips/14th SE corner,5/South Phillips Avenue/Avera McKennan Hospital
+17,767417,29,2nd Ave/13th SE corner,5/South Phillips Avenue/Avera McKennan Hospital
+17,767253,30,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+18,767253,1,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+18,767390,2,2nd Ave/13th NW corner,"5/South Phillips Avenue/Avera McKennan Hospital, 9/South Sycamore/East 26th Street"
+18,767391,3,2nd Ave/15th NW corner,5/South Phillips Avenue/Avera McKennan Hospital
+18,767392,4,18th/3rd Ave SW corner,5/South Phillips Avenue/Avera McKennan Hospital
+18,767393,5,18th/7th Ave SW corner,5/South Phillips Avenue/Avera McKennan Hospital
+18,767394,6,20th/7th Ave at Avera Clinic (mid-block),5/South Phillips Avenue/Avera McKennan Hospital
+18,767395,7,20th/Physicians Office Bldg (between driveways),5/South Phillips Avenue/Avera McKennan Hospital
+18,767396,8,20th/Cliff SW corner,5/South Phillips Avenue/Avera McKennan Hospital
+18,767397,9,Cliff/23rd NW corner,5/South Phillips Avenue/Avera McKennan Hospital
+18,767398,10,26th/Sherman SW corner,5/South Phillips Avenue/Avera McKennan Hospital
+18,767399,11,26th/Blauvelt SW corner,5/South Phillips Avenue/Avera McKennan Hospital
+18,767400,12,Blauvelt/Wayland NW corner,5/South Phillips Avenue/Avera McKennan Hospital
+18,767401,13,Blauvelt/33rd NW corner,5/South Phillips Avenue/Avera McKennan Hospital
+18,767402,14,Cliff/33rd SW corner (mid-block),5/South Phillips Avenue/Avera McKennan Hospital
+18,767403,15,Cliff/38th NW corner,5/South Phillips Avenue/Avera McKennan Hospital
+18,767404,16,41st/Cliff NW corner (mid-block),5/South Phillips Avenue/Avera McKennan Hospital
+18,767405,17,41st/800 address (mid-block),5/South Phillips Avenue/Avera McKennan Hospital
+18,767406,18,41st/4th Ave NE corner,5/South Phillips Avenue/Avera McKennan Hospital
+18,767407,19,41st/1st Ave NE corner,5/South Phillips Avenue/Avera McKennan Hospital
+18,767408,20,Phillips/38th SE corner,5/South Phillips Avenue/Avera McKennan Hospital
+18,767409,21,Phillips/33rd SE corner,5/South Phillips Avenue/Avera McKennan Hospital
+18,767410,22,Phillips/30th SE corner,5/South Phillips Avenue/Avera McKennan Hospital
+18,767411,23,Phillips/28th SE corner,5/South Phillips Avenue/Avera McKennan Hospital
+18,767412,24,Phillips/26th SE corner,5/South Phillips Avenue/Avera McKennan Hospital
+18,767413,25,Phillips/24th SE corner,5/South Phillips Avenue/Avera McKennan Hospital
+18,767414,26,Phillips/20th SE corner,5/South Phillips Avenue/Avera McKennan Hospital
+18,767415,27,Phillips/18th SE corner,5/South Phillips Avenue/Avera McKennan Hospital
+18,767416,28,Phillips/14th SE corner,5/South Phillips Avenue/Avera McKennan Hospital
+18,767417,29,2nd Ave/13th SE corner,5/South Phillips Avenue/Avera McKennan Hospital
+18,767253,30,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+19,767253,1,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+19,767390,2,2nd Ave/13th NW corner,"5/South Phillips Avenue/Avera McKennan Hospital, 9/South Sycamore/East 26th Street"
+19,767507,3,14th/4th Ave SW corner,9/South Sycamore/East 26th Street
+19,767508,4,14th/6th Ave SW corner,9/South Sycamore/East 26th Street
+19,767509,5,14th between 9th & Cliff Ave.,9/South Sycamore/East 26th Street
+19,767510,6,River Blvd/17th SW corner,9/South Sycamore/East 26th Street
+19,767511,7,18th/Foster Ave SW corner,9/South Sycamore/East 26th Street
+19,767512,8,18th/Blaine SE corner,9/South Sycamore/East 26th Street
+19,767513,9,18th/Gary SW corner,9/South Sycamore/East 26th Street
+19,767514,10,18th/Laurie SW corner,9/South Sycamore/East 26th Street
+19,767515,11,18th/Point SW corner,9/South Sycamore/East 26th Street
+19,767516,12,18th/Churchill SW corner,9/South Sycamore/East 26th Street
+19,767517,13,18th/Judy SW corner,9/South Sycamore/East 26th Street
+19,767518,14,18th/Sycamore/SW corner,9/South Sycamore/East 26th Street
+19,767519,15,Sycamore/23rd NW corner,9/South Sycamore/East 26th Street
+19,767520,16,Sycamore/26th NW corner,9/South Sycamore/East 26th Street
+19,767521,17,26th/Judy NE corner,9/South Sycamore/East 26th Street
+19,767522,18,26th/Bahnson NE corner,9/South Sycamore/East 26th Street
+19,767523,19,26th/Village Square Circle NW corner,9/South Sycamore/East 26th Street
+19,767524,20,26th/Cleveland NE corner,9/South Sycamore/East 26th Street
+19,767525,21,Cleveland/22nd SE corner,9/South Sycamore/East 26th Street
+19,767526,22,Cleveland/19th SE corner,9/South Sycamore/East 26th Street
+19,767527,23,18th/Baline NE corner,9/South Sycamore/East 26th Street
+19,767528,24,18th/Lowell NE corner,9/South Sycamore/East 26th Street
+19,767529,25,18th/Southeastern NE corner,9/South Sycamore/East 26th Street
+19,767530,26,18th at entrance to River Blvd Greenway Park,9/South Sycamore/East 26th Street
+19,767531,27,14th  (mid-block) /Cliff Ave NW,9/South Sycamore/East 26th Street
+19,767532,28,14th/6th Ave NE corner,9/South Sycamore/East 26th Street
+19,767533,29,14th/4th Ave NE corner,9/South Sycamore/East 26th Street
+19,767534,30,13th/3rd Ave NE corner,9/South Sycamore/East 26th Street
+19,767535,31,Tower of David Apts,9/South Sycamore/East 26th Street
+19,767253,32,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+20,767253,1,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+20,767390,2,2nd Ave/13th NW corner,"5/South Phillips Avenue/Avera McKennan Hospital, 9/South Sycamore/East 26th Street"
+20,767507,3,14th/4th Ave SW corner,9/South Sycamore/East 26th Street
+20,767508,4,14th/6th Ave SW corner,9/South Sycamore/East 26th Street
+20,767509,5,14th between 9th & Cliff Ave.,9/South Sycamore/East 26th Street
+20,767510,6,River Blvd/17th SW corner,9/South Sycamore/East 26th Street
+20,767511,7,18th/Foster Ave SW corner,9/South Sycamore/East 26th Street
+20,767512,8,18th/Blaine SE corner,9/South Sycamore/East 26th Street
+20,767513,9,18th/Gary SW corner,9/South Sycamore/East 26th Street
+20,767514,10,18th/Laurie SW corner,9/South Sycamore/East 26th Street
+20,767515,11,18th/Point SW corner,9/South Sycamore/East 26th Street
+20,767516,12,18th/Churchill SW corner,9/South Sycamore/East 26th Street
+20,767517,13,18th/Judy SW corner,9/South Sycamore/East 26th Street
+20,767518,14,18th/Sycamore/SW corner,9/South Sycamore/East 26th Street
+20,767519,15,Sycamore/23rd NW corner,9/South Sycamore/East 26th Street
+20,767520,16,Sycamore/26th NW corner,9/South Sycamore/East 26th Street
+20,767521,17,26th/Judy NE corner,9/South Sycamore/East 26th Street
+20,767522,18,26th/Bahnson NE corner,9/South Sycamore/East 26th Street
+20,767523,19,26th/Village Square Circle NW corner,9/South Sycamore/East 26th Street
+20,767524,20,26th/Cleveland NE corner,9/South Sycamore/East 26th Street
+20,767525,21,Cleveland/22nd SE corner,9/South Sycamore/East 26th Street
+20,767526,22,Cleveland/19th SE corner,9/South Sycamore/East 26th Street
+20,767527,23,18th/Baline NE corner,9/South Sycamore/East 26th Street
+20,767528,24,18th/Lowell NE corner,9/South Sycamore/East 26th Street
+20,767529,25,18th/Southeastern NE corner,9/South Sycamore/East 26th Street
+20,767530,26,18th at entrance to River Blvd Greenway Park,9/South Sycamore/East 26th Street
+20,767531,27,14th  (mid-block) /Cliff Ave NW,9/South Sycamore/East 26th Street
+20,767532,28,14th/6th Ave NE corner,9/South Sycamore/East 26th Street
+20,767533,29,14th/4th Ave NE corner,9/South Sycamore/East 26th Street
+20,767534,30,13th/3rd Ave NE corner,9/South Sycamore/East 26th Street
+20,767535,31,Tower of David Apts,9/South Sycamore/East 26th Street
+20,767253,32,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+21,767253,1,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+21,767291,2,10th/Main SW corner,2/S. Western/Sanford
+21,767292,3,14th/Main NW corner,2/S. Western/Sanford
+21,767293,4,14th/Spring NE corner,2/S. Western/Sanford
+21,767294,5,14th/Summit NE corner,2/S. Western/Sanford
+21,767295,6,17th/Summit NW corner,2/S. Western/Sanford
+21,767296,7,Grange/18th SW corner,2/S. Western/Sanford
+21,767297,8,Grange/21st SW corner,2/S. Western/Sanford
+21,767298,9,Grange/26th NW corner,2/S. Western/Sanford
+21,767299,10,26th/Lake NE corner,2/S. Western/Sanford
+21,767300,11,26th/Glendale NE corner,2/S. Western/Sanford
+21,767301,12,26th (midblock)/Western NE corner,2/S. Western/Sanford
+21,767302,13,Western/Oak SW corner,2/S. Western/Sanford
+21,767303,14,Western/33rd NW corner,2/S. Western/Sanford
+21,767304,15,Western/37th NW corner,2/S. Western/Sanford
+21,767305,16,Western/42nd SW corner,2/S. Western/Sanford
+21,767306,17,Western/46th NW corner,2/S. Western/Sanford
+21,767307,18,46th (north side) at Active Generations,2/S. Western/Sanford
+21,767308,19,Elmwood/49th NW corner,2/S. Western/Sanford
+21,767269,20,49th/Oxbox NE corner,"1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford"
+21,767270,21,Southwest Center (SWC) SAM's southwest transit hub,"11/Louise Avenue/Empire Mall, 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector"
+21,767309,22,57th/Tennis Lane SW corner,2/S. Western/Sanford
+21,767310,23,57th/Burr Oak Place SW corner,2/S. Western/Sanford
+21,767311,24,57th/Old Yanton Road SW corner,2/S. Western/Sanford
+21,767312,25,Western/51st SE corner,2/S. Western/Sanford
+21,767313,26,Western/47th NE corner,2/S. Western/Sanford
+21,767314,27,Western/45th SE corner,2/S. Western/Sanford
+21,767315,28,Western (mid-block)/41st NE corner,2/S. Western/Sanford
+21,767316,29,Western/37th SE corner,2/S. Western/Sanford
+21,767317,30,Western/33rd SE corner,2/S. Western/Sanford
+21,767318,31,33rd/West SE corner,2/S. Western/Sanford
+21,767319,32,33rd/Euclid  south side,2/S. Western/Sanford
+21,767320,33,Grange/30th NE corner,2/S. Western/Sanford
+21,767321,34,Grange/28th SE corner,2/S. Western/Sanford
+21,767322,35,Grange/26th SE corner,2/S. Western/Sanford
+21,767323,36,Grange/22nd SE corner,2/S. Western/Sanford
+21,767324,37,Grange/18th SE corner,2/S. Western/Sanford
+21,767325,38,18th/Prairie SW corner,2/S. Western/Sanford
+21,767326,39,16th/Summit SE corner,2/S. Western/Sanford
+21,767327,40,14th/Summit SE corner,2/S. Western/Sanford
+21,767328,41,14th/Spring SW corner,2/S. Western/Sanford
+21,767329,42,Dakota/11th SE corner,2/S. Western/Sanford
+21,767253,43,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+22,767253,1,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
+22,767291,2,10th/Main SW corner,2/S. Western/Sanford
+22,767292,3,14th/Main NW corner,2/S. Western/Sanford
+22,767293,4,14th/Spring NE corner,2/S. Western/Sanford
+22,767294,5,14th/Summit NE corner,2/S. Western/Sanford
+22,767295,6,17th/Summit NW corner,2/S. Western/Sanford
+22,767296,7,Grange/18th SW corner,2/S. Western/Sanford
+22,767297,8,Grange/21st SW corner,2/S. Western/Sanford
+22,767298,9,Grange/26th NW corner,2/S. Western/Sanford
+22,767299,10,26th/Lake NE corner,2/S. Western/Sanford
+22,767300,11,26th/Glendale NE corner,2/S. Western/Sanford
+22,767301,12,26th (midblock)/Western NE corner,2/S. Western/Sanford
+22,767302,13,Western/Oak SW corner,2/S. Western/Sanford
+22,767303,14,Western/33rd NW corner,2/S. Western/Sanford
+22,767304,15,Western/37th NW corner,2/S. Western/Sanford
+22,767305,16,Western/42nd SW corner,2/S. Western/Sanford
+22,767306,17,Western/46th NW corner,2/S. Western/Sanford
+22,767307,18,46th (north side) at Active Generations,2/S. Western/Sanford
+22,767308,19,Elmwood/49th NW corner,2/S. Western/Sanford
+22,767269,20,49th/Oxbox NE corner,"1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford"
+22,767270,21,Southwest Center (SWC) SAM's southwest transit hub,"11/Louise Avenue/Empire Mall, 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector"
+22,767309,22,57th/Tennis Lane SW corner,2/S. Western/Sanford
+22,767310,23,57th/Burr Oak Place SW corner,2/S. Western/Sanford
+22,767311,24,57th/Old Yanton Road SW corner,2/S. Western/Sanford
+22,767312,25,Western/51st SE corner,2/S. Western/Sanford
+22,767313,26,Western/47th NE corner,2/S. Western/Sanford
+22,767314,27,Western/45th SE corner,2/S. Western/Sanford
+22,767315,28,Western (mid-block)/41st NE corner,2/S. Western/Sanford
+22,767316,29,Western/37th SE corner,2/S. Western/Sanford
+22,767317,30,Western/33rd SE corner,2/S. Western/Sanford
+22,767318,31,33rd/West SE corner,2/S. Western/Sanford
+22,767319,32,33rd/Euclid  south side,2/S. Western/Sanford
+22,767320,33,Grange/30th NE corner,2/S. Western/Sanford
+22,767321,34,Grange/28th SE corner,2/S. Western/Sanford
+22,767322,35,Grange/26th SE corner,2/S. Western/Sanford
+22,767323,36,Grange/22nd SE corner,2/S. Western/Sanford
+22,767324,37,Grange/18th SE corner,2/S. Western/Sanford
+22,767325,38,18th/Prairie SW corner,2/S. Western/Sanford
+22,767326,39,16th/Summit SE corner,2/S. Western/Sanford
+22,767327,40,14th/Summit SE corner,2/S. Western/Sanford
+22,767328,41,14th/Spring SW corner,2/S. Western/Sanford
+22,767329,42,Dakota/11th SE corner,2/S. Western/Sanford
+22,767253,43,The Bus Stop (TBS) SAM's downtown terminal,"10/Hayward/West Side, 19/Southeast Technical Institute (STI), 1/South Kiwanis Avenue/VA Medical Center, 2/S. Western/Sanford, 3/Downtown/Southwest Connector, 4/East 10th Street/East 12th Street, 5/South Phillips Avenue/Avera McKennan Hospital, 6/North Prairie Avenue, 7/North Cleveland/East 6th Street/Arrowhead Parkway, 8/North Industrial, 9/South Sycamore/East 26th Street"
