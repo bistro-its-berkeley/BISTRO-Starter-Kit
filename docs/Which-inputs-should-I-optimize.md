@@ -27,7 +27,7 @@ The submission input file *VehicleFleetMix.csv* describes the status of the bus 
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_VehicleFleetMix.png "*Figure 2: Input1 - composition of the bus fleet")\
 ***Figure 2: Input1 - Bus fleet composition***
-SFDOT has four available bus types, each of them with different technical properties (`fixed-data/siouxfalls/vehicleTypes.csv`, see Fig.2) and cost characteristics (`fixed-data/siouxfalls/vehicleCosts.csv`, see Fig.3). Currently, SFDOT owns the minimum number of bus types to provide service for each route, as specifed in the file *submission-inputs/VehicleFleetMix.csv*. Additionally, the number of buses required to service each route is equal to the number of trips: for each headway dispatched, a new bus is used. This does not reflect a realistic scenario combining bus routes into runs, but, for now, it still allows for comparisons to a BAU case.
+SFDOT has four available bus types, each of them with different technical properties (`fixed-data/siouxfalls/vehicleTypes.csv`, see Fig.2) and cost characteristics (`fixed-data/siouxfalls/vehicleCosts.csv`, see Fig.3). Currently, SFDOT owns the minimum number of bus types to provide service for each route, as specifed in the file *submission-inputs/VehicleFleetMix.csv*. Additionally, the number of buses required to service each route is equal to the number of trips: after the a headway has expired, a new bus is used. This does not reflect a realistic scenario combining bus routes into runs, but, for now, it still allows for comparisons to a BAU case.
 
 During the Pilot Study, for each route, you have the opportunity to purchase new types of buses possessing attributes that might improve the level of service for transit along a route (see Figure 2 below).
 
@@ -51,9 +51,9 @@ The choice of utilized socio-demographic qualifier(s), range(s), mode(s), and su
   * `drive_transit`: use of the personal car as an access/egress mode to/from transit (bus)
   * `walk_transit`: walking as an access/egress mode to/from transit (bus)
   
-* The *groups* are defined as in mathematical notation where parentheses () indicate exclusive bounds and brackets \[] indicate inclusive bounds. Below, you will find an accompanying statement for each subsidy, in the order they appear in Figure 4.
+* The *groups* are defined as in mathematical notation where parentheses () indicate exclusive bounds and brackets \[] indicate inclusive bounds. Below, you will find an accompanying statement for each subsidy in the order they appear in Figure 4.
 
-* The *amounts* of subsidies are float numbers that must be greater than 0.
+* The *amounts* of the subsidies are decimal numbers that must be greater than 0.
 
 The Figure 5 below shows an example input file with subsidies for specific socio-demographic groups. 
 
