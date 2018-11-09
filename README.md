@@ -5,7 +5,11 @@ This is a starter-kit Repository for the **Uber Prize challenge** on **Crowd AI*
 In this repo you will find background materials that will help you get started with the challenge. 
 
 ## Competition Phasing
-The competition will be split into two phases, preceded by a Hackathon... **Flesh this out**
+The competition will be split into two phases:
+* the first phase challenges contestants to optimize the transportation network of a small mock city: Sioux Faux 
+* the second phase will apply the optimization challenge on a real city, to be announced by the launch of the Uber Prize
+
+The internal hackathon aims at testing the ability for participants to compete in Phase 1 of the competition. Given the complexity with a simulator, we want to do an initial round of internal testing with a core group of members from AI Labs in order to identify any issues.  
 
 ## How do I get started?
 
@@ -28,7 +32,7 @@ We recommend that you proceed through the documentation in the following order:
 
 ## What do I have to do?
 
-Your will generate a set of inputs (where a set of inputs can be thought of as a policy--find more on this in the **Problem Statement** to optimize the transportation system of Sioux Faux, based upon the criteria given in the Problem Statement. Solutions will be judged using the scoring function, and your goal is to achieve the **highest score**. In the event of ties, solutions will be further assessed on their performance with respect to key metrics **[X,Y,Z] (and the explanation, potentially?) TBD**.
+Your will generate a set of inputs (where a set of inputs can be thought of as a policy--find more on this in the [Problem Statement](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Problem_statement_Sioux_Faux_Phase1) to optimize the transportation system of Sioux Faux, based upon the criteria given in the Problem Statement. Solutions will be judged using the scoring function, and your goal is to achieve the **highest score**. In the event of ties, solutions will be further assessed on their performance with respect to other key metrics. *([X,Y,Z] and the explanation, potentially? TBD)*.
 
 Once you have a solution, you should submit:
 * your **best outputs (.zip)**
@@ -46,16 +50,17 @@ For info on how to submit, read this [tutorial](https://github.com/vgolfier/Uber
   * a description of the [outputs and the scoring function](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md)
   * a presentation of [the Sioux-Faux case](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/The_Sioux_Faux_case_Hackathon.md)
   * the Problem statement of the Hackathon - *to be added*
-  * the [Problem statement of Phase 1](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Problem_statement_Phase%20I.pdf) - *to be updated*
+  * the [Problem statement of Phase 1](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Problem_statement_Phase%20I.pdf) 
   * a note on [what and how to submit](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit%3F.md) 
  
 
 ## Contacts
 
 If you have any questions about the challenge, you can ask them on this FAQ chat:
-* Uchat? **ABHISHEK**
+* ...
 
 In case of further questions, you can contact:
-***Consider setting up a troubleshooting email account so you don't have to use your personal ones***
 * Sid Feygin: sid.feygin@berkeley.edu
 * Valentine Golfier-Vetterli: golfiervalentine@gmail.com
+
+*Note to organizers: Consider setting up a troubleshooting email account so you don't have to use your personal ones*
