@@ -49,10 +49,21 @@ During the Pilot Test, for each route, you have to choose between keeping the cu
 
 #### **Subsidies for transit and on-demand rideshare users**
 
-In an effort to provide a high-quality alternative to private vehicles, you may define subsidies for qualifying agents using public transit or on-demand ridehail. Qualification for a subsidy can be based on the following socio-demographic categories: age and/or income (***and employment status***). The choice of utilized socio-demographic qualifier(s), range(s), mode(s), and subsidy amount(s) are all inputs that you can define. For the hackathon, there is no upper limit to the number of times an agent can claim a subsidy throughout the day.
+In an effort to provide a high-quality alternative to private vehicles, you may define subsidies for qualifying agents using public transit or on-demand ridehail. Qualification for a subsidy can be based on the following socio-demographic categories: age and/or income (*Note ot organizer: add employment status*). 
 
-The Figure 5 below shows an example input file with subsidies for specific socio-demographic groups. These are defined as in mathematical notation where parentheses () indicate exclusive bounds and brackets \[] indicate inclusive bounds. Below, you will find an accompanying statement for each subsidy, in the order they appear in Figure 4.
+The choice of utilized socio-demographic qualifier(s), range(s), mode(s), and subsidy amount(s) are all inputs that you can define. They are described below. For the Internal Pilot Test, there is no upper limit to the number of times an agent can claim a subsidy throughout the day.
+* The *modes* to subsidize can be chosen from the following list: 
+  * drive: use of the personal car as the main transport mode for the trip
+  * walk: walking as the main transport mode for the trip
+  * ride_hail: use of on-demand rideshare as the main transport mode for the trip
+  * drive_transit: use of the personal car as an access/egress mode to/from transit (bus)
+  * walk_transit: walking as an access/egress mode to/from transit (bus)
+  
+* The *groups* are defined as in mathematical notation where parentheses () indicate exclusive bounds and brackets \[] indicate inclusive bounds. Below, you will find an accompanying statement for each subsidy, in the order they appear in Figure 4.
 
+* The *amounts* of subsidies are float numbers that must be greater than 0.
+
+The Figure 5 below shows an example input file with subsidies for specific socio-demographic groups. 
   * Subsidies for transit trips
     * Children 10 years old or younger receives $2 off of every transit trip
     * Seniors older than 50 and up through 75 years of age, earning up to $20,000/year receives $2.30 off of every transit trip
