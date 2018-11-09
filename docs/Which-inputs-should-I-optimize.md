@@ -25,14 +25,13 @@ To help the Sioux Faux Department of Transportation (SFDOT) combat congestion an
 The submission input file *VehicleFleetMix.csv* describes the status of the bus fleet (see Fig.2). Currently, SFBL (*agencyID* = 217) operates 12 bus lines in Sioux Faux. During the Pilot Test, you can decide which type of bus (i.e. *vehicleTypeId*) will provide service for each route (*routeID*, see Fig.1 & 2). Each route can utilize only **one type of bus**. 
 
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/sf_route_guide.png)
-***Figure 1: Sioux Faux route IDs guide***
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/sf_route_guide.png)\
+***Figure 1: Sioux Faux route IDs guide***\
 
 \
-\
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_VehicleFleetMix.png "*Figure 2: Input1 - composition of the bus fleet")
 
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_VehicleFleetMix.png "*Figure 2: Input1 - composition of the bus fleet")\
 ***Figure 2: Input1 - Bus fleet composition***
 
 SFDOT has four available bus types, each of them with different technical properties (`fixed-data/siouxfalls/vehicleTypes.csv`, see Fig.3) and costs (`fixed-data/siouxfalls/ vehicleCosts.csv`, see Fig.4). Currently, SFDOT owns the minimum number of bus types to provide service for each route, as specifed in the provided *VehicleFleetMix.csv*. Additionally, the number of buses required to service each route is equal to the number of trips: for each headway dispatched, a new bus is used. This does not reflect a realistic scenario combining bus routes into runs, but it still allows for comparisons to a BAU case.
@@ -40,7 +39,7 @@ SFDOT has four available bus types, each of them with different technical proper
 During the Pilot Test, for each route, you have to choose between keeping the currently operated bus types (see Figure 3 below) or purchasing new types of buses. ***For the Internal Pilot Test, the sale of an unused bus is not taken into account, only the purchase of buses.***
 
 *Figure to change*
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/BusTypes.png "Figure 2: Set of available bus types")
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Bus_types.png)\
 ***Figure 3: Set of available bus types***
 
 
