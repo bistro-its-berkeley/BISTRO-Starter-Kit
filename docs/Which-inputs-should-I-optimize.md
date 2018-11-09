@@ -31,6 +31,9 @@ The submission input file *VehicleFleetMix.csv* describes the status of the bus 
 
 
 
+
+
+
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_VehicleFleetMix.png "*Figure 2: Input1 - composition of the bus fleet")
 
 ***Figure 2: Input1 - Bus fleet composition***
