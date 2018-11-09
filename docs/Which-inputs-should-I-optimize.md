@@ -44,7 +44,7 @@ During the Pilot Test, for each route, you have to choose between keeping the cu
 ***Figure 3: Set of available bus types***
 
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/BusCosts.png "Figure 4: Costs of available bus types")
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/BusCosts.png "Figure 4: Costs of available bus types")\
 ***Figure 4: Costs of available bus types***
 
 #### **Subsidies for transit and on-demand rideshare users**
