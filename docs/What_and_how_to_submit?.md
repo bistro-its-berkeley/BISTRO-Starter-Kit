@@ -1,6 +1,6 @@
 # How to submit?
 
-Once you have found your best input-combination send the following documents to sid.feygin@berkeley.edu:
+Once you have found your best input-combination, send the following documents to sid.feygin@berkeley.edu:
 
 * A **zip. version of your best output folder** 
 * A **brief explanation on your methodology** (.doc): how did you solve the optimization problem, what did you try, is there some room for improvement?
