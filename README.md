@@ -15,10 +15,10 @@ The **internal pilot test** aims at testing the ability for participants to comp
 
 The **objectives** of this internal pilot test are:
 * How easy/difficult is it to on-board participants, and feel comfortable moving forward with a solution approach, given the starter kit and associated documentation?
- * Update documentation in response to this.
+  * Update documentation in response to this.
 * We are looking for optimization algorithms that explore the set of feasible solutions to the Sioux Faux scenario given the possible input variables and corresponding constraints.
- * We are not necessarily looking to generate the best solutions, but to assess the difficulty of the problem given the current dimensions of the input space
- * Ideally, we should also identify any obvious “cheats” and address them.
+  * We are not necessarily looking to generate the best solutions, but to assess the difficulty of the problem given the current dimensions of the input space
+  * Ideally, we should also identify any obvious “cheats” and address them.
 * Review feedback and user-generated reports to identify likely approaches/models.
 If an approach seems particularly worthwhile, then request that it be submitted as a “benchmark solution”.
 
