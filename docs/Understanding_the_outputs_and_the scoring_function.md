@@ -1,9 +1,9 @@
 # Understanding the outputs and the scoring function
-After reading this document, you will have a better understanding of the outputs of the simulation, where they are stored after a simulation run, what do they describe and how to interpret them.
+After reading this document, you will have a better understanding of the outputs of the simulation, where they are stored after a simulation run, what they describe, and how to interpret them.
 
 ## Where are the outputs stored?
 
-After the last simulation's iteration, the system reaches an *equilibrium state*: the simulation stops. All the outputs generated during this run are stored in a unique output folder called `output/siouxfalls-1k__\<date>_\<time>`. It ends with the date and time of the simulation you have just runed (see figure).
+***Is there a maximum number of iterations, or a stopping criteria for equilibrium?*** After the simulation's last iteration, the system reaches an *equilibrium state* and the simulation stops. All the outputs generated during this last run are stored in a unique output folder called `output/siouxfalls-1k__\<date>_\<time>`. It ends with the date and time of the simulation you have just run (see Figure 1). Note that the figure references a simulation run with a 1k population sample.
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Output_folder_2.png)
 
@@ -11,39 +11,39 @@ Figure 1: Outputs of the simulation
 
 ## Scoring function
 
-The main outputs you should be focusing on are the one located in the `competition` folder. It contains: 
+The main outputs you should focus on are located in the `competition` folder. It contains: 
 
 * The [input files](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Which-inputs-should-I-optimize%3F.md) you used for the simulation run
-* The *subscores* and the *general score* from the scoring function, which evaluates the quality of the policy-based transportation sytsem 
+* The *component scores* and the *submission score* from the scoring function, which evaluates the quality of the policy-based transportation sytsem 
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/The_scoring_function.png)
-Figure 2: Score and subscores
+Figure 2: Score and component scores
 
-The *scoring function* is a weighted sum of several components: 
+The *scoring function* is a weighted sum of several components, listed below. ***Weights are pre-determined based upon...\[fill in]*** 
 * Measures of **congestion**:
-  * **vehile hours of delay** (`Congestion: Vehicle Hours Delay`, \[veh.hours]): total hours of delay experienced by all motorized vehicles of the system during the simulation. Delay is measured as the difference between the free-flow travel time over the path of a vehicle movement and the actual duration of the movement in the simulation. 
-  * **vehicle-miles traveled** (`Congestion: Vehicle Miles Traveled`, \[veh.miles]): total miles traveled by all motorized vehicles of the system during the simulation.
+  * **vehicle hours of delay** (`Congestion: Vehicle Hours Delay`, \[veh-hours]): total hours of delay experienced by all motorized vehicles in the system during the simulation. Delay is measured as the difference between the free-flow travel time over the path of a vehicle's movement and the actual duration of the movement in the simulation. 
+  * **vehicle-miles traveled** (`Congestion: Vehicle Miles Traveled`, \[veh-miles]): total miles traveled by all motorized vehicles in the system during the simulation.
 
 * Measures of **the level of service** of the transportation system:
   * **travel cost** (`Level of Service: Travel expenditures`, \[$]): total trip cost incurred by all agents during the simulation. 
   * **bus crowding** (`Level of Service: Agent Hours on Crowding Transit`,\[hours]): the total time spent by agents standing in buses occupied above their seating capacity. 
 
 * Measures of the **Budget** incurred by the city:
-  * **operational cost**, \[$]: total costs incurred by SFBL operations including amortized fixed costs (`Budget : Operational Costs (Fixed)`), the cost of fuel consumed (`Budget : Operational Costs (Fuel)`), and variable costs (`Budget : Operational Costs (Variable, Hourly)`). The rates for each of these factors for motorized vehicles is specified in the fixed-data/siouxfalls/vehicleTypes.csv file (see. page on the [inputs](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Which-inputs-should-I-optimize%3F.md))
+  * **operational cost**, \[$]: total costs incurred by SFBL operations including amortized fixed costs (`Budget : Operational Costs (Fixed)`), the cost of fuel consumed (`Budget : Operational Costs (Fuel)`), and variable costs (`Budget : Operational Costs (Variable, Hourly)`). The rates for each of these factors for motorized vehicles are specified in the `fixed-data/siouxfalls/vehicleTypes.csv` file (see the [inputs](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Which-inputs-should-I-optimize%3F.md) page for more).
   * **incentives used** (`Budget: Subsidies Paid`, \[$]): total incentives used by agents.
   * **incentives unused** (`Budget: Subsidies Unpaid`, \[$]): total incentives available but unused by agents. 
   * **revenues**, (\[$]): total bus fares collected **SID?**
 
-If you want to know more about the mathematical formulation of each of these scoring function components, read section 4 and  4.3 of the [Sioux Faux Hackhaton problem statement]() **link**.
+If you want to know more about the mathematical formulation of each of these scoring function components, read ***check reference section 4 and  4.3*** of the [Sioux Faux Hackathon problem statement]() **link**.
 
 ## Other outputs
 
-Besides the scores, the `output/siouxfalls-1k__\<date>_\<time>` folder contains a few graphs with their corresponding textfiles, describing performance outputs of the system. Their are listed below.
+In addition to the scores, the `output/siouxfalls-1k__\<date>_\<time>` folder contains graphs describing performance outputs of the system along with their corresponding data files, listed below.
 
 * **Mode choice**
-The mode choice graph describes the overall distribution of chosen modes per agent's preference for each iteration of the simulation. In the exemple shown in Fig.3 below, the simulation ended after 100 iterations. In the simulation, agents received a 20$ subsidy per person. Throughout the iterations, we can see that this incentives to take public transit works: the agents leave progressively leave the car for on-demand rideshare and transit.    
+The mode choice graph describes the overall distribution of chosen modes for each iteration of the simulation. In the example shown in Figure 3 below, the simulation ended after 100 iterations. In the simulation, every agent received a $20 subsidy per ride ***for ridehail and/or public transit?***. As the iterations progressed, you can see that this incentives to take ***public transit and/or ridehail*** worked: the agents progressively shifted away from cars towards ridehail and transit.    
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Mode_choice_histogram.png)
-Figure 3: Mode choice of agents for each iteration of the simulation.
+Figure 3: Mode choice of agents for each iteration of the simulation
 
 * **Ride-hail revenue**
 
@@ -53,7 +53,7 @@ Figure 3: Mode choice of agents for each iteration of the simulation.
 
 ## Summary stats
 
-The `summaryStats.csv` file gathers all raw outputs of the simulation. Their meanings are listed below:
+The `summaryStats.csv` file gathers all the raw outputs of the simulation. Details for each output are listed below:
 
 * `agentHoursOnCrowdedTransit`: total time spent by agents in a crowded transit vehicle (with people standing) \[hours]
 * `fuelConsumedInMJ_Diesel`:  
