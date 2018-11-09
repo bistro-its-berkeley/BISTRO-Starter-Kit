@@ -64,6 +64,11 @@ The choice of utilized socio-demographic qualifier(s), range(s), mode(s), and su
 * The *amounts* of subsidies are float numbers that must be greater than 0.
 
 The Figure 5 below shows an example input file with subsidies for specific socio-demographic groups. 
+
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_Subsidies.png "Figure 4: Input2 - Subsidies for transit and on-deamdn rideshare users")
+***Figure 5: Input2 - Subsidies for transit and on-demand rideshare users***
+
+The scenario is the following:
   * Subsidies for transit trips
     * Children 10 years old or younger receives $2 off of every transit trip
     * Seniors older than 50 and up through 75 years of age, earning up to $20,000/year receives $2.30 off of every transit trip
@@ -73,9 +78,6 @@ The Figure 5 below shows an example input file with subsidies for specific socio
     * Anyone earning more than $50,000/year, but no more than $60,000/year receives $1.10 off of every ridehail trip
  
 You will be able to modify the characeristics of the subsidies in the input file `submission-inputs/ModeSubsidies.csv` shown below. 
-
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_Subsidies.png "Figure 4: Input2 - Subsidies for transit and on-deamdn rideshare users")
-***Figure 5: Input2 - Subsidies for transit and on-demand rideshare users***
 
 
 
