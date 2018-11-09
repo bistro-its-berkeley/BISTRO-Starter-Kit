@@ -8,7 +8,7 @@ To optimize the transportation system of Sioux Faux, you will need to test the p
 
 The repository details all the required inputs to run the simulation for Sioux Faux with BEAM. You will only have control over some of them (the inputs to optimize), but understanding all of them is important to run a successful simulation.
 
-For more information on the folders discussed below, see the [How to run a simulation?](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/How_to_run_a_simulation%3F.md) page.
+For more information on the folders discussed below, see the [How to run a simulation?](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/How_to_run_a_simulation.md) page.
 
 ### The fixed inputs 
 
