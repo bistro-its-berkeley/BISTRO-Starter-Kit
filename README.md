@@ -53,7 +53,7 @@ Once you have a solution, you should submit:
 * a **brief explanation on your methodology (.doc)**: For example: how did you solve the optimization problem? What was the motivation behind your approach? What did you try? What failed? Is there some room for improvement?
 * any comments on this starter kit repository (as pull requests) if you see any unclear information or have any suggestions for improvements.
 
-For info on how to submit, read this [tutorial](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit%3F.md).
+For info on how to submit, read this [tutorial](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit.md).
 
 ## What can I find in this repository?
 
