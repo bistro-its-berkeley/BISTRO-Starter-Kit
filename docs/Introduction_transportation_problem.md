@@ -10,7 +10,7 @@ The overall goal of the first phase of the Uber Prize is to find the **best poli
 
 Policies are tested by simulating the daily travels of a synthetic population of individuals called *Agents*, each with their own socio-demographic characteristics. The *agent-based simulation* is hosted by the BEAM simulator. During the simulated day, each *Agent* has a defined *Plan*, i.e. an ordered series of activites with specific start times, durations that she wants to complete. Throughout the day, the *Agents* will make decisions on which transportation modes they will use to travel to and from their daily activities. 
 
-By simulating the daily travel behavior of the whole population, the quality of the city's transportation system can be evaluated, based upon scoring criteria, detailed in **LINK**.
+By simulating the daily travel behavior of the whole population, the quality of the city's transportation system can be evaluated, based upon scoring criteria, detailed [here](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md).
 
 ### What is BEAM?
 
@@ -32,8 +32,8 @@ You will find more information on the Sioux Faux simulation inputs, where they a
 
 Once all agents of the system have chosen their optimal transportation modes--via iteration--to attend their daily activities, the system reaches what we call an *equilibrium state*. Based on this equilibrium state, the simulator produces a series of outputs concerning the individual agents and the overall system. 
 
-The quality of the new policy-based transportation system is evaluated based upon a comparison against the Business As Usual Scenario (BAU). The BAU scenario represents the baseline or "current" policy of Sioux Faux. This comparison captures **how the new policy will improve the current state of the transportation system*.
-The performance of this new policy-based transportation system is measured by a *scoring function S** which computes the weighted sum of three groups of outputs:
+The quality of the new policy-based transportation system is evaluated based upon a comparison against the Business As Usual Scenario (BAU). The BAU scenario represents the baseline or "current" policy of Sioux Faux. This comparison captures **how the new policy will improve the current state of the transportation system**.
+The performance of this new policy-based transportation system is measured by a **scoring function S** which computes the weighted sum of three groups of outputs:
 
 * How much *congestion* did the agents experience during the day? 
 * What *level of service* did the transportation system offer to agents? 
