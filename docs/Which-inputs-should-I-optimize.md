@@ -13,7 +13,7 @@ For more information on the folders discussed below, see the [How to run a simul
 
 To help the Sioux Faux Department of Transportation (SFDOT) combat congestion and improve overall mobility in Sioux Faux, you will prepare a set of inputs to the simulation engine, which represent the following transportation system interventions: the bus fleet composition, the adjustments to the frequency of buses on routes and the distribution of subsidies for agents using ridehail and/or public transit. These to-be-optimized inputs can be found in .csv format in the `submission-inputs` folder.
 
-#### **Bus fleet composition**
+#### **1. Bus fleet composition**
 
 The submission input file *VehicleFleetMix.csv* describes the status of the bus fleet (see Fig.2). Currently, SFBL (*agencyID* = 217) operates 12 bus lines in Sioux Faux. During the Pilot Test, you can decide which type of bus (i.e. *vehicleTypeId*) will provide service for each route (*routeID*, see Fig.1 & 2). Each route can utilize only **one type of bus**. 
 
@@ -42,7 +42,7 @@ During the Pilot Study, for each route, you have the opportunity to purchase new
 ***Figure 4: Costs of available bus types***
 <br/>
 
-#### **Subsidies for transit and on-demand rideshare users**
+#### **2. Subsidies for transit and on-demand rideshare users**
 
 In an effort to provide a high-quality alternative to private vehicles, you may define subsidies for qualifying agents using public transit or on-demand ridehail. Qualification for a subsidy can be based on the following socio-demographic categories: age and/or income (*Note ot organizer: add employment status*). 
 
@@ -74,7 +74,13 @@ The input file describes the following situation:
     * Anyone earning more than $40,000/year, but no more than $50,000/year receives $2.20 off of every ridehail trip
     * Anyone earning more than $50,000/year, but no more than $60,000/year receives $1.10 off of every ridehail trip
  
-You will be able to modify the characeristics of the subsidies in the input file `submission-inputs/ModeSubsidies.csv`, as shown below. 
+You will be able to modify the characeristics of the subsidies in the input file `submission-inputs/ModeSubsidies.csv`, as shown above. 
+
+#### **3. Adjustments to the frequency of buses on routess**
+
+The third input you have control on is the buses frequencies. 
+
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Bus_frequencies_inputs.png)
 
 
 
