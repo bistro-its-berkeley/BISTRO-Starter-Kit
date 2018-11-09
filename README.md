@@ -1,17 +1,15 @@
-# Uber-Prize-Starter-Kit
+# Uber Prize Starter Kit
 
-This is a starter-kit Repository for the **Uber Prize challenge** on **Crowd AI**. 
+This repository is a starter kit for the **Uber Prize challenge** on **Crowd AI** where you may find background material and competition guidelines to help you get started. 
 
-In this repo you will find background materials that will help you get started with the challenge. 
-
-## Competition Phasing
+## Competition Rounds
 The competition will be split into two phases:
-* The first phase challenges contestants to optimize the transportation network of a small mock city: Sioux Faux 
-* The second phase will apply the optimization challenge on a real city, to be announced by the launch of the Uber Prize
+* The first round challenges contestants to optimize the transportation network of a small fictitious city: Sioux Faux 
+* The second round will require contestants to apply their optimization algorithms to a real city, which will be announced prior to the launch of the Uber Prize.
 
-## Internal pilot test
+## Internal Pilot Test
 
-The **internal pilot test** aims at testing the ability for participants to compete in Phase 1 of the competition. Given the complexity with a simulator, we want to do an initial round of internal testing with a core group of members from AI Labs in order to identify any issues.
+This **internal pilot test** aims at testing the ability of participants to compete in Round 1 of the competition. Given the novelty of the framing of our problem as well as computational expense of running the simulation engine, we wish to do an initial round of internal testing with a core group of members from AI Labs in order to identify any issues.
 
 The **objectives** of this internal pilot test are:
 * How easy/difficult is it to on-board participants, and feel comfortable moving forward with a solution approach, given the starter kit and associated documentation?
@@ -48,12 +46,7 @@ We recommend that you proceed through the documentation in the following order:
 
 Your will generate a set of inputs (where a set of inputs can be thought of as a policy--find more on this in the [Problem Statement](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Problem_statement_Sioux_Faux_Phase1) to optimize the transportation system of Sioux Faux, based upon the criteria given in the Problem Statement. Solutions will be judged using the scoring function, and your goal is to achieve the **highest score**. In the event of ties, solutions will be further assessed on their performance with respect to other key metrics. *(Note to organizers: metrics [X,Y,Z] + the explanation, potentially? TBD)*.
 
-Once you have a solution, you should submit:
-* your **best outputs (.zip)**
-* a **brief explanation on your methodology (.doc)**: For example: how did you solve the optimization problem? What was the motivation behind your approach? What did you try? What failed? Is there some room for improvement?
-* any comments on this starter kit repository (as pull requests) if you see any unclear information or have any suggestions for improvements.
-
-For info on how to submit, read this [tutorial](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit%3F.md).
+For info on how to submit, plaes see here [tutorial](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit%3F.md).
 
 ## What can I find in this repository?
 
@@ -68,7 +61,7 @@ For info on how to submit, read this [tutorial](https://github.com/vgolfier/Uber
   * a note on [what and how to submit](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit%3F.md) 
  
 
-## Contacts
+## Contact Information
 
 If you have any questions about the challenge, you can ask them on uChat:
 * *(To be set for pilot study)*
