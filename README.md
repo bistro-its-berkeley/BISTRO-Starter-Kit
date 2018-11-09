@@ -32,7 +32,7 @@ We recommend that you proceed through the documentation in the following order:
 
 ## What do I have to do?
 
-Your will generate a set of inputs (where a set of inputs can be thought of as a policy--find more on this in the [Problem Statement](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Problem_statement_Sioux_Faux_Phase1) to optimize the transportation system of Sioux Faux, based upon the criteria given in the Problem Statement. Solutions will be judged using the scoring function, and your goal is to achieve the **highest score**. In the event of ties, solutions will be further assessed on their performance with respect to other key metrics. *([X,Y,Z] and the explanation, potentially? TBD)*.
+Your will generate a set of inputs (where a set of inputs can be thought of as a policy--find more on this in the [Problem Statement](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Problem_statement_Sioux_Faux_Phase1) to optimize the transportation system of Sioux Faux, based upon the criteria given in the Problem Statement. Solutions will be judged using the scoring function, and your goal is to achieve the **highest score**. In the event of ties, solutions will be further assessed on their performance with respect to other key metrics. *(Note to organizers: metrics [X,Y,Z] + the explanation, potentially? TBD)*.
 
 Once you have a solution, you should submit:
 * your **best outputs (.zip)**
