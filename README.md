@@ -57,7 +57,7 @@ For info on how to submit, read this [tutorial](https://github.com/vgolfier/Uber
 ## Contacts
 
 If you have any questions about the challenge, you can ask them on this FAQ chat:
-* ...
+* *(To be set for phase I)*
 
 In case of further questions, you can contact:
 * Sid Feygin: sid.feygin@berkeley.edu
