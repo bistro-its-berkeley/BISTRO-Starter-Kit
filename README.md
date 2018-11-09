@@ -35,7 +35,7 @@ We recommend that you proceed through the documentation in the following order:
 
   * **The Problem statement for the Internal Pilot Study**: Then, read through the [presentation of the Sioux-Faux case](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/The_Sioux_Faux_case_pilot_study.md) for the Hackathon, which provides a high-level description of the tasks, as well as information on the outputs and scoring function.
   
-  * **The inputs to optimize**: Next, the [Which inputs should I optimize?](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Which-inputs-should-I-optimize%3F.md) page will give you the steps for installing BEAM and understanding what the inputs of the simulation are, where they are stored, and how to modify them.
+  * **The inputs to optimize**: Next, the [Which inputs should I optimize?](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Which-inputs-should-I-optimize.md) page will give you the steps for installing BEAM and understanding what the inputs of the simulation are, where they are stored, and how to modify them.
   
   * **The description of the outputs**: Once you're familiar with the inputs, read the [Understanding the outputs and the scoring function](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md) page to get a better understanding of the outputs of the simulation, where they are stored after a simulation run, what they describe, and how to interpret them. Here you will also find details on how the outputs are used to construct the challenge scoring function.
   
@@ -60,7 +60,7 @@ For info on how to submit, read this [tutorial](https://github.com/vgolfier/Uber
 * Documentation folder 
   * the [brief introduction to the Urban Transportation System Optimization Framework](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md)
   * a note on [how to run a simulation](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/How_to_run_a_simulation%3F.md)
-  * a description of the [inputs to optimize](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Which-inputs-should-I-optimize%3F.md)
+  * a description of the [inputs to optimize](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Which-inputs-should-I-optimize.md)
   * a description of the [outputs and the scoring function](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md)
   * a presentation of [the Sioux-Faux case](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/The_Sioux_Faux_case_Hackathon.md)
   * the [Problem statement of the internal pilot test](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Pilot_Test_Problem_Statement.pdf)
