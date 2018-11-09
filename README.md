@@ -41,7 +41,7 @@ We recommend that you proceed through the documentation in the following order:
   
   * **The tutorial on how to run a simulation**: Once you are clear about the inputs you can manipulate, the outputs, and the effects of changes in inputs on the outputs, the [How to run a simulation?](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/How_to_run_a_simulation.md) page will explain the steps to run a simulation.
   
-  * **How to submit?** To finish, follow the [How to submit?](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit%3F.md) instructions to submit your solution.
+  * **How to submit?** To finish, follow the [How to submit?](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit.md) instructions to submit your solution.
   
 
 ## What do I have to do?
@@ -65,7 +65,7 @@ For info on how to submit, read this [tutorial](https://github.com/vgolfier/Uber
   * a presentation of [the Sioux-Faux case](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/The_Sioux_Faux_case_Hackathon.md)
   * the [Problem statement of the internal pilot test](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Pilot_Test_Problem_Statement.pdf)
   * the [Problem statement of Round 1](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Problem_statement_Phase%20I.pdf) 
-  * a note on [what and how to submit](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit%3F.md) 
+  * a note on [what and how to submit](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit.md) 
  
 
 ## Contacts
