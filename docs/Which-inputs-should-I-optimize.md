@@ -25,7 +25,7 @@ To help the Sioux Faux Department of Transportation (SFDOT) combat congestion an
 The submission input file *VehicleFleetMix.csv* describes the status of the bus fleet (see Fig.1). Currently, SFBL (*agencyID* = 217) operates 12 bus lines in Sioux Faux. During the Hackathon, you can decide which type of bus (i.e. *vehicleTypeId*) will provide service for each route (*routeID*). Each route can utilize only **one type of bus**. 
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_VehicleFleetMix.png "*Figure 2: Input1 - composition of the bus fleet")
-***Figure 1: Input1 - composition of the bus fleet***
+***Figure 1: Input1 - Bus fleet composition***
 
 SFDOT has four available bus types, each of them with different technical properties (`fixed-data/siouxfalls/vehicleTypes.csv`, see Fig.2) and costs (`fixed-data/siouxfalls/ vehicleCosts.csv`, see Fig.3). Currently, SFDOT owns the minimum number of bus types to provide service for each route, as specifed in the provided *VehicleFleetMix.csv*. Additionally, the number of buses required to service each route is equal to the number of trips: for each headway dispatched, a new bus is used. This does not reflect a realistic scenario combining bus routes into runs, but it still allows for comparisons to a BAU case.
 
