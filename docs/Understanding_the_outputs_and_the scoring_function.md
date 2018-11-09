@@ -56,7 +56,7 @@ Figure 4: Statistics of agent scores
 
 ## Summary stats
 
-The `summaryStats.csv` file gathers all the raw outputs of the simulation. Details for each output are listed below:
+The `summaryStats.csv` file gathers many of the raw outputs of the simulation, which are themselves used to compute the scoring functions.  Details for each output are listed below:
 
 * `agentHoursOnCrowdedTransit`: total time spent by agents in a crowded transit vehicle (with people standing) \[hours]
 * `fuelConsumedInMJ_Diesel`: overall amount (in MJ) of diesel consumed by buses during the day
@@ -73,22 +73,23 @@ The `summaryStats.csv` file gathers all the raw outputs of the simulation. Detai
 * `personTravelTime_ride_hail`: total time traveled by on-demand rideshare by all agents during the day \[person.hours]
 * `personTravelTime_walk`: total time traveled by foot by all agents during the day \[person.hours]
 * `personTravelTime_walk_transit`: total time spent by foot to access public transit by all agents during the day \[person.hours]
-* `totalCostIncludingSubsidy_drive_transit`: **SID?**
-* `totalCostIncludingSubsidy_ride_hail`: **SID?**
-* `totalCostIncludingSubsidy_walk_transit`: **SID?**
-* `totalSubsidy_drive_transit`: total subsidies \[$/person] received by all agents for accessing public transit by car \[$] 
-* `totalSubsidy_ride_hail`: total subsidies \[$/person] received by all agents for accessing public transit by on-demand rideshare \[$] 
-* `totalSubsidy_walk_transit`: total subsidies \[$/person] received by all agents for accessing public transit by foot \[$] 
-* `totalTravelTime`: total time traveled by all agents during the day \[hours]
-* `totalVehicleDelay`: total hours of delay experienced by all motorized vehicles of the system during the simulation \[hours]
-* `vehicleHoursTraveled_BODY-TYPE-DEFAULT`: total time traveled by foot during the day \[vehicle.hours]. Here the people are considered as "walking vehicles". 
-* `vehicleHoursTraveled_BUS-DEFAULT`: total time traveled by bus of type "DEFAULT" during the day \[vehicle.hours] 
-* `vehicleHoursTraveled_BUS-SMALL-HD`: total time traveled by bus of type "SMALL-HD" during the day \[vehicle.hours] 
-* `vehicleHoursTraveled_BUS-STD-ART`: total time traveled by bus of type "STD-ART" during the day \[vehicle.hours] 
-* `vehicleHoursTraveled_CAR-TYPE-DEFAULT`: total time traveled by car of type "DEFAULT" during the day \[vehicle.hours] 
-* `vehicleMilesTraveled_BODY-TYPE-DEFAULT`: total time traveled by bus of type "DEFAULT" during the day \[vehicle.hours] 
-* `vehicleMilesTraveled_BUS-DEFAULT`: total miles traveled by bus of type "DEFAULT" \[vehicle.miles]
-* `vehicleMilesTraveled_BUS-SMALL-HD`: total miles traveled by bus of type "SMALL-HD" \[vehicle.miles]
-* `vehicleMilesTraveled_BUS-STD-ART`: total miles traveled by bus of type "STD-ART" \[vehicle.miles]
-* `vehicleMilesTraveled_CAR-TYPE-DEFAULT`: total miles traveled by car of type "DEFAULT" \[vehicle.miles]
-* `vehicleMilesTraveled_total`: total miles traveled by motorized vehicles \[vehicle.miles]
+<!--TODO: The following stats will be improved for clarity, issue open on BEAM-->
+<!--* `totalCostIncludingSubsidy_drive_transit`: **SID*-->
+<!--* `totalCostIncludingSubsidy_ride_hail`: **SID?**-->
+<!--* `totalCostIncludingSubsidy_walk_transit`: **SID?**-->
+* `totalSubsidy_drive_transit`: total subsidies \[$US/person] received by all agents to incentivize trips that access public transit by car \[$US]
+* `totalSubsidy_ride_hail`: total subsidies \[$US/person] received by all agents to incentivize trips using on-demand rideshare \[$US]
+* `totalSubsidy_walk_transit`: total subsidies \[$US/person] received by all agents to incentivize trips that access public transit on foot \[$US]
+* `totalTravelTime`: total time spent traveling by all agents during the day \[person-hours]
+* `totalVehicleDelay`: total hours of delay experienced by all motorized vehicles of the system during the simulation \[vehicle-hours]
+* `vehicleHoursTraveled_BODY-TYPE-DEFAULT`: total time traveled by foot during the day \[vehicle-hours]. Note that in BEAM, person agents are considered to be "human body vehicles".
+* `vehicleHoursTraveled_BUS-DEFAULT`: total time traveled by bus of type "DEFAULT" during the day \[vehicle-hours]
+* `vehicleHoursTraveled_BUS-SMALL-HD`: total time traveled by bus of type "SMALL-HD" during the day \[vehicle-hours]
+* `vehicleHoursTraveled_BUS-STD-ART`: total time traveled by bus of type "STD-ART" during the day \[vehicle-hours]
+* `vehicleHoursTraveled_CAR-TYPE-DEFAULT`: total time traveled by car of type "DEFAULT" during the day \[vehicle-hours]
+* `vehicleMilesTraveled_BODY-TYPE-DEFAULT`: total time traveled by bus of type "DEFAULT" during the day \[vehicle-hours]
+* `vehicleMilesTraveled_BUS-DEFAULT`: total miles traveled by bus of type "DEFAULT" \[vehicle-miles]
+* `vehicleMilesTraveled_BUS-SMALL-HD`: total miles traveled by bus of type "SMALL-HD" \[vehicle-miles]
+* `vehicleMilesTraveled_BUS-STD-ART`: total miles traveled by bus of type "STD-ART" \[vehicle-miles]
+* `vehicleMilesTraveled_CAR-TYPE-DEFAULT`: total miles traveled by car of type "DEFAULT" \[vehicle-miles]
+* `vehicleMilesTraveled_total`: total miles traveled by motorized vehicles \[vehicle-0miles]

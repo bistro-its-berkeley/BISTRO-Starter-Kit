@@ -70,11 +70,15 @@ For info on how to submit, read this [tutorial](https://github.com/vgolfier/Uber
 
 ## Contacts
 
-If you have any questions about the challenge, you can ask them on this FAQ chat:
-* *(To be set for phase I)*
+If you have any questions about the challenge, you can ask them on uChat:
+* *(To be set for pilot study)*
 
-In case of further questions, you can contact:
-* Sid Feygin: sid.feygin@berkeley.edu
+In case of further questions, you may contact:
+* Sid Feygin: sfeygi@ext.uber.com
 * Valentine Golfier-Vetterli: golfiervalentine@gmail.com
 
-*Note to organizers: Consider setting up a troubleshooting email account so you don't have to use your personal ones*
+## Contributing
+Feel free also to post issues and submit pull requests on this start-kit repository if you
+see any unclear information or have any suggestions for improvements.
+
+<!--*Note to organizers: Consider setting up a troubleshooting email account so you don't have to use your personal ones*-->
