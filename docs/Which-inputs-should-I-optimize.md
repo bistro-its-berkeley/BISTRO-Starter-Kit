@@ -54,7 +54,7 @@ The choice of utilized socio-demographic qualifier(s), range(s), mode(s), and su
   * `drive_transit`: use of the personal car as an access/egress mode to/from transit (bus)
   * `walk_transit`: walking as an access/egress mode to/from transit (bus)
   
-* The *groups* are defined as in mathematical notation where parentheses () indicate exclusive bounds and brackets \[] indicate inclusive bounds. Below, you will find an accompanying statement for each subsidy in the order they appear in Figure 4.
+* The *groups* are defined as in mathematical notation where parentheses () indicate exclusive bounds and brackets \[] indicate inclusive bounds. Below, you will find an accompanying statement for each subsidy in the order they appear in Figure 5.
 
 * The *amounts* of the subsidies are decimal numbers that must be greater than 0.
 
@@ -63,7 +63,7 @@ The Figure 5 below shows an example input file with subsidies for specific socio
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_Subsidies.png)
 ***Figure 5: Input2 - Subsidies for transit and on-demand rideshare users***
 
-The scenario is the following:
+The input file describes the following situation:
 
   * Subsidies for walking to access transit
     * Children 10 years old or younger receives $2 off of every transit trip
