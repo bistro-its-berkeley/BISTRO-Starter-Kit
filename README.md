@@ -71,7 +71,7 @@ For info on how to submit, plaes see here [tutorial](https://github.com/vgolfier
 ## Contact Information
 
 If you have any questions about the challenge, you can ask them on uChat:
-* *(To be set for pilot study)*
+* https://uchat.uberinternal.com/uber/channels/uber_prize_round1_pilot_test
 
 In case of further questions, you may contact:
 * Sid Feygin: sfeygi@ext.uber.com
