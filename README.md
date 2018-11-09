@@ -58,7 +58,14 @@ For info on how to submit, plaes see here [tutorial](https://github.com/vgolfier
   * a presentation of [the Sioux-Faux case](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/The_Sioux_Faux_case_Hackathon.md)
   * the [Problem statement of the internal pilot test](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Pilot_Test_Problem_Statement.pdf)
   * the [Problem statement of Round 1](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Problem_statement_Phase%20I.pdf) 
-  * a note on [what and how to submit](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit.md) 
+  * a note on [what and how to submit](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit.md)
+
+* `submission-inputs` folder:
+  * the input file for the [bus fleet composition](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/submission-inputs/VehicleFleetMix.csv)
+  * the input file for the [mode subsidies](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/submission-inputs/ModeSubsidies.csv)
+  * the input file for the [bus frequency adjustments](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/submission-inputs/FrequencyAdjustment.csv)
+   * the input file for the [road pricing](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/submission-inputs/RoadPricing.csv)
+
  
 
 ## Contact Information
