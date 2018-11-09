@@ -38,7 +38,7 @@ If you want to know more about the mathematical formulation of each of these sco
 
 ## Other outputs
 
-In addition to the scores, the `output/siouxfalls-1k__\<date>_\<time>` folder contains graphs describing performance outputs of the system along with their corresponding data files, listed below.
+In addition to the scores, the `output/siouxfalls-1k__\<date>_\<time>` folder contains graphs describing performance outputs of the system along with their corresponding data files. Two of them are described below.
 
 * **Mode choice**
 The mode choice graph describes the overall distribution of chosen modes for each iteration of the simulation. In the example shown in Figure 3 below, the simulation ended after 100 iterations. In the simulation, every agent received a $20 subsidy per ride for ridehail. As the iterations progressed, you can see that this incentives to use on-demand rideshare worked: the agents progressively shifted away from cars towards ridehail.    
@@ -46,10 +46,13 @@ The mode choice graph describes the overall distribution of chosen modes for eac
 Figure 3: Mode choice of agents for each iteration of the simulation
 
 * **Ride-hail revenue**
-
-* **Ride-hail stats**
+The ride-hail revenues describe the revenues made by the ridehail company with the fares of the course. 
 
 * **Scorestats**
+The score statistics represent the evolution of the agent's plans scores during the simulation. Each iteration simulates one entire day. At the end of each iteration, the daily plan of each agent is evaluated according to how well it performed in the transportation scenario. Based on this score, some agents may change their daily plan (which modes they use to travel from and to their activities) for the next iteration in an attempt to improve it. This learning mechanism can be observed in the Figure 4 below: as iterations progress, the agents' plan scores keep increasing till they reach a plateau after about 50 iterations: the system has reached an equilibrium state where each agent has found its optimal daily plan.
+
+![alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/scorestats.png)
+Figure 4: Statistics of agent scores 
 
 ## Summary stats
 
