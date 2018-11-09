@@ -1,30 +1,16 @@
 # How to run a simulation?
 
-## Installing BEAM
 
-Clone the following GitHub repository in your GitHub Desktop:
-https://github.com/sfwatergit/BeamCompetitions
+## Running via [Docker](https://www.docker.com/)
 
-After you unzip the archive, you will see a directory that looks like this when partially expanded:
+A wrapper library around BEAM, `BEAMCompetition` evaluates submissions via a [Docker](https://www.docker.com/) image that is currently on [Docker Hub](https://hub.docker.com/) with tag `beammodel/beam-competition:0.0.1-SNAPSHOT`.
 
-![Competition Repository](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/CompetitionRepository.png "Competition Repository")
+### Running a Container Locally
 
-***Figure 1: Competition Repository***
+For the first round, we expect users will be running containers locally.
 
-## Running a simulation
-
-### [Docker](https://www.docker.com/) Container Management and Execution
-
-The wrapper around `BeamCompetitions` has a Docker image on [Docker Hub](https://hub.docker.com/) with tag `beammodel/beam-competition:0.0.1-SNAPSHOT`.
-
-This section details how administrators can manage and execute this image via the Docker toolkit.
-
-
-### Running a Container
-
-Once built and pushed, the container is ready to be executed by the competitors.
-
-To run the container users need to specify the submission folder and output folder and then run the following command:
+To run the `beam-competition` container and evaluate your inputs, you will want to specify paths to the submission folder (which should be named `submission-inputs`) and
+output folder (named `output`) using the following command:
 ` docker run -it --memory=4g --cpus=2  -v "$(pwd)"/submission-inputs:/submission-inputs:ro -v "$(pwd)"/output:/output:rw beammodel/beam-competition:0.0.1-SNAPSHOT --config /fixed-data/siouxfalls/siouxfalls-1k.conf`
 
 If desired, users may pass Java Virtual Machine (JVM) attributes and add JAVA_OPTS `env` arguments to the `docker run` command:
@@ -32,7 +18,7 @@ If desired, users may pass Java Virtual Machine (JVM) attributes and add JAVA_OP
 
 ### Shell Script
 
-For convenience, the `docker run` command is wrapped by a bash script, `competition.sh`.
+For convenience, the `docker run` command is wrapped by a bash script, which may be found in `./competition.sh`.
 
 To run it, users enter `./competition.sh -m 4g -c 2 -s siouxfalls -sz 15k -i "$(pwd)"/submission-inputs/`, where
 

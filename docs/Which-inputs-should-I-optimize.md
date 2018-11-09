@@ -1,7 +1,7 @@
 # Which inputs should I optimize?
 
 
-To optimize the transportation system of Sious Faux, you will need to test the performance of different policies, or combinations of inputs, by running an agent-based simulation with the BEAM simulator. This document provides the steps for installing BEAM, understanding the inputs to the simulation, where they are stored, and how to modify them.
+To optimize the transportation system of Sioux Faux, you will need to test the performance of different policies, or combinations of inputs, by running an agent-based simulation with the BEAM simulator. This document provides the steps for installing BEAM, understanding the inputs to the simulation, where they are stored, and how to modify them.
 
  
 ## Overview of the repository
