@@ -9,7 +9,17 @@ The competition will be split into two phases:
 * The first phase challenges contestants to optimize the transportation network of a small mock city: Sioux Faux 
 * The second phase will apply the optimization challenge on a real city, to be announced by the launch of the Uber Prize
 
-The **internal pilot test** aims at testing the ability for participants to compete in Phase 1 of the competition. Given the complexity with a simulator, we want to do an initial round of internal testing with a core group of members from AI Labs in order to identify any issues.  
+The **internal pilot test** aims at testing the ability for participants to compete in Phase 1 of the competition. Given the complexity with a simulator, we want to do an initial round of internal testing with a core group of members from AI Labs in order to identify any issues.
+
+The **objectives** of this internal pilot test are:
+* How easy/difficult is it to on-board participants, and feel comfortable moving forward with a solution approach, given the starter kit and associated documentation?
+ * Update documentation in response to this.
+* We are looking for optimization algorithms that explore the set of feasible solutions to the Sioux Faux scenario given the possible input variables and corresponding constraints.
+ * We are not necessarily looking to generate the best solutions, but to assess the difficulty of the problem given the current dimensions of the input space
+ * Ideally, we should also identify any obvious “cheats” and address them.
+* Review feedback and user-generated reports to identify likely approaches/models.
+If an approach seems particularly worthwhile, then request that it be submitted as a “benchmark solution”.
+
 
 ## How do I get started?
 
