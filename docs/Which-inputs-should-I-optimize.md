@@ -65,7 +65,7 @@ The choice of utilized socio-demographic qualifier(s), range(s), mode(s), and su
 
 The Figure 5 below shows an example input file with subsidies for specific socio-demographic groups. 
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_Subsidies.png "Figure 4: Input2 - Subsidies for transit and on-deamdn rideshare users")
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_Subsidies.png)
 ***Figure 5: Input2 - Subsidies for transit and on-demand rideshare users***
 
 The scenario is the following:
