@@ -3,7 +3,7 @@ After reading this document, you will have a better understanding of the outputs
 
 ## Where are the outputs stored?
 
-***Is there a maximum number of iterations, or a stopping criteria for equilibrium?*** After the simulation's last iteration, the system reaches an *equilibrium state* and the simulation stops. All the outputs generated during this last run are stored in a unique output folder called `output/siouxfalls-1k__\<date>_\<time>`. It ends with the date and time of the simulation you have just run (see Figure 1). Note that the figure references a simulation run with a 1k population sample.
+After the simulation's last iteration, the system reaches an *equilibrium state* and the simulation stops. All the outputs generated during this last run are stored in a unique output folder called `output/siouxfalls-1k__\<date>_\<time>`. It ends with the date and time of the simulation you have just run (see Figure 1). Note that the figure references a simulation run with a 1k population sample.
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Output_folder_2.png)
 
@@ -21,7 +21,7 @@ Figure 2: Score and component scores
 
 The *scoring function* is a weighted sum of several components, listed below. ***Weights are pre-determined based upon...\[fill in]*** 
 * Measures of **congestion**:
-  * **vehicle hours of delay** (`Congestion: Vehicle Hours Delay`, \[veh-hours]): total hours of delay experienced by all motorized vehicles in the system during the simulation. Delay is measured as the difference between the free-flow travel time over the path of a vehicle's movement and the actual duration of the movement in the simulation. 
+  * **vehicle-hours of delay** (`Congestion: Vehicle Hours Delay`, \[veh-hours]): total hours of delay experienced by all motorized vehicles in the system during the simulation. Delay is measured as the difference between the free-flow travel time over the path of a vehicle's movement and the actual duration of the movement in the simulation. 
   * **vehicle-miles traveled** (`Congestion: Vehicle Miles Traveled`, \[veh-miles]): total miles traveled by all motorized vehicles in the system during the simulation.
 
 * Measures of **the level of service** of the transportation system:
@@ -32,7 +32,7 @@ The *scoring function* is a weighted sum of several components, listed below. **
   * **operational cost**, \[$]: total costs incurred by SFBL operations including amortized fixed costs (`Budget : Operational Costs (Fixed)`), the cost of fuel consumed (`Budget : Operational Costs (Fuel)`), and variable costs (`Budget : Operational Costs (Variable, Hourly)`). The rates for each of these factors for motorized vehicles are specified in the `fixed-data/siouxfalls/vehicleTypes.csv` file (see the [inputs](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Which-inputs-should-I-optimize%3F.md) page for more).
   * **incentives used** (`Budget: Subsidies Paid`, \[$]): total incentives used by agents.
   * **incentives unused** (`Budget: Subsidies Unpaid`, \[$]): total incentives available but unused by agents. 
-  * **revenues**, (\[$]): total bus fares collected **SID?**
+  * **revenues**, (\[$]): total bus fares collected
 
 If you want to know more about the mathematical formulation of each of these scoring function components, read ***check reference section 4 and  4.3*** of the [Sioux Faux Hackathon problem statement]() **link**.
 
@@ -41,7 +41,7 @@ If you want to know more about the mathematical formulation of each of these sco
 In addition to the scores, the `output/siouxfalls-1k__\<date>_\<time>` folder contains graphs describing performance outputs of the system along with their corresponding data files, listed below.
 
 * **Mode choice**
-The mode choice graph describes the overall distribution of chosen modes for each iteration of the simulation. In the example shown in Figure 3 below, the simulation ended after 100 iterations. In the simulation, every agent received a $20 subsidy per ride ***for ridehail and/or public transit?***. As the iterations progressed, you can see that this incentives to take ***public transit and/or ridehail*** worked: the agents progressively shifted away from cars towards ridehail and transit.    
+The mode choice graph describes the overall distribution of chosen modes for each iteration of the simulation. In the example shown in Figure 3 below, the simulation ended after 100 iterations. In the simulation, every agent received a $20 subsidy per ride for ridehail. As the iterations progressed, you can see that this incentives to use on-demand rideshare worked: the agents progressively shifted away from cars towards ridehail.    
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Mode_choice_histogram.png)
 Figure 3: Mode choice of agents for each iteration of the simulation
 
@@ -56,9 +56,9 @@ Figure 3: Mode choice of agents for each iteration of the simulation
 The `summaryStats.csv` file gathers all the raw outputs of the simulation. Details for each output are listed below:
 
 * `agentHoursOnCrowdedTransit`: total time spent by agents in a crowded transit vehicle (with people standing) \[hours]
-* `fuelConsumedInMJ_Diesel`:  
-* `fuelConsumedInMJ_Food`: ?
-* `fuelConsumedInMJ_Gasoline`
+* `fuelConsumedInMJ_Diesel`: overall amount (in MJ) of diesel consumed by buses during the day
+* `fuelConsumedInMJ_Food`: overall amount (in MJ) of food consumed by pedestrians during the day
+* `fuelConsumedInMJ_Gasoline`: overall amount (in MJ) of gasoline consumed by cars during the day
 * `numberOfVehicles_BODY-TYPE-DEFAULT`: number of vehicles in the system 
 * `numberOfVehicles_BUS-DEFAULT`: number of buses of type "DEFAULT" circulating in the system during the day \[units]
 * `numberOfVehicles_BUS-SMALL-HD`: number of buses of type "SMALL-HD" circulating in the system during the day \[units]
@@ -78,7 +78,7 @@ The `summaryStats.csv` file gathers all the raw outputs of the simulation. Detai
 * `totalSubsidy_walk_transit`: total subsidies \[$/person] received by all agents for accessing public transit by foot \[$] 
 * `totalTravelTime`: total time traveled by all agents during the day \[hours]
 * `totalVehicleDelay`: total hours of delay experienced by all motorized vehicles of the system during the simulation \[hours]
-* `vehicleHoursTraveled_BODY-TYPE-DEFAULT`: **SID?**
+* `vehicleHoursTraveled_BODY-TYPE-DEFAULT`: total time traveled by foot during the day \[vehicle.hours]. Here the people are considered as "walking vehicles". 
 * `vehicleHoursTraveled_BUS-DEFAULT`: total time traveled by bus of type "DEFAULT" during the day \[vehicle.hours] 
 * `vehicleHoursTraveled_BUS-SMALL-HD`: total time traveled by bus of type "SMALL-HD" during the day \[vehicle.hours] 
 * `vehicleHoursTraveled_BUS-STD-ART`: total time traveled by bus of type "STD-ART" during the day \[vehicle.hours] 
