@@ -33,10 +33,12 @@ During the Pilot Study, for each route, you have the opportunity to purchase new
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Bus_types.png)\
 ***Figure 3: Set of available bus types***
+<br/>
 
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/BusCosts.png "Figure 4: Costs of available bus types")\
 ***Figure 4: Costs of available bus types***
+<br/>
 
 #### **Subsidies for transit and on-demand rideshare users**
 
