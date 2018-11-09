@@ -22,6 +22,8 @@ The **objectives** of this internal pilot test are:
 * Review feedback and user-generated reports to identify likely approaches/models.
 If an approach seems particularly worthwhile, then request that it be submitted as a “benchmark solution”.
 
+Thank you for your help! :-)
+
 
 ## How do I get started?
 
