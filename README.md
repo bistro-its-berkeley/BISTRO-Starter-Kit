@@ -50,7 +50,7 @@ For info on how to submit, plaes see here [tutorial](https://github.com/vgolfier
 
 ## What can I find in this repository?
 
-* Documentation folder 
+* `docs` folder 
   * the [brief introduction to the Urban Transportation System Optimization Framework](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md)
   * a note on [how to run a simulation](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/How_to_run_a_simulation.md)
   * a description of the [inputs to optimize](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Which-inputs-should-I-optimize.md)
