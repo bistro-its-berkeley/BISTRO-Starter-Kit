@@ -48,7 +48,7 @@ In an effort to provide a high-quality alternative to private vehicles, you may 
 
 The choice of utilized socio-demographic qualifier(s), range(s), mode(s), and subsidy amount(s) are all inputs that you can define. They are described below. For the Internal Pilot Test, there is no upper limit to the number of times an agent can claim a subsidy throughout the day.
 * The *modes* to subsidize can be chosen from the following list: 
-  * `drive`: use of the personal car as the main transport mode for the trip
+  * `car`: use of the personal car as the main transport mode for the trip
   * `walk`: walking as the main transport mode for the trip
   * `ride_hail`: use of on-demand rideshare as the main transport mode for the trip
   * `drive_transit`: use of the personal car as an access/egress mode to/from transit (bus)
