@@ -76,7 +76,7 @@ The input file describes the following situation:
  
 You will be able to modify the characeristics of the subsidies in the input file `submission-inputs/ModeSubsidies.csv`, as shown above. 
 
-#### **3. Adjustments to the frequency of buses on routess**
+#### **3. Adjustments to the frequency of buses on routes**
 
 The third input you have control on is the buses frequencies. 
 
