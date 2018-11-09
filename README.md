@@ -75,7 +75,7 @@ If you have any questions about the challenge, you can ask them on uChat:
 
 In case of further questions, you may contact:
 * Sid Feygin: sfeygi@ext.uber.com
-* Valentine Golfier-Vetterli: golfiervalentine@gmail.com
+* Valentine Golfier-Vetterli: vgolfi@ext.uber.com
 
 ## Contributing
 Feel free also to post issues and submit pull requests on this start-kit repository if you
