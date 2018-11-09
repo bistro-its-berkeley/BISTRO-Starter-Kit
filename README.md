@@ -31,7 +31,7 @@ Before you can get started, some explanations on the challenge are needed. Even 
 
 We recommend that you proceed through the documentation in the following order:
 
-  * **Introduction to the Transportation Systems Challenge Framework**: First, read the quick [introduction on the Urban Transportation Optimization problem](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md). It will give you a general understanding of the framework of problem you need to solve and the related optimization challenges. 
+  * **Introduction to the Urban Transportation Systems Optimization Framework**: First, read the brief [introduction on the Urban Transportation System problem](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md). It will give you a general understanding of the framework of problem you need to solve and the related optimization challenges. 
 
   * **The Problem statement for the internal pilot test**: Then, read through the [presentation of the Sioux-Faux case] for the Hackathon, which provides a high-level description of the tasks, as well as information on the outputs and scoring function. **LINK**
   
@@ -58,7 +58,7 @@ For info on how to submit, read this [tutorial](https://github.com/vgolfier/Uber
 ## What can I find in this repository?
 
 * Documentation folder 
-  * the [Quick introduction on the Urban Transportation Optimization problem](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md)
+  * the [brief introduction to the Urban Transportation System Optimization Framework](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md)
   * a note on [how to run a simulation](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/How_to_run_a_simulation%3F.md)
   * a description of the [inputs to optimize](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Which-inputs-should-I-optimize%3F.md)
   * a description of the [outputs and the scoring function](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md)
