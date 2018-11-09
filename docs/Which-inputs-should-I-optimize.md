@@ -57,17 +57,19 @@ The choice of utilized socio-demographic qualifier(s), range(s), mode(s), and su
 
 The Figure 5 below shows an example input file with subsidies for specific socio-demographic groups. 
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_Subsidies.png "Figure 4: Input2 - Subsidies for transit and on-deamdn rideshare users")
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_Subsidies.png)
 ***Figure 5: Input2 - Subsidies for transit and on-demand rideshare users***
 
 The scenario is the following:
-  * Subsidies for transit trips:
-    * Children 10 years old or younger receive $2 off of every transit trip
-    * Seniors between 50 and 75 years of age, earning up to $20,000/year receive $2.30 off of every transit trip
-* Subsidies for ridehail trips
-    * Customers earning $40,000/year or less receive $3.20 off of every ridehail trip
-    * Customers earning between $40,000/year and $50,000/year receive $2.20 off of every ridehail trip
-    * Customers earning between $50,000/year and $60,000/year receive $1.10 off of every ridehail trip
+
+  * Subsidies for walking to access transit
+    * Children 10 years old or younger receives $2 off of every transit trip
+  * Subsidies for using on-deamdn rideshare to access transit
+    * Seniors older than 50 and up through 75 years of age, earning up to $20,000/year receives $2.30 off of every transit trip
+  * Subsidies for ridehail trips
+    * Anyone earning $40,000/year or less receives $3.20 off of every ridehail trip
+    * Anyone earning more than $40,000/year, but no more than $50,000/year receives $2.20 off of every ridehail trip
+    * Anyone earning more than $50,000/year, but no more than $60,000/year receives $1.10 off of every ridehail trip
  
 You will be able to modify the characeristics of the subsidies in the input file `submission-inputs/ModeSubsidies.csv`, as shown below. 
 
