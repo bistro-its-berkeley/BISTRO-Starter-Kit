@@ -27,7 +27,7 @@ For the **pilot test**, the input parameters specify:
 * **adjustments to the frequency of buses on routes**.
 * **distribution of subsidies** for agents using ridehail and/or public transit.
 
-You will find more information on the Sioux Faux simulation inputs, where they are stored, and how to control them on the [inputs to optimize](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Which-inputs-should-I-optimize%3F.md) page.
+You will find more information on the Sioux Faux simulation inputs, where they are stored, and how to control them on the [inputs to optimize](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Which-inputs-should-I-optimize.md) page.
 
 ## The simulation outputs: evaluating the system 
 
