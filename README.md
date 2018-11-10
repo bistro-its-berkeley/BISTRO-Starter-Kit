@@ -64,7 +64,6 @@ For info on how to submit, plaes see here [tutorial](https://github.com/vgolfier
   * the input file for the [bus fleet composition](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/submission-inputs/VehicleFleetMix.csv)
   * the input file for the [mode subsidies](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/submission-inputs/ModeSubsidies.csv)
   * the input file for the [bus frequency adjustments](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/submission-inputs/FrequencyAdjustment.csv)
-   * the input file for the [road pricing](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/submission-inputs/RoadPricing.csv)
 
  
 
