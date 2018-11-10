@@ -1,6 +1,6 @@
 # Uber Prize Starter Kit
 
-This repository is a starter kit for the **Uber Prize challenge** on **Crowd AI** where you may find background material and competition guidelines to help you get started. 
+This repository is a starter kit for the **Uber Prize Challenge** on **[Crowd AI](https://www.crowdai.org/)** where you may find background material and competition guidelines to help you get started. 
 
 ## Competition Rounds
 The competition will be split into two rounds:
