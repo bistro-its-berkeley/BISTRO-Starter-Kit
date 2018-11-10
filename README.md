@@ -29,7 +29,7 @@ While the problem setting may not be as familiar as that of previous machine lea
 
 We recommend that you proceed through the documentation in the following order:
 
-  * **Introduction to the Urban Transportation Systems Optimization Framework**: First, read the brief [introduction on the Urban Transportation System problem](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md). It will give you a general understanding of the framework of problem you need to solve and the related optimization challenges. 
+  * **Introduction to the Urban Transportation Systems Optimization Framework**: First, read the brief [introduction to the Urban Transportation System problem](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md), which will give you a general understanding of the framework of problem you need to solve as well as the relevant optimization challenges. 
 
   * **The Problem statement for the Internal Pilot Study**: Then, read through the [presentation of the Sioux-Faux case](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/The_Sioux_Faux_case_pilot_study.md) for the pilot study, which provides a high-level description of the tasks, as well as information on the outputs and scoring function.
   
