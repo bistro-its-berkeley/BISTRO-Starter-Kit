@@ -31,7 +31,7 @@ We recommend that you proceed through the documentation in the following order:
 
   * **Introduction to the Urban Transportation Systems Optimization Framework**: First, read the brief [introduction on the Urban Transportation System problem](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md). It will give you a general understanding of the framework of problem you need to solve and the related optimization challenges. 
 
-  * **The Problem statement for the Internal Pilot Study**: Then, read through the [presentation of the Sioux-Faux case](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/The_Sioux_Faux_case_pilot_study.md) for the Hackathon, which provides a high-level description of the tasks, as well as information on the outputs and scoring function.
+  * **The Problem statement for the Internal Pilot Study**: Then, read through the [presentation of the Sioux-Faux case](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/The_Sioux_Faux_case_pilot_study.md) for the pilot study, which provides a high-level description of the tasks, as well as information on the outputs and scoring function.
   
   * **The inputs to optimize**: Next, the [Which inputs should I optimize?](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Which-inputs-should-I-optimize.md) page will give you the steps for using BEAM, the transportation simulation software, understanding what the inputs of the simulation are, where they are stored, and how to modify them.
   
