@@ -13,7 +13,7 @@ Figure 1: Outputs of the simulation
 
 The main outputs you should focus on are located in the `competition` folder. It contains: 
 
-* The [input files](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Which-inputs-should-I-optimize%3F.md) you used for the simulation run
+* The [input files](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Which-inputs-should-I-optimize.md) you used for the simulation run
 * The *component scores* and the *submission score* from the scoring function, which evaluates the quality of the policy-based transportation sytsem 
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/The_scoring_function.png)
