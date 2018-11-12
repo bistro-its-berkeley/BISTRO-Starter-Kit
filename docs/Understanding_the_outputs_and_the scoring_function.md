@@ -34,7 +34,7 @@ The *scoring function* is a weighted sum of several components, listed below. **
   * **incentives unused** (`Budget: Subsidies Unpaid`, \[$]): the difference between the amount of subsidies allocated by a subsidy policy and the amount of subsidies actually paid.
   * **revenues**, (\[$]): total bus fares collected
 
-If you want to know more about the mathematical formulation of each of these scoring function components, read ***check reference section 4 and  4.3*** of the [Sioux Faux  problem statement](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Problem_Statement_Pilot_Study.pdf).
+If you want to know more about the mathematical formulation of each of these scoring function components, read section 4.3 of the [Sioux Faux  problem statement](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Problem_Statement_Pilot_Study.pdf).
 
 ## Other outputs
 
