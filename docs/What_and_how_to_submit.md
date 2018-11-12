@@ -9,5 +9,3 @@ Once you have found your best set of inputs, please send the following documents
     - what worked in general and what led to a dead end?
     - what other approaches would you have pursued, had you more time?
     - did you run into any snags with the documentation/implementation?
-
-Thank you for your time and participation! :-)
