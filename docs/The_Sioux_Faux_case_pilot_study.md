@@ -16,4 +16,4 @@ For the Pilot Study, you have access to two sample populations with which you ca
 It is permissible to use either sample as you generate training data for your algorithm. For example, you can develop your algorithm using the 1k scenario and then test it with the 15K population scenario. However, official submissions must be run with the 15K sample population.
 
 ## Problem statement 
-To get a more thorough description of the Sioux-Faux challenge, please refer to the [Pilot Study Problem Statement](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Pilot_Test_Problem_Statement.pdf).
+To get a more thorough description of the Sioux-Faux challenge, please refer to the [Pilot Study Problem Statement](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Problem_Statement_Pilot_Study.pdf).
