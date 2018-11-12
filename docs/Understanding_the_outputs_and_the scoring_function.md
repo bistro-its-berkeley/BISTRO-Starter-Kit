@@ -30,8 +30,8 @@ The *scoring function* is a weighted sum of several components, listed below. **
 
 * Measures of the **Budget** incurred by the city:
   * **operational cost**, \[$]: total costs incurred by SFBL operations including amortized fixed costs (`Budget : Operational Costs (Fixed)`), the cost of fuel consumed (`Budget : Operational Costs (Fuel)`), and variable costs (`Budget : Operational Costs (Variable, Hourly)`). The rates for each of these factors for motorized vehicles are specified in the `fixed-data/siouxfalls/vehicleTypes.csv` file (see the [inputs](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Which-inputs-should-I-optimize%3F.md) page for more).
-  * **incentives used** (`Budget: Subsidies Paid`, \[$]): total incentives used by agents.
-  * **incentives unused** (`Budget: Subsidies Unpaid`, \[$]): total incentives available but unused by agents. 
+  * **incentives used** (`Budget: Subsidies Paid`, \[$]): total amount of subsidies actually paid to agents.
+  * **incentives unused** (`Budget: Subsidies Unpaid`, \[$]): the difference between the amount of subsidies allocated by a subsidy policy and the amount of subsidies actually paid.
   * **revenues**, (\[$]): total bus fares collected
 
 If you want to know more about the mathematical formulation of each of these scoring function components, read ***check reference section 4 and  4.3*** of the [Sioux Faux Hackathon problem statement]() **link**.
@@ -41,15 +41,15 @@ If you want to know more about the mathematical formulation of each of these sco
 In addition to the scores, the `output/siouxfalls-1k__\<date>_\<time>` folder contains graphs describing performance outputs of the system along with their corresponding data files. Two of them are described below.
 
 * **Mode choice**
-The mode choice graph describes the overall distribution of chosen modes for each iteration of the simulation. In the example shown in Figure 3 below, the simulation ended after 100 iterations. In the simulation, every agent received a $20 subsidy per ride for ridehail. As the iterations progressed, you can see that this incentives to use on-demand rideshare worked: the agents progressively shifted away from cars towards ridehail.    
+The mode choice graph describes the overall distribution of chosen modes for each iteration of the simulation. In the example shown in Figure 3 below, the simulation ended after 100 iterations. In the simulation, every agent received a $20 subsidy per ride for ride-hail. As the iterations progressed, you can see that providing a monetary incentive for some agents to use on-demand rideshare indeed shifted more agents towards using this mode.
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Mode_choice_histogram.png)
 Figure 3: Mode choice of agents for each iteration of the simulation
 
 * **Ride-hail revenue**
-The ride-hail revenues describe the revenues made by the ridehail company with the fares of the course. 
+The ride-hail revenues describes the net revenues earned by the ride-hail company .
 
-* **Scorestats**
-The score statistics represent the evolution of the agent's plans scores during the simulation. Each iteration simulates one entire day. At the end of each iteration, the daily plan of each agent is evaluated according to how well it performed in the transportation scenario. Based on this score, some agents may change their daily plan (which modes they use to travel from and to their activities) for the next iteration in an attempt to improve it. This learning mechanism can be observed in the Figure 4 below: as iterations progress, the agents' plan scores keep increasing till they reach a plateau after about 50 iterations: the system has reached an equilibrium state where each agent has found its optimal daily plan.
+* **Score Statistics**
+The score statistics represent the evolution of the agent's plans scores during the simulation. Each iteration simulates one entire day. At the end of each iteration, the daily plan of each agent is evaluated according to how well it performed in the transportation scenario. Based on this score, some agents may change their daily plan (which modes they use to travel from and to their activities) for the next iteration in an attempt to improve it. This learning mechanism can be observed in the Figure 4 below: as iterations progress, the agents' plan scores keep increasing until they reach a plateau after about 50 iterations. Once each agent can no longer find plans that improve their score, the system has reached an equilibrium state.
 
 ![alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/scorestats.png)
 Figure 4: Statistics of agent scores 
@@ -73,10 +73,10 @@ The `summaryStats.csv` file gathers many of the raw outputs of the simulation, w
 * `personTravelTime_ride_hail`: total time traveled by on-demand rideshare by all agents during the day \[person.hours]
 * `personTravelTime_walk`: total time traveled by foot by all agents during the day \[person.hours]
 * `personTravelTime_walk_transit`: total time spent by foot to access public transit by all agents during the day \[person.hours]
-<!--TODO: The following stats will be improved for clarity, issue open on BEAM-->
-<!--* `totalCostIncludingSubsidy_drive_transit`: **SID*-->
-<!--* `totalCostIncludingSubsidy_ride_hail`: **SID?**-->
-<!--* `totalCostIncludingSubsidy_walk_transit`: **SID?**-->
+* `totalCost_drive`: total cost of a trip where driving alone is the only mode used \[$US]
+* `totalCost_ride_hail`: total cost of a ride hail trip \[$US]
+* `totalCost_drive_transit`: total cost of a transit trip where driving alone is the access or egress mode \[$US]
+* `totalCost_walk_transit`: total cost of a transit trip where walk is the access or egress mode \[$US]
 * `totalSubsidy_drive_transit`: total subsidies \[$US/person] received by all agents to incentivize trips that access public transit by car \[$US]
 * `totalSubsidy_ride_hail`: total subsidies \[$US/person] received by all agents to incentivize trips using on-demand rideshare \[$US]
 * `totalSubsidy_walk_transit`: total subsidies \[$US/person] received by all agents to incentivize trips that access public transit on foot \[$US]
