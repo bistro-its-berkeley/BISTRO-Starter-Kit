@@ -59,7 +59,7 @@ We recommend that you proceed through the documentation in the following order:
   * the input file for the [mode subsidies](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/submission-inputs/ModeSubsidies.csv)
   * the input file for the [bus frequency adjustments](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/submission-inputs/FrequencyAdjustment.csv)
 
-* `reference-data/sioux_faux_gtfs_data` folder: <br>
+* `reference-data/sioux_faux_gtfs_data` folder: <br> <br>
 List of the Sioux Faux gtfs data (General Transit Feed Specification). It is a serie of text files, each of them modeling a particular aspect of transit information: stops, routes, trips, and other schedule data. The details of each file are defined in the [GTFS reference](https://developers.google.com/transit/gtfs/reference/).
 
 
