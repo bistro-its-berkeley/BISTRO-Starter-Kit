@@ -44,7 +44,7 @@ We recommend that you proceed through the documentation in the following order:
 
 ## What can I find in this repository?
 
-* `docs` folder 
+* `docs` folder: 
   * an [introduction to the urban transportation system optimization problem](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md)
   * a note on [how to run a simulation](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/How_to_run_a_simulation.md)
   * a description of the [input schema](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Which-inputs-should-I-optimize.md)
@@ -59,7 +59,7 @@ We recommend that you proceed through the documentation in the following order:
   * the input file for the [mode subsidies](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/submission-inputs/ModeSubsidies.csv)
   * the input file for the [bus frequency adjustments](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/submission-inputs/FrequencyAdjustment.csv)
 
-* `reference-data/sioux_faux_gtfs_data` folder: 
+* `reference-data/sioux_faux_gtfs_data` folder: <br>
 List of the Sioux Faux gtfs data (General Transit Feed Specification). It is a serie of text files, each of them modeling a particular aspect of transit information: stops, routes, trips, and other schedule data. The details of each file are defined in the [GTFS reference](https://developers.google.com/transit/gtfs/reference/).
 
 
