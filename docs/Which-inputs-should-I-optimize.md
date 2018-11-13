@@ -66,9 +66,9 @@ The Figure 5 below shows an example input file with subsidies for specific socio
 The input file describes the following situation:
 
   * Subsidies for walking to access transit
-    * Children 10 years old or younger receives $2 off of every transit trip
-  * Subsidies for using on-deamdn rideshare to access transit
-    * Seniors older than 50 and up through 75 years of age, earning up to $20,000/year receives $2.30 off of every transit trip
+    * Children 10 years old or younger receive $2 off of every transit trip
+  * Subsidies for using ridehail to access transit
+    * Seniors older than 50 and up through 75 years of age, earning up to $20,000/year receive $2.30 off of every transit trip
   * Subsidies for ridehail trips
     * Anyone earning $40,000/year or less receives $3.20 off of every ridehail trip
     * Anyone earning more than $40,000/year, but no more than $50,000/year receives $2.20 off of every ridehail trip
