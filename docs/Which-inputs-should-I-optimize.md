@@ -42,7 +42,7 @@ During the Pilot Study, for each route, you have the opportunity to purchase new
 ***Figure 4: Costs of available bus types***
 <br/>
 
-#### **2. Subsidies for transit and on-demand rideshare users**
+#### **2. Subsidies for transit and on-demand ridehail users**
 
 In an effort to provide a high-quality alternative to private vehicles, you may define subsidies for qualifying agents using public transit or on-demand ridehail. Qualification for a subsidy can be based on the following socio-demographic categories: age and/or income (*Note ot organizer: add employment status*). 
 
