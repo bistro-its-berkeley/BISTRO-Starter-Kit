@@ -128,13 +128,30 @@ if __name__ == '__main__':
     import sys
 
     # Must use absolute paths here
-    ex = CompetitionDockerExecutor(input_loc=sys.argv[1],
+    ex = CompetitionContainerExecutor(input_loc=sys.argv[1],
                                    output_loc=sys.argv[2])
+
+    print("Running Container")
+
+    try:
+        uber = ex.client.containers.get('uber')
+        uber.stop()
+        uber.remove()
+        print("Found container from previous run, removing and creating new sim container...")
+    except docker.errors.NotFound:
+        print("Creating new simulation container...")
+
 
     ex.run_simulation('uber')
 
     # Let it roll for a bit (hopefully at least one or two iterations!)
-    time.sleep(40)
+    if len(sys.argv) < 4:
+        print("Running simulation for 40 seconds...")
+        time.sleep(40)
+    else:
+        run_time = int(sys.argv[3])
+        print("Running simulation for {} seconds...".format(str(run_time)))
+        time.sleep(int(run_time))
 
     ex.output_simulation_logs('uber')
 
