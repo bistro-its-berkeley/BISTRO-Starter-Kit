@@ -4,6 +4,10 @@ import docker
 class CompetitionContainerExecutor:
     """Utility to run (potentially many) instances of the simulation.
 
+    Pointers to docker-py container objects executed by this utility are cached on the field
+    self.containers under the name specified in the self.run(...) method. Convenience methods on this object can be
+    used to simplify interaction with one or many of these containers.
+
     :param input_loc: a permanent input file directory (if you expect not to feed
                       this in manually; see run method below).
     :param output_loc: a permanent output file directory (it's a good idea to set this,
@@ -22,7 +26,11 @@ class CompetitionContainerExecutor:
             raise ValueError("Container not executed using this interface.")
 
     def list_running_simulations(self):
-        # TODO: Check if actually running somehow
+        """Queries the run status for executed containers cached on this object in turn
+        (updating their status as appropriate).
+
+        :return: a list of running containers
+        """
         running = []
         for name, container in self.containers.items():
             container.reload()
@@ -37,10 +45,18 @@ class CompetitionContainerExecutor:
 
 
     def stop_all_simulations(self, remove=True):
+        """Stop and all simulations. Containers are removed (both from this object and the docker daemon by default).
+
+        Removal frees the names that were used to execute containers previously, so it's generally a good idea to
+        remove if you will be planning reusing names.
+
+        :param remove: whether to remove the containers cached on this object.
+        """
         for container in self.containers.values():
             container.stop()
             if remove:
                 container.remove()
+        self.containers.clear()
 
     def output_simulation_logs(self, sim_name, filename=None):
         """Prints a specified simulation log or writes to file if filename is provided
@@ -66,7 +82,11 @@ class CompetitionContainerExecutor:
                        num_iterations=10):
         """Creates a new container running a Uber Prize competition simulation on a specified set of inputs.
 
-        Adds the container to the list of containers managed by this object.
+        Containers are run in a background process, so several containers can be run in parallel
+        (though this is a loose and uncoordinated parallelism... future updates may scale execution out over
+        compute nodes).
+
+        This utility adds the container to the list of containers managed by this object.
 
         :param sim_name: name of the simulation instance (will become the container name)
         :param sim_output_loc: the path to locate simulation outputs
