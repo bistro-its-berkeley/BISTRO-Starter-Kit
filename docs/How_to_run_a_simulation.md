@@ -5,6 +5,13 @@
 
 A wrapper library around BEAM, `BEAMCompetition` evaluates submissions via a [Docker](https://www.docker.com/) image that is currently on [Docker Hub](https://hub.docker.com/) with tag `beammodel/beam-competition:0.0.1-SNAPSHOT`.
 
+## Requirements
+
+For execution:
+- [Docker](https://www.docker.com) <sup id="a1">[1](#f1)</sup>.
+
+
+
 ### Running a Container Locally
 
 For the first round, we expect you will be running containers locally.
