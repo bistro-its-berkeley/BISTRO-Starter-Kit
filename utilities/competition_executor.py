@@ -8,7 +8,7 @@ class CompetitionContainerExecutor:
     self.containers under the name specified in the self.run(...) method. Convenience methods on this object can be
     used to simplify interaction with one or many of these containers.
 
-    :param input_loc: a permanent input file directory (if you expect not to feed
+    :param input_loc: a permanent input file directory, i.e., /submission-inputs (if you expect not to feed
                       this in manually; see run method below).
     :param output_loc: a permanent output file directory (it's a good idea to set this,
                         else you will need to do so for every container you create).
