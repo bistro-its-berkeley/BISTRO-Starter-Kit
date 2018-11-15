@@ -17,9 +17,9 @@ To run the container users need to specify the submission folder and output fold
 If desired, users may pass Java Virtual Machine (JVM) attributes and add JAVA_OPTS `env` arguments to the `docker run` command:
 `docker run -it --memory=4g --cpus=2 -v <path_to_submission_inputs>:/submission-inputs:ro -v <path_to_output_root>/output:/output:rw -e JAVA_OPTS='"-Xmx4g" "-Xms2g"' beammodel/beam-competition:0.0.1-SNAPSHOT --config /fixed-data/siouxfalls/siouxfalls-1k.conf`
 
-As an alternative to the config file, you may specify the scenario name with flag `--scenario` or `-s` (`siouxfalls` only, for now), the sample size using flag `--sample-size` or `-sz` (either `1k` or `15k` for the two Sioux Faux scenarios for now), and the number of BEAM iterations `--iters` or `n` (an integer number 0 or greater). For example, in a Windows environment on PowerShell (Linux/Mac users just change the direction of directory slashes), once could minimally run:
+As an alternative to the config file, you may specify the scenario name with flag `--scenario` or `-s` (`siouxfalls` only, for now), the sample size using flag `--sample-size` or `-sz` (either `1k` or `15k` for the two Sioux Faux scenarios for now), and the number of BEAM iterations `--iters` or `n` (an integer number 0 or greater). For example, in a Windows environment on PowerShell (Linux/Mac users just change the direction of directory slashes), you could run:
 
-     docker run -v C:\Users\sidfe\current_code\scala\BeamCompetitions\submission-inputs\:/submission-inputs:ro -v C:\Users\sidfe\current_code\scala\BeamCompetitions\output\:/output:rw beammodel/beam-competition:0.0.1-SNAPSHOT --scenario siouxfalls --sample-size 1k --iters 10
+`docker run -v C:\Users\sidfe\current_code\scala\BeamCompetitions\submission-inputs\:/submission-inputs:ro -v C:\Users\sidfe\current_code\scala\BeamCompetitions\output\:/output:rw beammodel/beam-competition:0.0.1-SNAPSHOT --scenario siouxfalls --sample-size 1k --iters 10`
 
 to execute the 1k Sioux Faux scenario for 10 iterations.
 
