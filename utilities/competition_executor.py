@@ -89,9 +89,9 @@ class CompetitionContainerExecutor:
         This utility adds the container to the list of containers managed by this object.
 
         :param sim_name: name of the simulation instance (will become the container name)
-        :param sim_output_loc: the path to locate simulation outputs
-        :param sim_input_loc: where simulation inputs will be located
-        :param scenario: which of the available scenarios will be run in the container?
+        :param sim_output_loc: the (absolute) path to locate simulation outputs
+        :param sim_input_loc: (absolute) path where simulation inputs are located
+        :param scenario: which of the available scenarios will be run in the container
         :param sample_size: available samples size (scenario dependent, see documentation).
         :param num_iterations: number of iterations to run BEAM simulation engine.
         """
