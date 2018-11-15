@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 POSITIONAL=()
 while [[ $# -gt 0 ]]
@@ -27,10 +27,15 @@ case $key in
     shift # past value
     ;;
     -i|--input)
-    INPUT="$2"
-    shift # past argument
-    shift # past value
-    ;;
+          INPUT="$2"
+          shift # past argument
+          shift # past value
+          ;;
+   -n|--iters)
+        ITERS="$2"
+        shift # past argument
+        shift # past value
+              ;;
     *)    # unknown option
     POSITIONAL+=("$1") # save it in an array for later
     shift # past argument
@@ -51,4 +56,15 @@ if [ -z $(docker volume ls | awk -F' +' '{print $2}' | grep "competition-output"
     docker volume create competition-output >> /dev/null
 fi
 
-docker run -it --memory="${MEMORY}" --cpus="${CPUS}"  -v "${INPUT}":/submission-inputs:ro -v $PWD/output:/output:rw beammodel/beam-competition:0.0.1-SNAPSHOT --scenario "${SCENARIO}" --sample-size "${SIZE}"
+
+M_EXT=$(echo "${MEMORY}" | awk -F '([0-9])+' '{print $2}')
+M_SIZE=$(echo "${MEMORY}" |  awk -F '[a-zA-Z]+' '{print $1}')
+
+J_OPT=$(echo "\"-Xmx${M_SIZE}${M_EXT}\" \"-Xms$((M_SIZE/2))${M_EXT}\"")
+JJ=$(echo JAVA_OPTS="${J_OPT}")
+
+if [ -z $(docker ps | grep "beam-competition") -n ]; then
+    docker rm beam-competition >> /dev/null
+fi
+
+docker run -it --memory="${MEMORY}" --cpus="${CPUS}" --name=beam-competition -v "${INPUT}":/submission-inputs:ro -v $PWD/output:/output:rw -e "${JJ}" beammodel/beam-competition:0.0.1-SNAPSHOT --scenario "${SCENARIO}" --sample-size "${SIZE}" --iters "${ITERS}"
