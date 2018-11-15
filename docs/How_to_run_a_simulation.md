@@ -22,19 +22,25 @@ For the first round, we expect you will be running containers locally.
 
 **Note to Windows users**: you will need to execute the following from PowerShell.
 
-To run the container users need to specify the submission folder and output folder and then run the following command (subsititute <x> as appropriate, keeping in mind that there are sample submission inputs in the root of this repo (i.e., `/submission-inputs`)):
-`docker run -it --memory=4g --cpus=2  -v <absolute_path_to_submission_inputs>:/submission-inputs:ro -v <path_to_output_root>/output:/output:rw beammodel/beam-competition:0.0.1-SNAPSHOT --config /fixed-data/siouxfalls/siouxfalls-1k.conf`
 
-If desired, users may pass Java Virtual Machine (JVM) attributes and add JAVA_OPTS `env` arguments to the `docker run` command:
-`docker run -it --memory=4g --cpus=2 -v <absolute_path_to_submission_inputs>:/submission-inputs:ro -v <path_to_output_root>/output:/output:rw -e JAVA_OPTS='"-Xmx4g" "-Xms2g"' beammodel/beam-competition:0.0.1-SNAPSHOT --config /fixed-data/siouxfalls/siouxfalls-1k.conf`
+`docker run -it --memory=4g --cpus=2  -v <absolute_path_to_submission_inputs>:/submission-inputs:ro -v <path_to_output_root>:/output:rw beammodel/beam-competition:0.0.1-SNAPSHOT --config /fixed-data/siouxfalls/siouxfalls-1k.conf`
 
-As an alternative to the config file, you may specify the scenario name with flag `--scenario` or `-s` (`siouxfalls` only, for now), the sample size using flag `--sample-size` or `-sz` (either `1k` or `15k` for the two Sioux Faux scenarios for now), and the number of BEAM iterations `--iters` or `n` (an integer number 0 or greater). For example, in a Windows environment on PowerShell (Linux/Mac users just change the direction of directory slashes), you could run:
+
+
+To run the container users need to specify the submission folder and output folder and then run the following command (subsititute <x> as appropriate, keeping in mind that there are sample submission inputs in the root of this repo i.e., `/submission-inputs`). For example, you may run
 
 `docker run -v C:\Users\sidfe\current_code\scala\BeamCompetitions\submission-inputs\:/submission-inputs:ro -v C:\Users\sidfe\current_code\scala\BeamCompetitions\output\:/output:rw beammodel/beam-competition:0.0.1-SNAPSHOT --scenario siouxfalls --sample-size 1k --iters 10`
 
-to execute the 1k Sioux Faux scenario for 10 iterations.
+to execute the 1k Sioux Faux scenario for 10 iterations (this would be for a Windows user in PowerShell--Mac/Linux users can just switch slash directions).
 
-_Note_: To those unfamiliar with the `docker run` command, `-v` binds a local volume (directory, say) to a volume inside the container. The `ro` or `rw` flags indicate if the directory is to be bound as read-only or write-only, respectively.
+_Note_: To those unfamiliar with the `docker run` command, `-v` binds a local volume (the `.../submission-input` directory, say) to a volume inside the container, which is what follows the `:` (e.g., `/submission-input`). The `ro` or `rw` flags indicate if the directory is to be bound as read-only or write-only, respectively.
+
+If desired, users may pass Java Virtual Machine (JVM) attributes and add JAVA_OPTS `env` arguments to the `docker run` command. For example,
+`docker run -it --memory=4g --cpus=2 -v <absolute_path_to_submission_inputs>:/submission-inputs:ro -v <path_to_output_root>/output:/output:rw -e JAVA_OPTS='"-Xmx4g" "-Xms2g"' beammodel/beam-competition:0.0.1-SNAPSHOT --scenario siouxfalls --sample-size 1k --iters 10`
+
+sets the memory used by docker instance to 4 GB and uses 2 cpus. BEAM, in fact, uses _ncpu_-1 for each run, where _ncpu_ is the number of CPUs available on the host machine (virtual or otherwise). While this is sensible for a single run on
+one machine, it is not very useful for multiple runs (one CPU is left alone in order to avoid freezing the system).
+
 
 ### Shell Script (Linux/Mac only)
 

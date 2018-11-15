@@ -129,7 +129,7 @@ if __name__ == '__main__':
 
     # Must use absolute paths here
     ex = CompetitionContainerExecutor(input_loc=sys.argv[1],
-                                   output_loc=sys.argv[2])
+                                    output_loc=sys.argv[2])
 
     print("Running Container")
 
