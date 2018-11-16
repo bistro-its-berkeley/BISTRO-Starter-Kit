@@ -1,4 +1,8 @@
 import docker
+from glob import glob
+from os import path
+import datetime
+import pandas as pd
 
 
 class CompetitionContainerExecutor:
@@ -38,10 +42,61 @@ class CompetitionContainerExecutor:
                 running.append(name)
         return running
 
-    def get_submission_stats(self, sim_name):
+    def parse_score(self, filePath):
+        """
+        Parse the submission scores txt file to a dataframe with one row.
+        """
+        with open(filePath, "r") as f:
+            lines = f.readlines()
+
+            data = []
+            for idx, l in enumerate(lines):
+                if idx == 0:
+                    columns = l.rstrip('\n').split("|")
+                    columns = [i.strip() for i in columns]
+                    continue
+                elif idx == 1:
+                    continue
+                values = l.rstrip('\n').split("|")
+                values = [i.strip() for i in values]
+                values = [i if len(i) > 0 else "0" for i in values]
+                data.append(values)
+
+        df = pd.DataFrame(data, columns=columns)
+
+        all_scores = []
+
+        for score_type in ["Weight", "Raw Score", "Weighted Score"]:
+            pivoted = pd.pivot_table(df, values=score_type, columns="Component Name", aggfunc="first").reset_index(
+                drop=True)
+            pivoted.columns = ["%s_%s" % (i, score_type) for i in pivoted.columns]
+            all_scores.append(pivoted)
+        all_scores = pd.concat(all_scores, 1).astype(float)
+        return all_scores
+
+    def get_submission_stats(self, scenario='siouxfalls'):
         # TODO: Parse and return the output stats for this simulation from the <output_dir>/siouxfalls-${sz}__<timestamp>/competition/submissionScore.txt file.
         # Output Format should be pandas DataFrame
-        return NotImplementedError()
+
+        path_stats = glob(path.join(self.output_loc, scenario, "*","summaryStats.csv" ))
+        path_score = glob(path.join(self.output_loc, scenario, "*","competition", "submissionScores.txt"))
+
+        # Parse/sort them by hour and select the last one
+        def hours_output(file):
+            hour = datetime.datetime.strptime(file.split('/')[-2].split('__')[-1], '%Y-%m-%d_%H-%M-%S')
+            return hour
+
+        def hours_score(file):
+            hour = datetime.datetime.strptime(file.split('/')[-3].split('__')[-1], '%Y-%m-%d_%H-%M-%S')
+            return hour
+
+        path_stats = sorted(path_stats, key=hours_output)[-1]
+        path_score = sorted(path_score, key=hours_score)[-1]
+
+        scores = self.parse_score(path_score)
+        stats = pd.read_csv(path_stats)
+
+        return scores, stats
 
 
     def stop_all_simulations(self, remove=True):
