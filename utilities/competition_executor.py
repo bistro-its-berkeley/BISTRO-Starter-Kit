@@ -5,6 +5,8 @@ import datetime
 import pandas as pd
 
 
+#TODO: Refactor so that Submissions are separate objects with the container as a field
+
 class CompetitionContainerExecutor:
     """Utility to run (potentially many) instances of the simulation.
 
@@ -42,7 +44,7 @@ class CompetitionContainerExecutor:
                 running.append(name)
         return running
 
-    def parse_score(self, filePath):
+    def _parse_score(self, filePath):
         """
         Parse the submission scores txt file to a dataframe with one row.
         """
@@ -74,8 +76,7 @@ class CompetitionContainerExecutor:
         all_scores = pd.concat(all_scores, 1).astype(float)
         return all_scores
 
-    def get_submission_stats(self, scenario='siouxfalls'):
-        # TODO: Parse and return the output stats for this simulation from the <output_dir>/siouxfalls-${sz}__<timestamp>/competition/submissionScore.txt file.
+    def get_submission_scores_and_stats(self, scenario='siouxfalls'):
         # Output Format should be pandas DataFrame
 
         path_stats = glob(path.join(self.output_loc, scenario, "*","summaryStats.csv" ))

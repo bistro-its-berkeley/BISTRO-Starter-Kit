@@ -9,13 +9,19 @@ The repository details all the required inputs to run the BEAM simulation for th
 
 For more information on the folders discussed below, see the [How to run a simulation?](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/How_to_run_a_simulation.md) page.
 
-### The Internal Pilot Test inputs to optimize
+### Scenario: The Internal Pilot Test
 
-To help the Sioux Faux Department of Transportation (SFDOT) combat congestion and improve overall mobility in Sioux Faux, you will prepare a set of inputs to the simulation engine, which represent the following transportation system interventions: the bus fleet composition, the adjustments to the frequency of buses on routes and the distribution of subsidies for agents using ridehail and/or public transit. These to-be-optimized inputs can be found in .csv format in the `submission-inputs` folder.
+To help the Sioux Faux Department of Transportation (SFDOT) combat congestion and improve overall mobility in Sioux Faux, you will prepare a set of inputs to the simulation engine, which represent the following transportation system interventions: 
+
+1. Bus fleet composition;
+2. Adjustments to the frequency of buses on routes; and, 
+3. Distribution of subsidies for agents using ridehail and/or public transit. 
+
+Files representing input settings can be found in `.csv` format in the `submission-inputs` folder. The following subsections describe the input file semantics and schema in further detail.
 
 #### **1. Bus fleet composition**
 
-The submission input file `VehicleFleetMix.csv` describes the status of the bus fleet (see Fig.2). Currently, SFBL (`agencyID` = 217) operates 12 bus lines in Sioux Faux. During the Pilot Test, you can decide which type of bus (i.e. `vehicleTypeId`) will provide service for each route (`routeID`, see Fig.1 & 2). Each route can utilize only **one type of bus**. 
+The file `VehicleFleetMix.csv` permits modification of the bus fleet (see Fig.2). Currently, SFBL (`agencyID` = 217) operates 12 bus routes in Sioux Faux using a standard bus type, which we designate `BUS-STD-DEFAULT`. During the Pilot Test, you can decide which type of bus (i.e. `vehicleTypeId`) will provide service for each route (`routeID`, see Fig.1 & 2). Each route can utilize only **one type of bus**. 
 
 
 ![Route IDs](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/sf_route_guide.png)\
@@ -30,7 +36,7 @@ The submission input file `VehicleFleetMix.csv` describes the status of the bus 
 
 SFDOT has four available bus types, each of them with different technical properties (`fixed-data/siouxfalls/vehicleTypes.csv`, see Fig.2) and cost characteristics (`fixed-data/siouxfalls/vehicleCosts.csv`, see Fig.3). Currently, SFDOT owns the minimum number of bus types to provide service for each route, as specifed in the file `submission-inputs/VehicleFleetMix.csv`. Additionally, the number of buses required to service each route is equal to the number of trips: after the a headway has expired, a new bus is used. This does not reflect a realistic scenario combining bus routes into runs, but, for now, it still allows for comparisons to a BAU case.
 
-During the Pilot Study, for each route, you have the opportunity to purchase new types of buses possessing attributes that might improve the level of service for transit along a route (see Figure 2 below). For each bus that you purchase to replace a default bus (i.e., buses of the type, `BUS-STD-DEFAULT`), the latter is automatically sold for a price of 10'000$ + 20'000 * $$\mathcal{N}$$ (0,1).
+During the Pilot Study, for each route, you have the opportunity to purchase new types of buses possessing attributes that might improve the level of service for transit along a route (see Figure 2 below). For each bus that you purchase to replace a default bus (i.e., buses of the type, `BUS-STD-DEFAULT`), the latter is automatically sold for a price of <a href="https://www.codecogs.com/eqnedit.php?latex=\$10,000&space;&plus;&space;\$20,000&space;\times&space;\mathcal{N}(0,1)" target="_blank"><img src="https://latex.codecogs.com/png.latex?\$10,000&space;&plus;&space;\$20,000&space;\times&space;\mathcal{N}(0,1)" title="\$10,000 + \$20,000 \times \mathcal{N}(0,1)" /></a>
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Bus_types.png)\
 ***Figure 3: Set of available bus types***

@@ -1,6 +1,7 @@
 # How to run a simulation?
 
 
+
 ## Running via [Docker](https://www.docker.com/)
 
 An external wrapper library around BEAM evaluates submissions via a [Docker](https://www.docker.com/) image that is currently on [Docker Hub](https://hub.docker.com/). 
@@ -24,8 +25,6 @@ For the first round, we expect you will be running containers locally.
 
 
 `docker run -it --memory=4g --cpus=2  -v <absolute_path_to_submission_inputs>:/submission-inputs:ro -v <path_to_output_root>:/output:rw beammodel/beam-competition:0.0.1-SNAPSHOT --config /fixed-data/siouxfalls/siouxfalls-1k.conf`
-
-
 
 To run the container users need to specify the submission folder and output folder and then run the following command (subsititute <x> as appropriate, keeping in mind that there are sample submission inputs in the root of this repo i.e., `/submission-inputs`). For example, you may run
 
