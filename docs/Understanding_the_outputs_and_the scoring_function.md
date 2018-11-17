@@ -3,7 +3,7 @@ After reading this document, you will have a better understanding of the outputs
 
 ## Where are the outputs stored?
 
-After the simulation's last iteration, the system reaches an *equilibrium state* and the simulation stops. All the outputs generated during this last run are stored in a unique output folder called `output/siouxfalls-1k__\<date>_\<time>`. It ends with the date and time of the simulation you have just run (see Figure 1). Note that the figure references a simulation run with a 1k population sample.
+Outputs are produced after the simulation's last iteration (see the [introduction](../docs/Introduction_transportation_problem.md))). All the outputs generated during this last run are stored in a unique output folder called `output/siouxfalls-1k__\<date>_\<time>`. It ends with the date and time of the simulation you have just run (see Figure 1). Note that the figure references a simulation run with a 1k population sample.
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Output_folder_2.png)
 
