@@ -1,6 +1,20 @@
 # How to run a simulation?
 
+## Requirements
 
+*Software Requirements*:
+
+There is only one firm software requirement at the moment:
+- [Docker](https://www.docker.com)
+
+Thus, the code is OS-agnostic.
+
+Note that some of the provided utility scripts require a python installation with the [docker-py](https://docker-py.readthedocs.io/en/stable/) installed. Please run `pip install docker` prior to running the scripts.
+
+*Hardware Requirements*:
+
+There are no strict hardware requirements; however,
+performance will increase substantially with more CPUs (as well as, to some extent, more memory). At a bare minimum, we recommend 8GB RAM and 2 CPUs. Initial observations for the 1k sample on the minimum hardware clock in at ~24s/iteration. On a more powerful machine with 12 CPUs We provide some parameter settings on the `docker run` entrypoint below so that this parameter can be customized to container service (i.e., Docker)'s host machine.
 
 ## Running via [Docker](https://www.docker.com/)
 
