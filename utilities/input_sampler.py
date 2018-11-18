@@ -46,6 +46,26 @@ def sample_frequency_adjustments(num_samples, feed):
     return df
 
 
+def format_range_with_sampled_inclusivity(rng):
+    a, b = rng
+    left_inc = np.random.choice(['(', '['])
+    right_inc = np.random.choice([')', ']'])
+    return "{}{}:{}{}".format(left_inc, a, b, right_inc)
+
+
+def sample_mode_subsidies(num_samples):
+    res = []
+    for _ in range(num_samples):
+        possible_modes = ['walk_transit', 'ride_hail', 'walk_transit', 'walk', 'car', 'drive_transit']
+        mode = np.random.choice(possible_modes)
+        age = sorted(np.random.choice(range(0, 100), 2))
+        income = sorted(np.random.choice(range(0, 300000, 1000), 2))
+        amount = np.round(np.random.uniform(0.1, 20), 1)
+
+        res.append({'mode': mode, 'age': format_range_with_sampled_inclusivity(age),
+                    'income': format_range_with_sampled_inclusivity(income), 'amount': amount})
+    return pd.DataFrame(res, columns=['mode', 'age', 'income', 'amount'])
+
 
 
 if __name__ == '__main__':
@@ -60,5 +80,7 @@ if __name__ == '__main__':
     gtfs_path = DATA_DIR / 'sioux_faux_gtfs_data'
     feed = gt.read_gtfs(gtfs_path, dist_units='mi')
 
-    freq_df = sample_frequency_adjustments(5)
+    freq_df = sample_frequency_adjustments(5,feed)
+    mode_subsidy_df = sample_mode_subsidies(5)
+
 
