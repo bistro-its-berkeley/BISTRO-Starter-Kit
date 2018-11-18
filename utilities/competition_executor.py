@@ -1,7 +1,5 @@
-import datetime
-from glob import glob
-from os import path
 import multiprocessing
+from os import path
 
 import docker
 import pandas as pd
@@ -10,7 +8,6 @@ CONTAINER_ID = 'uber1'
 
 
 def _get_submission_timestamp_from_log(log):
-
     lines = log.decode('utf-8').split('\n')
     for line in lines:
         if 'Beam output directory is' in line:
@@ -20,6 +17,7 @@ def _get_submission_timestamp_from_log(log):
             return timestamp
     else:
         raise ValueError("No timestamp found for submission. Error running submission!")
+
 
 class Submission:
     def __init__(self,
@@ -136,7 +134,7 @@ class CompetitionContainerExecutor:
 
     def list_running_simulations(self):
         """Queries the run status for executed containers cached on this object in turn
-        (updating their status as appropriate).
+        (updating their statuses as appropriate).
 
         :return: a list of running containers
         """
@@ -146,8 +144,6 @@ class CompetitionContainerExecutor:
             if container.status == 'running':
                 running.append(name)
         return running
-
-
 
     @verify_submission_id
     def get_submission_scores_and_stats(self, submission_id):
@@ -195,7 +191,7 @@ class CompetitionContainerExecutor:
                        scenario_name='siouxfalls',
                        sample_size='1k',
                        num_iterations=10,
-                       num_cpus=multiprocessing.cpu_count()-1,
+                       num_cpus=multiprocessing.cpu_count() - 1,
                        mem_limit="4g"):
         """Creates a new container running a Uber Prize competition simulation on a specified set of inputs.
 
