@@ -1,6 +1,6 @@
 import multiprocessing
 from os import path
-import time
+
 import docker
 import pandas as pd
 
@@ -229,7 +229,7 @@ class CompetitionContainerExecutor:
                                                command=r"--scenario {0} --sample-size {1} --iters {2}".format(
                                                    scenario_name, sample_size, num_iterations),
                                                detach=True,
-                                                env={JAVA_OPTS:'"-Xmx4g" "-Xms2g"'},
+                                               env={JAVA_OPTS: '"-Xmx4g" "-Xms2g"'},
                                                volumes=
                                                {output_root: {"bind": "/output", "mode": "rw"},
                                                 input_root: {"bind": "/submission-inputs",
