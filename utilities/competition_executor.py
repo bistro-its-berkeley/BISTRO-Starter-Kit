@@ -6,11 +6,19 @@ import multiprocessing
 
 import docker
 import pandas as pd
+from functools import wraps
 
 CONTAINER_ID = 'uber1'
 
 
 def _get_submission_timestamp_from_log(log):
+    """
+    Function that parses the logs of a container to find the precise time at which the output directory was
+    created.
+
+    :param log: docker container logs object
+    :return: timestamp of the folder creation.
+    """
 
     lines = log.decode('utf-8').split('\n')
     for line in lines:
@@ -23,6 +31,17 @@ def _get_submission_timestamp_from_log(log):
         raise ValueError("No timestamp found for submission. Error running submission!")
 
 class Submission:
+    """
+    Class summarizing the submission results of a specific simulation run.
+
+    :param submission_id: Id of the submission
+    :param scenario_name: which of the available scenarios will be run in the container (i.e SiouxFalls)
+    :param input_directory: Location of the input files of the simulation
+    :param output_root: Location of the output directory for the simulation
+    :param sample_size: available samples size (scenario dependent, see documentation, i.e 1k).
+    :param num_iterations: number of iterations to run BEAM simulation engine.
+
+    """
     def __init__(self,
                  submission_id,
                  scenario_name,
@@ -41,6 +60,7 @@ class Submission:
         self.scenario_name = scenario_name
         self.input_directory = input_directory
         self._container = container
+        self.is_finished = False
 
         self.output_directory = self._format_out_dir(output_root)
 
@@ -61,10 +81,20 @@ class Submission:
         self._container.reload()
 
     def _format_out_dir(self, output_root):
+        """
+        Automatically creates the path to the output directory of the simulation.
+        :param output_root: root directory of the simulation
+        :return: path
+        """
         return path.join(output_root, self.scenario_name,
                          "{}-{}__{}".format(self.scenario_name, self.sample_size, self._timestamp))
 
     def score(self):
+        """
+        Parses the submissionScores.txt file and returns the output in a Pandas DataFrame
+
+        :return: pandas DataFrame
+        """
         with open(path.join(self.output_directory, "competition", "submissionScores.txt"), "r") as f:
             lines = f.readlines()
 
@@ -94,8 +124,22 @@ class Submission:
         return all_scores
 
     def summary_stats(self):
+        """Returns the summaryStats.csv file in a Pandas DataFrame"""
         summary_file = path.join(self.output_directory, "summaryStats.csv")
         return pd.read_csv(summary_file)
+
+
+    def is_submission_complete(self):
+        """
+        Helper function to check if the submission is complete. i.e if the submission score
+        is the last element in the log file.
+
+        :return: True or False
+        """
+        path_sub_scores = path.join(self.output_directory, "competition", "submissionScores.txt")
+        if path.exists(path_sub_scores):
+            self.is_finished = True
+        return self.is_finished
 
     def __str__(self):
         return "Submission_id: {}\n\t Scenario name: {}\n\t # iters: {}\n\t sample size: {}".format(self._submission_id,
@@ -105,6 +149,8 @@ class Submission:
 
 
 def verify_submission_id(func):
+    """Decorator function to check that the container id exists in the CompetitionContainerExecutor object."""
+    @wraps(func)
     def wrapper(*args, **kwargs):
         self, submission_id = args
         if submission_id not in self.containers:
@@ -152,13 +198,27 @@ class CompetitionContainerExecutor:
 
     @verify_submission_id
     def get_submission_scores_and_stats(self, submission_id):
-        # Output Format should be pandas DataFrame
+        """
+        Utility that returns two of the simulation outputs (pandas dataframes) for a specific submission ID:
+        the scores and the statistics. The function raises ValueError when the scores do not exist yet i.e the
+        simulation is still running.
+
+        :param submission_id:
+        :return:
+        - scores: Dataframe with the results of the submissionScore.txt file (raw and weighted sub-scores + final score)
+        - stats: Contains the results of the summaryStats.csv file. You can find the full list of outputs in the
+        starter_kit (https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md)
+        """
         submission = self.containers[submission_id]
 
-        scores = submission.score()
-        stats = submission.summary_stats()
+        if submission.is_submission_complete():
+            scores = submission.score()
+            stats = submission.summary_stats()
 
-        return scores, stats
+            return scores, stats
+        else:
+            raise ValueError("The simulation {0} is still running, please import scores when "
+                             "check_if_submission_complete(submission_id) returns True.".format(submission_id))
 
     def stop_all_simulations(self, remove=True):
         """Stop and all simulations. Containers are removed (both from this object and the docker daemon by default).
@@ -188,6 +248,18 @@ class CompetitionContainerExecutor:
         else:
             with open(filename, 'w') as f:
                 f.write(logs)
+        return logs
+
+    @verify_submission_id
+    def check_if_submission_complete(self, sim_name):
+        """
+        Returns True or False if the simulation sim_name has finished producing all outputs.
+
+        :param sim_name: the requested simulation name
+        :return: True or False
+        """
+        return self.containers[sim_name].is_submission_complete()
+
 
     def run_simulation(self,
                        submission_id,
@@ -215,6 +287,7 @@ class CompetitionContainerExecutor:
         """
         output_root = self.output_root
         input_root = self.input_root
+
         if output_root is None:
             if submission_output_root is not None:
                 output_root = submission_output_root
@@ -249,7 +322,9 @@ class CompetitionContainerExecutor:
 
 
 if __name__ == '__main__':
-    # Example to demonstrate/test usage. Not a production script.
+    # Example to demonstrate/test usage. Not a production script. For more detailed explanations, read the API-tutorial
+    # Jupyter Notebook in the Starter-Kit repository.
+
     import time
     import sys
 
