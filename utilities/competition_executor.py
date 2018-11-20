@@ -8,16 +8,11 @@ import docker
 import pandas as pd
 from functools import wraps
 
-CONTAINER_ID = 'uber1'
-
 
 def _get_submission_timestamp_from_log(log):
-    """
-    Function that parses the logs of a container to find the precise time at which the output directory was
+    """Parses the logs of a container to find the precise time at which the output directory was
     created.
 
-    :param log: docker container logs object
-    :return: timestamp of the folder creation.
     """
 
     lines = log.decode('utf-8').split('\n')
@@ -31,17 +26,19 @@ def _get_submission_timestamp_from_log(log):
         raise ValueError("No timestamp found for submission. Error running submission!")
 
 class Submission:
-    """
-    Class summarizing the submission results of a specific simulation run.
+    """Points to the simulation as the submission is executing and thus permits the querying of the simulation state
+    as it executes within the container. Besides, summaries the submission results of a specific simulation run.
 
-    :param submission_id: Id of the submission
-    :param scenario_name: which of the available scenarios will be run in the container (i.e SiouxFalls)
-    :param input_directory: Location of the input files of the simulation
-    :param output_root: Location of the output directory for the simulation
-    :param sample_size: available samples size (scenario dependent, see documentation, i.e 1k).
-    :param num_iterations: number of iterations to run BEAM simulation engine.
+    Args:
+        submission_id (string): : identifier of the simulation instance (will become the container name)
+        scenario_name (string): Which of the available scenarios will be run in the container (i.e SiouxFalls)
+        input_directory (string): Location of the input files of the simulation
+        output_root(string): Location of the output directory for the simulation
+        sample_size (string): available samples size (scenario dependent, see documentation, i.e 1k)
+        num_iterations (float): number of iterations to run BEAM simulation engine
 
     """
+
     def __init__(self,
                  submission_id,
                  scenario_name,
@@ -60,7 +57,6 @@ class Submission:
         self.scenario_name = scenario_name
         self.input_directory = input_directory
         self._container = container
-        self.is_finished = False
 
         self.output_directory = self._format_out_dir(output_root)
 
@@ -81,20 +77,29 @@ class Submission:
         self._container.reload()
 
     def _format_out_dir(self, output_root):
-        """
-        Automatically creates the path to the output directory of the simulation.
-        :param output_root: root directory of the simulation
-        :return: path
+        """Automatically creates the path to the output directory of the simulation.
+
+        Args:
+            output_root (string): root directory of the simulation
+        Returns:
+            path of the output directory
+
         """
         return path.join(output_root, self.scenario_name,
                          "{}-{}__{}".format(self.scenario_name, self.sample_size, self._timestamp))
 
     def score(self):
-        """
-        Parses the submissionScores.txt file and returns the output in a Pandas DataFrame
+        """ Extracts the submission scores from the simulation outputs and creates a pandas DataFrame from it.
 
-        :return: pandas DataFrame
+        Parses the submissionScores.txt output file containing the raw and weighted subscores, as well as the general
+        score of the simulation run. Stores the result in a pandas DataFrame
+
+        Returns:
+             all_scores (pandas DataFrame): summary of the raw and weighted subscores, as well as the general score of
+             the simulation run.
+
         """
+
         with open(path.join(self.output_directory, "competition", "submissionScores.txt"), "r") as f:
             lines = f.readlines()
 
@@ -124,22 +129,29 @@ class Submission:
         return all_scores
 
     def summary_stats(self):
-        """Returns the summaryStats.csv file in a Pandas DataFrame"""
+        """ Extracts the submission statistics from the simulation outputs and creates a pandas DataFrame from it.
+
+        Reads the summaryStats.csv output file containing many of the raw output statistics of the simulation
+        (see "Understanding the outputs and the scoring function" page of the Starter Kit).
+
+        Returns:
+             (Pandas DataFrame): summary of the output stats of the submission
+
+        """
+
         summary_file = path.join(self.output_directory, "summaryStats.csv")
         return pd.read_csv(summary_file)
 
+    def is_complete(self):
+        """ Checks if the submission is complete.
 
-    def is_submission_complete(self):
-        """
-        Helper function to check if the submission is complete. i.e if the submission score
-        is the last element in the log file.
+        Returns:
+            bool: The return value. True if the simulation is complete, False otherwise.
 
-        :return: True or False
         """
-        path_sub_scores = path.join(self.output_directory, "competition", "submissionScores.txt")
-        if path.exists(path_sub_scores):
-            self.is_finished = True
-        return self.is_finished
+
+        path_submission_scores = path.join(self.output_directory, "competition", "submissionScores.txt")
+        return path.exists(path_submission_scores)
 
     def __str__(self):
         return "Submission_id: {}\n\t Scenario name: {}\n\t # iters: {}\n\t sample size: {}".format(self._submission_id,
@@ -149,7 +161,8 @@ class Submission:
 
 
 def verify_submission_id(func):
-    """Decorator function to check that the container id exists in the CompetitionContainerExecutor object."""
+    """Checks that the container id exists in the CompetitionContainerExecutor object."""
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         self, submission_id = args
@@ -168,10 +181,12 @@ class CompetitionContainerExecutor:
     self.containers under the name specified in the self.run(...) method. Convenience methods on this object can be
     used to simplify interaction with one or many of these containers.
 
-    :param input_root: a permanent input file directory, i.e., /submission-inputs (if you expect not to feed
+    Args:
+        input_root (string): a permanent input file directory, i.e., /submission-inputs (if you expect not to feed
                       this in manually; see run method below).
-    :param output_root: a permanent output file directory (it's a good idea to set this,
-                        else you will need to do so for every container you create).
+        output_root (string): a permanent output file directory (it's a good idea to set this,
+                        else you will need to do so for every container you create)
+
     """
 
     def __init__(self, input_root=None,
@@ -185,7 +200,8 @@ class CompetitionContainerExecutor:
         """Queries the run status for executed containers cached on this object in turn
         (updating their status as appropriate).
 
-        :return: a list of running containers
+        Returns: a list of running containers
+
         """
         running = []
         for name, container in self.containers.items():
@@ -198,35 +214,39 @@ class CompetitionContainerExecutor:
 
     @verify_submission_id
     def get_submission_scores_and_stats(self, submission_id):
-        """
-        Utility that returns two of the simulation outputs (pandas dataframes) for a specific submission ID:
+        """ Returns two of the simulation outputs (as pandas DataFrames) for a specific submission ID:
         the scores and the statistics. The function raises ValueError when the scores do not exist yet i.e the
         simulation is still running.
 
-        :param submission_id:
-        :return:
-        - scores: Dataframe with the results of the submissionScore.txt file (raw and weighted sub-scores + final score)
-        - stats: Contains the results of the summaryStats.csv file. You can find the full list of outputs in the
-        starter_kit (https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md)
+        Args:
+            submission_id (string):
+
+        Returns:
+            scores (pandas DataFrame): summary of the raw and weighted sub-scores  as well aas the final score of the
+            submission
+            stats (pandas DataFrame): summary of the output stats of the submission. (see "Understanding the outputs
+            and the scoring function" page of the Starter Kit for the full list of stats)
+
         """
         submission = self.containers[submission_id]
 
-        if submission.is_submission_complete():
+        if submission.is_complete():
             scores = submission.score()
             stats = submission.summary_stats()
 
             return scores, stats
         else:
-            raise ValueError("The simulation {0} is still running, please import scores when "
-                             "check_if_submission_complete(submission_id) returns True.".format(submission_id))
+            raise NameError("Simulation {0} is still running.".format(submission_id))
 
     def stop_all_simulations(self, remove=True):
-        """Stop and all simulations. Containers are removed (both from this object and the docker daemon by default).
+        """Stops all simulations. Containers are removed (both from this object and the docker daemon by default).
 
         Removal frees the names that were used to execute containers previously, so it's generally a good idea to
         remove if you will be planning reusing names.
 
-        :param remove: whether to remove the containers cached on this object.
+        Args:
+            remove: whether to remove the containers cached on this object.
+
         """
         for container in self.containers.values():
             container.stop()
@@ -236,10 +256,12 @@ class CompetitionContainerExecutor:
 
     @verify_submission_id
     def output_simulation_logs(self, sim_name, filename=None):
-        """Prints a specified simulation log or writes to file if filename is provided
+        """Prints a specified simulation log or writes to file if filename is provided.
 
-        :param sim_name the requested simulation
-        :param filename (optional) a path to which to save the logfile
+        Args:
+            sim_name (string): name of the the requested simulation
+            filename (string, optional): a path to which to save the logfile
+
         """
 
         logs = self.containers[sim_name].logs().decode('utf-8')
@@ -252,13 +274,16 @@ class CompetitionContainerExecutor:
 
     @verify_submission_id
     def check_if_submission_complete(self, sim_name):
-        """
-        Returns True or False if the simulation sim_name has finished producing all outputs.
+        """ Checks if a given submission is complete.
 
-        :param sim_name: the requested simulation name
-        :return: True or False
+        Args:
+            sim_name (string): identifier of the simulation instance
+
+        Returns:
+            bool: True if the given simulation is complete, False otherwise
+
         """
-        return self.containers[sim_name].is_submission_complete()
+        return self.containers[sim_name].is_complete()
 
 
     def run_simulation(self,
@@ -270,7 +295,7 @@ class CompetitionContainerExecutor:
                        num_iterations=10,
                        num_cpus=multiprocessing.cpu_count()-1,
                        mem_limit="4g"):
-        """Creates a new container running a Uber Prize competition simulation on a specified set of inputs.
+        """Creates a new container running an Uber Prize competition simulation on a specified set of inputs.
 
         Containers are run in a background process, so several containers can be run in parallel
         (though this is a loose and uncoordinated parallelism... future updates may scale execution out over
@@ -278,12 +303,14 @@ class CompetitionContainerExecutor:
 
         This utility adds the container to the list of containers managed by this object.
 
-        :param submission_id: identifier of the simulation instance (will become the container name)
-        :param submission_output_root: the (absolute) path to locate simulation outputs
-        :param submission_input_root: (absolute) path where simulation inputs are located
-        :param scenario_name: which of the available scenarios will be run in the container
-        :param sample_size: available samples size (scenario dependent, see documentation).
-        :param num_iterations: number of iterations to run BEAM simulation engine.
+        Args:
+            submission_id (string): identifier of the simulation instance (will become the container name)
+            submission_output_root (string): the (absolute) path to locate simulation outputs
+            submission_input_root (string): (absolute) path where simulation inputs are located
+            scenario_name (string): which of the available scenarios will be run in the container
+            sample_size (string): available samples size (scenario dependent, see documentation)
+            num_iterations (float): number of iterations to run BEAM simulation engine
+
         """
         output_root = self.output_root
         input_root = self.input_root
@@ -327,6 +354,8 @@ if __name__ == '__main__':
 
     import time
     import sys
+
+    CONTAINER_ID = 'uber1'
 
     # Must use absolute paths here
     ex = CompetitionContainerExecutor(input_root=sys.argv[1],
