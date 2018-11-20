@@ -30,7 +30,8 @@ The file `VehicleFleetMix.csv` permits modification of the bus fleet (see Fig.2)
 <br/>
 
 ![Bus fleet](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_VehicleFleetMix.png "*Figure 2: Input1 - composition of the bus fleet")\
-***Figure 2: Example of vehicle fleet mix input. (Only three routes are assigned a different bus; all other routes operate with the standard bus type)***
+***Figure 2: Example of Vehicle Fleet Mix Input.*** 
+(Only three routes are assigned a different bus; all other routes operate with the standard bus type)***
 
 <br/>
 
@@ -67,7 +68,7 @@ The choice of utilized socio-demographic qualifier(s), range(s), mode(s), and su
 The Figure 5 below shows an example input file with subsidies for specific socio-demographic groups. 
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_Subsidies.png)
-***Figure 5: Mode Subsidy Input***
+***Figure 5: Example of Mode Subsidy Input***
 
 The input file describes the following situation:
 
