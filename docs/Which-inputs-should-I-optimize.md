@@ -60,9 +60,9 @@ The choice of utilized socio-demographic qualifier(s), range(s), mode(s), and su
   * `drive_transit`: use of the personal car as an access/egress mode to/from transit (bus)
   * `walk_transit`: walking as an access/egress mode to/from transit (bus)
   
-* The *groups* are defined as in mathematical notation where parentheses () indicate exclusive bounds and brackets \[] indicate inclusive bounds. Below, you will find an accompanying statement for each subsidy in the order they appear in Figure 5.
+* The *groups* (`age` and `income`) are defined as in mathematical notation where parentheses () indicate exclusive bounds and brackets \[] indicate inclusive bounds. Below, you will find an accompanying statement for each subsidy in the order they appear in the example of Figure 5.
 
-* The *amounts* of the subsidies are decimal numbers that must be greater than 0.
+* The *amounts* of the subsidies are **decimal numbers** that must be **greater than 0**.
 
 The Figure 5 below shows an example input file with subsidies for specific socio-demographic groups. 
 
@@ -92,5 +92,5 @@ The third input you have control over is the frequency of buses assigned to a ro
 
 
 ![Bus Fequency Input](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Bus_frequencies_inputs.png)
-***Figure 5: Bus Frequency Input***
+***Figure 6: Bus Frequency Input***
 
