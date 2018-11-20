@@ -27,7 +27,8 @@ def _get_submission_timestamp_from_log(log):
 
 class Submission:
     """Points to the simulation as the submission is executing and thus permits the querying of the simulation state
-    as it executes within the container. Besides, summaries the submission results of a specific simulation run.
+    as it executes within the container. Additionally this class summarizes the submission results of a specific
+    simulation run.
 
     Args:
         submission_id (string): : identifier of the simulation instance (will become the container name)
