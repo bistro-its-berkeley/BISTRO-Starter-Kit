@@ -19,7 +19,7 @@ To help the Sioux Faux Department of Transportation (SFDOT) combat congestion an
 
 Files representing input settings can be found in `.csv` format in the `submission-inputs` folder. The following subsections describe the input file semantics and schema in further detail.
 
-#### **1. Bus fleet composition**
+### **1. Bus fleet composition**
 
 The file `VehicleFleetMix.csv` permits modification of the bus fleet (see Fig.2). Currently, SFBL (`agencyID` = 217) operates 12 bus routes in Sioux Faux using a standard bus type, which we designate `BUS-DEFAULT`. During the Pilot Test, you can decide which type of bus (i.e. `vehicleTypeId`) will provide service for each route (`routeID`, see Fig.1 & 2). Each route can utilize only **one type of bus**. 
 
@@ -49,7 +49,7 @@ During the Pilot Study, for each route, you have the opportunity to purchase new
 ***Figure 4: Costs of available bus types***
 <br/>
 
-#### **2. Subsidies for transit and on-demand ridehail users**
+### **2. Subsidies for transit and on-demand ridehail users**
 
 In an effort to provide a high-quality alternative to private vehicles, you may define subsidies for qualifying agents using public transit or on-demand ridehail. Qualification for a subsidy can be based on the following socio-demographic categories: age and/or income (*Note ot organizer: add employment status*). 
 
@@ -83,7 +83,7 @@ The input file describes the following situation:
  
 You will be able to modify the characeristics of the subsidies in the input file `submission-inputs/ModeSubsidies.csv`, as shown above. 
 
-#### **3. Adjustments to the frequency of buses on routes**
+### **3. Adjustments to the frequency of buses on routes**
 
 The third input you have control over is the frequency of buses assigned to a route. The format for this AdjustFrequency input is identical to the `frequencies.txt` component of the [GTFS specification](https://developers.google.com/transit/gtfs/reference/#frequenciestxt). The first field in this file, `trip_id`, refers to a corresponding trip identifier in the `trips.txt` [file](https://developers.google.com/transit/gtfs/reference/?csw=1#tripstxt). To understand the geospatial embedding of the Route corresponding to a `route_id`, please refer to Figure 1, above. 
 
