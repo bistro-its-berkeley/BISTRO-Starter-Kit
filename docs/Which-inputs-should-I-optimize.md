@@ -61,7 +61,7 @@ The choice of utilized socio-demographic qualifier(s), range(s), mode(s), and su
   * `drive_transit`: use of the personal car as an access/egress mode to/from transit (bus)
   * `walk_transit`: walking as an access/egress mode to/from transit (bus)
   
-* The *groups* (`age` and `income`) are defined as in mathematical notation where parentheses () indicate exclusive bounds and brackets \[] indicate inclusive bounds. Below, you will find an accompanying statement for each subsidy in the order they appear in the example of Figure 5.
+* The *groups* (`age` and `income`) are defined as in mathematical notation where parentheses () indicate exclusive bounds and brackets \[ ] indicate inclusive bounds. Below, you will find an accompanying statement for each subsidy in the order they appear in the example of Figure 5.
 
 * The *amounts \[$/person]* of the subsidies are **decimal numbers** that must be **greater than 0**. There is no upper limit but note that there is no interest in having a subsidy greater than the trip cost.
 
