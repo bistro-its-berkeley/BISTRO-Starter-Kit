@@ -63,7 +63,7 @@ The choice of utilized socio-demographic qualifier(s), range(s), mode(s), and su
   
 * The *groups* (`age` and `income`) are defined as in mathematical notation where parentheses () indicate exclusive bounds and brackets \[] indicate inclusive bounds. Below, you will find an accompanying statement for each subsidy in the order they appear in the example of Figure 5.
 
-* The *amounts* of the subsidies are **decimal numbers** that must be **greater than 0**.
+* The *amounts \[$/person]* of the subsidies are **decimal numbers** that must be **greater than 0**. There is no upper limit but note that there is no interest in having a subsidy greater than the trip cost.
 
 The Figure 5 below shows an example input file with subsidies for specific socio-demographic groups. 
 
