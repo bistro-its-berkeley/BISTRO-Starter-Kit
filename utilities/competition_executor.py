@@ -4,8 +4,6 @@ from os import path
 import docker
 import pandas as pd
 
-CONTAINER_ID = 'uber1'
-
 
 def _get_submission_timestamp_from_log(log):
     lines = log.decode('utf-8').split('\n')
@@ -201,12 +199,23 @@ class CompetitionContainerExecutor:
 
         This utility adds the container to the list of containers managed by this object.
 
-        :param submission_id: identifier of the simulation instance (will become the container name)
-        :param submission_output_root: the (absolute) path to locate simulation outputs
-        :param submission_input_root: (absolute) path where simulation inputs are located
-        :param scenario_name: which of the available scenarios will be run in the container
-        :param sample_size: available samples size (scenario dependent, see documentation).
-        :param num_iterations: number of iterations to run BEAM simulation engine.
+        Parameters
+        ----------
+        submission_id : str
+            Identifier of the simulation instance (will become the container name)
+        submission_output_root : str
+            The (absolute) path to locate simulation outputs
+        submission_input_root : str
+            The (absolute) path where simulation inputs are located
+        scenario_name : str
+        sample_size : str
+             The available sample size (scenario dependent, see documentation).
+        num_iterations : int
+            Number of iterations for which to run the BEAM simulation engine.
+        num_cpus : str
+            Number of cpus to allocate to container (0.01 - Runtime.getRuntime().availableProcessors())
+        mem_limit : int
+
         """
         output_root = self.output_root
         input_root = self.input_root
@@ -229,7 +238,6 @@ class CompetitionContainerExecutor:
                                                command=r"--scenario {0} --sample-size {1} --iters {2}".format(
                                                    scenario_name, sample_size, num_iterations),
                                                detach=True,
-                                               env={JAVA_OPTS: '"-Xmx4g" "-Xms2g"'},
                                                volumes=
                                                {output_root: {"bind": "/output", "mode": "rw"},
                                                 input_root: {"bind": "/submission-inputs",

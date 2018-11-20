@@ -1,1 +1,4 @@
 docker==3.5.1
+pathlib==3.7.1
+numpy==1.14.3
+pandas==0.23.0
