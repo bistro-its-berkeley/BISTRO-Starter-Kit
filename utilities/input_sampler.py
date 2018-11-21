@@ -36,10 +36,10 @@ def sample_vehicle_fleet_mix(num_records, scenario_name):
 
     Parameters
     ----------
-    num_records : (int)
+    num_records : int
         Number of randomly sampled records to create
 
-    scenario_name : (str)
+    scenario_name : str
         Name of scenario (used for path resolution purposes)
 
     Returns
@@ -88,10 +88,11 @@ def sample_frequency_adjustments(num_records, scenario_name):
 
     Parameters
     ----------
-    num_records : (int)
+    num_records : int
         Number of randomly sampled records to create
-    scenario_name: (str)
+    scenario_name: str
         Name of scenario (used for path resolution purposes)
+
     Returns
     -------
     `pd.DataFrame`
@@ -144,7 +145,7 @@ def format_range_with_sampled_inclusivity(rng):
 
     Parameters
     ----------
-    rng : (tuple)
+    rng : tuple
          Tuple of exactly two ints, where rng[0] < rng[1]
 
     Returns
@@ -172,7 +173,7 @@ def sample_mode_subsidies(num_records):
 
     Parameters
     ----------
-    num_records : (int)
+    num_records : int
         Number of randomly sampled records to create
 
     Returns
