@@ -19,9 +19,9 @@ To help the Sioux Faux Department of Transportation (SFDOT) combat congestion an
 
 Files representing input settings can be found in `.csv` format in the `submission-inputs` folder. The following subsections describe the input file semantics and schema in further detail.
 
-#### **1. Bus fleet composition**
+### **1. Bus fleet composition**
 
-The file `VehicleFleetMix.csv` permits modification of the bus fleet (see Fig.2). Currently, SFBL (`agencyID` = 217) operates 12 bus routes in Sioux Faux using a standard bus type, which we designate `BUS-STD-DEFAULT`. During the Pilot Test, you can decide which type of bus (i.e. `vehicleTypeId`) will provide service for each route (`routeID`, see Fig.1 & 2). Each route can utilize only **one type of bus**. 
+The file `VehicleFleetMix.csv` permits modification of the bus fleet (see Fig.2). Currently, SFBL (`agencyID` = 217) operates 12 bus routes in Sioux Faux using a standard bus type, which we designate `BUS-DEFAULT`. During the Pilot Test, you can decide which type of bus (i.e. `vehicleTypeId`) will provide service for each route (`routeID`, see Fig.1 & 2). Each route can utilize only **one type of bus**. 
 
 
 ![Route IDs](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/sf_route_guide.png)\
@@ -30,13 +30,14 @@ The file `VehicleFleetMix.csv` permits modification of the bus fleet (see Fig.2)
 <br/>
 
 ![Bus fleet](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_VehicleFleetMix.png "*Figure 2: Input1 - composition of the bus fleet")\
-***Figure 2: Vehicle fleet mix input***
+***Figure 2: Example of Vehicle Fleet Mix Input.*** 
+(Only three routes are assigned a different bus; all other routes operate with the standard bus type)***
 
 <br/>
 
-SFDOT has four available bus types, each of them with different technical properties (`fixed-data/siouxfalls/vehicleTypes.csv`, see Fig.2) and cost characteristics (`fixed-data/siouxfalls/vehicleCosts.csv`, see Fig.3). Currently, SFDOT owns the minimum number of bus types to provide service for each route, as specifed in the file `submission-inputs/VehicleFleetMix.csv`. Additionally, the number of buses required to service each route is equal to the number of trips: after the a headway has expired, a new bus is used. This does not reflect a realistic scenario combining bus routes into runs, but, for now, it still allows for comparisons to a BAU case.
+SFDOT has four available bus types, each of them with different technical properties (`fixed-data/siouxfalls/availableVehicleTypes.csv`, see Fig.2) and cost characteristics (`fixed-data/siouxfalls/vehicleCosts.csv`, see Fig.3). Currently, SFDOT owns the minimum number of bus types to provide service for each route, as specifed in the file `submission-inputs/VehicleFleetMix.csv`. Additionally, the number of buses required to service each route is equal to the number of trips: after the a headway has expired, a new bus is used. This does not reflect a realistic scenario combining bus routes into runs, but, for now, it still allows for comparisons to a BAU case.
 
-During the Pilot Study, for each route, you have the opportunity to purchase new types of buses possessing attributes that might improve the level of service for transit along a route (see Figure 2 below). For each bus that you purchase to replace a default bus (i.e., buses of the type, `BUS-STD-DEFAULT`), the latter is automatically sold for a price of <a href="https://www.codecogs.com/eqnedit.php?latex=\$10,000&space;&plus;&space;\$20,000&space;\times&space;\mathcal{N}(0,1)" target="_blank"><img src="https://latex.codecogs.com/png.latex?\$10,000&space;&plus;&space;\$20,000&space;\times&space;\mathcal{N}(0,1)" title="\$10,000 + \$20,000 \times \mathcal{N}(0,1)" /></a>
+During the Pilot Study, for each route, you have the opportunity to purchase new types of buses possessing attributes that might improve the level of service for transit along a route (see Figure 2 below). For each bus that you purchase to replace a default bus (i.e., buses of the type, `BUS-DEFAULT`), the latter is automatically sold for a price of <a href="https://www.codecogs.com/eqnedit.php?latex=\$10,000&space;&plus;&space;\$20,000&space;\times&space;\mathcal{N}(0,1)" target="_blank"><img src="https://latex.codecogs.com/png.latex?\$10,000&space;&plus;&space;\$20,000&space;\times&space;\mathcal{N}(0,1)" title="\$10,000 + \$20,000 \times \mathcal{N}(0,1)" /></a>
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Bus_types.png)\
 ***Figure 3: Set of available bus types***
@@ -48,7 +49,7 @@ During the Pilot Study, for each route, you have the opportunity to purchase new
 ***Figure 4: Costs of available bus types***
 <br/>
 
-#### **2. Subsidies for transit and on-demand ridehail users**
+### **2. Subsidies for transit and on-demand ridehail users**
 
 In an effort to provide a high-quality alternative to private vehicles, you may define subsidies for qualifying agents using public transit or on-demand ridehail. Qualification for a subsidy can be based on the following socio-demographic categories: age and/or income (*Note ot organizer: add employment status*). 
 
@@ -60,14 +61,14 @@ The choice of utilized socio-demographic qualifier(s), range(s), mode(s), and su
   * `drive_transit`: use of the personal car as an access/egress mode to/from transit (bus)
   * `walk_transit`: walking as an access/egress mode to/from transit (bus)
   
-* The *groups* are defined as in mathematical notation where parentheses () indicate exclusive bounds and brackets \[] indicate inclusive bounds. Below, you will find an accompanying statement for each subsidy in the order they appear in Figure 5.
+* The *groups* (`age` and `income`) are defined as in mathematical notation where parentheses () indicate exclusive bounds and brackets \[ ] indicate inclusive bounds. Below, you will find an accompanying statement for each subsidy in the order they appear in the example of Figure 5.
 
-* The *amounts* of the subsidies are decimal numbers that must be greater than 0.
+* The *amounts \[$/person]* of the subsidies are **decimal numbers** that must be **greater than 0**. There is no upper limit but note that there is no interest in having a subsidy greater than the trip cost.
 
 The Figure 5 below shows an example input file with subsidies for specific socio-demographic groups. 
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_Subsidies.png)
-***Figure 5: Mode Subsidy Input***
+***Figure 5: Example of Mode Subsidy Input***
 
 The input file describes the following situation:
 
@@ -82,7 +83,7 @@ The input file describes the following situation:
  
 You will be able to modify the characeristics of the subsidies in the input file `submission-inputs/ModeSubsidies.csv`, as shown above. 
 
-#### **3. Adjustments to the frequency of buses on routes**
+### **3. Adjustments to the frequency of buses on routes**
 
 The third input you have control over is the frequency of buses assigned to a route. The format for this AdjustFrequency input is identical to the `frequencies.txt` component of the [GTFS specification](https://developers.google.com/transit/gtfs/reference/#frequenciestxt). The first field in this file, `trip_id`, refers to a corresponding trip identifier in the `trips.txt` [file](https://developers.google.com/transit/gtfs/reference/?csw=1#tripstxt). To understand the geospatial embedding of the Route corresponding to a `route_id`, please refer to Figure 1, above. 
 
@@ -92,5 +93,5 @@ The third input you have control over is the frequency of buses assigned to a ro
 
 
 ![Bus Fequency Input](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Bus_frequencies_inputs.png)
-***Figure 5: Bus Frequency Input***
+***Figure 6: Bus Frequency Input***
 

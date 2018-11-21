@@ -29,7 +29,7 @@ The *scoring function* is a weighted sum of several components, listed below. **
   * **bus crowding** (`Level of Service: Agent Hours on Crowding Transit`,\[hours]): the total time spent by agents standing in buses occupied above their seating capacity. 
 
 * Measures of the **Budget** incurred by the city:
-  * **operational cost**, \[$]: total costs incurred by SFBL operations including amortized fixed costs (`Budget : Operational Costs (Fixed)`), the cost of fuel consumed (`Budget : Operational Costs (Fuel)`), and variable costs (`Budget : Operational Costs (Variable, Hourly)`). The rates for each of these factors for motorized vehicles are specified in the `fixed-data/siouxfalls/vehicleTypes.csv` file (see the [inputs](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Which-inputs-should-I-optimize%3F.md) page for more).
+  * **operational cost**, \[$]: total costs incurred by SFBL operations including amortized fixed costs (`Budget : Operational Costs (Fixed)`), the cost of fuel consumed (`Budget : Operational Costs (Fuel)`), and variable costs (`Budget : Operational Costs (Variable, Hourly)`). The rates for each of these factors for motorized vehicles are specified in the `fixed-data/siouxfalls/availableVehicleTypes.csv` file (see the [inputs](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Which-inputs-should-I-optimize%3F.md) page for more).
   * **incentives used** (`Budget: Subsidies Paid`, \[$]): total amount of subsidies actually paid to agents.
   * **incentives unused** (`Budget: Subsidies Unpaid`, \[$]): the difference between the amount of subsidies allocated by a subsidy policy and the amount of subsidies actually paid.
   * **revenues**, (\[$]): total bus fares collected

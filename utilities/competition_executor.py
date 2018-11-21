@@ -1,11 +1,9 @@
-import datetime
-import time
-from glob import glob
-from os import path
 import multiprocessing
+from os import path
 
 import docker
 import pandas as pd
+
 from functools import wraps
 
 
@@ -24,6 +22,7 @@ def _get_submission_timestamp_from_log(log):
             return timestamp
     else:
         raise ValueError("No timestamp found for submission. Error running submission!")
+
 
 class Submission:
     """Points to the simulation as the submission is executing and thus permits the querying of the simulation state
@@ -199,7 +198,7 @@ class CompetitionContainerExecutor:
 
     def list_running_simulations(self):
         """Queries the run status for executed containers cached on this object in turn
-        (updating their status as appropriate).
+        (updating their statuses as appropriate).
 
         Returns: a list of running containers
 
@@ -210,8 +209,6 @@ class CompetitionContainerExecutor:
             if container.status == 'running':
                 running.append(name)
         return running
-
-
 
     @verify_submission_id
     def get_submission_scores_and_stats(self, submission_id):
@@ -294,7 +291,7 @@ class CompetitionContainerExecutor:
                        scenario_name='siouxfalls',
                        sample_size='1k',
                        num_iterations=10,
-                       num_cpus=multiprocessing.cpu_count()-1,
+                       num_cpus=multiprocessing.cpu_count() - 1,
                        mem_limit="4g"):
         """Creates a new container running an Uber Prize competition simulation on a specified set of inputs.
 
@@ -304,13 +301,23 @@ class CompetitionContainerExecutor:
 
         This utility adds the container to the list of containers managed by this object.
 
-        Args:
-            submission_id (string): identifier of the simulation instance (will become the container name)
-            submission_output_root (string): the (absolute) path to locate simulation outputs
-            submission_input_root (string): (absolute) path where simulation inputs are located
-            scenario_name (string): which of the available scenarios will be run in the container
-            sample_size (string): available samples size (scenario dependent, see documentation)
-            num_iterations (float): number of iterations to run BEAM simulation engine
+
+        Parameters
+        ----------
+        submission_id : str
+            Identifier of the simulation instance (will become the container name)
+        submission_output_root : str
+            The (absolute) path to locate simulation outputs
+        submission_input_root : str
+            The (absolute) path where simulation inputs are located
+        scenario_name : str
+        sample_size : str
+             The available sample size (scenario dependent, see documentation).
+        num_iterations : int
+            Number of iterations for which to run the BEAM simulation engine.
+        num_cpus : str
+            Number of cpus to allocate to container (0.01 - Runtime.getRuntime().availableProcessors())
+        mem_limit : int
 
         """
         output_root = self.output_root
