@@ -74,13 +74,16 @@ def sample_vehicle_fleet_mix(num_records, scenario_name):
         agency_ids.append(route_df['agency_id'].values[0])
 
     res = []
+    # TODO maybe better to just use choice of product of agency and route_id
+    # Then sample vehicle iid for each
     pairs = []  # TODO make a set
     while len(res) < num_records:
-        agency_ind = np.random.choice(len(agency_ids))
+        agency_idx = np.random.choice(len(agency_ids))
+        # TODO why are last two singleton lists?? why not unbox as int?
         agency_id, route_ids_for_agency_id, vehicle_type_ids_for_agency_id = \
-            (agency_ids[agency_ind],
-             np.random.choice(route_ids[agency_ind], 1),
-             np.random.choice(vehicle_type_ids[agency_ind], 1))
+            (agency_ids[agency_idx],
+             np.random.choice(route_ids[agency_idx], 1),
+             np.random.choice(vehicle_type_ids[agency_idx], 1))
         route_id = np.random.choice(route_ids_for_agency_id)
 
         if (agency_id, route_id) not in pairs:  # Rejection sampling
@@ -124,8 +127,10 @@ def sample_frequency_adjustments(num_records, scenario_name):
 
     res = []
     trip_ids = []
+    # TODO can prob do this all in vectorized way without rejection sampling
     for _ in range(num_records):
-        # TODO pull as these out as const
+        # TODO pull as these out as const, build as 24*60*60
+        # TODO be consistent for s vs secs in var names
         min_s = 0
         max_s = 86340
         headway_secs = np.random.choice(range(0, 12000, 60))
@@ -210,6 +215,7 @@ def sample_mode_subsidies(num_records):
     for _ in range(num_records):
         # TODO[saf]: make possible modes configurable by scenario
         # TODO pull out to constant
+        # TODO can vectorize
         possible_modes = ['walk_transit', 'ride_hail', 'walk_transit', 'walk',
                           'car', 'drive_transit']
         mode = np.random.choice(possible_modes)
@@ -217,6 +223,7 @@ def sample_mode_subsidies(num_records):
         income = tuple(sorted(np.random.choice(range(0, 300000, 1000), 2)))
         amount = np.round(np.random.uniform(0.1, 20), 1)
 
+        # TODO would be much cleaner df if start end were different cols
         res.append({'mode': mode, 'age': sample_format_range(age),
                     'income': sample_format_range(income), 'amount': amount})
     return pd.DataFrame(res, columns=['mode', 'age', 'income', 'amount'])
