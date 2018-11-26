@@ -7,6 +7,70 @@ import pandas as pd
 from functools import wraps
 
 
+class Results:
+    """Allow to read the results from a simulation based on its output folder.
+
+    """
+    def __init__(self,
+                 output_root):
+        self.output_directory = output_root
+
+    def score(self):
+        """ Extracts the submission scores from the simulation outputs and creates a pandas DataFrame from it.
+
+        Parses the submissionScores.txt output file containing the raw and weighted subscores, as well as the general
+        score of the simulation run. Stores the result in a pandas DataFrame
+
+        Returns:
+             all_scores (pandas DataFrame): summary of the raw and weighted subscores, as well as the general score of
+             the simulation run.
+
+        """
+
+        with open(path.join(self.output_directory, "competition", "submissionScores.txt"), "r") as f:
+            lines = f.readlines()
+
+            data = []
+            for idx, l in enumerate(lines):
+                if idx == 0:
+                    columns = l.rstrip('\n').split("|")
+                    columns = [i.strip() for i in columns]
+                    continue
+                elif idx == 1:
+                    continue
+                values = l.rstrip('\n').split("|")
+                values = [i.strip() for i in values]
+                values = [i if len(i) > 0 else "0" for i in values]
+                data.append(values)
+
+        df = pd.DataFrame(data, columns=columns)
+
+        all_scores = []
+
+        for score_type in ["Weight", "Raw Score", "Weighted Score"]:
+            pivoted = pd.pivot_table(df, values=score_type, columns="Component Name", aggfunc="first").reset_index(
+                drop=True)
+            pivoted.columns = ["%s_%s" % (i, score_type) for i in pivoted.columns]
+            all_scores.append(pivoted)
+        all_scores = pd.concat(all_scores, 1).astype(float)
+        return all_scores
+
+
+    def summary_stats(self):
+        """ Extracts the submission statistics from the simulation outputs and creates a pandas DataFrame from it.
+
+        Reads the summaryStats.csv output file containing many of the raw output statistics of the simulation
+        (see "Understanding the outputs and the scoring function" page of the Starter Kit).
+
+        Returns:
+             (Pandas DataFrame): summary of the output stats of the submission
+
+        """
+
+        summary_file = path.join(self.output_directory, "summaryStats.csv")
+        return pd.read_csv(summary_file)
+
+
 def _get_submission_timestamp_from_log(log):
     """Parses the logs of a container to find the precise time at which the output directory was
     created.
@@ -59,6 +123,7 @@ class Submission:
         self._container = container
 
         self.output_directory = self._format_out_dir(output_root)
+        self.results = Results(self.output_directory)
 
     def logs(self):
         return self._container.logs()
@@ -100,33 +165,7 @@ class Submission:
 
         """
 
-        with open(path.join(self.output_directory, "competition", "submissionScores.txt"), "r") as f:
-            lines = f.readlines()
-
-            data = []
-            for idx, l in enumerate(lines):
-                if idx == 0:
-                    columns = l.rstrip('\n').split("|")
-                    columns = [i.strip() for i in columns]
-                    continue
-                elif idx == 1:
-                    continue
-                values = l.rstrip('\n').split("|")
-                values = [i.strip() for i in values]
-                values = [i if len(i) > 0 else "0" for i in values]
-                data.append(values)
-
-        df = pd.DataFrame(data, columns=columns)
-
-        all_scores = []
-
-        for score_type in ["Weight", "Raw Score", "Weighted Score"]:
-            pivoted = pd.pivot_table(df, values=score_type, columns="Component Name", aggfunc="first").reset_index(
-                drop=True)
-            pivoted.columns = ["%s_%s" % (i, score_type) for i in pivoted.columns]
-            all_scores.append(pivoted)
-        all_scores = pd.concat(all_scores, 1).astype(float)
-        return all_scores
+        return self.results.score()
 
     def summary_stats(self):
         """ Extracts the submission statistics from the simulation outputs and creates a pandas DataFrame from it.
@@ -139,8 +178,7 @@ class Submission:
 
         """
 
-        summary_file = path.join(self.output_directory, "summaryStats.csv")
-        return pd.read_csv(summary_file)
+        return self.results.summary_stats()
 
     def is_complete(self):
         """ Checks if the submission is complete.
@@ -196,6 +234,40 @@ class CompetitionContainerExecutor:
         self.client = docker.from_env()
         self.containers = {}
 
+    def save_inputs(self, input_dictionary, submission_input_root=None):
+        """ Save the contestant's inputs into csv files that can be read by the simulation.
+
+         The dictionary should be structured as follows:
+        - "VehicleFleetMix": Bus fleet mix DataFrame as described (...)
+        - "ModeSubsidies"
+        - "FrequencyAdjustment"
+
+        Parameters
+        ----------
+        input_dictionary (dictionary)
+
+
+        Returns
+        -------
+
+        """
+        input_root = self.input_root
+
+        if input_root is None:
+            if submission_input_root is not None:
+                input_root = submission_input_root
+            else:
+                raise ValueError(
+                    "No input location specified. One must be provided by default on object"
+                    " instantiation or supplied to this method as an argument")
+
+        for input_name, input_dataframe in input_dictionary.items():
+            if input_name not in list_inputs:
+                raise KeyError("{0} is not a valid key for `input_dictionary`.".format(input_name))
+
+            input_dataframe.to_csv(path.join(input_root, input_name,".csv"))
+
+
     def list_running_simulations(self):
         """Queries the run status for executed containers cached on this object in turn
         (updating their statuses as appropriate).
@@ -229,8 +301,8 @@ class CompetitionContainerExecutor:
         submission = self.containers[submission_id]
 
         if submission.is_complete():
-            scores = submission.score()
-            stats = submission.summary_stats()
+            scores = submission.results.score()
+            stats = submission.results.summary_stats()
 
             return scores, stats
         else:
