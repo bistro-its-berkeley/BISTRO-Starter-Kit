@@ -1,6 +1,6 @@
 import multiprocessing
 from os import path
-
+import time
 import docker
 import pandas as pd
 
@@ -186,11 +186,14 @@ class CompetitionContainerExecutor:
     self.containers under the name specified in the self.run(...) method. Convenience methods on this object can be
     used to simplify interaction with one or many of these containers.
 
-    Args:
-        input_root (string): a permanent input file directory, i.e., /submission-inputs (if you expect not to feed
-                      this in manually; see run method below).
-        output_root (string): a permanent output file directory (it's a good idea to set this,
-                        else you will need to do so for every container you create)
+    Parameters
+    ----------
+    input_root : str
+        a permanent input file directory, i.e., /submission-inputs
+        (if you expect not to feed this in manually; see run method below).
+    output_root : str
+        a permanent output file directory (it's a good idea to set this,
+        else you will need to do so for every container you create)
 
     """
 
@@ -205,7 +208,8 @@ class CompetitionContainerExecutor:
         """Queries the run status for executed containers cached on this object in turn
         (updating their statuses as appropriate).
 
-        Returns: a list of running containers
+        Returns:
+            a list of running containers
 
         """
         running = []
@@ -341,6 +345,7 @@ class CompetitionContainerExecutor:
         submission_input_root : str
             The (absolute) path where simulation inputs are located
         scenario_name : str
+            Name of the current scenario (e.g., "sioux_faux")
         sample_size : str
              The available sample size (scenario dependent, see documentation).
         num_iterations : int
@@ -348,6 +353,11 @@ class CompetitionContainerExecutor:
         num_cpus : str
             Number of cpus to allocate to container (0.01 - Runtime.getRuntime().availableProcessors())
         mem_limit : int
+
+
+        Raises
+        ------
+        ValueError
 
         """
         output_root = self.output_root

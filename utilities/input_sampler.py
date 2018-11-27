@@ -5,7 +5,7 @@ Example
 Here's how to generate a sample of 5 records from each of the provided input samplers::
 
     {{
-    SCENARIO_NAME = 'sioux_faux'
+    SCENARIO_NAME = 'siouxfalls'
 
     DIR = Path('..')
     sys.path.append(str(DIR))
