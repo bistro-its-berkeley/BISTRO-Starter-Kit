@@ -5,6 +5,10 @@ import docker
 import pandas as pd
 
 from functools import wraps
+from abc import ABC, abstractmethod
+
+import time
+import sys
 
 
 class Results:
@@ -211,24 +215,14 @@ def verify_submission_id(func):
 
     return wrapper
 
-
-class CompetitionContainerExecutor:
-    """Utility to run (potentially many) instances of the simulation.
-
-    Pointers to docker-py container objects executed by this utility are cached on the field
-    self.containers under the name specified in the self.run(...) method. Convenience methods on this object can be
-    used to simplify interaction with one or many of these containers.
-
-    Args:
-        input_root (string): a permanent input file directory, i.e., /submission-inputs (if you expect not to feed
-                      this in manually; see run method below).
-        output_root (string): a permanent output file directory (it's a good idea to set this,
-                        else you will need to do so for every container you create)
+class AbstractCompetitionExecutor(ABC):
+    """ Factors the common methods used by subclasses running instances of the simulation with different
+    executors (e.g. Docker, Gradle...)
 
     """
-
     def __init__(self, input_root=None,
                  output_root=None):
+        super().__init__()
         self.input_root = input_root
         self.output_root = output_root
         self.client = docker.from_env()
@@ -238,13 +232,16 @@ class CompetitionContainerExecutor:
         """ Save the contestant's inputs into csv files that can be read by the simulation.
 
          The dictionary should be structured as follows:
-        - "VehicleFleetMix": Bus fleet mix DataFrame as described (...)
-        - "ModeSubsidies"
-        - "FrequencyAdjustment"
+        - "VehicleFleetMix": Bus fleet mix DataFrame
+        - "ModeSubsidies": Subsidies DataFrame
+        - "FrequencyAdjustment": Frequency Adjustment DataFrame
+
+        The content of the different dataframes can be understood by refering to the documentation
+        (docs/Which-inputs-should-I-optimize.ms)
 
         Parameters
         ----------
-        input_dictionary (dictionary)
+        input_dictionary (dictionary):  maps data_name (key) to datafrane (value)
 
 
         Returns
@@ -267,6 +264,33 @@ class CompetitionContainerExecutor:
 
             input_dataframe.to_csv(path.join(input_root, input_name,".csv"))
 
+    @abstractmethod
+    def get_submission_scores_and_stats(self, *args, **kwargs):
+        pass
+
+    @abstractmethod
+    def output_simulation_logs(self, *args, **kwargs):
+        pass
+
+    @abstractmethod
+    def run_simulation(self, *args, **kwargs):
+        pass
+
+
+class CompetitionContainerExecutor(AbstractCompetitionExecutor):
+    """Utility to run (potentially many) instances of the simulation.
+
+    Pointers to docker-py container objects executed by this utility are cached on the field
+    self.containers under the name specified in the self.run(...) method. Convenience methods on this object can be
+    used to simplify interaction with one or many of these containers.
+
+    Args:
+        input_root (string): a permanent input file directory, i.e., /submission-inputs (if you expect not to feed
+                      this in manually; see run method below).
+        output_root (string): a permanent output file directory (it's a good idea to set this,
+                        else you will need to do so for every container you create)
+
+    """
 
     def list_running_simulations(self):
         """Queries the run status for executed containers cached on this object in turn
@@ -431,9 +455,6 @@ class CompetitionContainerExecutor:
 if __name__ == '__main__':
     # Example to demonstrate/test usage. Not a production script. For more detailed explanations, read the API-tutorial
     # Jupyter Notebook in the Starter-Kit repository.
-
-    import time
-    import sys
 
     CONTAINER_ID = 'uber1'
 
