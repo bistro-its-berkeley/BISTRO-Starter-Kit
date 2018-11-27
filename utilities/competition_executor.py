@@ -72,12 +72,12 @@ class Results:
 
 
 def _get_submission_timestamp_from_log(log):
-    """Parses the logs of a container to find the precise time at which the output directory was
+    """Parses the logs (as a string) of a container to find the precise time at which the output directory was
     created.
 
     """
 
-    lines = log.decode('utf-8').split('\n')
+    lines = log.split('\n')
     for line in lines:
         if 'Beam output directory is' in line:
             words = line.split(' ')
@@ -115,7 +115,7 @@ class Submission:
         time.sleep(10)
         log = container.logs()
         self._submission_id = submission_id
-        self._timestamp = _get_submission_timestamp_from_log(log)
+        self._timestamp = _get_submission_timestamp_from_log(log.decode('utf-8'))
         self.n_iters = n_iters
         self.sample_size = sample_size
         self.scenario_name = scenario_name
