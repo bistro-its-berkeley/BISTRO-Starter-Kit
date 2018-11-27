@@ -228,6 +228,9 @@ class AbstractCompetitionExecutor(ABC):
         self.client = docker.from_env()
         self.containers = {}
 
+        self.scenario_name = scenario_name
+        self.sample_size = sample_size
+
     def save_inputs(self, input_dictionary, submission_input_root=None):
         """ Save the contestant's inputs into csv files that can be read by the simulation.
 
