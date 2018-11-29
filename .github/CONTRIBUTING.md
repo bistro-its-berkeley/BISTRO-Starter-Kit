@@ -177,7 +177,7 @@ Enhancement suggestions are tracked as [GitHub issues](https://guides.github.com
 
 Current developers should follow the [workflow](#workflow-for-developers) below.
 
-We use a scrumboard on [waffle.io](https://waffle.io/sfwatergit/BeamCompetition). Opening an issue or pull request will result in labeling the issue or PR. In order to take advantage of the automated
+We use a scrumboard on [waffle.io](https://waffle.io/sfwatergit/BeamCompetitions). Opening an issue or pull request will result in labeling the issue or PR. In order to take advantage of the automated
 labeling and referencing functionality of this tool, we make extensive use of several issue cross-referencing in GitHub.
 
 #### Workflow for Developers
