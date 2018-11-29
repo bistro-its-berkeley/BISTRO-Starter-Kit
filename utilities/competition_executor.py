@@ -40,10 +40,11 @@ class Results:
         Parses the submissionScores.txt output file containing the raw and weighted subscores, as well as the general
         score of the simulation run. Stores the result in a pandas DataFrame
 
-        Returns:
-             all_scores (pandas DataFrame): summary of the raw and weighted subscores, as well as the general score of
-             the simulation run.
-
+        Returns
+        -------
+        scores: pandas DataFrame
+                Summary of the raw and weighted subscores, as well as the general score of
+                the simulation run.
         """
 
         with open(path.join(self.output_directory, "competition", "submissionScores.txt"), "r") as f:
@@ -81,8 +82,11 @@ class Results:
         Reads the summaryStats.csv output file containing many of the raw output statistics of the simulation
         (see "Understanding the outputs and the scoring function" page of the Starter Kit).
 
-        Returns:
-             (Pandas DataFrame): summary of the output stats of the submission
+        Returns
+        -------
+        summary_stats: Pandas DataFrame
+            Summary of the output stats of the submission
+
 
         """
 
