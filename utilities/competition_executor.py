@@ -11,6 +11,20 @@ import time
 import sys
 
 
+def lazy_property(fn):
+    '''Decorator that makes a property lazy-evaluated.
+    '''
+    attr_name = '_lazy_' + fn.__name__
+
+    @property
+    @wraps(fn)
+    def _lazy_property(self):
+        if not hasattr(self, attr_name):
+            setattr(self, attr_name, fn(self))
+        return getattr(self, attr_name)
+    return _lazy_property
+
+
 class Results:
     """Allow to read the results from a simulation based on its output folder.
 
@@ -19,7 +33,8 @@ class Results:
                  output_root):
         self.output_directory = output_root
 
-    def score(self):
+    @lazy_property
+    def scores(self):
         """ Extracts the submission scores from the simulation outputs and creates a pandas DataFrame from it.
 
         Parses the submissionScores.txt output file containing the raw and weighted subscores, as well as the general
@@ -49,17 +64,17 @@ class Results:
 
         df = pd.DataFrame(data, columns=columns)
 
-        all_scores = []
+        scores = []
 
         for score_type in ["Weight", "Raw Score", "Weighted Score"]:
             pivoted = pd.pivot_table(df, values=score_type, columns="Component Name", aggfunc="first").reset_index(
                 drop=True)
             pivoted.columns = ["%s_%s" % (i, score_type) for i in pivoted.columns]
-            all_scores.append(pivoted)
-        all_scores = pd.concat(all_scores, 1).astype(float)
-        return all_scores
+            scores.append(pivoted)
+        scores = pd.concat(scores, 1).astype(float)
+        return scores
 
-
+    @lazy_property
     def summary_stats(self):
         """ Extracts the submission statistics from the simulation outputs and creates a pandas DataFrame from it.
 
@@ -72,24 +87,8 @@ class Results:
         """
 
         summary_file = path.join(self.output_directory, "summaryStats.csv")
-        return pd.read_csv(summary_file)
-
-
-def _get_submission_timestamp_from_log(log):
-    """Parses the logs (as a string) of a container to find the precise time at which the output directory was
-    created.
-
-    """
-
-    lines = log.split('\n')
-    for line in lines:
-        if 'Beam output directory is' in line:
-            words = line.split(' ')
-            output_dir = words[-1]
-            timestamp = output_dir.split('/')[-1].split('__')[-1]
-            return timestamp
-    else:
-        raise ValueError("No timestamp found for submission. Error running submission!")
+        summary_stats = pd.read_csv(summary_file)
+        return summary_stats
 
 
 class Submission:
@@ -119,7 +118,7 @@ class Submission:
         time.sleep(10)
         log = container.logs()
         self._submission_id = submission_id
-        self._timestamp = _get_submission_timestamp_from_log(log.decode('utf-8'))
+        self._timestamp = self.__get_submission_timestamp_from_log(log.decode('utf-8'))
         self.n_iters = n_iters
         self.sample_size = sample_size
         self.scenario_name = scenario_name
@@ -127,6 +126,7 @@ class Submission:
         self._container = container
 
         self.output_directory = self._format_out_dir(output_root)
+
         self.results = Results(self.output_directory)
 
     def logs(self):
@@ -168,8 +168,7 @@ class Submission:
              the simulation run.
 
         """
-
-        return self.results.score()
+        return self.results.scores
 
     def summary_stats(self):
         """ Extracts the submission statistics from the simulation outputs and creates a pandas DataFrame from it.
@@ -182,7 +181,7 @@ class Submission:
 
         """
 
-        return self.results.summary_stats()
+        return self.results.summary_stats
 
     def is_complete(self):
         """ Checks if the submission is complete.
@@ -194,6 +193,23 @@ class Submission:
 
         path_submission_scores = path.join(self.output_directory, "competition", "submissionScores.txt")
         return path.exists(path_submission_scores)
+
+    @staticmethod
+    def __get_submission_timestamp_from_log(log):
+        """Parses the logs (as a string) of a container to find the precise time at which the output directory was
+        created.
+
+        """
+
+        lines = log.split('\n')
+        for line in lines:
+            if 'Beam output directory is' in line:
+                words = line.split(' ')
+                output_dir = words[-1]
+                timestamp = output_dir.split('/')[-1].split('__')[-1]
+                return timestamp
+        else:
+            raise ValueError("No timestamp found for submission. Error running submission!")
 
     def __str__(self):
         return "Submission_id: {}\n\t Scenario name: {}\n\t # iters: {}\n\t sample size: {}".format(self._submission_id,
@@ -227,9 +243,6 @@ class AbstractCompetitionExecutor(ABC):
         self.output_root = output_root
         self.client = docker.from_env()
         self.containers = {}
-
-        self.scenario_name = scenario_name
-        self.sample_size = sample_size
 
     def save_inputs(self, input_dictionary, submission_input_root=None):
         """ Save the contestant's inputs into csv files that can be read by the simulation.
@@ -325,11 +338,12 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
             and the scoring function" page of the Starter Kit for the full list of stats)
 
         """
+
         submission = self.containers[submission_id]
 
         if submission.is_complete():
-            scores = submission.results.score()
-            stats = submission.results.summary_stats()
+            scores = submission.results.scores
+            stats = submission.results.summary_stats
 
             return scores, stats
         else:
