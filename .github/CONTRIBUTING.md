@@ -2,7 +2,14 @@
 
 The core development team and maintainers are always grateful to users looking to improve this starter kit. In order to equitably, expeditiously, and courteously resolve issues as well as collaborate on improvements to the code base, we ask that you adhere to the guidelines below.
 
-<!--TODO: Code of conduct?-->
+## What should I know before I get started?
+### Code of Conduct
+
+This project adheres to the Contributor Covenant [code of conduct](CODE_OF_CONDUCT.md).
+By participating, you are expected to uphold this code.
+Please report unacceptable behavior to [sfeygi@ext.uber.com](mailto:sfeygi@ext.uber.com).
+
+## How Can I Contribute?
 
 ### Reporting Bugs
 
@@ -192,6 +199,9 @@ If the above seems daunting to you, please feel free to reach out to the
 Uber Prize community forum (TODO: Add link) or contact the Uber Prize working group technical team leads directly:
 * Sid Feygin: sfeygi@ext.uber.com
 * Valentine Golfier-Vetterli: vgolfi@ext.uber.com
+
+## Attribution
+We thank crowdAI (@crowdAI) for suggesting the template for this documentation, which itself was adapted from the [Atom](https://atom.io) project's [Contributor Guidelines](https://github.com/atom/atom/blob/master/CONTRIBUTING.md).
 
 ## Thank you!
 
