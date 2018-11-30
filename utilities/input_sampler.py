@@ -18,10 +18,13 @@ Here's how to generate a sample of 5 records from each of the input samplers:
 
 Write each to file using <input_df>.to_csv(<filename>, index=None) if desired.
 """
-from pathlib import Path
 import sys
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
+
+from . import lazyprop
 
 # TODO:
 # clearly document somewhere in repo which convention on doc strings we follow
@@ -30,12 +33,63 @@ import pandas as pd
 # also implement clear validation function for what are valid csvs
 #    can be useful for user to know full domain of inputs
 
-# Below are provided for convenience as we expect auxilliary data to remain in
+# Below are provided for convenience as we expect auxiliary data to remain in
 # designated location.
 DIR = Path('..')
 # TODO best to right code in way that it doesn't require messing with path etc
 sys.path.append(str(DIR))
 DATA_DIR = DIR / 'reference-data/'
+
+
+def scenario_agencies(data_dir, scenario_name):
+    """Given root data directory and scenario name, computes a mapping
+    of agency names to their respective paths.
+
+    Parameters
+    ----------
+    data_dir : (Path)
+        Absolute path to root of data directory
+    scenario_name : (str)
+        Name of scenario with GTFS data
+
+    Returns
+    -------
+    (dict)
+        Dictionary of agency names mapped to directories containing files comprising their GTFS data.
+    """
+    gtfs_root = (data_dir / scenario_name).absolute()
+    return {p.stem: p for p in
+            gtfs_root.iterdir()}
+
+
+class AgencyGtfsDataManager(object):
+
+    def __init__(self, agency_gtfs_path):
+        """Used to cache an agency's GTFS data for sampling purposes
+
+        Parameters
+        ----------
+        agency_gtfs_path : (Path)
+            Directory containing the agency's gtfs data
+        """
+
+        self.agency_gtfs_path = agency_gtfs_path
+
+    @lazyprop
+    def routes(self):
+        return pd.read_csv(self.agency_gtfs_path / "gtfs_data/routes.txt", header=0, index_col=1,
+                           na_values=None,
+                           delimiter=',')
+
+    @lazyprop
+    def vehicle_types(self):
+        return pd.read_csv(self.agency_gtfs_path / "availableVehicleTypes.csv", header=0, index_col=0, na_values=None,
+                           delimiter=',')
+
+    @lazyprop
+    def trips(self):
+        return pd.read_csv(self.agency_gtfs_path / "gtfs_data/trips.txt", header=0, index_col=2, na_values=None,
+                           delimiter=',')
 
 
 def sample_vehicle_fleet_mix(num_records, scenario_name):
