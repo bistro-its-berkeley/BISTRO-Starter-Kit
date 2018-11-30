@@ -62,6 +62,9 @@ We recommend that you proceed through the documentation in the following order:
 * `reference-data/sioux_faux_gtfs_data` folder: <br> <br>
 List of the Sioux Faux GTFS data (General Transit Feed Specification). It is a series of text files, each of them modeling a particular aspect of the transit agency's operations: stops, routes, trips, and other schedule data. The details of each file and their relationships are defined in the [GTFS reference](https://developers.google.com/transit/gtfs/reference/).
 
+## Contributing
+
+We always welcome bug reports and enhancement requests from both competitors as well as developers on the Uber Prize-Berkeley Working Group team and elsewhere. Guidelines and suggestions on how to contribute code to this repository may be found in [./github/CONTRIBUTING.md](./github/CONTRIBUTING.md].
 
 ## Contact Information
 
@@ -72,8 +75,6 @@ Alternatively, to contact the Uber Prize working group technical team directly, 
 * Sid Feygin: sfeygi@ext.uber.com
 * Valentine Golfier-Vetterli: vgolfi@ext.uber.com
 
-## Contributing
-Feel free also to post issues and submit pull requests on this start-kit repository if you
-see any unclear information or have any suggestions for improvements.
+
 
 <!--*Note to organizers: Consider setting up a troubleshooting email account so you don't have to use your personal ones*-->
