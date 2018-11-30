@@ -5,21 +5,94 @@ import docker
 import pandas as pd
 
 from functools import wraps
+from abc import ABC, abstractmethod
+
+import time
+import sys
 
 
-def _get_submission_timestamp_from_log(log):
-    """Parses the logs of a container to find the precise time at which the output directory was
-    created."""
+def lazy_property(fn):
+    '''Decorator that makes a property lazy-evaluated.
+    '''
+    attr_name = '_lazy_' + fn.__name__
 
-    lines = log.decode('utf-8').split('\n')
-    for line in lines:
-        if 'Beam output directory is' in line:
-            words = line.split(' ')
-            output_dir = words[-1]
-            timestamp = output_dir.split('/')[-1].split('__')[-1]
-            return timestamp
-    else:
-        raise ValueError("No timestamp found for submission. Error running submission!")
+    @property
+    @wraps(fn)
+    def _lazy_property(self):
+        if not hasattr(self, attr_name):
+            setattr(self, attr_name, fn(self))
+        return getattr(self, attr_name)
+    return _lazy_property
+
+
+class Results:
+    """Allow to read the results from a simulation based on its output folder.
+
+    """
+    def __init__(self,
+                 output_root):
+        self.output_directory = output_root
+
+    @lazy_property
+    def scores(self):
+        """ Extracts the submission scores from the simulation outputs and creates a pandas DataFrame from it.
+
+        Parses the submissionScores.txt output file containing the raw and weighted subscores, as well as the general
+        score of the simulation run. Stores the result in a pandas DataFrame
+
+        Returns
+        -------
+        scores: pandas DataFrame
+                Summary of the raw and weighted subscores, as well as the general score of
+                the simulation run.
+        """
+
+        with open(path.join(self.output_directory, "competition", "submissionScores.txt"), "r") as f:
+            lines = f.readlines()
+
+            data = []
+            for idx, l in enumerate(lines):
+                if idx == 0:
+                    columns = l.rstrip('\n').split("|")
+                    columns = [i.strip() for i in columns]
+                    continue
+                elif idx == 1:
+                    continue
+                values = l.rstrip('\n').split("|")
+                values = [i.strip() for i in values]
+                values = [i if len(i) > 0 else "0" for i in values]
+                data.append(values)
+
+        df = pd.DataFrame(data, columns=columns)
+
+        scores = []
+
+        for score_type in ["Weight", "Raw Score", "Weighted Score"]:
+            pivoted = pd.pivot_table(df, values=score_type, columns="Component Name", aggfunc="first").reset_index(
+                drop=True)
+            pivoted.columns = ["%s_%s" % (i, score_type) for i in pivoted.columns]
+            scores.append(pivoted)
+        scores = pd.concat(scores, 1).astype(float)
+        return scores
+
+    @lazy_property
+    def summary_stats(self):
+        """ Extracts the submission statistics from the simulation outputs and creates a pandas DataFrame from it.
+
+        Reads the summaryStats.csv output file containing many of the raw output statistics of the simulation
+        (see "Understanding the outputs and the scoring function" page of the Starter Kit).
+
+        Returns
+        -------
+        summary_stats: Pandas DataFrame
+            Summary of the output stats of the submission
+
+
+        """
+
+        summary_file = path.join(self.output_directory, "summaryStats.csv")
+        summary_stats = pd.read_csv(summary_file)
+        return summary_stats
 
 
 class Submission(object):
@@ -57,14 +130,16 @@ class Submission(object):
         time.sleep(10)
         log = container.logs()
         self._submission_id = submission_id
-        self._timestamp = _get_submission_timestamp_from_log(log)
-        self.n_iters = num_iterations
+        self._timestamp = self.__get_submission_timestamp_from_log(log.decode('utf-8'))
+        self.n_iters = num_iters
         self.sample_size = sample_size
         self.scenario_name = scenario_name
         self.input_directory = input_directory
         self._container = container
 
         self.output_directory = self._format_out_dir(output_root)
+
+        self.results = Results(self.output_directory)
 
     def logs(self):
         return self._container.logs()
@@ -100,34 +175,7 @@ class Submission(object):
             summary of the raw and weighted subscores, as well as the total score of the simulation run.
 
         """
-
-        with open(path.join(self.output_directory, "competition", "submissionScores.txt"), "r") as f:
-            lines = f.readlines()
-
-            data = []
-            for idx, l in enumerate(lines):
-                if idx == 0:
-                    columns = l.rstrip('\n').split("|")
-                    columns = [i.strip() for i in columns]
-                    continue
-                elif idx == 1:
-                    continue
-                values = l.rstrip('\n').split("|")
-                values = [i.strip() for i in values]
-                values = [i if len(i) > 0 else "0" for i in values]
-                data.append(values)
-
-        df = pd.DataFrame(data, columns=columns)
-
-        all_scores = []
-
-        for score_type in ["Weight", "Raw Score", "Weighted Score"]:
-            pivoted = pd.pivot_table(df, values=score_type, columns="Component Name", aggfunc="first").reset_index(
-                drop=True)
-            pivoted.columns = ["%s_%s" % (i, score_type) for i in pivoted.columns]
-            all_scores.append(pivoted)
-        all_scores = pd.concat(all_scores, 1).astype(float)
-        return all_scores
+        return self.results.scores
 
     def summary_stats(self):
         """ Extracts the submission statistics from the simulation outputs and creates a pandas DataFrame from it.
@@ -142,8 +190,7 @@ class Submission(object):
 
         """
 
-        summary_file = path.join(self.output_directory, "summaryStats.csv")
-        return pd.read_csv(summary_file)
+        return self.results.summary_stats
 
     def is_complete(self):
         """ Checks if the submission is complete.
@@ -157,6 +204,23 @@ class Submission(object):
 
         path_submission_scores = path.join(self.output_directory, "competition", "submissionScores.txt")
         return path.exists(path_submission_scores)
+
+    @staticmethod
+    def __get_submission_timestamp_from_log(log):
+        """Parses the logs (as a string) of a container to find the precise time at which the output directory was
+        created.
+
+        """
+
+        lines = log.split('\n')
+        for line in lines:
+            if 'Beam output directory is' in line:
+                words = line.split(' ')
+                output_dir = words[-1]
+                timestamp = output_dir.split('/')[-1].split('__')[-1]
+                return timestamp
+        else:
+            raise ValueError("No timestamp found for submission. Error running submission!")
 
     def __str__(self):
         return "Submission_id: {}\n\t Scenario name: {}\n\t # iters: {}\n\t sample size: {}".format(self._submission_id,
@@ -178,8 +242,69 @@ def verify_submission_id(func):
 
     return wrapper
 
+class AbstractCompetitionExecutor(ABC):
+    """ Factors the common methods used by subclasses running instances of the simulation with different
+    executors (e.g. Docker, Gradle...)
 
-class CompetitionContainerExecutor:
+    """
+    def __init__(self, input_root=None,
+                 output_root=None):
+        super().__init__()
+        self.input_root = input_root
+        self.output_root = output_root
+        self.client = docker.from_env()
+        self.containers = {}
+
+    def save_inputs(self, input_dictionary, submission_input_root=None):
+        """ Save the contestant's inputs into csv files that can be read by the simulation.
+
+         The dictionary should be structured as follows:
+        - "VehicleFleetMix": Bus fleet mix DataFrame
+        - "ModeSubsidies": Subsidies DataFrame
+        - "FrequencyAdjustment": Frequency Adjustment DataFrame
+
+        The content of the different dataframes can be understood by refering to the documentation
+        (docs/Which-inputs-should-I-optimize.ms)
+
+        Parameters
+        ----------
+        input_dictionary (dictionary):  maps data_name (key) to datafrane (value)
+
+
+        Returns
+        -------
+
+        """
+        input_root = self.input_root
+
+        if input_root is None:
+            if submission_input_root is not None:
+                input_root = submission_input_root
+            else:
+                raise ValueError(
+                    "No input location specified. One must be provided by default on object"
+                    " instantiation or supplied to this method as an argument")
+
+        for input_name, input_dataframe in input_dictionary.items():
+            if input_name not in list_inputs:
+                raise KeyError("{0} is not a valid key for `input_dictionary`.".format(input_name))
+
+            input_dataframe.to_csv(path.join(input_root, input_name,".csv"))
+
+    @abstractmethod
+    def get_submission_scores_and_stats(self, *args, **kwargs):
+        pass
+
+    @abstractmethod
+    def output_simulation_logs(self, *args, **kwargs):
+        pass
+
+    @abstractmethod
+    def run_simulation(self, *args, **kwargs):
+        pass
+
+
+class CompetitionContainerExecutor(AbstractCompetitionExecutor):
     """Utility to run (potentially many) instances of the simulation.
 
     Pointers to docker-py container objects executed by this utility are cached on the field
@@ -196,13 +321,6 @@ class CompetitionContainerExecutor:
         else you will need to do so for every container you create)
 
     """
-
-    def __init__(self, input_root=None,
-                 output_root=None):
-        self.input_root = input_root
-        self.output_root = output_root
-        self.client = docker.from_env()
-        self.containers = {}
 
     def list_running_simulations(self):
         """Queries the run status for executed containers cached on this object in turn
@@ -244,11 +362,12 @@ class CompetitionContainerExecutor:
             The scores do not exist yet i.e the simulation is still running.
 
         """
+
         submission = self.containers[submission_id]
 
         if submission.is_complete():
-            scores = submission.score()
-            stats = submission.summary_stats()
+            scores = submission.results.scores
+            stats = submission.results.summary_stats
 
             return scores, stats
         else:
@@ -401,9 +520,6 @@ class CompetitionContainerExecutor:
 if __name__ == '__main__':
     # Example to demonstrate/test usage. Not a production script. For more detailed explanations, read the API-tutorial
     # Jupyter Notebook in the Starter-Kit repository.
-
-    import time
-    import sys
 
     CONTAINER_ID = 'uber1'
 
