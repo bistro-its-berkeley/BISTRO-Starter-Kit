@@ -153,6 +153,14 @@ Enhancement suggestions are tracked as [GitHub issues](https://guides.github.com
 
 ## Styleguides
 
+### Python Style
+
+
+Beyond standard PEP8 conventions, we try to follow the
+[Google Python style guide](https://google.github.io/styleguide/pyguide.html) with the significant exception that we use the [numpy documentation style](https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html). 
+ 
+
+
 ### Git Commit Messages
 
 * Use the present tense ("Add feature" not "Added feature")

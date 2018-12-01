@@ -41,14 +41,6 @@ import pandas as pd
 from utils import lazyprop
 
 
-# TODO:
-# clearly document somewhere in repo which convention on doc strings we follow
-#   require var name for returns??
-# consider making all filenames and dirs global const
-# also implement clear validation function for what are valid csvs
-#    can be useful for user to know full domain of inputs
-
-
 def scenario_agencies(data_dir, scenario_name):
     """Given root data directory and scenario name, computes a mapping
     of agency names to their respective paths.
