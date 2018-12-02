@@ -269,6 +269,7 @@ class AbstractCompetitionExecutor(ABC):
 
         """
         input_root = self.input_root
+        list_inputs = ["VehicleFleetMix", "ModeSubsidies", "RoadPricing", "FrequencyAdjustment"]
 
         if input_root is None:
             if submission_input_root is not None:
@@ -282,7 +283,7 @@ class AbstractCompetitionExecutor(ABC):
             if input_name not in list_inputs:
                 raise KeyError("{0} is not a valid key for `input_dictionary`.".format(input_name))
 
-            input_dataframe.to_csv(path.join(input_root, input_name,".csv"))
+            input_dataframe.to_csv(path.join(input_root, input_name +".csv"))
 
     @abstractmethod
     def get_submission_scores_and_stats(self, *args, **kwargs):
