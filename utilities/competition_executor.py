@@ -249,8 +249,6 @@ class AbstractCompetitionExecutor(ABC):
         super().__init__()
         self.input_root = input_root
         self.output_root = output_root
-        self.client = docker.from_env()
-        self.containers = {}
 
     def save_inputs(self, input_dictionary, submission_input_root=None):
         """ Save the contestant's inputs into csv files that can be read by the simulation.
@@ -314,6 +312,12 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
                         else you will need to do so for every container you create)
 
     """
+    def __init__(self, input_root=None,
+                 output_root=None):
+        super().__init__(input_root, output_root)
+        self.client = docker.from_env()
+        self.containers = {}
+
 
     def list_running_simulations(self):
         """Queries the run status for executed containers cached on this object in turn
