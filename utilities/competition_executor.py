@@ -202,29 +202,11 @@ class Submission:
         path_submission_scores = path.join(self.output_directory, "competition", "submissionScores.txt")
         return path.exists(path_submission_scores)
 
-    @staticmethod
-    def __get_submission_timestamp_from_log(log):
-        """Parses the logs (as a string) of a container to find the precise time at which the output directory was
-        created.
-
-        """
-
-        lines = log.split('\n')
-        for line in lines:
-            if 'Beam output directory is' in line:
-                words = line.split(' ')
-                output_dir = words[-1]
-                timestamp = output_dir.split('/')[-1].split('__')[-1]
-                return timestamp
-        else:
-            raise ValueError("No timestamp found for submission. Error running submission!")
-
     def __str__(self):
         return "Submission_id: {}\n\t Scenario name: {}\n\t # iters: {}\n\t sample size: {}".format(self._submission_id,
                                                                                                     self.scenario_name,
                                                                                                     self.n_iters,
                                                                                                     self.sample_size)
-
 
 def verify_submission_id(func):
     """Checks that the container id exists in the CompetitionContainerExecutor object."""
@@ -238,6 +220,23 @@ def verify_submission_id(func):
             return func(*args, **kwargs)
 
     return wrapper
+
+def _get_submission_timestamp_from_log(log):
+    """Parses the logs (as a string) of a container to find the precise time at which the output directory was
+    created.
+
+    """
+
+    lines = log.split('\n')
+    for line in lines:
+        if 'Beam output directory is' in line:
+            words = line.split(' ')
+            output_dir = words[-1]
+            timestamp = output_dir.split('/')[-1].split('__')[-1]
+            return timestamp
+    else:
+        raise ValueError("No timestamp found for submission. Error running submission!")
+
 
 class AbstractCompetitionExecutor(ABC):
     """ Factors the common methods used by subclasses running instances of the simulation with different
