@@ -1,14 +1,12 @@
 import multiprocessing
-from os import path
+import sys
 import time
+from abc import ABC, abstractmethod
+from functools import wraps
+from os import path
+
 import docker
 import pandas as pd
-
-from functools import wraps
-from abc import ABC, abstractmethod
-
-import time
-import sys
 
 
 def lazy_property(fn):
@@ -22,6 +20,7 @@ def lazy_property(fn):
         if not hasattr(self, attr_name):
             setattr(self, attr_name, fn(self))
         return getattr(self, attr_name)
+
     return _lazy_property
 
 
@@ -29,6 +28,7 @@ class Results:
     """Allow to read the results from a simulation based on its output folder.
 
     """
+
     def __init__(self,
                  output_root):
         self.output_directory = output_root
@@ -131,7 +131,7 @@ class Submission(object):
         log = container.logs()
         self._submission_id = submission_id
         self._timestamp = self.__get_submission_timestamp_from_log(log.decode('utf-8'))
-        self.n_iters = num_iters
+        self.num_iterations = num_iterations
         self.sample_size = sample_size
         self.scenario_name = scenario_name
         self.input_directory = input_directory
@@ -225,7 +225,7 @@ class Submission(object):
     def __str__(self):
         return "Submission_id: {}\n\t Scenario name: {}\n\t # iters: {}\n\t sample size: {}".format(self._submission_id,
                                                                                                     self.scenario_name,
-                                                                                                    self.n_iters,
+                                                                                                    self.num_iterations,
                                                                                                     self.sample_size)
 
 
@@ -242,11 +242,13 @@ def verify_submission_id(func):
 
     return wrapper
 
+
 class AbstractCompetitionExecutor(ABC):
     """ Factors the common methods used by subclasses running instances of the simulation with different
     executors (e.g. Docker, Gradle...)
 
     """
+
     def __init__(self, input_root=None,
                  output_root=None):
         super().__init__()
@@ -289,7 +291,7 @@ class AbstractCompetitionExecutor(ABC):
             if input_name not in list_inputs:
                 raise KeyError("{0} is not a valid key for `input_dictionary`.".format(input_name))
 
-            input_dataframe.to_csv(path.join(input_root, input_name,".csv"))
+            input_dataframe.to_csv(path.join(input_root, input_name, ".csv"))
 
     @abstractmethod
     def get_submission_scores_and_stats(self, *args, **kwargs):
@@ -435,7 +437,6 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
 
         """
         return self.containers[sim_name].is_complete()
-
 
     def run_simulation(self,
                        submission_id,
