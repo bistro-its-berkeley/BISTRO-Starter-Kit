@@ -22,6 +22,7 @@ Sioux Faux), but you can just iterate through the agency mapping if more agencie
 
     {{
     agency = 'sioux_faux_bus_lines'
+    agency_dict = scenario_agencies(DATA_DIR,"siouxfalls")
     # Create a lazy cache of GTFS data for the agency:
     sf_gtfs_manager = AgencyGtfsDataManager(agency_dict[agency])
 
@@ -95,7 +96,7 @@ class AgencyGtfsDataManager(object):
                            delimiter=',')
 
 
-def sample_vehicle_fleet_mix(num_records, gtfs_manager):
+def sample_vehicle_fleet_mix_input(num_records, gtfs_manager):
     """Generate random `VehicleFleetMix` input according to possible substitute
     vehicle trip ids available for an agency.
 
@@ -140,7 +141,7 @@ def _get_valid_start_end_time(min_secs, max_secs, headway_secs):
         return st, et
 
 
-def sample_frequency_adjustment(num_records, gtfs_manager):
+def sample_frequency_adjustment_input(num_records, gtfs_manager):
     """Generate random `FrequencyAdjustment` inputs according to trips run by
     an agency.
 
@@ -202,7 +203,7 @@ def sample_format_range(tuple_range):
     return "{}{}:{}{}".format(left_inc, a, b, right_inc)
 
 
-def sample_mode_subsisdies_input(num_records):
+def sample_mode_subsidies_input(num_records):
     """Generate random mode subsidies inputs based on modes available for
     subsidies.
 
