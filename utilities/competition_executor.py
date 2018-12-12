@@ -84,7 +84,7 @@ class Results:
 
         Returns
         -------
-        summary_stats: Pandas DataFrame
+        summary_stats: pandas DataFrame
             Summary of the output stats of the submission
 
 
@@ -93,6 +93,21 @@ class Results:
         summary_file = path.join(self.output_directory, "summaryStats.csv")
         summary_stats = pd.read_csv(summary_file)
         return summary_stats
+
+    @lazy_property
+    def mode_choice(self):
+        """ Extracts the mode choice of agents from the simulation outputs and creates a pandas DataFrame from it.
+
+        Reads the modeChoice.csv output file containing the distribution of agents among available transportation modes.
+
+        Returns
+        -------
+        mode_choice: pandas DataFrame
+            Summary of the number of users per transportaion mode.
+        """
+        mode_choice_file = path.join(self.output_directory, "modeChoice.csv")
+        mode_choice = pd.read_csv(mode_choice_file)
+        return mode_choice
 
 
 class Submission:
@@ -129,7 +144,7 @@ class Submission:
         self.input_directory = input_directory
         self._container = container
 
-        self.output_directory = self._format_out_dir(output_root)
+        self.output_directory = self._format_output_directory(output_root)
 
         self.results = Results(self.output_directory)
 
@@ -149,7 +164,7 @@ class Submission:
     def reload(self):
         self._container.reload()
 
-    def _format_out_dir(self, output_root):
+    def _format_output_directory(self, output_root):
         """Automatically creates the path to the output directory of the simulation.
 
         Parameters
@@ -282,7 +297,7 @@ class AbstractCompetitionExecutor(ABC):
             if input_name not in list_inputs:
                 raise KeyError("{0} is not a valid key for `input_dictionary`.".format(input_name))
 
-            input_dataframe.to_csv(path.join(input_root, input_name +".csv"))
+            input_dataframe.to_csv(path.join(input_root, input_name +".csv"), index=False)
 
     @abstractmethod
     def get_submission_scores_and_stats(self, *args, **kwargs):
