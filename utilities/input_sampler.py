@@ -1,194 +1,238 @@
-"""Utility functions provided to sample random inputs for execution in Uber Prize
+"""Utility functions to sample random inputs for execution in Uber Prize.
 
 Example
 -------
-Here's how to generate a sample of 5 records from each of the provided input samplers::
+Provide the root to the data directory and select a scenario:
+
+{{
+    # By default, this is /reference-data in the root of this repository
+    ROOT_DATA_DIR = <path_to_data_dir_as_string>
+}}
+
+Get the mapping of agencies to paths for this :
+
+{{
+    SCENARIO_NAME = 'sioux_faux'
+    agency_dict = scenario_agencies(DATA_DIR, SCENARIO_NAME)
+}}
+
+Here's how to generate a sample of 5 records from each of the input samplers for an agency as
+separate Pandas `DataFrame`s. For illustrative purposes, we only one agency (the only one in
+Sioux Faux), but you can just iterate through the agency mapping if more agencies are desired:
 
     {{
-    SCENARIO_NAME = 'sioux_faux'
+    agency = 'sioux_faux_bus_lines'
+    agency_dict = scenario_agencies(DATA_DIR,"siouxfalls")
+    # Create a lazy cache of GTFS data for the agency:
+    sf_gtfs_manager = AgencyGtfsDataManager(agency_dict[agency])
 
-    DIR = Path('..')
-    sys.path.append(str(DIR))
-    DATA_DIR = DIR / 'reference-data/'
-
-    freq_df = sample_frequency_adjustments(5, SCENARIO_NAME)
-    mode_subsidy_df = sample_mode_subsidies(5)
-    vehicle_fleet_mix_df = sample_vehicle_fleet_mix(5, SCENARIO_NAME)
+    freq_df = sample_frequency_adjustments(num_records, sf_gtfs_manager)
+    mode_subsidy_df = sample_mode_subsidies(num_records)
+    vehicle_fleet_mix_df = sample_vehicle_fleet_mix(num_records, sf_gtfs_manager)
     }}
 
-Write each to file using <input_df>.to_csv(<filename>, index=None) if desired.
+Write each dataframe of samples to file using <input_df>.to_csv(<filename>, index=None) if desired.
 """
-import sys
+
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
-# Below are provided for convenience as we expect auxilliary data to remain in designated location.
-DIR = Path('..')
-sys.path.append(str(DIR))
-DATA_DIR = DIR / 'reference-data/'
+from utils import lazyprop
 
 
-def sample_vehicle_fleet_mix(num_records, scenario_name):
-    """Generate random VehicleFleetMix input according to possible substitute vehicle trip ids available for
-    each agency.
+def scenario_agencies(data_dir, scenario_name):
+    """Given root data directory and scenario name, computes a mapping
+    of agency names to their respective paths.
 
     Parameters
     ----------
-    num_records : (int)
-        Number of randomly sampled records to create
-
+    data_dir : (Path)
+        Absolute path to root of data directory
     scenario_name : (str)
-        Name of scenario (used for path resolution purposes)
+        Name of scenario with GTFS data
 
     Returns
     -------
-    `pd.DataFrame`
-        `num_records` VehicleFleetMix records. These are unique by `routeId` for each `agencyId`.
+    (dict)
+        Dictionary of agency names mapped to directories containing files comprising their GTFS
+        data.
     """
-    gtfs_root = DATA_DIR / scenario_name
-    agencies = gtfs_root.iterdir()
-    route_ids = []
-    vehicle_type_ids = []
-    agency_ids = []
-    for agency_path in agencies:
-        route_df = pd.read_csv(agency_path / "gtfs_data/routes.txt")
-        route_ids.append(route_df.route_id.values.tolist())
-        vehicle_type_ids.append(pd.read_csv(agency_path / "availableVehicleTypes.csv").vehicleTypeId.values.tolist())
-        agency_ids.append(route_df['agency_id'].values[0])
-
-    res = []
-    pairs = []
-    while len(res) < num_records:
-        agency_ind = np.random.choice(len(agency_ids), 1)[0]
-        agency_id, route_ids_for_agency_id, vehicle_type_ids_for_agency_id = agency_ids[agency_ind], \
-                                                                             np.random.choice(route_ids[agency_ind], 1), \
-                                                                             np.random.choice(
-                                                                                 vehicle_type_ids[agency_ind], 1)
-        route_id = np.random.choice(route_ids_for_agency_id, 1)[0]
-        if len(pairs) == 0:
-            pairs.append((agency_id, route_id))
-        elif (agency_id, route_id) in pairs:
-            continue
-        else:
-            pairs.append((agency_id, route_id))
-        vehicle_type_id = np.random.choice(vehicle_type_ids_for_agency_id, 1)[0]
-        res.append({'agencyId': agency_id, 'routeId': route_id, 'vehicleTypeId': vehicle_type_id})
-    return pd.DataFrame(res)
+    gtfs_root = (data_dir / scenario_name).absolute()
+    return {p.stem: p for p in
+            gtfs_root.iterdir()}
 
 
-def sample_frequency_adjustments(num_records, scenario_name):
-    """Generate random FrequencyAdjustment inputs according to trips run by an agency
+class AgencyGtfsDataManager(object):
 
-    Creates `num_records` records where fields for each record where the `headway_secs` field is randomly chosen
-    from a range of between 0 and 12000 seconds at intervals of 60 seconds and the `min_time` and `max_time`
-    field are sampled between the 0 and 86340 seconds, respectively (i.e., the possible minimum and maximum number of
-    seconds in a day of 86359 seconds, given the headway interval).
+    def __init__(self, agency_gtfs_path):
+        """Used to cache an agency's GTFS data for sampling purposes
+
+        Parameters
+        ----------
+        agency_gtfs_path : (Path)
+            Directory containing the agency's gtfs data
+        """
+
+        self.agency_gtfs_path = agency_gtfs_path
+
+    @lazyprop
+    def routes(self):
+        return pd.read_csv(self.agency_gtfs_path / "gtfs_data/routes.txt", header=0, index_col=1,
+                           na_values=None,
+                           delimiter=',')
+
+    @lazyprop
+    def vehicle_types(self):
+        return pd.read_csv(self.agency_gtfs_path / "availableVehicleTypes.csv", header=0,
+                           index_col=0, na_values=None,
+                           delimiter=',')
+
+    @lazyprop
+    def trips(self):
+        return pd.read_csv(self.agency_gtfs_path / "gtfs_data/trips.txt", header=0, index_col=2,
+                           na_values=None,
+                           delimiter=',')
+
+
+def sample_vehicle_fleet_mix_input(num_records, gtfs_manager):
+    """Generate random `VehicleFleetMix` input according to possible substitute
+    vehicle trip ids available for an agency.
 
     Parameters
     ----------
     num_records : (int)
-        Number of randomly sampled records to create
-    scenario_name: (str)
-        Name of scenario (used for path resolution purposes)
+        Number of randomly sampled records to create.
+    gtfs_manager : (`AgencyGtfsDataManager`)
+        An instance of the `AgencyGtfsDataManager` for the target agency.
+
     Returns
     -------
     `pd.DataFrame`
-        `num_records` FrequencyAdjustmentInput records
+        `num_records` `VehicleFleetMix` records. These are unique by `routeId`
+        for the `agencyId` specified on the `gtfs_manager`
+
+    Raises
+    ------
+    `ValueError`
+        If the `num_records` is in excess of the number of routes that an agency schedules buses on.
     """
-
-    res = []
-    trip_ids = []
-    gtfs_root = DATA_DIR / scenario_name
-    agencies = gtfs_root.iterdir()
-
-    # FIXME[saf}: implement for multiple agencies; taking one for now.
-    agency_path = list(agencies)[0]
-    possible_trip_ids = pd.read_csv(agency_path / 'gtfs_data/trips.txt').trip_id.values.tolist()
-
-    for _ in range(num_records):
-        min_s = 0
-        max_s = 86340
-        headway_secs = np.random.choice(range(0, 12000, 60))
-
-        def gen_trip_id():
-            tid = np.random.choice(possible_trip_ids, 1)[0]
-            if tid in trip_ids:
-                return gen_trip_id()
-            else:
-                return tid
-
-        trip_id = gen_trip_id()
-        trip_ids.append(trip_id)
-
-        def get_valid_start_end_time():
-            st, et = sorted(np.random.choice(list(range(min_s, max_s, 60)), 2))
-            if (et - st) < headway_secs:
-                return get_valid_start_end_time()
-            else:
-                return st, et
-
-        start_time, end_time = get_valid_start_end_time()
-
-        res.append({'trip_id': trip_id, 'start_time': start_time, 'end_time': end_time, 'headway_secs': headway_secs,
-                    'exact_times': 0})
-
-    df = pd.DataFrame(res, columns=['trip_id', 'start_time', 'end_time', 'headway_secs', 'exact_times'])
-
+    max_num_routes = gtfs_manager.routes.shape[0]
+    if num_records > max_num_routes:
+        raise ValueError(
+            "More samples requested than the number of routes available in agency; please enter a "
+            "number less than {}".format(
+                max_num_routes))
+    route_agency_sample = gtfs_manager.routes.sample(num_records)
+    routes = pd.Series(route_agency_sample.index.values)
+    agency = pd.Series(route_agency_sample.agency_id.values)
+    vehicles = pd.Series(gtfs_manager.vehicle_types.sample(num_records, replace=True).index)
+    df = pd.concat([routes, agency, vehicles], axis=1, ignore_index=True)
+    df.columns = ["routeId", "agencyId", "vehicleType"]
     return df
 
 
-def format_range_with_sampled_inclusivity(rng):
-    """Randomly select range inclusivity (i.e., inclusive or exclusive on lower or upper bound of provided range).
+def _get_valid_start_end_time(min_secs, max_secs, headway_secs):
+    st, et = sorted(np.random.choice(list(range(min_secs, max_secs, 60)), 2))
+    if (et - st) < headway_secs:
+        return _get_valid_start_end_time(min_secs, max_secs, headway_secs)
+    else:
+        return st, et
+
+
+def sample_frequency_adjustment_input(num_records, gtfs_manager):
+    """Generate random `FrequencyAdjustment` inputs according to trips run by
+    an agency.
+
+    Creates `num_records` records where fields for each record where the
+    `headway_secs` field is randomly chosen from a range of between 0 and 12000
+    seconds at intervals of 60 seconds and the `min_time` and `max_time` field
+    are sampled between the 0 and 86340 seconds, respectively (i.e.,
+    the possible minimum and maximum number of seconds in a day of 86359
+    seconds, given the headway interval).
 
     Parameters
     ----------
-    rng : (tuple)
-         Tuple of exactly two ints, where rng[0] < rng[1]
+    num_records : (int)
+        Number of randomly sampled records to create.
+    gtfs_manager : (`AgencyGtfsDataManager`)
+        An instance of the `AgencyGtfsDataManager` for the target agency.
+
+    Returns
+    -------
+    `pd.DataFrame`
+        `num_records` `FrequencyAdjustmentInput` records.
+    """
+
+    min_secs = 0
+    max_secs = 86340
+
+    headway_secs_arr = np.random.choice(range(0, 12000, 60), num_records)
+    trip_ids = pd.Series(gtfs_manager.trips.sample(num_records).index.values)
+
+    times_df = pd.DataFrame(
+        [_get_valid_start_end_time(min_secs, max_secs, headway_secs) for headway_secs in
+         headway_secs_arr])
+    res_df = pd.concat([trip_ids, times_df, pd.Series(headway_secs_arr)], axis=1, ignore_index=True)
+    res_df.columns = ['trip_id', 'start_time', 'end_time', 'headway_secs']
+    res_df['exact_times'] = 0
+    return res_df
+
+
+def sample_format_range(tuple_range):
+    """Randomly select range inclusivity (i.e., inclusive or exclusive on lower
+    or upper bound of provided range).
+
+    As is typical mathematical notation, '(' or ')' means exclusive and '[' or ']' means inclusive.
+
+    Parameters
+    ----------
+    tuple_range : (tuple)
+         Tuple of exactly two ints, where tuple_range[0] < tuple_range[1]
 
     Returns
     -------
     str
-        The input range formatted as a string in mathematical notation with ':' setting off the lower and upper bound.
+        The input range formatted as a string in mathematical notation with ':'
+        setting off the lower and upper bound.
     """
-    a, b = rng
+    a, b = tuple_range
     left_inc = np.random.choice(['(', '['])
     right_inc = np.random.choice([')', ']'])
     return "{}{}:{}{}".format(left_inc, a, b, right_inc)
 
 
-def sample_mode_subsidies(num_records):
-    """Generate random mode subsidies inputs based on modes available for subsidies.
+def sample_mode_subsidies_input(num_records):
+    """Generate random mode subsidies inputs based on modes available for
+    subsidies.
 
     Creates `num_records` ModeSubsidyInput records where fields for each record
-    are randomly sampled as follows::
+    are randomly sampled as follows:
         * `age` : uniformly from `range(0,120,1)`.
-        * `mode` : uniformly from list of available modes for scenario
+        * `mode` : uniformly from list of available modes for scenario.
         * `income` : uniformly from `range(0,300000,1000)`.
-        * `amount` : uniformly from `range(0.1,20)`
+        * `amount` : uniformly from `range(0.1,20)`.
 
     The amount of subsidy is rounded to the nearest $0.10.
 
     Parameters
     ----------
     num_records : (int)
-        Number of randomly sampled records to create
+        Number of randomly sampled records to create.
 
     Returns
     -------
     `DataFrame`
-        `num_records` ModeSubsidyInput records
+        `num_records` `ModeSubsidyInput` records.
     """
-    res = []
-    for _ in range(num_records):
-        # TODO[saf]: make possible modes configurable by scenario
-        possible_modes = ['walk_transit', 'ride_hail', 'walk_transit', 'walk', 'car', 'drive_transit']
-        mode = np.random.choice(possible_modes)
-        age = tuple(sorted(np.random.choice(120, 2)))
-        income = tuple(sorted(np.random.choice(range(0, 300000, 1000), 2)))
-        amount = np.round(np.random.uniform(0.1, 20), 1)
-
-        res.append({'mode': mode, 'age': format_range_with_sampled_inclusivity(age),
-                    'income': format_range_with_sampled_inclusivity(income), 'amount': amount})
-    return pd.DataFrame(res, columns=['mode', 'age', 'income', 'amount'])
+    possible_modes = ['walk_transit', 'ride_hail', 'walk_transit', 'walk',
+                      'car', 'drive_transit']
+    modes = np.random.choice(possible_modes, num_records).tolist()
+    ages = [sample_format_range(tuple(sorted(np.random.choice(120, 2)))) for _ in
+            range(num_records)]
+    incomes = [sample_format_range(tuple(sorted(np.random.choice(range(0, 300000, 1000), 2)))) for _
+               in range(num_records)]
+    amounts = [np.round(np.random.uniform(0.1, 20), 1) for _ in range(num_records)]
+    return pd.DataFrame(np.array([modes, ages, incomes, amounts]).T,
+                        columns=['mode', 'age', 'income', 'amount'])

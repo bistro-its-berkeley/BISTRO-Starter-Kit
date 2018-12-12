@@ -1,14 +1,12 @@
 import multiprocessing
+import sys
+import time
+from abc import ABC, abstractmethod
+from functools import wraps
 from os import path
 
 import docker
 import pandas as pd
-
-from functools import wraps
-from abc import ABC, abstractmethod
-
-import time
-import sys
 
 
 def lazy_property(fn):
@@ -22,6 +20,7 @@ def lazy_property(fn):
         if not hasattr(self, attr_name):
             setattr(self, attr_name, fn(self))
         return getattr(self, attr_name)
+
     return _lazy_property
 
 
@@ -29,6 +28,7 @@ class Results:
     """Allow to read the results from a simulation based on its output folder.
 
     """
+
     def __init__(self,
                  output_root):
         self.output_directory = output_root
@@ -110,18 +110,26 @@ class Results:
         return mode_choice
 
 
-class Submission:
+class Submission(object):
     """Points to the simulation as the submission is executing and thus permits the querying of the simulation state
-    as it executes within the container. Additionally this class summarizes the submission results of a specific
-    simulation run.
+    as it executes within the container.
 
-    Args:
-        submission_id (string): : identifier of the simulation instance (will become the container name)
-        scenario_name (string): Which of the available scenarios will be run in the container (i.e SiouxFalls)
-        input_directory (string): Location of the input files of the simulation
-        output_root(string): Location of the output directory for the simulation
-        sample_size (string): available samples size (scenario dependent, see documentation, i.e 1k)
-        num_iterations (float): number of iterations to run BEAM simulation engine
+    Additionally this class summarizes the submission results of a specific simulation run.
+
+    Parameters
+    ----------
+        submission_id : string
+            Identifier of the simulation instance (will become the container name)
+        scenario_name : string
+            Which of the available scenarios will be run in the container (i.e SiouxFalls)
+        input_directory : string
+            Location of the input files for the simulation
+        output_root :string:
+            Location of the output directory for the simulation
+        sample_size : string:
+            Available samples size (scenario dependent, see documentation, i.e 1k)
+        num_iterations: float:
+            Number of iterations to run BEAM simulation engine
 
     """
 
@@ -131,7 +139,7 @@ class Submission:
                  input_directory,
                  output_root,
                  sample_size,
-                 n_iters,
+                 num_iterations,
                  container):
         # Delay initialization in order to get timestamp
         time.sleep(10)
@@ -176,6 +184,7 @@ class Submission:
         -------
         :str
             path of the output directory
+
         """
         return path.join(output_root, self.scenario_name,
                          "{}-{}__{}".format(self.scenario_name, self.sample_size, self._timestamp))
@@ -183,12 +192,13 @@ class Submission:
     def score(self):
         """ Extracts the submission scores from the simulation outputs and creates a pandas DataFrame from it.
 
-        Parses the submissionScores.txt output file containing the raw and weighted subscores, as well as the general
-        score of the simulation run. Stores the result in a pandas DataFrame
+        Parses the submissionScores.txt output file containing the raw and weighted subscores,
+        as well as the general score of the simulation run. Stores the result in a pandas DataFrame
 
-        Returns:
-             all_scores (pandas DataFrame): summary of the raw and weighted subscores, as well as the general score of
-             the simulation run.
+        Returns
+        -------
+        all_scores : pd.DataFrame
+            summary of the raw and weighted subscores, as well as the total score of the simulation run.
 
         """
         return self.results.scores
@@ -199,8 +209,10 @@ class Submission:
         Reads the summaryStats.csv output file containing many of the raw output statistics of the simulation
         (see "Understanding the outputs and the scoring function" page of the Starter Kit).
 
-        Returns:
-             (Pandas DataFrame): summary of the output stats of the submission
+        Returns
+        -------
+         DataFrame:
+            Summary of the output stats of the submission
 
         """
 
@@ -209,8 +221,10 @@ class Submission:
     def is_complete(self):
         """ Checks if the submission is complete.
 
-        Returns:
-            bool: The return value. True if the simulation is complete, False otherwise.
+        Returns
+        -------
+        bool
+            True if the simulation is complete, False otherwise.
 
         """
 
@@ -220,7 +234,7 @@ class Submission:
     def __str__(self):
         return "Submission_id: {}\n\t Scenario name: {}\n\t # iters: {}\n\t sample size: {}".format(self._submission_id,
                                                                                                     self.scenario_name,
-                                                                                                    self.n_iters,
+                                                                                                    self.num_iterations,
                                                                                                     self.sample_size)
 
 def verify_submission_id(func):
@@ -258,6 +272,7 @@ class AbstractCompetitionExecutor(ABC):
     executors (e.g. Docker, Gradle...)
 
     """
+
     def __init__(self, input_root=None,
                  output_root=None):
         super().__init__()
@@ -319,11 +334,14 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
     self.containers under the name specified in the self.run(...) method. Convenience methods on this object can be
     used to simplify interaction with one or many of these containers.
 
-    Args:
-        input_root (string): a permanent input file directory, i.e., /submission-inputs (if you expect not to feed
-                      this in manually; see run method below).
-        output_root (string): a permanent output file directory (it's a good idea to set this,
-                        else you will need to do so for every container you create)
+    Parameters
+    ----------
+    input_root : str
+        a permanent input file directory, i.e., /submission-inputs
+        (if you expect not to feed this in manually; see run method below).
+    output_root : str
+        a permanent output file directory (it's a good idea to set this,
+        else you will need to do so for every container you create)
 
     """
     def __init__(self, input_root=None,
@@ -337,7 +355,8 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
         """Queries the run status for executed containers cached on this object in turn
         (updating their statuses as appropriate).
 
-        Returns: a list of running containers
+        Returns:
+            a list of running containers
 
         """
         running = []
@@ -350,17 +369,26 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
     @verify_submission_id
     def get_submission_scores_and_stats(self, submission_id):
         """ Returns two of the simulation outputs (as pandas DataFrames) for a specific submission ID:
-        the scores and the statistics. The function raises ValueError when the scores do not exist yet i.e the
-        simulation is still running.
+        the scores and the statistics.
 
-        Args:
-            submission_id (string):
 
-        Returns:
-            scores (pandas DataFrame): summary of the raw and weighted sub-scores  as well aas the final score of the
-            submission
-            stats (pandas DataFrame): summary of the output stats of the submission. (see "Understanding the outputs
+        Parameters
+        ----------
+        submission_id : str
+            The unique identifier for the submission
+
+        Returns
+        -------
+        Tuple(DataFrame,DataFrame)
+            [0] Summary of the raw and weighted sub-scores as well as the final score of the
+            submission, and;
+            [1] summary of the output stats of the submission. (see "Understanding the outputs
             and the scoring function" page of the Starter Kit for the full list of stats)
+
+        Raises
+        ------
+        ValueError
+            The scores do not exist yet i.e the simulation is still running.
 
         """
 
@@ -378,10 +406,12 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
         """Stops all simulations. Containers are removed (both from this object and the docker daemon by default).
 
         Removal frees the names that were used to execute containers previously, so it's generally a good idea to
-        remove if you will be planning reusing names.
+        remove if you plan to reuse names.
 
-        Args:
-            remove: whether to remove the containers cached on this object.
+        Parameters
+        ----------
+        remove : bool
+            Whether to remove the containers cached on this object.
 
         """
         for container in self.containers.values():
@@ -394,9 +424,18 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
     def output_simulation_logs(self, sim_name, filename=None):
         """Prints a specified simulation log or writes to file if filename is provided.
 
-        Args:
-            sim_name (string): name of the the requested simulation
-            filename (string, optional): a path to which to save the logfile
+
+        Parameters
+        ----------
+        sim_name : str
+            Name of the the requested simulation
+        filename : str, optional
+            A path to which to save the logfile
+
+        Returns
+        -------
+        str
+            Log output as bytestring
 
         """
 
@@ -412,15 +451,19 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
     def check_if_submission_complete(self, sim_name):
         """ Checks if a given submission is complete.
 
-        Args:
-            sim_name (string): identifier of the simulation instance
+        Parameters
+        ----------
+        sim_name : (string)
+            identifier of the simulation instance
 
-        Returns:
-            bool: True if the given simulation is complete, False otherwise
+        Returns
+        -------
+        bool :
+            True if the given simulation is complete, False otherwise
+
 
         """
         return self.containers[sim_name].is_complete()
-
 
     def run_simulation(self,
                        submission_id,
@@ -449,6 +492,7 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
         submission_input_root : str
             The (absolute) path where simulation inputs are located
         scenario_name : str
+            Name of the current scenario (e.g., "sioux_faux")
         sample_size : str
              The available sample size (scenario dependent, see documentation).
         num_iterations : int
@@ -456,6 +500,11 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
         num_cpus : str
             Number of cpus to allocate to container (0.01 - Runtime.getRuntime().availableProcessors())
         mem_limit : int
+
+
+        Raises
+        ------
+        ValueError
 
         """
         output_root = self.output_root
@@ -466,14 +515,16 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
                 output_root = submission_output_root
             else:
                 raise ValueError(
-                    "No output location specified. One must be provided by default on object instantiation or supplied to this method as an argument.")
+                    "No output location specified. One must be provided by default "
+                    "on object instantiation or supplied to this method as an argument.")
 
         if input_root is None:
             if submission_input_root is not None:
                 input_root = submission_input_root
             else:
                 raise ValueError(
-                    "No input location specified. One must be provided by default on object instantiation or supplied to this method as an argument.")
+                    "No input location specified. One must be provided by default "
+                    "on object instantiation or supplied to this method as an argument.")
 
         container = self.client.containers.run('beammodel/beam-competition:0.0.1-SNAPSHOT',
                                                name=submission_id,
