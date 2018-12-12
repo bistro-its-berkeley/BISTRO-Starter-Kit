@@ -137,7 +137,7 @@ class Submission:
         time.sleep(10)
         log = container.logs()
         self._submission_id = submission_id
-        self._timestamp = self.__get_submission_timestamp_from_log(log.decode('utf-8'))
+        self._timestamp = _get_submission_timestamp_from_log(log.decode('utf-8'))
         self.n_iters = n_iters
         self.sample_size = sample_size
         self.scenario_name = scenario_name
