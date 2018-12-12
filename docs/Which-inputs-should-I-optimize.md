@@ -90,7 +90,9 @@ The third input you have control over is the frequency of buses assigned to a ro
 Before explaining how the AdjustFrequency input works, a few terms must be defined. 
 
 * A **route** is made of a group of *trips* that are displayed to riders as a single service. Each bus route can be identified with a `route_id`. To understand the geospatial embedding of each Route corresponding to a `route_id`, please refer to Figure 1, above.   
-* Each **trip** is a sequence of two or more *stops* that occurs at specific time and is identified by a `trip_id`. The trips corresponding to each route are described in the `trips.txt` [file](https://developers.google.com/transit/gtfs/reference/?csw=1#tripstxt). For Sioux Faux, the existing SFBL trips are described in the [trip.txt](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt)file of the [gtfs-data](https://github.com/vgolfier/Uber-Prize-Starter-Kit/tree/master/reference-data/sioux_faux/sioux_faux_bus_lines).
+* A **trip** is a sequence of two or more *stops* that occurs at specific time and is identified by a `trip_id`. The trips corresponding to each route are described in the `trips.txt` [file](https://developers.google.com/transit/gtfs/reference/?csw=1#tripstxt). For Sioux Faux, the existing SFBL trips are described in the [trip.txt](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt)file of the [gtfs-data](https://github.com/vgolfier/Uber-Prize-Starter-Kit/tree/master/reference-data/sioux_faux/sioux_faux_bus_lines).
+* Each trip get assigned a **service_id**, 
+
 
  The first field in this file, `trip_id`, refers to a corresponding trip identifier in the `trips.txt` [file](https://developers.google.com/transit/gtfs/reference/?csw=1#tripstxt). 
 
