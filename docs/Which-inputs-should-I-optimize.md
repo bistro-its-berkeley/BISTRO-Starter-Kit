@@ -106,3 +106,6 @@ Before explaining how the AdjustFrequency input works, a few terms must be defin
 ![Bus Fequency Input](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Bus_frequencies_inputs.png)
 ***Figure 6: Bus Frequency Input***
 
+### **4. Public Transportation Fares**
+The last input that you will be able to modify is the **bus fare**, i.e. the cost to a passenger of traveling by bus. Passengers pay one *flat fare* each time they board a bus, which can be changed in the [`PtFares.csv`](link) input file.
+
