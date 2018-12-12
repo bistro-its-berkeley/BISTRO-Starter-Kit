@@ -1,4 +1,4 @@
-t_75380_b_219_tn_2,arrival_time,departure_time,stop_id,stop_sequence,stop_headsign,pickup_type,drop_off_type,shape_dist_traveled,timepoint,continuous_stops,area_id,service_area_radius
+trip_id,arrival_time,departure_time,stop_id,stop_sequence,stop_headsign,pickup_type,drop_off_type,shape_dist_traveled,timepoint,continuous_stops,area_id,service_area_radius
 t_13118_b_219_tn_0,07:20:00,07:20:00,767253,1,,0,0,0,0,0,,
 t_13118_b_219_tn_0,,,767291,2,,0,0,376.244493998896,0,0,,
 t_13118_b_219_tn_0,,,767292,3,,0,0,846.862272315561,0,0,,
