@@ -21,7 +21,7 @@ Files representing input settings can be found in `.csv` format in the `submissi
 
 ### **1. Bus fleet composition**
 
-The file `VehicleFleetMix.csv` permits modification of the bus fleet (see Fig.2). Currently, SFBL (`agencyID` = 217) operates 12 bus routes in Sioux Faux using a standard bus type, which we designate `BUS-DEFAULT`. During the Pilot Test, you can decide which type of bus (i.e. `vehicleTypeId`) will provide service for each route (`routeID`, see Fig.1 & 2). Each route can utilize only **one type of bus**. 
+The file `VehicleFleetMix.csv` permits modification of the bus fleet (see Fig.2). Currently, the Sioux Faux Bus Lines agency (SFBL, `agencyID` = 217) operates 12 bus routes in Sioux Faux using a standard bus type, which we designate `BUS-DEFAULT`. During the Pilot Test, you can decide which type of bus (i.e. `vehicleTypeId`) will provide service for each route (`routeID`, see Fig.1 & 2). Each route can utilize only **one type of bus**. 
 
 
 ![Route IDs](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/sf_route_guide.png)\
@@ -91,16 +91,27 @@ Before explaining how the AdjustFrequency input works, a few terms must be defin
 
 * A **route** is made of a group of *trips* that are displayed to riders as a single service. Each bus route can be identified with a `route_id`. To understand the geospatial embedding of each Route corresponding to a `route_id`, please refer to Figure 1, above.   
 * A **trip** is a sequence of two or more *stops* that occurs at specific time and is identified by a `trip_id`. The trips corresponding to each route are described in the `trips.txt` [file](https://developers.google.com/transit/gtfs/reference/?csw=1#tripstxt). For Sioux Faux, the existing SFBL trips are described in the [trip.txt](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt)file of the [gtfs-data](https://github.com/vgolfier/Uber-Prize-Starter-Kit/tree/master/reference-data/sioux_faux/sioux_faux_bus_lines).
-* Each trip get assigned a **service_id**, which uniquely identifies a set of dates when service is available. SFBL has two operational timeframes (see [`calendar.txt`](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/calendar.txt) file:
-  * service on week days (Mon-Fri): `service_id` = `c_676_b_219_d_31`
-  * service on Saturdays only: `service_id` = `c_676_b_219_d_31`
+
+Currently, Sioux Faux buses follow a *non-frequency schedule* based on their arrival and departure times to and from each stop of their route. These arrival and departure times are listed in the [`stop_times.txt`](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/stop_times.txt) file of Sioux Faux's GTFS data.
+You role here is to decide if some routes should follow a *frequency schedule* instead of a non frequency one. While we term the behavior of this input as frequency adjustment, in fact, it modifies the SFBL bus headways on a particular route. The adjustment wipes out all non-frequency trips from the route and converts them to frequency trips according to the given `headway_secs` defined between `start_time` and `end_time`.
+
+The different fields of the input file must be filled up:
+* Here, we require you to provide the `trip_id` in order to derive the stop pattern and travel times. The `trip_id` also links the new headway to the route on which the specified frequency of service applies. A list of the trip_id's to be provided for each route is presented on the Figure 6 below. Three trip_id's per route were provided in case you want to define up to three different service time frames for a same route, 
+e.g.for a specific route:
+    * Time frame 1 (trip_id_1) = morning peak hour
+    * Time frame 2 (trip_id_2) = off-peak period
+    * Time frame 3 (trip_id_3) = evening peak-hour  
+
+* the `start_time` [sec] specifies the time at which the first vehicle departs from the first stop of the bus route with the specified frequency. The time is measured from "noon minus 12h" (t = 0, effectively midnight) at the beginning of the service day. For times occurring after midnight, enter the time as a value greater than 24\*3600  = 86400[sec] for the day on which the trip schedule begins. E.g. 1:30am = 91800[sec].
+* the `end_time` [sec] indicates the time at which service changes to a different frequency (or ceases) at the first stop of the bus route. The time is measured following the same method as the `start_time`.
+* the `headway_secs` [sec] indicates the time between departures from the first stop (headway) for this bus route, during the time interval specified by start_time and end_time. The headway value must be entered in seconds. The mininum and maximum 
+* Please set `exact_times` to 0. This field is not currently being used, but must be included for validation purposes.
 
 
- The first field in this file, `trip_id`, refers to a corresponding trip identifier in the `trips.txt` [file](https://developers.google.com/transit/gtfs/reference/?csw=1#tripstxt). 
+**INSERT FIGURE**
+***Figure 6: Route ID-Trip ID correspondance***
 
- While we term the behavior of this input as frequency adjustment, in fact, it modifies the SFBL bus headways on a particular route. The adjustment wipes out all non-frequency trips from the route and converts them to frequency trips according to the given `headway_secs` defined between `start_time` and `end_time`. Here, we require you to provide the `trip_id` in order to derive the stop pattern and travel times. Please set `exact_times` to 0. This field is not currently being used, but must be included for validation purposes.
-  
-  Per the description of the behavior controlled by the Vehicle Fleet Mix input, adding or removing the number of trips on a route will require more or less buses to be assigned to a route. Ensuring input correctness requires the frequency adjustment to be executed prior to computation of the vehicle purchase costs. Thus, policies that include this input implicitly require vehicle purchases or sales--even when no new inputs are specified in the `VehicleFleetMix.csv` file. Thus, contestants must take care to coordinate modifications to this input with vehicle prices and ensure that they are not inadvertently over-spending exceeding their budgets. 
+Per the description of the behavior controlled by the Vehicle Fleet Mix input, adding or removing the number of trips on a route will require more or less buses to be assigned to a route. Ensuring input correctness requires the frequency adjustment to be executed prior to computation of the vehicle purchase costs. Thus, policies that include this input implicitly require vehicle purchases or sales--even when no new inputs are specified in the `VehicleFleetMix.csv` file. Thus, contestants must take care to coordinate modifications to this input with vehicle prices and ensure that they are not inadvertently over-spending exceeding their budgets. 
 
 
 ![Bus Fequency Input](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Bus_frequencies_inputs.png)
@@ -109,3 +120,12 @@ Before explaining how the AdjustFrequency input works, a few terms must be defin
 ### **4. Public Transportation Fares**
 The last input that you will be able to modify is the **bus fare**, i.e. the cost to a passenger of traveling by bus. Passengers pay one *flat fare* each time they board a bus, which can be changed in the [`PtFares.csv`](link) input file.
 
+**INSERT FIGURE**
+***Figure 8: Example of Public Transportation Fare input***
+
+For each new bus fare that you want to introduce, you need to specify the amount of the new fare (`amount`), to which bus route it will apply (`routeID`), which bus company operated this bus route (`agendyID`) and which age range will be concerned by the fare (`age`). 
+
+* As SFBL (agencyID = 217) is the only bus agency operating in Sioux Faux, the `agencyID` parameter of the input file will always be set to *217*.
+* The `routeID`, like in the bus fleet composition input (see Figure 1 above), refers to the different bus routes of Sioux Faux. 
+* The `age` range is defined as in mathematical notation where parentheses () indicate exclusive bounds and brackets \[ ] indicate inclusive bounds. For a notation example, refer to Figure 5.
+* The `amount` \[$] of the fare must be written as a float number. Note that if an agent has a transfer during his trip and must take two buses with two different fares, he will pay both fares.
