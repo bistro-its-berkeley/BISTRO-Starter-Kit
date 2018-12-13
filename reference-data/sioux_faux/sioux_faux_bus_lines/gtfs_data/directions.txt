@@ -1,1 +1,1 @@
-route_id,direction_id,Direction
+route_id,direction_id,direction
