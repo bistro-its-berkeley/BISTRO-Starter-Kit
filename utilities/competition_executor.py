@@ -286,7 +286,7 @@ class AbstractCompetitionExecutor(ABC):
         - "VehicleFleetMix": Bus fleet mix DataFrame
         - "ModeSubsidies": Subsidies DataFrame
         - "FrequencyAdjustment": Frequency Adjustment DataFrame
-        - "RoadPricing":  Road Pricing DataFrame
+        - "PublicTransportationFares": Bus Fares DataFrame
 
         The content of the different DataFrames can be understood by refering to the `Uber-Prize-Starter-Kit` repository
         documentation (`docs/Which-inputs-should-I-optimize.ms`)
@@ -298,7 +298,7 @@ class AbstractCompetitionExecutor(ABC):
 
         """
         input_root = self.input_root
-        list_inputs = ["VehicleFleetMix", "ModeSubsidies", "FrequencyAdjustment", "RoadPricing"]
+        list_inputs = ["VehicleFleetMix", "ModeSubsidies", "FrequencyAdjustment", "PublicTransportationFares", "RoadPricing"]
 
         if input_root is None:
             if submission_input_root is not None:
