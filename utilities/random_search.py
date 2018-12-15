@@ -17,6 +17,7 @@ DIR_DELIM = "-"
 FREQ_FILE = "FrequencyAdjustment.csv"
 SUB_FILE = "ModeSubsidies.csv"
 FLEET_FILE = "VehicleFleetMix.csv"
+PT_FARE_FILE = "PtFares.csv"
 SCORES_PATH = ("competition", "submissionScores.txt")
 
 logger = logging.getLogger(__name__)
@@ -49,14 +50,16 @@ def sample_settings(num_records, data_root):
     freq_df = sampler.sample_frequency_adjustment_input(num_records, sf_gtfs_manager)
     mode_subsidy_df = sampler.sample_mode_subsidies_input(num_records)
     vehicle_fleet_mix_df = sampler.sample_vehicle_fleet_mix_input(num_records, sf_gtfs_manager)
+    pt_fares_df = sampler.sample_pt_fares_input(num_records, sf_gtfs_manager)
 
-    return freq_df, mode_subsidy_df, vehicle_fleet_mix_df
+    return freq_df, mode_subsidy_df, vehicle_fleet_mix_df, pt_fares_df
 
 
-def save_inputs(input_dir, freq_df, mode_subsidy_df, vehicle_fleet_mix_df):
+def save_inputs(input_dir, freq_df, mode_subsidy_df, vehicle_fleet_mix_df, pt_fare_df):
     freq_df.to_csv(os.path.join(input_dir, FREQ_FILE), header=True, index=False)
     mode_subsidy_df.to_csv(os.path.join(input_dir, SUB_FILE), header=True, index=False)
     vehicle_fleet_mix_df.to_csv(os.path.join(input_dir, FLEET_FILE), header=True, index=False)
+    pt_fare_df.to_csv(os.path.join(input_dir, PT_FARE_FILE), header=True, index=False)
 
 
 def read_scores(output_dir):
