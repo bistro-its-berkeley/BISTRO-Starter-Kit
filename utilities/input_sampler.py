@@ -288,4 +288,4 @@ def sample_pt_fares_input(num_records, gtfs_manager, max_fare_amount=10.0):
     ages = [sample_format_range(tuple(sorted(np.random.choice(120, 2)))) for _ in
             range(num_records)]
     return pd.DataFrame(np.array([agency, routes, ages, amounts]).T,
-                        columns=['mode', 'age', 'income', 'amount'])
+                        columns=['agency', 'routeId', 'age', 'amount'])
