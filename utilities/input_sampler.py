@@ -48,14 +48,14 @@ def scenario_agencies(data_dir, scenario_name):
 
     Parameters
     ----------
-    data_dir : (Path)
+    data_dir : Path
         Absolute path to root of data directory
-    scenario_name : (str)
+    scenario_name : str
         Name of scenario with GTFS data
 
     Returns
     -------
-    (dict)
+    dict
         Dictionary of agency names mapped to directories containing files comprising their GTFS
         data.
     """
@@ -71,7 +71,7 @@ class AgencyGtfsDataManager(object):
 
         Parameters
         ----------
-        agency_gtfs_path : (Path)
+        agency_gtfs_path : Path
             Directory containing the agency's gtfs data
         """
 
@@ -102,9 +102,9 @@ def sample_vehicle_fleet_mix_input(num_records, gtfs_manager):
 
     Parameters
     ----------
-    num_records : (int)
+    num_records : int
         Number of randomly sampled records to create.
-    gtfs_manager : (`AgencyGtfsDataManager`)
+    gtfs_manager : `AgencyGtfsDataManager`
         An instance of the `AgencyGtfsDataManager` for the target agency.
 
     Returns
@@ -159,9 +159,9 @@ def sample_frequency_adjustment_input(num_records, gtfs_manager):
 
     Parameters
     ----------
-    num_records : (int)
+    num_records : int
         Number of randomly sampled records to create.
-    gtfs_manager : (`AgencyGtfsDataManager`)
+    gtfs_manager : `AgencyGtfsDataManager`
         An instance of the `AgencyGtfsDataManager` for the target agency.
 
     Returns
@@ -176,7 +176,8 @@ def sample_frequency_adjustment_input(num_records, gtfs_manager):
     min_headway_mins_by_trip = gtfs_manager.trips.join(gtfs_manager.routes.min_headway_minutes,
                                                        on='route_id').min_headway_minutes
     trip_ids = pd.Series(gtfs_manager.trips.sample(num_records).index.values)
-    headway_secs_arr = [np.random.choice(range(m * 60, 7200, 60)) for m in min_headway_mins_by_trip[trip_ids].values]
+    headway_secs_arr = [np.random.choice(range(m * 60, 7200, 60)) for m in
+                        min_headway_mins_by_trip[trip_ids].values]
     times_df = pd.DataFrame(
         [_get_valid_start_end_time(min_secs, max_secs, headway_secs) for headway_secs in
          headway_secs_arr])
@@ -194,7 +195,7 @@ def sample_format_range(tuple_range):
 
     Parameters
     ----------
-    tuple_range : (tuple)
+    tuple_range : tuple
          Tuple of exactly two ints, where tuple_range[0] < tuple_range[1]
 
     Returns
@@ -224,7 +225,7 @@ def sample_mode_subsidies_input(num_records):
 
     Parameters
     ----------
-    num_records : (int)
+    num_records : int
         Number of randomly sampled records to create.
 
     Returns
@@ -241,4 +242,50 @@ def sample_mode_subsidies_input(num_records):
                in range(num_records)]
     amounts = [np.round(np.random.uniform(0.1, 20), 1) for _ in range(num_records)]
     return pd.DataFrame(np.array([modes, ages, incomes, amounts]).T,
+                        columns=['mode', 'age', 'income', 'amount'])
+
+
+def sample_pt_fares_input(num_records, gtfs_manager, max_fare_amount=10.0):
+    """Generate `num_records` random `PtFares` for an
+    agency (specified within `gtfs_manager`) by randomly sampling age and fare amount.
+
+    The fare amount will not exceed the maximum fare amount and cannot be less than $0.10 (else,
+    there shouldn't have been a fare assigned in the first place).
+
+    The age will be sampled from 0 to 120 (maximum age in scenario).
+
+    Parameters
+    ----------
+    num_records : int
+        Number of randomly sampled records to create.
+    gtfs_manager : `AgencyGtfsDataManager`
+        An instance of the `AgencyGtfsDataManager` for the target agency.
+    max_fare_amount : float
+        The maximum fare amount that should be charged.
+
+    Returns
+    -------
+    `pd.DataFrame`
+        `num_records` `PtFares` records. These are unique by `routeId`
+        for the `agencyId` specified on the `gtfs_manager`
+
+    Raises
+    ------
+    `ValueError`
+        If the `num_records` is in excess of the number of routes that an agency schedules
+        buses on.
+    """
+    max_num_routes = gtfs_manager.routes.shape[0]
+    if num_records > max_num_routes:
+        raise ValueError(
+            "More samples requested than the number of routes available in agency; please enter a "
+            "number less than {}".format(
+                max_num_routes))
+    route_agency_sample = gtfs_manager.routes.sample(num_records)
+    routes = pd.Series(route_agency_sample.index.values)
+    agency = pd.Series(route_agency_sample.agency_id.values)
+    amounts = [np.round(np.random.uniform(0.1, max_fare_amount), 1) for _ in range(num_records)]
+    ages = [sample_format_range(tuple(sorted(np.random.choice(120, 2)))) for _ in
+            range(num_records)]
+    return pd.DataFrame(np.array([agency, routes, ages, amounts]).T,
                         columns=['mode', 'age', 'income', 'amount'])
