@@ -128,8 +128,8 @@ def sample_vehicle_fleet_mix_input(num_records, gtfs_manager):
     routes = pd.Series(route_agency_sample.index.values)
     agency = pd.Series(route_agency_sample.agency_id.values)
     vehicles = pd.Series(gtfs_manager.vehicle_types.sample(num_records, replace=True).index)
-    df = pd.concat([routes, agency, vehicles], axis=1, ignore_index=True)
-    df.columns = ["routeId", "agencyId", "vehicleType"]
+    df = pd.concat([agency, routes, vehicles], axis=1, ignore_index=True)
+    df.columns = ["agencyId", "routeId", "vehicleTypeId"]
     return df
 
 
@@ -145,12 +145,17 @@ def sample_frequency_adjustment_input(num_records, gtfs_manager):
     """Generate random `FrequencyAdjustment` inputs according to trips run by
     an agency.
 
-    Creates `num_records` records where fields for each record where the
-    `headway_secs` field is randomly chosen from a range of between 0 and 12000
+    Creates `num_records` frequency adjustment records where fields for each record where the
+    `headway_secs` field is randomly chosen from a range of between `min_headway_seconds`
+    (per the route.txt file in the corresponding gtfs data for the trip) and 7200
     seconds at intervals of 60 seconds and the `min_time` and `max_time` field
     are sampled between the 0 and 86340 seconds, respectively (i.e.,
     the possible minimum and maximum number of seconds in a day of 86359
     seconds, given the headway interval).
+
+    Note that a frequency adjustment is really tied to a route based on a particular trip.
+    The trip serves as a template for the frequency adjustment. See the documentation
+    for further details.
 
     Parameters
     ----------
@@ -168,9 +173,10 @@ def sample_frequency_adjustment_input(num_records, gtfs_manager):
     min_secs = 0
     max_secs = 86340
 
-    headway_secs_arr = np.random.choice(range(0, 12000, 60), num_records)
+    min_headway_mins_by_trip = gtfs_manager.trips.join(gtfs_manager.routes.min_headway_minutes,
+                                                       on='route_id').min_headway_minutes
     trip_ids = pd.Series(gtfs_manager.trips.sample(num_records).index.values)
-
+    headway_secs_arr = [np.random.choice(range(m * 60, 7200, 60)) for m in min_headway_mins_by_trip[trip_ids].values]
     times_df = pd.DataFrame(
         [_get_valid_start_end_time(min_secs, max_secs, headway_secs) for headway_secs in
          headway_secs_arr])
