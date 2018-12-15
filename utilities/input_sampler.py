@@ -127,7 +127,7 @@ def sample_vehicle_fleet_mix_input(num_records, gtfs_manager):
     route_agency_sample = gtfs_manager.routes.sample(num_records)
     routes = pd.Series(route_agency_sample.index.values)
     agency = pd.Series(route_agency_sample.agency_id.values)
-    vehicles = pd.Series(gtfs_manager.vehicle_types.sample(num_records, replace=True).index)
+    vehicles = pd.Series((gtfs_manager.vehicle_types.filter(like="BUS", axis=0)).sample(num_records, replace=True).index)
     df = pd.concat([agency, routes, vehicles], axis=1, ignore_index=True)
     df.columns = ["agencyId", "routeId", "vehicleTypeId"]
     return df
