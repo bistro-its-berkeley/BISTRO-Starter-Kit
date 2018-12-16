@@ -111,7 +111,7 @@ def search_iteration(docker_cmd, data_root, input_root, output_root):
 
     # Should be unique name here since folder is unique, also checks only one instance of delim
     _, submission_name = os.path.basename(input_dir).split(DIR_DELIM)
-
+    submission_name = "bm_bc_{}".format(submission_name)
     # Call random input sampler
     settings = sample_settings(num_records, data_root)
     # Save all inputs
@@ -163,7 +163,7 @@ def main():
     n_sim_iters = 3
     seed = 123
 
-    n_search_iters = 10
+    n_search_iters = 100
     data_root = abspath2("../reference-data")
     input_root = abspath2("../search-input")
     output_root = abspath2("../search-output")
