@@ -57,10 +57,10 @@ Your recommendation is to be submitted in a file named `VehicleFleetMix.csv` acc
 | `routeId` |`String` | The route that will have its vehicle type assignment modified | A route can only have its assignment modified once. The `routeId` name must exist in the `routes.txt` file corresponding to the GTFS data for the agency specified by this entry's `agencyId`|
 | `vehicleTypeId`|`String` | The vehicle type identifier | Must be a member of the set of vehicle type Ids listed under `vehicleTypeId` in the `availableVehicleTypes.txt` file corresponding to the GTFS data for the agency specified by this entry's `agencyId`|
 
-**Table 1: Vehicle fleet mix input schema and constraint definitions**
+***Table 1: Vehicle fleet mix input schema and constraint definitions***
 
 
-#### Example:
+#### 1.3. Example:
 
 ![Bus fleet](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_VehicleFleetMix.png "*Figure 2: Input1 - composition of the bus fleet")\
 ***Figure 4: Example of Vehicle Fleet Mix Input.***
@@ -93,7 +93,7 @@ Your recommendation is to be submitted in a file named `ModeSubsidies.csv` accor
 | `income` | [`Range`](#range) | The range of individual incomes of agents that qualify for this subsidy | Must be greater than 0. |
 | `amount` | `Float` | The amount (in $US) to subsidize this entry's `mode`| Must be greater than 0.|
 
-**Table 2: Vehicle fleet mix input schema and constraint definitions**
+***Table 2: Vehicle fleet mix input schema and constraint definitions***
 
 #### 2.3. Example:
 
@@ -156,6 +156,8 @@ You role here is to decide if some routes should follow a *frequency schedule* i
 | `headway_secs` | `Integer`| 	The headway_secs field indicates the time between departures from the same stop (headway) for this trip type, during the time interval specified by start_time and end_time. The headway value must be entered in seconds. | Must be greater than the number of headway seconds. 	Periods in which headways are defined (the rows in frequencies.txt) shouldn't overlap for the same trip, since it's hard to determine what should be inferred from two overlapping headways. However, a headway period may begin at the exact same time that another one ends. |
 | `exact_time` | `Integer`|Determines if frequency-based trips should be exactly scheduled based on the specified headway information. |Must be entered as 1 for the purposes of this round of the contest. See the [GTFS specification](https://developers.google.com/transit/gtfs/reference/#frequenciestxt) for further information about what this field represents. |
 
+***Table 3: Frequency Adjustments input schema and constraint definitions***
+
 <!--TODO: Suppress exact time?-->
 
 #### 3.3. Example:
@@ -188,6 +190,7 @@ For each new bus fare that you want to introduce, you need to specify the amount
 | `age` | [`Range`](#range) | The range of ages of agents that this fare pertains to. | Must be greater than 0 and less than 120 (the maximum age of any resident in Sioux Faux)|
 | `amount` | `Float` | The amount (in $US) to charge an agent in the corresponding fare group. | Must be greater than 0.|
 
+***Table 4: Pt Fares input schema and constraint definitions***
 
 #### 4.3. Example
 
