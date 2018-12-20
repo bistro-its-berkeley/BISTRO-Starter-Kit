@@ -20,21 +20,21 @@ The following subsections provide a detailed description of what each input repr
 
 ### **1. Bus Fleet Composition**
 
-#### Description:
+#### 1.1. Description:
 
-Currently, Sioux Faux Bus Lines (SFBL) operates a small fleet of buses on 12 routes in Sioux Faux. Orginally purchased as a group, each bus in the fleet possesses identical attributes of seating capacity, fuel consumption, operations and maintenance cost, etc. SFBL is considering optimizing bus type in order to better match the specific demand characteristics of each route. Four types of buses are available from its supplier, each of them with different technical properties (`fixed-data/siouxfalls/availableVehicleTypes.csv`, see Fig.2) and cost characteristics (`fixed-data/siouxfalls/vehicleCosts.csv`, see Fig.3). Currently, the number of buses required to service each route is equal to the number of trips: after the a headway has expired, a new bus is used. For instance, if the bus frequency is 10 minutes, a new bus is used every 10 minutes.  This does not reflect a realistic scenario combining bus routes into runs, but, for now, it still allows for comparisons to a BAU case.
+Currently, Sioux Faux Bus Lines (SFBL) operates a small fleet of buses on 12 routes in Sioux Faux. Orginally purchased as a group, each bus in the fleet possesses identical attributes of seating capacity, fuel consumption, operations and maintenance cost, etc. SFBL is considering optimizing bus type in order to better match the specific demand characteristics of each route. Four types of buses are available from its supplier, each of them with different technical properties (`fixed-data/siouxfalls/availableVehicleTypes.csv`, see Figure 2) and cost characteristics (`fixed-data/siouxfalls/vehicleCosts.csv`, see Figure 3). Currently, the number of buses required to service each route is equal to the number of trips: after the a headway has expired, a new bus is used. For instance, if the bus frequency on a specific route is 10 minutes, a new bus is used every 10 minutes durung the service time on this route. This does not reflect a realistic scenario combining bus routes into runs, but, for now, it still allows for comparisons to a BAU case.
 
 
-![Route IDs](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/sf_route_guide.png)\
+![Route IDs](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/sf_route_guide.png) <br/>
 ***Figure 1: Sioux Faux route IDs guide***
 <br/>
 <br/>
 
 
-To provide guidance on vehicle procurement for SFBL, you can recommend purchase of new types of buses possessing attributes (seating capacity, fuel usage, operations and maintenance cost, etc.) that might improve the level of service for transit along a route while (ideally) reducing operational costs and greenhouse gas emissions (see Fig.2 below).
+To provide guidance on vehicle procurement for SFBL, you can recommend purchase of new types of buses possessing attributes (seating capacity, fuel usage, operations and maintenance cost, etc.) that might improve the level of service for transit along a route while (ideally) reducing operational costs and greenhouse gas emissions (see Figure 2 below).
 
 
- You can decide to update the type of bus (i.e. `vehicleTypeId`) that will provide service for all trips on each route (`routeID`, see Fig.1 & 2). Each route can utilize only **one type of bus**, and, if **SID???**
+ You can decide to update the type of bus (i.e. `vehicleTypeId`) that will provide service for all trips on each route (`routeID`, see Figures 1 & 2). Each route can utilize only **one type of bus**.
 
 For each bus that you purchase, the default bus on the route (i.e., buses designated by `vehicleTypeId` `BUS-DEFAULT`) is automatically sold for a price of <a href="https://www.codecogs.com/eqnedit.php?latex=\$10,000&space;&plus;&space;\$20,000&space;\times&space;\mathcal{N}(0,1)" target="_blank"><img src="https://latex.codecogs.com/png.latex?\$10,000&space;&plus;&space;\$20,000&space;\times&space;\mathcal{N}(0,1)" title="\$10,000 + \$20,000 \times \mathcal{N}(0,1)" /></a>
 
@@ -48,7 +48,7 @@ For each bus that you purchase, the default bus on the route (i.e., buses design
 ***Figure 3: Costs of available bus types***
 <br/>
 
-#### Technical Details:
+#### 1.2. Technical Details:
 Your recommendation is to be submitted in a file named `VehicleFleetMix.csv` according to the format specified in Table 1.
 
 | Column Name| Data Type | Description | Validation Criteria |
@@ -72,7 +72,7 @@ Only three routes are assigned a different bus; all other routes operate with th
 
 ### **2. Subsidies for transit and on-demand rideshare users**
 
-#### Description
+#### 2.1. Description
 
 In an effort to encourage the use of sustainable transportation alternatives to private vehicles, SFDOT has asked you to allocate subsidies to incentivize citizens to use public transit and/or on-demand ridesharing.
 
@@ -83,7 +83,7 @@ The travel *modes* and connectivity options to subsidize can be chosen from the 
 
 Qualification for a subsidy can be based on age and/or income. Subsidies for one mode do not disqualify subsidizing travel for another mode. Additionally, the price of each leg in a multimodal trip is will be adjusted by the amount of subsidy allocated to the qualifying agent undertaking the trip. That is, for each trip the best route for each multimodal type will include subsidies in the overall cost of the trip. This generalized cost will then factor into agent decision-making.
 
-#### Technical Details:
+#### 2.2. Technical Details:
 Your recommendation is to be submitted in a file named `ModeSubsidies.csv` according to the format specified in Table 2. See Figure 5 for an example.
 
 | Column Name | Data Type |Description | Validation Criteria |
@@ -95,7 +95,7 @@ Your recommendation is to be submitted in a file named `ModeSubsidies.csv` accor
 
 **Table 2: Vehicle fleet mix input schema and constraint definitions**
 
-#### Example:
+#### 2.3. Example:
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_Subsidies.png)
 ***Figure 5: Example of Mode Subsidy Input***
@@ -116,11 +116,11 @@ Figure 5 depicts an example input file describing the following situation:
 
 ### **3. Adjustments to the Frequency of Buses on a Route**
 
-#### Description
+#### 3.1. Description
 
 An essential aspect of transit system operations is capacity optimization. Route capacity is the number of passengers that can be moved past a fixed point in a given unit of time. In addition to allocating buses with larger or smaller total occupancies, SFBL wants to alter the frequency of buses on a given route. The `FrequencyAdjustment` input works in concert with the `VehicleFleetMix` input so that the capacity of the route is more likely to meet demand as it changes throughout a typical workday.
 
-#### Technical Details
+#### 3.2. Technical Details
 
 The format for this  input is identical to the `frequencies.txt` component of the [GTFS specification](https://developers.google.com/transit/gtfs/reference/#frequenciestxt). The GTFS data of Sioux Faux are stored in the [reference-data](https://github.com/vgolfier/Uber-Prize-Starter-Kit/tree/master/reference-data/sioux_faux/sioux_faux_bus_lines) folder.
 
@@ -158,14 +158,14 @@ You role here is to decide if some routes should follow a *frequency schedule* i
 
 <!--TODO: Suppress exact time?-->
 
-#### Example:
+#### 3.3. Example:
 <!--TODO: Enter here... -->
 ![Bus Fequency Input](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Bus_frequencies_inputs.png)
 ***Figure 6: Bus Frequency Input***
 
 ### 4. Public Transit Fare Adjustment
 
-#### Description
+#### 4.1. Description
 The last input that you will be able to modify is the **bus fare**, i.e. the cost to a passenger of traveling by bus. Passengers pay one *flat fare* each time they board a bus, which can be changed in the [`PtFares.csv`](link) input file.
 
 **INSERT FIGURE**
@@ -178,7 +178,7 @@ For each new bus fare that you want to introduce, you need to specify the amount
 * The `age` range is defined as in mathematical notation where parentheses () indicate exclusive bounds and brackets \[ ] indicate inclusive bounds. For a notation example, refer to Figure 5.
 * The `amount` \[$] of the fare must be written as a float number. Note that if an agent has a transfer during his trip and must take two buses with two different fares, he will pay both fares.
 
-#### Technical Details
+#### 4.2. Technical Details
 
 
 | Column Name | Description | Validation Criteria |
@@ -189,19 +189,19 @@ For each new bus fare that you want to introduce, you need to specify the amount
 | `amount` | `Float` | The amount (in $US) to charge an agent in the corresponding fare group. | Must be greater than 0.|
 
 
-#### Example
+#### 4.3. Example
 
-### Time-interval-based Road Pricing
+### 5. Time-interval-based Road Pricing
 
-#### Description
+#### 5.1. Description
 
-#### Technical Details
+#### 5.2. Technical Details
 
-#### Example
+#### 5.3. Example
 
 ---
 
-## Specialized Data Types:
+## 6. Specialized Data Types:
 
 The following are data types that are specializations of simplified data types that are constrained according to a specific syntax
 
