@@ -63,7 +63,7 @@ Your recommendation is to be submitted in a file named `VehicleFleetMix.csv` acc
 #### Example:
 
 ![Bus fleet](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_VehicleFleetMix.png "*Figure 2: Input1 - composition of the bus fleet")\
-**Figure 4: Example of Vehicle Fleet Mix Input.**
+***Figure 4: Example of Vehicle Fleet Mix Input.***
 
 Only three routes are assigned a different bus; all other routes operate with the standard bus type.
 
@@ -161,7 +161,7 @@ You role here is to decide if some routes should follow a *frequency schedule* i
 #### 3.3. Example:
 <!--TODO: Enter here... -->
 ![Bus Fequency Input](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Bus_frequencies_inputs.png)
-***Figure 6: Bus Frequency Input***
+***Figure 7: Bus Frequency Input***
 
 ### 4. Public Transit Fare Adjustment
 
