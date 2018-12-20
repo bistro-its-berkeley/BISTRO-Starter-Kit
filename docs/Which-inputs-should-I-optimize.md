@@ -131,7 +131,7 @@ You role here is to decide if some routes should follow a *frequency schedule* i
 
 Here, we require you to provide the `trip_id` in order to derive the stop pattern and travel times and to implicitly reference a bus route. The trip_ids corresponding to each route were summarized in the [`route_id_trip_id_correspondance.csv` file](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/route_id_trip_id_correspondance.csv) (see Figure 6 below).
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/route_id_trip_id_correspondance.csv)
+![Alt text]()
 ***Figure 6: Route ID-Trip ID correspondance***
 
 
@@ -160,15 +160,15 @@ Figure 7 below depicts an example input file.
 ***Figure 7: Example of Frequency Adjustment Input***
 
 In this case, two routes will see their bus frequency adjusted: route 1340 (`trip_id` "t_75335_b_219_tn_1") and route 1341 (`trip_id`s "t_75384_b_219_tn_1" and "t_75384_b_219_tn_2", see reference in Figure 6 above). 
-	* `trip_id` "t_75335_b_219_tn_1": the bus schedule on route 1340 is changed between 6am (21600sec) and 10pm (79200sec) to a 15minute frequency-schedule (900sec) . Outside of this time-window, the bus schedule on the route follow the non-frequency schedule defined by the gtfs-data of the agency.
-	* `trip_id` "t_75384_b_219_tn_1": the bus frequency on route 1341 is changed between 6am (21600sec) and 10am (36000sec) to a 5minute frequency-schedule (900sec).
-	* `trip_id` "t_75384_b_219_tn_2": the bus frequency on route 1341 is changed between 5pm (61200sec) and 8pm (72000sec) to a 5minute frequency-schedule (900sec).
+* `trip_id` "t_75335_b_219_tn_1": the bus schedule on route 1340 is changed between 6am (21600sec) and 10pm (79200sec) to a 15minute frequency-schedule (900sec) . Outside of this time-window, the bus schedule on the route follow the non-frequency schedule defined by the gtfs-data of the agency.
+* `trip_id` "t_75384_b_219_tn_1": the bus frequency on route 1341 is changed between 6am (21600sec) and 10am (36000sec) to a 5minute frequency-schedule (900sec).
+* `trip_id` "t_75384_b_219_tn_2": the bus frequency on route 1341 is changed between 5pm (61200sec) and 8pm (72000sec) to a 5minute frequency-schedule (900sec).
 
 
 ### 4. Public Transit Fare Adjustment
 
 #### 4.1. Description
-The last input that you will be able to modify is the **bus fare**, i.e. the cost to a passenger of traveling by bus. Passengers pay one *flat fare* each time they board a bus, which can be changed in the [`PtFares.csv`](link) input file.
+The last input that you will be able to modify is the **bus fare**, i.e. the cost to a passenger of traveling by bus. Each time they board a bus, passengers pay one *flat fare*.
 
 **INSERT FIGURE**
 ***Figure 8: Example of Public Transportation Fare input***
