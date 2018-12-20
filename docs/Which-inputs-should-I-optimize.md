@@ -34,10 +34,10 @@ Currently, Sioux Faux Bus Lines (SFBL) operates a small fleet of buses on 12 rou
 
 
 
-To provide guidance on vehicle procurement for SFBL, you can recommend purchase of new types of buses possessing attributes (seating capacity, fuel usage, operations and maintenance cost, etc.) that might improve the level of service for transit along a route while (ideally) reducing operational costs and greenhouse gas emissions (see Figure 2 below).
+To provide guidance on vehicle procurement for SFBL, you can recommend purchase of new types of buses possessing attributes (seating capacity, fuel usage, operations and maintenance cost, etc.) that might improve the level of service for transit along a route while (ideally) reducing operational costs and greenhouse gas emissions (see Fig.2 below).
 
 
- You can decide to update the type of bus (i.e. `vehicleTypeId`) that will provide service for all trips on each route (`routeID`, see Fig.1 & 2). Each route can utilize only **one type of bus**, and, if
+ You can decide to update the type of bus (i.e. `vehicleTypeId`) that will provide service for all trips on each route (`routeID`, see Fig.1 & 2). Each route can utilize only **one type of bus**, and, if **SID???**
 
 For each bus that you purchase, the default bus on the route (i.e., buses designated by `vehicleTypeId` `BUS-DEFAULT`) is automatically sold for a price of <a href="https://www.codecogs.com/eqnedit.php?latex=\$10,000&space;&plus;&space;\$20,000&space;\times&space;\mathcal{N}(0,1)" target="_blank"><img src="https://latex.codecogs.com/png.latex?\$10,000&space;&plus;&space;\$20,000&space;\times&space;\mathcal{N}(0,1)" title="\$10,000 + \$20,000 \times \mathcal{N}(0,1)" /></a>
 
