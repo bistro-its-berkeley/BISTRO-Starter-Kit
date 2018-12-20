@@ -53,7 +53,7 @@ Your recommendation is to be submitted in a file named `VehicleFleetMix.csv` acc
 
 | Column Name| Data Type | Description | Validation Criteria |
 | :---:| :--- | :--- | :----|
-| `agencyId`|`String` | Agency identifier | Must equal agency Id found under `agencyId` in `agencies.txt` of corresponding GTFS file for transit agency with `agency_name` designated by parent directory of `gtfs_data` in starter kit `/reference-data` directory. |
+| `agencyId`|`String` | Agency identifier | Must equal agency Id found under `agencyId` in `agencies.txt` of corresponding GTFS file for transit agency with `agency_name` designated by parent directory of `gtfs_data` in starter kit `/reference-data` directory. Note that for Sioux Faux, SFBL is the only agency operating in the city (`agencId`="217"). Therefore, any entry in the .csv file will have "217" under `agencyId`.|
 | `routeId` |`String` | The route that will have its vehicle type assignment modified | A route can only have its assignment modified once. The `routeId` name must exist in the [`routes.txt` file](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/vgv/%2326-document_pt_fares_input/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/routes.txt) corresponding to the GTFS data for the agency specified by this entry's `agencyId`|
 | `vehicleTypeId`|`String` | The vehicle type identifier | Must be a member of the set of vehicle type Ids listed under `vehicleTypeId` in the [`availableVehicleTypes.txt` file](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/vgv/%2326-document_pt_fares_input/reference-data/sioux_faux/sioux_faux_bus_lines/availableVehicleTypes.csv)|
 
@@ -153,14 +153,16 @@ The format for this  input is identical to the `frequencies.txt` component of th
 <!--TODO: Suppress exact time?-->
 
 #### 3.3. Example:
-<!--TODO: Enter here... -->
-![Bus Fequency Input](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Bus_frequencies_inputs.png)
-***Figure 7: Bus Frequency Input***
 
-* the `start_time` [sec] specifies the time at which the first vehicle departs from the first stop of the bus route with the specified frequency. The time is measured from "noon minus 12h" (t = 0, effectively midnight) at the beginning of the service day. For times occurring after midnight, enter the time as a value greater than 24\*3600  = 86400[sec] for the day on which the trip schedule begins. E.g. 1:30am = 91800[sec].
-* the `end_time` [sec] indicates the time at which service changes to a different frequency (or ceases) at the first stop of the bus route. The time is measured following the same method as the `start_time`.
-* the `headway_secs` [sec] indicates the time between departures from the first stop (headway) for this bus route, during the time interval specified by start_time and end_time. The headway value must be entered in seconds. The mininum and maximum 
-* Please set `exact_times` to 0. This field is not currently being used, but must be included for validation purposes.
+Figure 7 below depicts an example input file.
+
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_FrequencyAdjustment.png)
+***Figure 7: Example of Frequency Adjustment Input***
+
+In this case, two routes will see their bus frequency adjusted: route 1340 (`trip_id` "t_75335_b_219_tn_1") and route 1341 (`trip_id`s "t_75384_b_219_tn_1" and "t_75384_b_219_tn_2", see reference in Figure 6 above). 
+	* `trip_id` "t_75335_b_219_tn_1": the bus schedule on route 1340 is changed between 6am (21600sec) and 10pm (79200sec) to a 15minute frequency-schedule (900sec) . Outside of this time-window, the bus schedule on the route follow the non-frequency schedule defined by the gtfs-data of the agency.
+	* `trip_id` "t_75384_b_219_tn_1": the bus frequency on route 1341 is changed between 6am (21600sec) and 10am (36000sec) to a 5minute frequency-schedule (900sec).
+	* `trip_id` "t_75384_b_219_tn_2": the bus frequency on route 1341 is changed between 5pm (61200sec) and 8pm (72000sec) to a 5minute frequency-schedule (900sec).
 
 
 ### 4. Public Transit Fare Adjustment
