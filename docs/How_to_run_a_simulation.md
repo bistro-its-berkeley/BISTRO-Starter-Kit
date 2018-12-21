@@ -7,6 +7,8 @@
 There is only one firm software requirement at the moment:
 - [Docker](https://www.docker.com)
 
+You can find the instructions to install Docker for Mac [here](https://docs.docker.com/docker-for-mac/install/#install-and-run-docker-for-mac) and for Windows [here](https://docs.docker.com/docker-for-windows/install/)
+
 Thus, the code is OS-agnostic.
 
 Note that some of the provided utility scripts require a python installation with the [docker-py](https://docker-py.readthedocs.io/en/stable/) installed. Please run `pip install docker` prior to running the scripts.
