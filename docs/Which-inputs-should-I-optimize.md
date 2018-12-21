@@ -190,11 +190,12 @@ For each new bus fare that you want to introduce, you need to specify the amount
 ***Table 4: Pt Fares input schema and constraint definitions***
 
 #### 4.3. Example
+Figure 8 depicts an example input file for Public Transit Fare Adjustment.
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_Ptfares.png)
 ***Figure 8: Example of Public Transportation Fare input***
 
-Figure 8 depicts an example input file describing the following policy:
+The file describes the following fare policy:
 * Passengers 5 to 25 yrs. and under pay a reduced fare of 0.5 centime
 * Passengers over 65 yrs. pay a reduced fare of 0.5 centime
 * All other passengers pay the fare defined in the original Sioux Faux policy 
