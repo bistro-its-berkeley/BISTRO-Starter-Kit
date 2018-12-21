@@ -17,6 +17,7 @@ DIR_DELIM = "-"
 FREQ_FILE = "FrequencyAdjustment.csv"
 SUB_FILE = "ModeSubsidies.csv"
 FLEET_FILE = "VehicleFleetMix.csv"
+PT_FARE_FILE = "PtFares.csv"
 SCORES_PATH = ("competition", "submissionScores.txt")
 
 logger = logging.getLogger(__name__)
@@ -49,14 +50,16 @@ def sample_settings(num_records, data_root):
     freq_df = sampler.sample_frequency_adjustment_input(num_records, sf_gtfs_manager)
     mode_subsidy_df = sampler.sample_mode_subsidies_input(num_records)
     vehicle_fleet_mix_df = sampler.sample_vehicle_fleet_mix_input(num_records, sf_gtfs_manager)
+    pt_fares_df = sampler.sample_pt_fares_input(num_records, sf_gtfs_manager)
 
-    return freq_df, mode_subsidy_df, vehicle_fleet_mix_df
+    return freq_df, mode_subsidy_df, vehicle_fleet_mix_df, pt_fares_df
 
 
-def save_inputs(input_dir, freq_df, mode_subsidy_df, vehicle_fleet_mix_df):
+def save_inputs(input_dir, freq_df, mode_subsidy_df, vehicle_fleet_mix_df, pt_fare_df):
     freq_df.to_csv(os.path.join(input_dir, FREQ_FILE), header=True, index=False)
     mode_subsidy_df.to_csv(os.path.join(input_dir, SUB_FILE), header=True, index=False)
     vehicle_fleet_mix_df.to_csv(os.path.join(input_dir, FLEET_FILE), header=True, index=False)
+    pt_fare_df.to_csv(os.path.join(input_dir, PT_FARE_FILE), header=True, index=False)
 
 
 def read_scores(output_dir):
@@ -108,7 +111,7 @@ def search_iteration(docker_cmd, data_root, input_root, output_root):
 
     # Should be unique name here since folder is unique, also checks only one instance of delim
     _, submission_name = os.path.basename(input_dir).split(DIR_DELIM)
-
+    submission_name = "bm_bc_{}".format(submission_name)
     # Call random input sampler
     settings = sample_settings(num_records, data_root)
     # Save all inputs
@@ -160,7 +163,7 @@ def main():
     n_sim_iters = 3
     seed = 123
 
-    n_search_iters = 10
+    n_search_iters = 100
     data_root = abspath2("../reference-data")
     input_root = abspath2("../search-input")
     output_root = abspath2("../search-output")
