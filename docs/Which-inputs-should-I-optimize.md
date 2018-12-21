@@ -22,7 +22,7 @@ The following subsections provide a detailed description of what each input repr
 
 #### 1.1. Description:
 
-Currently, Sioux Faux Bus Lines (SFBL) operates a small fleet of buses on 12 routes in Sioux Faux. Orginally purchased as a group, each bus in the fleet possesses identical attributes of seating capacity, fuel consumption, operations and maintenance cost, etc. SFBL is considering optimizing bus type in order to better match the specific demand characteristics of each route. Four types of buses (including the current one used by SFBL, called `BUS-DEFAULT`) are available from its supplier, each of them with different technical properties (`fixed-data/siouxfalls/availableVehicleTypes.csv`, see Figure 2) and cost characteristics (`fixed-data/siouxfalls/vehicleCosts.csv`, see Figure 3). Currently, the number of buses required to service each route is equal to the number of trips: after the a headway has expired, a new bus is used. For instance, if the bus frequency on a specific route is 10 minutes, a new bus is used every 10 minutes durung the service time on this route. This does not reflect a realistic scenario combining bus routes into runs, but, for now, it still allows for comparisons to a BAU case.
+Currently, Sioux Faux Bus Lines (SFBL) operates a small fleet of buses on 12 routes in Sioux Faux. Orginally purchased as a group, each bus in the fleet possesses identical attributes of seating capacity, fuel consumption, operations and maintenance cost, etc. SFBL is considering optimizing bus type in order to better match the specific demand characteristics of each route. Four types of buses (including the current one used by SFBL, called `BUS-DEFAULT`) are available from its supplier, each of them with different technical properties (`fixed-data/siouxfalls/availableVehicleTypes.csv`, see Figure 2) and cost characteristics (`fixed-data/siouxfalls/vehicleCosts.csv`, see Figure 3). Currently, the number of buses required to service each route is equal to the number of trips: after the a headway has expired, a new bus is used. For instance, if the bus frequency on a specific route is 10 minutes, a new bus is used every 10 minutes during the service time on this route. Let's assume that buses operate from 8am to 8pm on this route, i.e. for a 12 hour service time. Therefore, there will be (12 * 60 min)/10min = 72 buses used for this route for the day. This does not reflect a realistic scenario combining bus routes into runs, but, for now, it still allows for comparisons to a BAU case.
 
 
 ![Route IDs](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/sf_route_guide.png) <br/>
@@ -92,13 +92,13 @@ Your recommendation is to be submitted in a file named `ModeSubsidies.csv` accor
 | `mode` | [`Subsidizable`](#subsidizable)| Mode to subsidize. | None |
 | `age` | [`Range`](#range) | The range of ages of agents that qualify for this subsidy. | Must be greater than 0 and less than 120 (the maximum age of any resident in Sioux Faux)|
 | `income` | [`Range`](#range) | The range of individual incomes (in $US) of agents that qualify for this subsidy | Must be greater than 0. |
-| `amount` | `Float` | The amount (in $US/person) to subsidize this entry's `mode`| Must be greater than 0.|
+| `amount` | `Float` | The amount (in $US/person-trip) to subsidize this entry's `mode`| Must be greater than 0. There is no cap on the subsidy. If it exceeds the trip's total monetary cost, the agent will not use the extra money from the subsidy.|
 
 ***Table 2: Vehicle fleet mix input schema and constraint definitions***
 
 #### 2.3. Example:
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_Subsidies.png)
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_ModeSubsidies.png)
 ***Figure 5: Example of Mode Subsidy Input***
 
 Figure 5 depicts an example input file describing the following situation:
@@ -106,7 +106,7 @@ Figure 5 depicts an example input file describing the following situation:
  *Subsidies for walking to access transit*:
  * Children 10 years old or younger receive $2 off of every transit trip
 
- *Subsidies for using rideshare to access transit*:
+ *Subsidies for using the car to access transit*:
  * Seniors older than 50 and up through 75 years of age, earning up to $20,000/year receive $2.30 off of every transit trip
 
  *Subsidies for rideshare trips*:
@@ -169,13 +169,15 @@ In this case, two routes will see their bus frequency adjusted: route 1340 (`tri
 ### 4. Public Transit Fare Adjustment
 
 #### 4.1. Description
-The last input that you will be able to modify is the **bus fare**, i.e. the cost to a passenger of traveling by bus. Each time they board a bus, passengers pay one flat fare, which can differ base on the **passenger's age**. Currently, the Sioux Faux bus fare policy works as follow: 
+The last input that you will be able to modify is the **bus fare**, i.e. the cost to a passenger of traveling by bus. Each time they board a bus, passengers pay one flat fare, which can differ base on the **passenger's age**. 
+
+Currently, the Sioux Faux bus fare policy works as follow: 
 * Children 5 yrs. and under: FREE
 * Children 6 to 10 yrs. : 75 centime
 * Children 10 to 18 yrs and Adults 65 yrs. and under: $1,50
 * Persons over 65 yrs: 75 centime
 
-For each new bus fare that you want to introduce, you need to specify the amount of the new fare (`amount`), to which bus route it will apply (`routeID`), which bus company operated this bus route (`agendyID`) and which age range will be concerned by the fare (`age`). 
+For each new bus fare that you want to introduce in the `Ptfares.csv` file, you need to specify the amount of the new fare (`amount`), to which bus route it will apply (`routeID`), which bus company operated this bus route (`agendyID`) and which age range will be concerned by the fare (`age`). 
 
 #### 4.2. Technical Details
 
