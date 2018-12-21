@@ -3,11 +3,11 @@ After reading this document, you will have a better understanding of the outputs
 
 ## Where are the outputs stored?
 
-Outputs are produced after the simulation's last iteration (see the [introduction](../docs/Introduction_transportation_problem.md))). All the outputs generated during this last run are stored in a unique output folder called `output/siouxfalls-1k__\<date>_\<time>`. It ends with the date and time of the simulation you have just run (see Figure 1). Note that the figure references a simulation run with a 1k population sample.
+Outputs are produced after the simulation's last iteration (see the [introduction](../docs/Introduction_transportation_problem.md))). All the outputs generated during this last run are stored in a unique output folder called `output/siouxfalls/siouxfalls-1k__<date>_<time>`. It ends with the date and time of the simulation you have just run (see Figure 1). Note that the figure references a simulation run with a 1k population sample.
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Output_folder_2.png)
 
-Figure 1: Outputs of the simulation
+***Figure 1: Outputs of the simulation***
 
 ## Scoring function
 
@@ -17,7 +17,7 @@ The main outputs you should focus on are located in the `competition` folder. It
 * The *component scores* and the *submission score* from the scoring function, which evaluates the quality of the policy-based transportation sytsem 
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/The_scoring_function.png)
-Figure 2: Score and component scores
+***Table 1: Score and component scores***
 
 The *scoring function* is a weighted sum of several components, listed below. ***Weights are pre-determined based upon...\[fill in]*** 
 * Measures of **congestion**:
@@ -38,21 +38,21 @@ If you want to know more about the mathematical formulation of each of these sco
 
 ## Other outputs
 
-In addition to the scores, the `output/siouxfalls-1k__\<date>_\<time>` folder contains graphs describing performance outputs of the system along with their corresponding data files. Two of them are described below.
+In addition to the scores, the `output/siouxfalls-1k__<date>_<time>` folder contains graphs describing performance outputs of the system along with their corresponding data files. Two of them are described below.
 
 * **Mode choice**
-The mode choice graph describes the overall distribution of chosen modes for each iteration of the simulation. In the example shown in Figure 3 below, the simulation ended after 100 iterations. In the simulation, every agent received a $20 subsidy per ride for ride-hail. As the iterations progressed, you can see that providing a monetary incentive for some agents to use on-demand rideshare indeed shifted more agents towards using this mode.
+The mode choice graph describes the overall distribution of chosen modes for each iteration of the simulation. In the example shown in Figure 2 below, the simulation ended after 100 iterations. In the simulation, every agent received a $20 subsidy per ride for ride-hail. As the iterations progressed, you can see that providing a monetary incentive for some agents to use on-demand rideshare indeed shifted more agents towards using this mode.
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Mode_choice_histogram.png)
-Figure 3: Mode choice of agents for each iteration of the simulation
+***Figure 2: Mode choice of agents for each iteration of the simulation***
 
 * **Ride-hail revenue**
 The ride-hail revenues describes the net revenues earned by the ride-hail company .
 
 * **Score Statistics**
-The score statistics represent the evolution of the agent's plans scores during the simulation. Each iteration simulates one entire day. At the end of each iteration, the daily plan of each agent is evaluated according to how well it performed in the transportation scenario. Based on this score, some agents may change their daily plan (which modes they use to travel from and to their activities) for the next iteration in an attempt to improve it. This learning mechanism can be observed in the Figure 4 below: as iterations progress, the agents' plan scores keep increasing until they reach a plateau after about 50 iterations. Once each agent can no longer find plans that improve their score, the system has reached an equilibrium state.
+The score statistics represent the evolution of the agent's plans scores during the simulation. Each iteration simulates one entire day. At the end of each iteration, the daily plan of each agent is evaluated according to how well it performed in the transportation scenario. Based on this score, some agents may change their daily plan (which modes they use to travel from and to their activities) for the next iteration in an attempt to improve it. This learning mechanism can be observed in the Figure 3 below: as iterations progress, the agents' plan scores keep increasing until they reach a plateau after about 50 iterations. Once each agent can no longer find plans that improve their score, the system has reached an equilibrium state.
 
 ![alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/scorestats.png)
-Figure 4: Statistics of agent scores 
+***Figure 3: Statistics of agent scores***
 
 ## Summary stats
 
