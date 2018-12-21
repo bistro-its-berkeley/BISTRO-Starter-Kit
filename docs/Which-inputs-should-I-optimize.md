@@ -11,7 +11,7 @@ As detailed in the [problem statement](docs/The_Sioux_Faux_case_pilot_study), to
 2. Adjustments to the frequency of buses on routes; and, 
 3. Distribution of subsidies for agents using on-demand carsharing and/or public transit.
 
-A submission entry is a set of input files (i.e., `csvs` named according to the input type), which have been collected into a single folder.
+A submission entry is a set of input files (i.e., `csv`s named according to the input type), which have been collected into a single folder.
 
 The following subsections provide a detailed description of what each input represents as well as technical details for the schema, data types, and constraints that specify the syntax of each input file. Files representing empty inputs can be found in the `submission-inputs` folder.
 
@@ -131,7 +131,7 @@ You role here is to decide if some routes should follow a *frequency schedule* i
 
 Here, we require you to provide the `trip_id` in order to derive the stop pattern and travel times and to implicitly reference a bus route. The trip_ids corresponding to each route were summarized in the [`route_id_trip_id_correspondance.csv` file](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/route_id_trip_id_correspondance.csv) (see Figure 6 below).
 
-![Alt text]()
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/route_id_trip_id_correspondance.csv)
 ***Figure 6: Route ID-Trip ID correspondance***
 
 
@@ -163,29 +163,26 @@ In this case, two routes will see their bus frequency adjusted: route 1340 (`tri
 * `trip_id` "t_75335_b_219_tn_1": the bus schedule on route 1340 is changed between 6am (21600sec) and 10pm (79200sec) to a 15minute frequency-schedule (900sec) . Outside of this time-window, the bus schedule on the route follow the non-frequency schedule defined by the gtfs-data of the agency.
 * `trip_id` "t_75384_b_219_tn_1": the bus frequency on route 1341 is changed between 6am (21600sec) and 10am (36000sec) to a 5minute frequency-schedule (900sec).
 * `trip_id` "t_75384_b_219_tn_2": the bus frequency on route 1341 is changed between 5pm (61200sec) and 8pm (72000sec) to a 5minute frequency-schedule (900sec).
+* Buses operating on all other routes follow the original non-frequency schedule
 
 
 ### 4. Public Transit Fare Adjustment
 
 #### 4.1. Description
-The last input that you will be able to modify is the **bus fare**, i.e. the cost to a passenger of traveling by bus. Each time they board a bus, passengers pay one *flat fare*.
-
-**INSERT FIGURE**
-***Figure 8: Example of Public Transportation Fare input***
+The last input that you will be able to modify is the **bus fare**, i.e. the cost to a passenger of traveling by bus. Each time they board a bus, passengers pay one flat fare, which can differ base on the **passenger's age**. Currently, the Sioux Faux bus fare policy works as follow: 
+* Children 5 yrs. and under: FREE
+* Children 6 to 10 yrs. : 75 centime
+* Children 10 to 18 yrs and Adults 65 yrs. and under: $1,50
+* Persons over 65 yrs: 75 centime
 
 For each new bus fare that you want to introduce, you need to specify the amount of the new fare (`amount`), to which bus route it will apply (`routeID`), which bus company operated this bus route (`agendyID`) and which age range will be concerned by the fare (`age`). 
-
-* As SFBL (agencyID = 217) is the only bus agency operating in Sioux Faux, the `agencyID` parameter of the input file will always be set to *217*.
-* The `routeID`, like in the bus fleet composition input (see Figure 1 above), refers to the different bus routes of Sioux Faux. 
-* The `age` range is defined as in mathematical notation where parentheses () indicate exclusive bounds and brackets \[ ] indicate inclusive bounds. For a notation example, refer to Figure 5.
-* The `amount` \[$] of the fare must be written as a float number. Note that if an agent has a transfer during his trip and must take two buses with two different fares, he will pay both fares.
 
 #### 4.2. Technical Details
 
 
 | Column Name | Description | Validation Criteria |
 | :---: | :--- | :----|
-| `agencyId`| `String` | Agency identifier | Must equal agency Id found under `agencyId` in `agencies.txt` of corresponding GTFS file for transit agency with `agency_name` designated by parent directory of `gtfs_data` in starter kit `/reference-data` directory. |
+| `agencyId`| `String` | Agency identifier | Must equal agency Id found under `agencyId` in `agencies.txt` of corresponding GTFS file for transit agency with `agency_name` designated by parent directory of `gtfs_data` in starter kit `/reference-data` directory. Note that for Sioux Faux, SFBL is the only agency operating in the city (`agencId`="217"). Therefore, any entry in the .csv file will have "217" under `agencyId`.|
 | `routeId` | `String` | The route that will have its fare specified. | A route can only have its fare set once. The `routeId` name must exist in the `routes.txt` file corresponding to the GTFS data for the agency specified by this entry's `agencyId`|
 | `age` | [`Range`](#range) | The range of ages of agents that this fare pertains to. | Must be greater than 0 and less than 120 (the maximum age of any resident in Sioux Faux)|
 | `amount` | `Float` | The amount (in $US) to charge an agent in the corresponding fare group. | Must be greater than 0.|
@@ -193,6 +190,14 @@ For each new bus fare that you want to introduce, you need to specify the amount
 ***Table 4: Pt Fares input schema and constraint definitions***
 
 #### 4.3. Example
+
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_Ptfares.png)
+***Figure 8: Example of Public Transportation Fare input***
+
+Figure 8 depicts an example input file describing the following policy:
+* Passengers 5 to 25 yrs. and under pay a reduced fare of 0.5 centime
+* Passengers over 65 yrs. pay a reduced fare of 0.5 centime
+* All other passengers pay the fare defined in the original Sioux Faux policy 
 
 ### 5. Time-interval-based Road Pricing
 
@@ -204,7 +209,7 @@ For each new bus fare that you want to introduce, you need to specify the amount
 
 ---
 
-## 6. Specialized Data Types:
+## Specialized Data Types:
 
 The following are data types that are specializations of simplified data types that are constrained according to a specific syntax
 
