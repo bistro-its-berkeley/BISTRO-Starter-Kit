@@ -1,10 +1,12 @@
 import logging
 import os
-from pathlib import Path
 import tempfile
+from pathlib import Path
+
 import docker
 import numpy as np
 import pandas as pd
+
 import input_sampler as sampler
 
 AGENCY = "sioux_faux_bus_lines"
@@ -18,7 +20,7 @@ FREQ_FILE = "FrequencyAdjustment.csv"
 SUB_FILE = "ModeSubsidies.csv"
 FLEET_FILE = "VehicleFleetMix.csv"
 PT_FARE_FILE = "PtFares.csv"
-SCORES_PATH = ("competition", "submissionScores.txt")
+SCORES_PATH = ("competition", "submissionScores.csv")
 
 logger = logging.getLogger(__name__)
 
@@ -67,32 +69,8 @@ def read_scores(output_dir):
     """
     # Need to go two levels deeper in useless nesting:
     output_dir = only_subdir(only_subdir(output_dir))
-
-    with open(os.path.join(output_dir, *SCORES_PATH), "r") as f:
-        lines = f.readlines()
-
-        data = []
-        for idx, l in enumerate(lines):
-            if idx == 0:
-                columns = l.rstrip("\n").split("|")
-                columns = [i.strip() for i in columns]
-                continue
-            elif idx == 1:
-                continue
-            values = l.rstrip("\n").split("|")
-            values = [i.strip() for i in values]
-            values = [i if len(i) > 0 else "0" for i in values]
-            data.append(values)
-
-    df = pd.DataFrame(data, columns=columns)
-
-    scores = []
-    for score_type in ["Weight", "Raw Score", "Weighted Score"]:
-        pivoted = pd.pivot_table(df, values=score_type, columns="Component Name", aggfunc="first").reset_index(drop=True)
-        pivoted.columns = ["%s_%s" % (i, score_type) for i in pivoted.columns]
-        scores.append(pivoted)
-    scores = pd.concat(scores, 1).astype(float)
-
+    df = pd.read_csv(os.path.join(output_dir, *SCORES_PATH), index_col="Component Name")
+    scores = df["Weighted Score"]
     return scores
 
 
@@ -118,7 +96,9 @@ def search_iteration(docker_cmd, data_root, input_root, output_root):
     save_inputs(input_dir, *settings)
 
     docker_dirs = {input_dir: {"bind": "/submission-inputs", "mode": "ro"},
-                   output_dir: {"bind": "/output", "mode": "rw"}}
+                   output_dir: {"bind": "/output", "mode": "rw"},
+                   "/tmp-data": {"bind": "/tmp-data", "mode": "rw"},
+                   "/var/run/docker.sock": {"bind": "/var/run/docker.sock", "mode": "rw"}}
 
     assert not docker_exists(submission_name, client)
     logger.info('%s start' % submission_name)
@@ -127,10 +107,9 @@ def search_iteration(docker_cmd, data_root, input_root, output_root):
                                  stdout=True, stderr=True)
     logger.debug(logs)
     logger.info('%s end' % submission_name)
-    assert not docker_exists(submission_name, client)  # Since we auto_removed it
 
     scores = read_scores(output_dir)
-    score, = scores["Submission Score_Weighted Score"]
+    score = scores["Submission Score"]
     score = float(score)  # verify simple float to keep simple
 
     paths = (input_dir, output_dir)
@@ -157,10 +136,10 @@ def main():
     logging.basicConfig(level=logging.INFO)
 
     # TODO explain why this is different than SCENARIO_NAME
-    scenario_name = "siouxfalls"
+
     # We can take these from cmd args later:
     sample_size = "1k"
-    n_sim_iters = 3
+    n_sim_iters = 1
     seed = 123
 
     n_search_iters = 100
@@ -175,7 +154,7 @@ def main():
     np.random.seed(seed)
 
     # Some prints
-    docker_cmd = CMD_TEMPLATE.format(scenario_name, sample_size, n_sim_iters)
+    docker_cmd = CMD_TEMPLATE.format(SCENARIO_NAME, sample_size, n_sim_iters)
     (input_dir, output_dir), best_score = random_search(docker_cmd, n_search_iters,
                                                         data_root, input_root, output_root)
 
