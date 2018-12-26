@@ -210,7 +210,7 @@ def sample_format_range(tuple_range):
     return "{}{}:{}{}".format(left_inc, a, b, right_inc)
 
 
-def sample_mode_subsidies_input(num_records):
+def sample_mode_subsidies_input(num_records, gtfs_manager=None):
     """Generate random mode subsidies inputs based on modes available for
     subsidies.
 
@@ -227,11 +227,18 @@ def sample_mode_subsidies_input(num_records):
     ----------
     num_records : int
         Number of randomly sampled records to create.
+    gtfs_manager : `AgencyGtfsDataManager`, optional
+        An instance of the `AgencyGtfsDataManager` for the target agency.
+
+    Notes
+    -----
+    `gtfs_manager` added to support duck-typing this field.
 
     Returns
     -------
     `DataFrame`
         `num_records` `ModeSubsidyInput` records.
+
     """
     possible_modes = ['walk_transit', 'ride_hail', 'walk_transit', 'walk',
                       'car', 'drive_transit']

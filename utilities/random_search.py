@@ -44,30 +44,40 @@ def docker_exists(container_id, client):
     return True
 
 
-def sample_settings(num_records, data_root):
+def sample_settings(max_num_records, data_root):
     # TODO pull out data GTFS stuff to make this pure function
     agency_dict = sampler.scenario_agencies(Path(data_root), SCENARIO_NAME)
     sf_gtfs_manager = sampler.AgencyGtfsDataManager(agency_dict[AGENCY])
 
-    freq_df = sampler.sample_frequency_adjustment_input(num_records, sf_gtfs_manager)
-    mode_subsidy_df = sampler.sample_mode_subsidies_input(num_records)
-    vehicle_fleet_mix_df = sampler.sample_vehicle_fleet_mix_input(num_records, sf_gtfs_manager)
-    pt_fares_df = sampler.sample_pt_fares_input(num_records, sf_gtfs_manager)
+    samplers = [sampler.sample_frequency_adjustment_input,
+                sampler.sample_mode_subsidies_input,
+                sampler.sample_vehicle_fleet_mix_input,
+                sampler.sample_pt_fares_input]
 
-    return freq_df, mode_subsidy_df, vehicle_fleet_mix_df, pt_fares_df
+    samples = []
+    for input_sampler in samplers:
+        num_records = np.random.randint(0, max_num_records)
+        if num_records == 0:
+            continue
+        samples.append(input_sampler(num_records, sf_gtfs_manager))
+
+    return tuple(samples)
 
 
-def save_inputs(input_dir, freq_df, mode_subsidy_df, vehicle_fleet_mix_df, pt_fare_df):
-    freq_df.to_csv(os.path.join(input_dir, FREQ_FILE), header=True, index=False)
-    mode_subsidy_df.to_csv(os.path.join(input_dir, SUB_FILE), header=True, index=False)
-    vehicle_fleet_mix_df.to_csv(os.path.join(input_dir, FLEET_FILE), header=True, index=False)
-    pt_fare_df.to_csv(os.path.join(input_dir, PT_FARE_FILE), header=True, index=False)
+def save_inputs(input_dir, freq_df=None, mode_subsidy_df=None, vehicle_fleet_mix_df=None, pt_fare_df=None):
+    if freq_df is not None:
+        freq_df.to_csv(os.path.join(input_dir, FREQ_FILE), header=True, index=False)
+    if mode_subsidy_df is not None:
+        mode_subsidy_df.to_csv(os.path.join(input_dir, SUB_FILE), header=True, index=False)
+    if vehicle_fleet_mix_df is not None:
+        vehicle_fleet_mix_df.to_csv(os.path.join(input_dir, FLEET_FILE), header=True, index=False)
+    if pt_fare_df is not None:
+        pt_fare_df.to_csv(os.path.join(input_dir, PT_FARE_FILE), header=True, index=False)
 
 
 def read_scores(output_dir):
-    """This function will become much simpler once sim is configured to output std csv file.
+    """Read scores from output directory as .csv file.
     """
-    # Need to go two levels deeper in useless nesting:
     output_dir = only_subdir(only_subdir(output_dir))
     df = pd.read_csv(os.path.join(output_dir, *SCORES_PATH), index_col="Component Name")
     scores = df["Weighted Score"]
@@ -75,7 +85,7 @@ def read_scores(output_dir):
 
 
 def search_iteration(docker_cmd, data_root, input_root, output_root):
-    num_records = 10  # TODO make this random as well
+    max_records = 10
 
     client = docker.from_env()  # TODO consider if cleanest that this is in main?
 
@@ -89,9 +99,10 @@ def search_iteration(docker_cmd, data_root, input_root, output_root):
 
     # Should be unique name here since folder is unique, also checks only one instance of delim
     _, submission_name = os.path.basename(input_dir).split(DIR_DELIM)
+    # Add 'bm_bc_' prefix due to docker's restriction on container names
     submission_name = "bm_bc_{}".format(submission_name)
     # Call random input sampler
-    settings = sample_settings(num_records, data_root)
+    settings = sample_settings(max_records, data_root)
     # Save all inputs
     save_inputs(input_dir, *settings)
 
