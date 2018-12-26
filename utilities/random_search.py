@@ -57,8 +57,6 @@ def sample_settings(max_num_records, data_root):
     samples = []
     for input_sampler in samplers:
         num_records = np.random.randint(0, max_num_records)
-        if num_records == 0:
-            continue
         samples.append(input_sampler(num_records, sf_gtfs_manager))
 
     return tuple(samples)
@@ -71,8 +69,10 @@ def save_inputs(input_dir, freq_df=None, mode_subsidy_df=None, vehicle_fleet_mix
         mode_subsidy_df.to_csv(os.path.join(input_dir, SUB_FILE), header=True, index=False)
     if vehicle_fleet_mix_df is not None:
         vehicle_fleet_mix_df.to_csv(os.path.join(input_dir, FLEET_FILE), header=True, index=False)
-    if pt_fare_df is not None:
-        pt_fare_df.to_csv(os.path.join(input_dir, PT_FARE_FILE), header=True, index=False)
+    if pt_fare_df is None:
+        pt_fare_df = pd.read_csv('../submission-inputs/{0}'.format(PT_FARE_FILE))
+    pt_fare_df.to_csv(os.path.join(input_dir, PT_FARE_FILE), header=True, index=False)
+
 
 
 def read_scores(output_dir):
