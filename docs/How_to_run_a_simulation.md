@@ -28,7 +28,6 @@ A python utility, `competition_executor.py` is available in `/utilities` to simp
 For execution:
 - [Docker](https://www.docker.com) <sup id="a1">[1](#f1)</sup>.
 
-**Hardware requirements**:
 
 ### Running a Simulation Locally
 
