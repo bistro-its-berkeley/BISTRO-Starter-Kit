@@ -150,7 +150,7 @@ def main():
 
     # We can take these from cmd args later:
     sample_size = "1k"
-    n_sim_iters = 1
+    n_sim_iters = 20
     seed = 123
 
     n_search_iters = 100

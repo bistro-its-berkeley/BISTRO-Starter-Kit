@@ -39,6 +39,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from random_search import PT_FARE_FILE
 from utils import lazyprop
 
 
@@ -294,7 +295,7 @@ def sample_pt_fares_input(num_records, gtfs_manager, max_fare_amount=10.0):
     """
     df_columns = ['agency', 'routeId', 'age', 'amount']
     if num_records == 0:
-        return pd.DataFrame({k: [] for k in df_columns})
+        return pd.read_csv('../submission-inputs/{0}'.format(PT_FARE_FILE))
     max_num_routes = gtfs_manager.routes.shape[0]
     if num_records > max_num_routes:
         raise ValueError(
