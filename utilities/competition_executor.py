@@ -287,7 +287,7 @@ class AbstractCompetitionExecutor(ABC):
         - "ModeSubsidies": Subsidies DataFrame
         - "RoadPricing": Road Pricing DataFrame
         - "FrequencyAdjustment": Frequency Adjustment DataFrame
-        - "PtFares": Public Transportation (buses) Fares DataFrame
+        - "PtFares": Mass Transit (buses) Fares DataFrame
 
         The content of the different DataFrames can be understood by refering to the `Uber-Prize-Starter-Kit` repository
         documentation (`docs/Which-inputs-should-I-optimize.ms`)
