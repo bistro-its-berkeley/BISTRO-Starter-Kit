@@ -7,22 +7,6 @@ The competition will be split into two rounds:
 * The first round challenges contestants to optimize the transportation network of a small fictitious city: Sioux Faux 
 * The second round will require contestants to apply their optimization algorithms to a real city, which will be announced prior to the launch of the Uber Prize.
 
-## Internal Pilot Test
-
-This **internal pilot test** aims at testing the ability of participants to compete in Round 1 of the competition. Given the novelty of the framing of our problem as well as computational expense of running the simulation engine, we wish to do an initial round of internal testing with a core group of members from AI Labs in order to identify any issues.
-
-The **objectives** of this internal pilot test are:
-* How easy/difficult is it to on-board participants, and feel comfortable moving forward with a solution approach, given the starter kit and associated documentation?
-  * Update documentation in response to this.
-* We are looking for optimization algorithms that explore the set of feasible solutions to the Sioux Faux scenario given the possible input variables and corresponding constraints.
-  * We are not necessarily looking to generate the best solutions, but to assess the difficulty of the problem given the current dimensions of the input space
-  * Ideally, we should also identify any obvious “cheats” and address them.
-* Review feedback and user-generated reports to identify likely approaches/models.
-If an approach seems particularly worthwhile, then request that it be submitted as a “benchmark solution”.
-
-Thank you for your help! :-)
-
-
 ## How do I get started?
 
 While the problem setting may not be as familiar as that of previous machine learning and AI competitions, our aim has been to make on-boarding to this competition as straightforward as possible for practitioners both with and without domain expertise. However, prior to jumping into developing a solution, please review the background material and preliminaries provided in this repository. Although you will not have to deal with complex transit analysis (the simulation engine will do it for you!), understanding a few transportation planning terms and concepts concepts will likely improve your understanding of the system that you will be modeling. 
@@ -31,7 +15,7 @@ We recommend that you proceed through the documentation in the following order:
 
   * **Introduction to the Urban Transportation System Optimization Problem**: First, read the brief [introduction to the Urban Transportation System problem](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md), which will give you a general understanding of the framework of problem you need to solve as well as the relevant optimization challenges. 
 
-  * **Problem statement for internal pilot testing**: Then, review the [presentation of the Sioux-Faux scenario](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/The_Sioux_Faux_case_pilot_study.md), which introduces the problem setting and particulars of transportation system running in the simulation environment.
+  * **Problem statement for internal pilot testing**: Then, review the [presentation of the Sioux Faux scenario](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/The_Sioux_Faux_case_pilot_study.md), which introduces the problem setting and particulars of transportation system running in the simulation environment.
   
   * **Inputs to optimize**: Next, please refer to the [input file specification schema](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Which-inputs-should-I-optimize.md), which describes the structure of the input files and their relationship to quantities computed in the context of the virtual transportation environment.
   
@@ -49,7 +33,7 @@ We recommend that you proceed through the documentation in the following order:
   * a note on [how to run a simulation](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/How_to_run_a_simulation.md)
   * a description of the [input schema](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Which-inputs-should-I-optimize.md)
   * a description of the [simulation outputs and the scoring function](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md)
-  * an outline of [the Sioux-Faux scenario](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/The_Sioux_Faux_case_pilot_study.md)
+  * an outline of [the Sioux Faux scenario](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/The_Sioux_Faux_case_pilot_study.md)
   * the [problem statement for the pilot test](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Problem_Statement_Pilot_Study.pdf)
   * the [problem statement for round 1](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Problem_statement_Phase%20I.pdf)
   * a note on [what and how to submit](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit.md)
