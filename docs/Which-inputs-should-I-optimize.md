@@ -63,12 +63,12 @@ Your recommendation is to be submitted in a file named `VehicleFleetMix.csv` acc
 #### 1.3. Example:
 Figure 4 below depicts an example of Vehicle Fleet Mix input file. Only three routes (1342, 1350 and 1351) out of twelve are assigned a new bus type; all other routes operate with the default bus type (`BUS-DEFAULT`).
 
-![Bus fleet](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/Input_VehicleFleetMix.png "*Figure 2: Input1 - composition of the bus fleet")\
+![Bus fleet](Input_VehicleFleetMix.png)\
 ***Figure 4: Example of Vehicle Fleet Mix Input.***
 
 
 
-### **2. Transit and on-demand ride incentives**
+### **2. Transit and on-demand rides incentives**
 
 #### 2.1. Description
 
@@ -99,7 +99,7 @@ Your recommendation is to be submitted in a file named `ModeSubsidies.csv` accor
 
 #### 2.3. Example:
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_Subsidies.png)
+![Alt text](Input_Subsidies.png)
 ***Figure 5: Example of Mode Incentive Input***
 
 Figure 5 depicts an example input file describing the following situation:
@@ -125,20 +125,20 @@ An essential aspect of transit system operations is capacity optimization. Route
 Before explaining how the input works, a few terms must be defined:
 
 * A **route** is made of a group of *trips* that are displayed to riders as a single service. Each bus route can be identified with a `route_id`. To understand the geospatial embedding of each Route corresponding to a `route_id`, please refer to Figure 1, above.   
-* A **trip** is a sequence of two or more *stops* that occurs at specific time and is identified by a `trip_id`. For Sioux Faux, the existing SFBL trips corresponding to each route are described in the [`trip.txt` file](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file in the gtfs-data folder.
+* A **trip** is a sequence of two or more *stops* that occurs at specific time and is identified by a `trip_id`. For Sioux Faux, the existing SFBL trips corresponding to each route are described in the [`trip.txt` file](trips.txt) file in the gtfs-data folder.
 
-Currently, Sioux Faux buses follow a *non-frequency schedule* based on their arrival and departure times to and from each stop of their route. These arrival and departure times are listed in the [`stop_times.txt`](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/stop_times.txt) file of Sioux Faux's GTFS data.
+Currently, Sioux Faux buses follow a *non-frequency schedule* based on their arrival and departure times to and from each stop of their route. These arrival and departure times are listed in the [`stop_times.txt`](stop_times.txt) file of Sioux Faux's GTFS data.
 You role here is to decide if some routes should follow a *frequency schedule* instead of a non frequency one. While we term the behavior of this input as frequency adjustment, in fact, it modifies the SFBL bus headways on a particular route. The adjustment wipes out all non-frequency trips from the route and converts them to frequency trips according to the given `headway_secs` defined between `start_time` and `end_time`. You can find a definition of these parameters in Table 3 below. Note that it is assumed that buses operate only on *week days* (i.e. from Monday to Friday).
 
-Here, we require you to provide the `trip_id` in order to derive the stop pattern and travel times and to implicitly reference a bus route. The trip_ids corresponding to each route were summarized in the [`route_id_trip_id_correspondance.csv` file](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/route_id_trip_id_correspondance.csv) (see Figure 6 below).
+Here, we require you to provide the `trip_id` in order to derive the stop pattern and travel times and to implicitly reference a bus route. The trip_ids corresponding to each route were summarized in the [`route_id_trip_id_correspondance.csv` file](route_id_trip_id_correspondance.csv) (see Figure 6 below).
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/route_id_trip_id_correspondance.csv)
+![Alt text](route_id_trip_id_correspondance.csv)
 ***Figure 6: Route ID-Trip ID correspondance***
 
 
 #### 3.2. Technical Details
 
-The format for this  input is identical to the `frequencies.txt` component of the [GTFS specification](https://developers.google.com/transit/gtfs/reference/#frequenciestxt). The GTFS data of Sioux Faux are stored in the [reference-data](https://github.com/vgolfier/Uber-Prize-Starter-Kit/tree/master/reference-data/sioux_faux/sioux_faux_bus_lines) folder.
+The format for this  input is identical to the `frequencies.txt` component of the <a href="https://developers.google.com/transit/gtfs/reference/#frequenciestxt">GTFS specification</a>. The GTFS data of Sioux Faux are stored in the [reference-data](sioux_faux_bus_lines) folder.
 
 
 | Column Name | Data Type |Description | Validation Criteria |
