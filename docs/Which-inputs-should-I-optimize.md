@@ -25,7 +25,7 @@ The following subsections provide a detailed description of what each input repr
 Currently, Sioux Faux Bus Lines (SFBL) operates a small fleet of buses on 12 routes in Sioux Faux. Orginally purchased as a group, each bus in the fleet possesses identical attributes of seating capacity, fuel consumption, operations and maintenance cost, etc. SFBL is considering optimizing bus type in order to better match the specific demand characteristics of each route. Four types of buses (including the current one used by SFBL, called `BUS-DEFAULT`) are available from its supplier, each of them with different technical properties (`fixed-data/siouxfalls/availableVehicleTypes.csv`, see Figure 2) and cost characteristics (`fixed-data/siouxfalls/vehicleCosts.csv`, see Figure 3). Currently, the number of buses required to service each route is equal to the number of trips: after the a headway has expired, a new bus is used. For instance, if the bus frequency on a specific route is 10 minutes, a new bus is used every 10 minutes durung the service time on this route. This does not reflect a realistic scenario combining bus routes into runs, but, for now, it still allows for comparisons to a BAU case.
 
 
-![Route IDs](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/sf_route_guide.png) <br/>
+![Route IDs](sf_route_guide.png) <br/>
 ***Figure 1: Sioux Faux route IDs guide***
 <br/>
 <br/>
@@ -38,13 +38,13 @@ To provide guidance on vehicle procurement for SFBL, you can recommend purchase 
 
 For each bus that you purchase, the default bus on the route (i.e., buses designated by `vehicleTypeId` `BUS-DEFAULT`) is automatically sold for a price of <a href="https://www.codecogs.com/eqnedit.php?latex=\$10,000&space;&plus;&space;\$20,000&space;\times&space;\mathcal{N}(0,1)" target="_blank"><img src="https://latex.codecogs.com/png.latex?\$10,000&space;&plus;&space;\$20,000&space;\times&space;\mathcal{N}(0,1)" title="\$10,000 + \$20,000 \times \mathcal{N}(0,1)" /></a>
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Bus_types.png)\
+![Alt text](Bus_types.png)\
 ***Figure 2: Set of available bus types***
 <br/>
 <br/>
 
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/BusCosts.png "Figure 4: Costs of available bus types")\
+![Alt text](BusCosts.png)\
 ***Figure 3: Costs of available bus types***
 <br/>
 
@@ -54,8 +54,8 @@ Your recommendation is to be submitted in a file named `VehicleFleetMix.csv` acc
 | Column Name| Data Type | Description | Validation Criteria |
 | :---:| :--- | :--- | :----|
 | `agencyId`|`String` | Agency identifier | Must equal agency Id found under `agencyId` in `agencies.txt` of corresponding GTFS file for transit agency with `agency_name` designated by parent directory of `gtfs_data` in starter kit `/reference-data` directory. Note that for Sioux Faux, SFBL is the only agency operating in the city (`agencId`="217"). Therefore, any entry in the .csv file will have "217" under `agencyId`.|
-| `routeId` |`String` | The route that will have its vehicle type assignment modified | A route can only have its assignment modified once. The `routeId` name must exist in the [`routes.txt` file](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/vgv/%2326-document_pt_fares_input/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/routes.txt) corresponding to the GTFS data for the agency specified by this entry's `agencyId`|
-| `vehicleTypeId`|`String` | The vehicle type identifier | Must be a member of the set of vehicle type Ids listed under `vehicleTypeId` in the [`availableVehicleTypes.txt` file](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/vgv/%2326-document_pt_fares_input/reference-data/sioux_faux/sioux_faux_bus_lines/availableVehicleTypes.csv)|
+| `routeId` |`String` | The route that will have its vehicle type assignment modified | A route can only have its assignment modified once. The `routeId` name must exist in the [`routes.txt` file](routes.txt) corresponding to the GTFS data for the agency specified by this entry's `agencyId`|
+| `vehicleTypeId`|`String` | The vehicle type identifier | Must be a member of the set of vehicle type Ids listed under `vehicleTypeId` in the [`availableVehicleTypes.txt` file](availableVehicleTypes.csv)|
 
 ***Table 1: Vehicle fleet mix input schema and constraint definitions***
 
@@ -143,11 +143,11 @@ The format for this  input is identical to the `frequencies.txt` component of th
 
 | Column Name | Data Type |Description | Validation Criteria |
 | :---: |:--- | :--- | :----|
-| `tripId` | `String` | The trip corresponding to the route for which frequencies will be adjusted. | Must reference a `tripId` in the `trips.txt` (and implicitly a `routeId` in the `routes.txt` file) corresponding to the GTFS data for the agency specified by this entry's `agencyId`. A list of trip_ids corresponding to each route were gathered in the [`route_id_trip_id_correspondance.csv` file](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/route_id_trip_id_correspondance.csv) (see Figure 6) |
+| `tripId` | `String` | The trip corresponding to the route for which frequencies will be adjusted. | Must reference a `tripId` in the `trips.txt` (and implicitly a `routeId` in the `routes.txt` file) corresponding to the GTFS data for the agency specified by this entry's `agencyId`. A list of trip_ids corresponding to each route were gathered in the [`route_id_trip_id_correspondance.csv` file](route_id_trip_id_correspondance.csv) (see Figure 6) |
 | `startTime` | `Integer`  | The `start_time` field specifies the time (in seconds past midnight) at which the first vehicle departs from the first stop of the trip with the specified frequency. | Must be greater than 0 and less 86400 (the number of seconds in a day).|
 | `endTime` | `Integer`  | The end_time field indicates the time at which service changes to a different frequency (or ceases) at the first stop in the trip. | Must be greater than 0 and less 86400 (the number of seconds in a day). |
 | `headway_secs` | `Integer`| 	The headway_secs field indicates the time between departures from the same stop (headway) for this trip type, during the time interval specified by start_time and end_time. The headway value must be entered in seconds. | Must be greater than the number of headway seconds. 	Periods in which headways are defined (the rows in frequencies.txt) shouldn't overlap for the same trip, since it's hard to determine what should be inferred from two overlapping headways. However, a headway period may begin at the exact same time that another one ends. |
-| `exact_time` | `Integer`|Determines if frequency-based trips should be exactly scheduled based on the specified headway information. |Must be entered as 1 for the purposes of this round of the contest. See the [GTFS specification](https://developers.google.com/transit/gtfs/reference/#frequenciestxt) for further information about what this field represents. |
+| `exact_time` | `Integer`|Determines if frequency-based trips should be exactly scheduled based on the specified headway information. |Must be entered as 1 for the purposes of this round of the contest. See the <a href="https://developers.google.com/transit/gtfs/reference/#frequenciestxt">GTFS specification</a> for further information about what this field represents. |
 
 ***Table 3: Frequency Adjustments input schema and constraint definitions***
 
@@ -157,7 +157,7 @@ The format for this  input is identical to the `frequencies.txt` component of th
 
 Figure 7 below depicts an example input file.
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_FrequencyAdjustment.png)
+![Alt text](Input_FrequencyAdjustment.png)
 ***Figure 7: Example of Frequency Adjustment Input***
 
 In this case, two routes will see their bus frequency adjusted: route 1340 (`trip_id` "t_75335_b_219_tn_1") and route 1341 (`trip_id`s "t_75384_b_219_tn_1" and "t_75384_b_219_tn_2", see reference in Figure 6 above). 
@@ -193,7 +193,7 @@ For each new bus fare that you want to introduce, you need to specify the amount
 #### 4.3. Example
 Figure 8 depicts an example input file for Public Transit Fare Adjustment.
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_Ptfares.png)
+![Alt text](Input_Ptfares.png)
 ***Figure 8: Example of Public Transportation Fare input***
 
 The file describes the following fare policy:
