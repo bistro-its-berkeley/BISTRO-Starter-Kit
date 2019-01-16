@@ -25,7 +25,8 @@ The following subsections provide a detailed description of what each input repr
 Currently, Sioux Faux Bus Lines (SFBL) operates a small fleet of buses on 12 routes in Sioux Faux. Orginally purchased as a group, each bus in the fleet possesses identical attributes of seating capacity, fuel consumption, operations and maintenance cost, etc. SFBL is considering optimizing bus type in order to better match the specific demand characteristics of each route. Four types of buses (including the current one used by SFBL, called `BUS-DEFAULT`) are available from its supplier, each of them with different technical properties (`fixed-data/siouxfalls/availableVehicleTypes.csv`, see Figure 2) and cost characteristics (`fixed-data/siouxfalls/vehicleCosts.csv`, see Figure 3). Currently, the number of buses required to service each route is equal to the number of trips: after the a headway has expired, a new bus is used. For instance, if the bus frequency on a specific route is 10 minutes, a new bus is used every 10 minutes durung the service time on this route. This does not reflect a realistic scenario combining bus routes into runs, but, for now, it still allows for comparisons to a BAU case.
 
 
-![Route IDs](/Users/vgolfi/Documents/GitHub/Uber-Prize-Starter-Kit/Images/sf_route_guide.png) <br/>
+![Route IDs](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/sf_route_guide.png) <br/>
+             
 ***Figure 1: Sioux Faux route IDs guide***
 <br/>
 <br/>
@@ -38,13 +39,13 @@ To provide guidance on vehicle procurement for SFBL, you can recommend purchase 
 
 For each bus that you purchase, the default bus on the route (i.e., buses designated by `vehicleTypeId` `BUS-DEFAULT`) is automatically sold for a price of <a href="https://www.codecogs.com/eqnedit.php?latex=\$10,000&space;&plus;&space;\$20,000&space;\times&space;\mathcal{N}(0,1)" target="_blank"><img src="https://latex.codecogs.com/png.latex?\$10,000&space;&plus;&space;\$20,000&space;\times&space;\mathcal{N}(0,1)" title="\$10,000 + \$20,000 \times \mathcal{N}(0,1)" /></a>
 
-![Alt text](/Users/vgolfi/Documents/GitHub/Uber-Prize-Starter-Kit/Images/Bus_types.png)\
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Bus_types.png)\
 ***Figure 2: Set of available bus types***
 <br/>
 <br/>
 
 
-![Alt text](/Users/vgolfi/Documents/GitHub/Uber-Prize-Starter-Kit/Images/BusCosts.png)\
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/Images/BusCosts.png)\
 ***Figure 3: Costs of available bus types***
 <br/>
 
@@ -63,7 +64,7 @@ Your recommendation is to be submitted in a file named `VehicleFleetMix.csv` acc
 #### 1.3. Example:
 Figure 4 below depicts an example of Vehicle Fleet Mix input file. Only three routes (1342, 1350 and 1351) out of twelve are assigned a new bus type; all other routes operate with the default bus type (`BUS-DEFAULT`).
 
-![Bus fleet](/Users/vgolfi/Documents/GitHub/Uber-Prize-Starter-Kit/Images/Input_VehicleFleetMix.png)\
+![Bus fleet](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_VehicleFleetMix.png)\
 ***Figure 4: Example of Vehicle Fleet Mix Input.***
 
 
@@ -99,7 +100,7 @@ Your recommendation is to be submitted in a file named `ModeSubsidies.csv` accor
 
 #### 2.3. Example:
 
-![Alt text](/Users/vgolfi/Documents/GitHub/Uber-Prize-Starter-Kit/Images/Input_Subsidies.png)
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/vgv/%2326-document_pt_fares_input/Images/Input_Subsidies.png)
 ***Figure 5: Example of Mode Incentive Input***
 
 Figure 5 depicts an example input file describing the following situation:
@@ -157,7 +158,7 @@ The format for this  input is identical to the `frequencies.txt` component of th
 
 Figure 7 below depicts an example input file.
 
-![Alt text](/Users/vgolfi/Documents/GitHub/Uber-Prize-Starter-Kit/Images/Input_FrequencyAdjustment.png)
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_FrequencyAdjustment.png)
 ***Figure 7: Example of Frequency Adjustment Input***
 
 In this case, two routes will see their bus frequency adjusted: route 1340 (`trip_id` "t_75335_b_219_tn_1") and route 1341 (`trip_id`s "t_75384_b_219_tn_1" and "t_75384_b_219_tn_2", see reference in Figure 6 above). 
@@ -193,7 +194,7 @@ For each new bus fare that you want to introduce, you need to specify the amount
 #### 4.3. Example
 Figure 8 depicts an example input file for Public Transit Fare Adjustment.
 
-![Alt text](/Users/vgolfi/Documents/GitHub/Uber-Prize-Starter-Kit/Images/Input_Ptfares.png)
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_Ptfares.png)
 ***Figure 8: Example of Public Transportation Fare input***
 
 The file describes the following fare policy:
