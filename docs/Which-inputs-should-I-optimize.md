@@ -26,7 +26,7 @@ Currently, Sioux Faux Bus Lines (SFBL) operates a small fleet of buses on 12 rou
 
 
 ![Route IDs](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/sf_route_guide.png) <br/>
-             
+
 ***Figure 1: Sioux Faux route IDs guide***
 <br/>
 <br/>
@@ -133,7 +133,7 @@ You role here is to decide if some routes should follow a *frequency schedule* i
 
 Here, we require you to provide the `trip_id` in order to derive the stop pattern and travel times and to implicitly reference a bus route. The trip_ids corresponding to each route were summarized in the [`route_id_trip_id_correspondance.csv` file](reference-data/sioux_faux/sioux_faux_bus_lines/route_id_trip_id_correspondance.csv) (see Figure 6 below).
 
-![Alt text](/Users/vgolfi/Documents/GitHub/Uber-Prize-Starter-Kit/reference-data/sioux_faux/sioux_faux_bus_lines/route_id_trip_id_correspondance.csv)
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/vgv/%2326-document_pt_fares_input/reference-data/sioux_faux/sioux_faux_bus_lines/route_id_trip_id_correspondance.csv)
 ***Figure 6: Route ID-Trip ID correspondance***
 
 
