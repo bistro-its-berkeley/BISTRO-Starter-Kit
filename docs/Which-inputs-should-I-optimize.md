@@ -77,10 +77,9 @@ In an effort to encourage the use of sustainable transportation alternatives to 
 
 You may choose to defray the cost of on-demand rides and/or transit based on either age group, income group, or both. %, up to a total amount constrained by SFDOT's budget
 To do so, the range of qualifying socio-demographic characteristics and value of the incentive provided to each group must be defined for passengers using each of the following modes of transportation to complete a trip: 
-  * "ride-hail": use of on-demand rideshare as the main transport mode for the trip
+  * "OnDemand_ride": use of on-demand rideshare as the main transport mode for the trip
   * "drive_transit": use of the personal car as an access/egress mode to/from transit (bus)
   * "walk_transit": walking as an access/egress mode to/from transit (bus)
-  * "walk": walking as the main mode for the trip
 
 Qualification for an incentive can be based on **age** and/or **income**. You can find the distributions of Sioux Faux's population over age and income on the page [**INSERT LINK**].
 
@@ -171,13 +170,15 @@ In this case, two routes will see their bus frequency adjusted: route 1340 (`tri
 ### 4. Public Transit Fare Adjustment
 
 #### 4.1. Description
-The last input that you will be able to modify is the **bus fare**, i.e. the cost to a passenger of traveling by bus. Each time they board a bus, passengers pay one flat fare, which can differ base on the **passenger's age**. Currently, the Sioux Faux bus fare policy works as follow: 
+SFBL would like to use this simulation experiment to explore the effect of changing **bus fares**, i.e. the cost to a passenger of traveling by bus. Currently, the Sioux Faux bus fare policy works as follow: 
 * Children 5 yrs. and under: FREE
-* Children 6 to 10 yrs. : 75 centime
+* Children 6 to 10 yrs. : $0,75
 * Children 10 to 18 yrs and Adults 65 yrs. and under: $1,50
-* Persons over 65 yrs: 75 centime
+* Persons over 65 yrs: $0,75
 
-For each new bus fare that you want to introduce, you need to specify the amount of the new fare (`amount`), to which bus route it will apply (`routeID`), which bus company operated this bus route (`agendyID`) and which age range will be concerned by the fare (`age`). 
+Perhaps a lower fare for young adults (ages 12-18) would significantly increase ridership among this population. Alternatively, perhaps a higher fare for middle-aged adults (40-55) would be well-tolerated, while boosting fare-box revenue."
+
+For each new bus fare that you want to introduce, you need to specify the amount of the new fare (`amount`), to which bus route it will apply (`routeID`), which bus company operated this bus route (`agendyID`) and to which age group (`age`) this fare will apply. 
 
 #### 4.2. Technical Details
 
@@ -198,17 +199,10 @@ Figure 8 depicts an example input file for Public Transit Fare Adjustment.
 ***Figure 8: Example of Public Transportation Fare input***
 
 The file describes the following fare policy:
-* Passengers 5 to 25 yrs. and under pay a reduced fare of 0.5 centime
+* Passengers 5 to 25 yrs. and under pay a reduced fare of $0.50
 * Passengers over 65 yrs. pay a reduced fare of 0.5 centime
 * All other passengers pay the fare defined in the original Sioux Faux policy 
 
-### 5. Time-interval-based Road Pricing
-
-#### 5.1. Description
-
-#### 5.2. Technical Details
-
-#### 5.3. Example
 
 ---
 
@@ -216,6 +210,6 @@ The file describes the following fare policy:
 
 The following are data types that are specializations of simplified data types that are constrained according to a specific syntax
 
-<span id="subsidizable">`Subsidizable`</span>: `Enumeration`; must be a member of the set: {`"ride_hail"`,`"drive_transit"`, `"walk_transit"`, `"walk"`}
+<span id="subsidizable">`Subsidizable`</span>: `Enumeration`; must be a member of the set: {`"OnDemand_ride"`,`"drive_transit"`, `"walk_transit"`}
 
 <span id="range">`Range`</span>: `String`; Ranges are defined according to typical mathematical notation conventions whereby parentheses "(" and ")" indicate exclusive bounds and brackets "\[" "]" indicate inclusive bounds. For example, "[0,100)" is interpreted to mean, "0 (inclusive) to 100 (exclusive)".
