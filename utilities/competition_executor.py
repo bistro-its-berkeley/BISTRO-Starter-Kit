@@ -565,7 +565,7 @@ if __name__ == '__main__':
     except docker.errors.NotFound:
         print("Creating new simulation container...")
 
-    ex.run_simulation(CONTAINER_ID, num_iterations=1, num_cpus=10)
+    ex.run_simulation(CONTAINER_ID, num_iterations=1, num_cpus=10, sample_size='15k')
 
     # Let it roll for a bit (hopefully at least one or two iterations!)
     if len(sys.argv) < 4:
