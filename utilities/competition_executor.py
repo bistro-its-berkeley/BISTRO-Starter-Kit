@@ -298,7 +298,7 @@ class AbstractCompetitionExecutor(ABC):
 
         """
         input_root = self.input_root
-        list_inputs = ["VehicleFleetMix", "ModeSubsidies", "FrequencyAdjustment", "RoadPricing"]
+        list_inputs = ["VehicleFleetMix", "ModeSubsidies", "FrequencyAdjustment", "RoadPricing", "PtFares"]
 
         if input_root is None:
             if submission_input_root is not None:
