@@ -39,6 +39,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from random_search import PT_FARE_FILE
 from utils import lazyprop
 
 
@@ -118,6 +119,10 @@ def sample_vehicle_fleet_mix_input(num_records, gtfs_manager):
     `ValueError`
         If the `num_records` is in excess of the number of routes that an agency schedules buses on.
     """
+    df_columns = ["agencyId", "routeId", "vehicleTypeId"]
+    if num_records == 0:
+        return pd.DataFrame({k: [] for k in df_columns})
+
     max_num_routes = gtfs_manager.routes.shape[0]
     if num_records > max_num_routes:
         raise ValueError(
@@ -127,9 +132,10 @@ def sample_vehicle_fleet_mix_input(num_records, gtfs_manager):
     route_agency_sample = gtfs_manager.routes.sample(num_records)
     routes = pd.Series(route_agency_sample.index.values)
     agency = pd.Series(route_agency_sample.agency_id.values)
-    vehicles = pd.Series((gtfs_manager.vehicle_types.filter(like="BUS", axis=0)).sample(num_records, replace=True).index)
+    vehicles = pd.Series(
+        (gtfs_manager.vehicle_types.filter(like="BUS", axis=0)).sample(num_records, replace=True).index)
     df = pd.concat([agency, routes, vehicles], axis=1, ignore_index=True)
-    df.columns = ["agencyId", "routeId", "vehicleTypeId"]
+    df.columns = df_columns
     return df
 
 
@@ -169,7 +175,9 @@ def sample_frequency_adjustment_input(num_records, gtfs_manager):
     `pd.DataFrame`
         `num_records` `FrequencyAdjustmentInput` records.
     """
-
+    df_columns = ['trip_id', 'start_time', 'end_time', 'headway_secs']
+    if num_records == 0:
+        return pd.DataFrame({k: [] for k in df_columns})
     min_secs = 0
     max_secs = 86340
 
@@ -182,7 +190,7 @@ def sample_frequency_adjustment_input(num_records, gtfs_manager):
         [_get_valid_start_end_time(min_secs, max_secs, headway_secs) for headway_secs in
          headway_secs_arr])
     res_df = pd.concat([trip_ids, times_df, pd.Series(headway_secs_arr)], axis=1, ignore_index=True)
-    res_df.columns = ['trip_id', 'start_time', 'end_time', 'headway_secs']
+    res_df.columns = df_columns
     res_df['exact_times'] = 0
     return res_df
 
@@ -210,7 +218,7 @@ def sample_format_range(tuple_range):
     return "{}{}:{}{}".format(left_inc, a, b, right_inc)
 
 
-def sample_mode_subsidies_input(num_records):
+def sample_mode_subsidies_input(num_records, gtfs_manager=None):
     """Generate random mode subsidies inputs based on modes available for
     subsidies.
 
@@ -227,12 +235,22 @@ def sample_mode_subsidies_input(num_records):
     ----------
     num_records : int
         Number of randomly sampled records to create.
+    gtfs_manager : `AgencyGtfsDataManager`, optional
+        An instance of the `AgencyGtfsDataManager` for the target agency.
+
+    Notes
+    -----
+    `gtfs_manager` added to support duck-typing this field.
 
     Returns
     -------
     `DataFrame`
         `num_records` `ModeSubsidyInput` records.
+
     """
+    df_columns = ['mode', 'age', 'income', 'amount']
+    if num_records == 0:
+        return pd.DataFrame({k: [] for k in df_columns})
     possible_modes = ['walk_transit', 'ride_hail', 'walk_transit', 'walk',
                       'car', 'drive_transit']
     modes = np.random.choice(possible_modes, num_records).tolist()
@@ -242,7 +260,7 @@ def sample_mode_subsidies_input(num_records):
                in range(num_records)]
     amounts = [np.round(np.random.uniform(0.1, 20), 1) for _ in range(num_records)]
     return pd.DataFrame(np.array([modes, ages, incomes, amounts]).T,
-                        columns=['mode', 'age', 'income', 'amount'])
+                        columns=df_columns)
 
 
 def sample_pt_fares_input(num_records, gtfs_manager, max_fare_amount=10.0):
@@ -275,6 +293,9 @@ def sample_pt_fares_input(num_records, gtfs_manager, max_fare_amount=10.0):
         If the `num_records` is in excess of the number of routes that an agency schedules
         buses on.
     """
+    df_columns = ['agency', 'routeId', 'age', 'amount']
+    if num_records == 0:
+        return pd.read_csv('../submission-inputs/{0}'.format(PT_FARE_FILE))
     max_num_routes = gtfs_manager.routes.shape[0]
     if num_records > max_num_routes:
         raise ValueError(
@@ -288,4 +309,4 @@ def sample_pt_fares_input(num_records, gtfs_manager, max_fare_amount=10.0):
     ages = [sample_format_range(tuple(sorted(np.random.choice(120, 2)))) for _ in
             range(num_records)]
     return pd.DataFrame(np.array([agency, routes, ages, amounts]).T,
-                        columns=['agency', 'routeId', 'age', 'amount'])
+                        columns=df_columns)
