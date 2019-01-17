@@ -469,7 +469,7 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
                        submission_id,
                        submission_output_root=None,
                        submission_input_root=None,
-                       scenario_name='siouxfalls',
+                       scenario_name='sioux_faux',
                        sample_size='1k',
                        num_iterations=10,
                        num_cpus=multiprocessing.cpu_count() - 1,
