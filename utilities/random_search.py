@@ -17,7 +17,7 @@ CMD_TEMPLATE = "--scenario {0} --sample-size {1} --iters {2}"
 DIR_DELIM = "-"
 
 FREQ_FILE = "FrequencyAdjustment.csv"
-SUB_FILE = "ModeSubsidies.csv"
+SUB_FILE = "ModeIncentives.csv"
 FLEET_FILE = "VehicleFleetMix.csv"
 PT_FARE_FILE = "PtFares.csv"
 SCORES_PATH = ("competition", "submissionScores.csv")
@@ -149,8 +149,8 @@ def main():
     # TODO explain why this is different than SCENARIO_NAME
 
     # We can take these from cmd args later:
-    sample_size = "1k"
-    n_sim_iters = 20
+    sample_size = "15k"
+    n_sim_iters = 2
     seed = 123
 
     n_search_iters = 100
