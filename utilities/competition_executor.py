@@ -142,10 +142,16 @@ class Submission(object):
                  num_iterations,
                  container):
         # Delay initialization in order to get timestamp
-        time.sleep(10)
+        time.sleep(15)
         log = container.logs()
         self._submission_id = submission_id
-        self._timestamp = _get_submission_timestamp_from_log(log.decode('utf-8'))
+
+        try:
+            self._timestamp = _get_submission_timestamp_from_log(log.decode('utf-8'))
+        except ValueError as e:
+            print(log.decode('utf-8'))
+            raise e
+
         self.num_iterations = num_iterations
         self.sample_size = sample_size
         self.scenario_name = scenario_name

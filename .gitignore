@@ -251,3 +251,6 @@ hs_err_pid*
 !.vscode/launch.json
 !.vscode/extensions.json
 /output/
+
+search-output/*
+search-input/*
