@@ -46,22 +46,20 @@ def docker_exists(container_id, client):
     return True
 
 
-def sample_settings(max_num_records, data_root):
+def sample_settings(data_root, combination_number):
+    max_bus_lines = 12
+    max_num_records = 24
     # TODO pull out data GTFS stuff to make this pure function
     agency_dict = sampler.scenario_agencies(Path(data_root), SCENARIO_NAME)
     sf_gtfs_manager = sampler.AgencyGtfsDataManager(agency_dict[AGENCY])
 
-    for incentives in fixed_inputs.incentive_inputs():
-        for fares in fixed_inputs.pt_fare_inputs():
-            samplers = [sampler.sample_frequency_adjustment_input,
-                        incentives,
-                        sampler.sample_vehicle_fleet_mix_input,
-                        fares]
+    subsidies_combination, pt_fares_combination = input_combinations[combination_number]
 
-            samples = []
-            for input_sampler in samplers:
-                num_records = np.random.randint(0, max_num_records)
-                samples.append(input_sampler(num_records, sf_gtfs_manager))
+    samples = [sampler.sample_frequency_adjustment_input(np.random.randint(0, max_num_records), sf_gtfs_manager),
+               subsidies_combination,
+               sampler.sample_vehicle_fleet_mix_input(np.random.randint(0, max_bus_lines), sf_gtfs_manager,
+                                                      ["BUS-SMALL-HD", "BUS-STD-ART", "BUS-DEFAULT"]),
+               pt_fares_combination]
 
     return tuple(samples)
 
@@ -87,9 +85,7 @@ def read_scores(output_dir):
     return scores
 
 
-def search_iteration(docker_cmd, data_root, input_root, output_root):
-    max_records = 10
-
+def search_iteration(docker_cmd, data_root, input_root, output_root, combination_number):
     client = docker.from_env()  # TODO consider if cleanest that this is in main?
 
     assert os.path.isabs(data_root)
@@ -105,14 +101,9 @@ def search_iteration(docker_cmd, data_root, input_root, output_root):
     # Add 'bm_bc_' prefix due to docker's restriction on container names
     submission_name = "bm_bc_{}".format(submission_name)
     # Call random input sampler
-    settings = sample_settings(max_records, data_root)
+    settings = sample_settings(data_root, combination_number)
     # Save all inputs
     save_inputs(input_dir, *settings)
-
-    # docker_dirs = {input_dir: {"bind": "/submission-inputs", "mode": "ro"},
-    #                output_dir: {"bind": "/output", "mode": "rw"},
-    #                "/tmp-data": {"bind": "/tmp-data", "mode": "rw"},
-    #                "/var/run/docker.sock": {"bind": "/var/run/docker.sock", "mode": "rw"}}
 
     docker_dirs = {output_dir: {"bind": "/output", "mode": "rw"},
                    input_dir: {"bind": "/submission-inputs",
@@ -120,41 +111,22 @@ def search_iteration(docker_cmd, data_root, input_root, output_root):
 
     assert not docker_exists(submission_name, client)
     logger.info('%s start' % submission_name)
-    logs = client.containers.run(DOCKER_IMAGE, command=docker_cmd, auto_remove=True, detach=False,
-                                 name=submission_name, volumes=docker_dirs,
-                                 stdout=True, stderr=True)
-
-    logger.debug(logs)
+    # logs = client.containers.run(DOCKER_IMAGE, command=docker_cmd, auto_remove=True, detach=False,
+    #                              name=submission_name, volumes=docker_dirs,
+    #                              stdout=True, stderr=True)
+    #
+    # logger.debug(logs)
     logger.info('%s end' % submission_name)
 
-    # scores = read_scores(output_dir)
-    # score = scores["Submission Score"]
-    # score = float(score)  # verify simple float to keep simple
-
     paths = (input_dir, output_dir)
-    # return paths, score
     return paths
 
-def random_search(docker_cmd, n_iters, data_root, input_root, output_root):
-    best_score = None
-    best_setting = None
+def random_search(docker_cmd, n_iters, data_root, input_root, output_root, combination_number):
     for _ in range(n_iters):
-        # paths, score = search_iteration(docker_cmd, data_root, input_root, output_root)
-        paths = search_iteration(docker_cmd, data_root, input_root, output_root)
+        paths = search_iteration(docker_cmd, data_root, input_root, output_root, combination_number)
+        logger.info("Iteration Number %s / %s"% (_ + 1, n_iters))
 
-        # Appears we are maximizing
-        # if best_score is None or score > best_score:
-        #     best_score = score
-        #     best_setting = paths
-        #
-        # result_str = 'paths: %s\nscore: %f' % (str(paths), score)
-        # logger.info(result_str)
-        logger.info("Iteration Number %s / %s"% (_, n_iters))
-
-    # return best_setting, best_score
-
-
-def main():
+def main(combination_number):
     os.chdir(r"/Users/vgolfi/Documents/GitHub/Uber-Prize-Starter-Kit/utilities")
     logging.basicConfig(level=logging.INFO)
 
@@ -165,7 +137,7 @@ def main():
     n_sim_iters = 1
     seed = 123
 
-    n_search_iters = 100
+    n_search_iters = 4
     data_root = abspath2("../reference-data")
     input_root = abspath2("../search-input")
     output_root = abspath2("../search-output")
@@ -178,15 +150,8 @@ def main():
 
     # Some prints
     docker_cmd = CMD_TEMPLATE.format(SCENARIO_NAME, sample_size, n_sim_iters)
-    # (input_dir, output_dir), best_score = random_search(docker_cmd, n_search_iters,
-    #                                                     data_root, input_root, output_root)
-    random_search(docker_cmd, n_search_iters, data_root, input_root, output_root)
-
-    # print('Best score: %f' % best_score)
-    # print('Input: %s' % input_dir)
-    # print('Output: %s' % output_dir)
-
+    random_search(docker_cmd, n_search_iters, data_root, input_root, output_root, combination_number)
 
 if __name__ == "__main__":
-    combination_number = sys.argv[1]
-    main()
+    combination_number = int(sys.argv[1])
+    main(combination_number)

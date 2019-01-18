@@ -133,4 +133,4 @@ for mass_transit_fare_i in mass_transit_fare:
     bus_fare_input.columns = bau_bus_fare_input.columns
     input_bus_fare_list.append(bus_fare_input)
 
-input_combinations = list(itertools.product(a, b))
+input_combinations = list(itertools.product(input_incentives_list, input_bus_fare_list))

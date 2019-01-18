@@ -476,8 +476,8 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
                        submission_output_root=None,
                        submission_input_root=None,
                        scenario_name='sioux_faux',
-                       sample_size='1k',
-                       num_iterations=10,
+                       sample_size='15k',
+                       num_iterations=1,
                        num_cpus=multiprocessing.cpu_count() - 1,
                        mem_limit="4g"):
         """Creates a new container running an Uber Prize competition simulation on a specified set of inputs.

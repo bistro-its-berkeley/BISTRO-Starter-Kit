@@ -97,7 +97,7 @@ class AgencyGtfsDataManager(object):
                            delimiter=',')
 
 
-def sample_vehicle_fleet_mix_input(num_records, gtfs_manager):
+def sample_vehicle_fleet_mix_input(num_records, gtfs_manager, bus_set=None):
     """Generate random `VehicleFleetMix` input according to possible substitute
     vehicle trip ids available for an agency.
 
@@ -107,6 +107,9 @@ def sample_vehicle_fleet_mix_input(num_records, gtfs_manager):
         Number of randomly sampled records to create.
     gtfs_manager : `AgencyGtfsDataManager`
         An instance of the `AgencyGtfsDataManager` for the target agency.
+    bus_set : list of strings
+        A list of possible bus types that we want to sample from if we don't want to sample from all
+        bus types. If bus_set = None samples from all bus types
 
     Returns
     -------
@@ -132,8 +135,11 @@ def sample_vehicle_fleet_mix_input(num_records, gtfs_manager):
     route_agency_sample = gtfs_manager.routes.sample(num_records)
     routes = pd.Series(route_agency_sample.index.values)
     agency = pd.Series(route_agency_sample.agency_id.values)
-    vehicles = pd.Series(
-        (gtfs_manager.vehicle_types.filter(like="BUS", axis=0)).sample(num_records, replace=True).index)
+    if bus_set is None:
+        vehicles = pd.Series((gtfs_manager.vehicle_types.filter(like="BUS", axis=0))
+                             .sample(num_records, replace=True).index)
+    else:
+        vehicles = pd.Series(bus_set).sample(num_records, replace=True).reset_index(drop=True)
     df = pd.concat([agency, routes, vehicles], axis=1, ignore_index=True)
     df.columns = df_columns
     return df
