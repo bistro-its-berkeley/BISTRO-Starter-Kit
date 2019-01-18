@@ -26,7 +26,7 @@ if __name__ == '__main__':
 
     hosts = ["52.13.145.44", "52.89.179.9", "54.191.161.231", "54.218.172.167", "54.218.29.151"]
     key_file_loc = sys.argv(1)
-    connection = connect_parallel(hosts, key_file_loc)
+    host_num = sys.argv(2)
 
     host1_conn = connect_single(hosts[0], key_file_loc)
     host2_conn = connect_single(hosts[1], key_file_loc)
@@ -35,10 +35,11 @@ if __name__ == '__main__':
     debug_conn = connect_single(hosts[4], key_file_loc)
 
     connections = [host1_conn, host2_conn, host3_conn, host4_conn, debug_conn]
+    connection = connections[host_num]
 
-    ########################
+    ###############################
     # Begin remote commands here:
-    ########################
+    ###############################
 
     # Pull latest docker image
     run('docker pull beammodel/beam-competition:0.0.1-SNAPSHOT', connection)
@@ -53,10 +54,8 @@ if __name__ == '__main__':
 
     # TODO[vgv]: Check if venv exists and if not, create!
 
-    # Activate venv and run exploratory analysis on each server
-    for i, connection in zip(range(5), connections):
-        run(
-            'cd /home/ubuntu/venv/beam_competitions/bin && \
-             source activate && \
-             cd /home/ubuntu/Uber-Prize-Starter-Kit/utilities && \
-             python exploratory_analysis.py {}'.format(i), connection)
+    # Activate venv and run exploratory analysis on target server
+    run('cd /home/ubuntu/venv/beam_competitions/bin && \
+         source activate && \
+         cd /home/ubuntu/Uber-Prize-Starter-Kit/utilities && \
+         python exploratory_analysis.py {}'.format(host_num - 1), connection)
