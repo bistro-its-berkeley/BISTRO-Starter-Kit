@@ -106,16 +106,20 @@ def search_iteration(docker_cmd, data_root, input_root, output_root):
     # Save all inputs
     save_inputs(input_dir, *settings)
 
-    docker_dirs = {input_dir: {"bind": "/submission-inputs", "mode": "ro"},
-                   output_dir: {"bind": "/output", "mode": "rw"},
-                   "/tmp-data": {"bind": "/tmp-data", "mode": "rw"},
-                   "/var/run/docker.sock": {"bind": "/var/run/docker.sock", "mode": "rw"}}
+    # docker_dirs = {input_dir: {"bind": "/submission-inputs", "mode": "ro"},
+    #                output_dir: {"bind": "/output", "mode": "rw"},
+    #                "/tmp-data": {"bind": "/tmp-data", "mode": "rw"},
+    #                "/var/run/docker.sock": {"bind": "/var/run/docker.sock", "mode": "rw"}}
 
+    docker_dirs = {output_dir: {"bind": "/output", "mode": "rw"},
+                   input_dir: {"bind": "/submission-inputs",
+                                                             "mode": "ro"}}
     assert not docker_exists(submission_name, client)
     logger.info('%s start' % submission_name)
     logs = client.containers.run(DOCKER_IMAGE, command=docker_cmd, auto_remove=True, detach=False,
                                  name=submission_name, volumes=docker_dirs,
                                  stdout=True, stderr=True)
+    print(logs)
     logger.debug(logs)
     logger.info('%s end' % submission_name)
 
