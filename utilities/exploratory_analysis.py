@@ -127,7 +127,6 @@ def random_search(docker_cmd, n_iters, data_root, input_root, output_root, combi
         logger.info("Iteration Number %s / %s"% (_ + 1, n_iters))
 
 def main(combination_number):
-    os.chdir(r"/Users/vgolfi/Documents/GitHub/Uber-Prize-Starter-Kit/utilities")
     logging.basicConfig(level=logging.INFO)
 
     # TODO explain why this is different than SCENARIO_NAME
