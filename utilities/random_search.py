@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 
 
 def abspath2(path):
-    path = os.path.abspath(os.path.expanduser(path))
+    path = os.path.abspath(os.path.expanduser(path)) # expanduser() expands "~" into "/Users/username"
     return path
 
 
