@@ -111,11 +111,11 @@ def search_iteration(docker_cmd, data_root, input_root, output_root, combination
 
     assert not docker_exists(submission_name, client)
     logger.info('%s start' % submission_name)
-    # logs = client.containers.run(DOCKER_IMAGE, command=docker_cmd, auto_remove=True, detach=False,
-    #                              name=submission_name, volumes=docker_dirs,
-    #                              stdout=True, stderr=True)
-    #
-    # logger.debug(logs)
+    logs = client.containers.run(DOCKER_IMAGE, command=docker_cmd, auto_remove=True, detach=False,
+                                 name=submission_name, volumes=docker_dirs,
+                                 stdout=True, stderr=True)
+
+    logger.debug(logs)
     logger.info('%s end' % submission_name)
 
     paths = (input_dir, output_dir)
@@ -137,7 +137,7 @@ def main(combination_number):
     n_sim_iters = 1
     seed = 123
 
-    n_search_iters = 4
+    n_search_iters = 1
     data_root = abspath2("../reference-data")
     input_root = abspath2("../search-input")
     output_root = abspath2("../search-output")
