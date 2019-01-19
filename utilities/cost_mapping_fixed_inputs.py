@@ -39,13 +39,13 @@ free = 0.01
 
 
 # 6. BAU DATA FRAMES (EMPTY DF TO BE FILLED UP WHEN TESTING OTHER INPUTS)
-bau_vehicle_type_input = pd.DataFrame({"agencyId": agencies, "routeId": route_id,
-                                       "vehicleTypeId": [BUS_DEFAULT] * len(route_id)})
+bau_vehicle_type_input = pd.DataFrame({"agencyId": agencies, "routeId": route_id,"vehicleTypeId": [BUS_DEFAULT] * len(route_id)})
+
 bau_incentives_input = pd.DataFrame(columns=["mode", "age", "income", "amount"])
 
-bau_bus_fare_input = pd.DataFrame(columns=["agencyId", "routId", "age", "amount"])
+bau_bus_fare_input = pd.DataFrame(columns=["agencyId", "routeId", "age", "amount"])
 
-bau_frequency_input = pd.DataFrame(columns=["trip_id", "start_time", "emd_time", "headway_secs", "exact_times"])
+bau_frequency_input = pd.DataFrame(columns=["trip_id", "start_time", "end_time", "headway_secs", "exact_times"])
 
 
 #######################################
