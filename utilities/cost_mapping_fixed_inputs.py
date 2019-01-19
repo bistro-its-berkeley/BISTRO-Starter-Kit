@@ -20,14 +20,14 @@ DRIVE_TO_TRANSIT = "drive_transit"
 WALK_TO_TRANSIT = "walk_transit"
 
 # 3. AGE GROUPS
-YOUNG = "(0,25]"
-ADULTS = "(25,65]"
-SENIORS = "(65,120]"
-ALL_AGES = "(0,120]"
+YOUNG = "(0:25]"
+ADULTS = "(25:65]"
+SENIORS = "(65:120]"
+ALL_AGES = "(0:120]"
 
 # 4. INCOME GROUPS
-LOW_INCOME = "[0,25000]"
-ALL_INCOMES = "[0,500000]"
+LOW_INCOME = "[0:25000]"
+ALL_INCOMES = "[0:500000]"
 
 # 4. INCENTIVE AMOUNT
 transit_subsidy = 1.00
