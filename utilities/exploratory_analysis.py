@@ -85,7 +85,7 @@ def read_scores(output_dir):
     return scores
 
 
-def search_iteration(docker_cmd, data_root, input_root, output_root, combination_number):
+def search_iteration(docker_cmd, data_root, input_root, output_root, combination_number, random_sample_number):
     client = docker.from_env()  # TODO consider if cleanest that this is in main?
 
     assert os.path.isabs(data_root)
@@ -93,8 +93,8 @@ def search_iteration(docker_cmd, data_root, input_root, output_root, combination
     assert os.path.isabs(output_root)
 
     # Make temp dirs, race condition safe too
-    input_dir = tempfile.mkdtemp(prefix="input" + DIR_DELIM, dir=input_root)
-    output_dir = tempfile.mkdtemp(prefix="output" + DIR_DELIM, dir=output_root)
+    input_dir = tempfile.mkdtemp(prefix="input" + DIR_DELIM + "C{}".format(combination_number +1) + DIR_DELIM + "RS{}".format(random_sample_number+1) + DIR_DELIM, dir=input_root)
+    output_dir = tempfile.mkdtemp(prefix="output" + DIR_DELIM + "C{}".format(combination_number +1) + DIR_DELIM + "RS{}".format(random_sample_number+1) + DIR_DELIM, dir=output_root)
 
     # Should be unique name here since folder is unique, also checks only one instance of delim
     _, submission_name = os.path.basename(input_dir).split(DIR_DELIM)
@@ -123,7 +123,7 @@ def search_iteration(docker_cmd, data_root, input_root, output_root, combination
 
 def random_search(docker_cmd, n_iters, data_root, input_root, output_root, combination_number):
     for _ in range(n_iters):
-        paths = search_iteration(docker_cmd, data_root, input_root, output_root, combination_number)
+        paths = search_iteration(docker_cmd, data_root, input_root, output_root, combination_number, _)
         logger.info("Iteration Number %s / %s" % (_ + 1, n_iters))
 
 def main(combination_number):
