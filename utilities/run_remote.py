@@ -52,8 +52,7 @@ if __name__ == '__main__':
     # save us in this case)
     try:
         run('cd /home/ubuntu/Uber-Prize-Starter-Kit/utilities &&  \
-            git checkout -b vgv/#55-adapt_ramdom_search && \
-            git pull', connection)
+            git pull origin vgv/#55-adapt_ramdom_search', connection)
     except UnexpectedExit:
         print("Already pulled in latest!")
 
