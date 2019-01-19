@@ -21,12 +21,16 @@ def run_n(cmd, connections):
 if __name__ == '__main__':
     import sys
 
+    # Args:
+    #   - 1: path to key file
+    #   - 2: number of host (1-5) below
+
     # globals
     # TODO[vgv]: read these from config file
 
     hosts = ["52.13.145.44", "52.89.179.9", "54.191.161.231", "54.218.172.167", "54.218.29.151"]
     key_file_loc = sys.argv(1)
-    host_num = sys.argv(2)
+    host_num = sys.argv(2) - 1
 
     host1_conn = connect_single(hosts[0], key_file_loc)
     host2_conn = connect_single(hosts[1], key_file_loc)
