@@ -61,5 +61,7 @@ if __name__ == '__main__':
     # Activate venv and run exploratory analysis on target server
     run('cd /home/ubuntu/venv/beam_competitions/bin && \
          source activate && \
+         cd /home/ubuntu/Uber-Prize-Starter-Kit && \
+         sudo rm -rf search-* && \
          cd /home/ubuntu/Uber-Prize-Starter-Kit/utilities && \
          python exploratory_analysis.py {}'.format(str(host_num - 1)), connection)
