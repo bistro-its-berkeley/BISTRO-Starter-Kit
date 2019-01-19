@@ -133,10 +133,10 @@ def main(combination_number):
 
     # We can take these from cmd args later:
     sample_size = "15k"
-    n_sim_iters = 10
+    n_sim_iters = 1
     seed = 123
 
-    n_search_iters = 1
+    n_search_iters = 100
     data_root = abspath2("../reference-data")
     input_root = abspath2("../search-input")
     output_root = abspath2("../search-output")
