@@ -8,6 +8,7 @@ route_id = np.arange(1340, 1352).tolist()
 
 # 1. AVAILABLE BUSES
 agencies = [217] * len(route_id)
+agency = 217
 
 BUS_SMALL_HD = "BUS-SMALL-HD"
 BUS_STD_ART = "BUS-STD-ART"
@@ -22,12 +23,12 @@ WALK_TO_TRANSIT = "walk_transit"
 # 3. AGE GROUPS
 YOUNG = "(0:25]"
 ADULTS = "(25:65]"
-SENIORS = "(65:120]"
-ALL_AGES = "(0:120]"
+SENIORS = "(65:120)"
+ALL_AGES = "(0:120)"
 
 # 4. INCOME GROUPS
-LOW_INCOME = "[0:25000]"
-ALL_INCOMES = "[0:500000]"
+LOW_INCOME = "(0:25000]"
+ALL_INCOMES = "(0:500000]"
 
 # 4. INCENTIVE AMOUNT
 transit_subsidy = 1.0e6
@@ -72,55 +73,25 @@ for incentive_i in incentive:
     input_incentives_list.append(incentives_input)
 
 # Mass transit fare input
-pt_fare_1 = [[217, 1340, YOUNG, free],
-             [217, 1341, YOUNG, free],
-             [217, 1342, YOUNG, free],
-             [217, 1343, YOUNG, free],
-             [217, 1344, YOUNG, free],
-             [217, 1345, YOUNG, free],
-             [217, 1346, YOUNG, free],
-             [217, 1347, YOUNG, free],
-             [217, 1348, YOUNG, free],
-             [217, 1349, YOUNG, free],
-             [217, 1350, YOUNG, free],
-             [217, 1351, YOUNG, free],
-           [217, 1340, SENIORS, free],
-           [217, 1341, SENIORS, free],
-           [217, 1342, SENIORS, free],
-           [217, 1343, SENIORS, free],
-           [217, 1344, SENIORS, free],
-           [217, 1345, SENIORS, free],
-           [217, 1346, SENIORS, free],
-           [217, 1347, SENIORS, free],
-           [217, 1348, SENIORS, free],
-           [217, 1349, SENIORS, free],
-           [217, 1350, SENIORS, free],
-           [217, 1351, SENIORS, free],
-           [217, 1340, ADULTS, full_fare],
-           [217, 1341, ADULTS, full_fare],
-           [217, 1342, ADULTS, full_fare],
-           [217, 1343, ADULTS, full_fare],
-           [217, 1344, ADULTS, full_fare],
-           [217, 1345, ADULTS, full_fare],
-           [217, 1346, ADULTS, full_fare],
-           [217, 1347, ADULTS, full_fare],
-           [217, 1348, ADULTS, full_fare],
-           [217, 1349, ADULTS, full_fare],
-           [217, 1350, ADULTS, full_fare],
-           [217, 1351, ADULTS, full_fare]]
+    # Combination 1
+ages_1 = [YOUNG, SENIORS, ADULTS]
+fares_1 = [free, free, full_fare]
 
-pt_fare_2 = [[217, 1340, ALL_AGES, full_fare],
-           [217, 1341, ALL_AGES, full_fare],
-           [217, 1342, ALL_AGES, full_fare],
-           [217, 1343, ALL_AGES, full_fare],
-           [217, 1344, ALL_AGES, full_fare],
-           [217, 1345, ALL_AGES, full_fare],
-           [217, 1346, ALL_AGES, full_fare],
-           [217, 1347, ALL_AGES, full_fare],
-           [217, 1348, ALL_AGES, full_fare],
-           [217, 1349, ALL_AGES, full_fare],
-           [217, 1350, ALL_AGES, full_fare],
-           [217, 1351, ALL_AGES, full_fare]]
+pt_fare_1 = []
+for agency, age, fare in zip(agencies, ages_1, fares_1):
+        for route in route_id:
+            policy = [agency, route, age, fare]
+            pt_fare_1.append(policy)
+
+    # Combination 2
+ages_2 = [ALL_AGES]
+fares_2 = [full_fare]
+
+pt_fare_2 = []
+for agency, age, fare in zip(agencies, ages_2, fares_2):
+        for route in route_id:
+            policy = [agency, route, age, fare]
+            pt_fare_2.append(policy)
 
 mass_transit_fare = [pt_fare_1, pt_fare_2]
 
