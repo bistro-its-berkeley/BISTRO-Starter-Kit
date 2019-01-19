@@ -124,7 +124,7 @@ def search_iteration(docker_cmd, data_root, input_root, output_root, combination
 def random_search(docker_cmd, n_iters, data_root, input_root, output_root, combination_number):
     for _ in range(n_iters):
         paths = search_iteration(docker_cmd, data_root, input_root, output_root, combination_number)
-        logger.info("Iteration Number %s / %s"% (_ + 1, n_iters))
+        logger.info("Iteration Number %s / %s" % (_ + 1, n_iters))
 
 def main(combination_number):
     logging.basicConfig(level=logging.INFO)

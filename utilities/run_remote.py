@@ -51,8 +51,9 @@ if __name__ == '__main__':
     # Update git for starter kit (optionally comment out if run since previous update, but error catching will
     # save us in this case)
     try:
-        run("cd /home/ubuntu/Uber-Prize-Starter-Kit/utilities &&  \
-            git pull", connection)
+        run('cd /home/ubuntu/Uber-Prize-Starter-Kit/utilities &&  \
+            git checkout -b vgv/#55-adapt_ramdom_search && \
+            git pull', connection)
     except UnexpectedExit:
         print("Already pulled in latest!")
 
