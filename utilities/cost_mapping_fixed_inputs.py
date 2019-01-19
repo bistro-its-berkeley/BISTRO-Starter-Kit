@@ -35,7 +35,7 @@ on_demand_ride_subsidy = 3.00
 
 # MASS TRANSIT FARES
 full_fare = 1.50
-free = 0.00
+free = 0.01
 
 
 # 6. BAU DATA FRAMES (EMPTY DF TO BE FILLED UP WHEN TESTING OTHER INPUTS)
