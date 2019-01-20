@@ -27,10 +27,15 @@ if __name__ == '__main__':
 
     # globals
     # TODO[vgv]: read these from config file
+    # Command line argument:
+    # arg1 : location of key file
+    # arg2 : host number on which to run the simulation
+    # arg3 : Name of output folder to save the results of latest run
 
     hosts = ["52.13.145.44", "52.89.179.9", "54.191.161.231", "54.218.172.167", "54.218.29.151"]
     key_file_loc = sys.argv[1]
     host_num = int(sys.argv[2]) - 1
+    output_folder = sys.argv[3]
 
     host1_conn = connect_single(hosts[0], key_file_loc)
     host2_conn = connect_single(hosts[1], key_file_loc)
@@ -64,4 +69,4 @@ if __name__ == '__main__':
          cd /home/ubuntu/Uber-Prize-Starter-Kit && \
          sudo rm -rf search-* && \
          cd /home/ubuntu/Uber-Prize-Starter-Kit/utilities && \
-         python3 exploratory_analysis.py {}'.format(str(host_num - 1)), connection)
+         python3 exploratory_analysis.py {0} {1}'.format(str(host_num - 1), 2), connection)

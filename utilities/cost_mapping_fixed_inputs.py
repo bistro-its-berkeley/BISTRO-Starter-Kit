@@ -31,11 +31,11 @@ LOW_INCOME = "(0:25000]"
 ALL_INCOMES = "(0:500000]"
 
 # 4. INCENTIVE AMOUNT
-transit_subsidy = 1.0e6
-on_demand_ride_subsidy = 1.0e6
+transit_subsidy = 50
+on_demand_ride_subsidy = 50
 
 # MASS TRANSIT FARES
-full_fare = 1.0e6
+full_fare = 50
 free = 0.01
 
 
