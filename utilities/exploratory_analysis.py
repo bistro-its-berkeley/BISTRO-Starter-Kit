@@ -133,7 +133,7 @@ def main(combination_number, name_of_exploration):
 
     # We can take these from cmd args later:
     sample_size = "15k"
-    n_sim_iters = 1
+    n_sim_iters = 20
     seed = 123
 
     n_search_iters = 100
