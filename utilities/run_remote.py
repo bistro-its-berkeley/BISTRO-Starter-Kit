@@ -59,11 +59,16 @@ if __name__ == '__main__':
         print("Already pulled in latest!")
 
     # TODO[vgv]: Check if venv exists and if not, create!
+    # Kill all containers before running simulation
+    run('sudo  docker stop $(docker ps -aq) -t 0')
 
-    # Activate venv and run exploratory analysis on target server
+
+    # Commands to delete all search folders
+    # cd / home / ubuntu / Uber - Prize - Starter - Kit & & \
+    # sudo rm - rf search - * & & \
+
+            # Activate venv and run exploratory analysis on target server
     run('cd /home/ubuntu/venv/beam_competitions/bin && \
          source activate && \
-         cd /home/ubuntu/Uber-Prize-Starter-Kit && \
-         sudo rm -rf search-* && \
          cd /home/ubuntu/Uber-Prize-Starter-Kit/utilities && \
          python3 exploratory_analysis.py {0} {1}'.format(str(host_num - 1), output_folder), connection)
