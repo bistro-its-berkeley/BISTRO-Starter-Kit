@@ -66,4 +66,4 @@ if __name__ == '__main__':
          cd /home/ubuntu/Uber-Prize-Starter-Kit && \
          sudo rm -rf search-* && \
          cd /home/ubuntu/Uber-Prize-Starter-Kit/utilities && \
-         python3 exploratory_analysis.py {0} {1}'.format(str(host_num - 1), 2), connection)
+         python3 exploratory_analysis.py {0} {1}'.format(str(host_num - 1), output_folder), connection)
