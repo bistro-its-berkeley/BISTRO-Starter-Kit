@@ -93,8 +93,8 @@ def search_iteration(docker_cmd, data_root, input_root, output_root, combination
     assert os.path.isabs(output_root)
 
     # Make temp dirs, race condition safe too
-    input_dir = tempfile.mkdtemp(prefix="input_C{0}_RS{1}".format(combination_number +1, random_sample_number+1) + DIR_DELIM, dir=input_root)
-    output_dir = tempfile.mkdtemp(prefix="output_C{0}_RS{1}".format(combination_number +1, random_sample_number+1) + DIR_DELIM, dir=output_root)
+    input_dir = tempfile.mkdtemp(prefix="input_C{0}/8_RS{1}".format(combination_number +1, random_sample_number+1) + DIR_DELIM, dir=input_root)
+    output_dir = tempfile.mkdtemp(prefix="output_C{0}/8_RS{1}".format(combination_number +1, random_sample_number+1) + DIR_DELIM, dir=output_root)
 
     # Should be unique name here since folder is unique, also checks only one instance of delim
     _, submission_name = os.path.basename(input_dir).split(DIR_DELIM)
@@ -126,20 +126,20 @@ def random_search(docker_cmd, n_iters, data_root, input_root, output_root, combi
         paths = search_iteration(docker_cmd, data_root, input_root, output_root, combination_number, _)
         logger.info("Iteration Number %s / %s" % (_ + 1, n_iters))
 
-def main(combination_number):
+def main(combination_number, name_of_exploration):
     logging.basicConfig(level=logging.INFO)
 
     # TODO explain why this is different than SCENARIO_NAME
 
     # We can take these from cmd args later:
     sample_size = "15k"
-    n_sim_iters = 10
+    n_sim_iters = 1
     seed = 123
 
     n_search_iters = 100
     data_root = abspath2("../reference-data")
     input_root = abspath2("../search-input")
-    output_root = abspath2("../search-output")
+    output_root = abspath2("../search-output-%s"%name_of_exploration)
 
     os.makedirs(input_root, exist_ok=True)
     os.makedirs(output_root, exist_ok=True)
@@ -153,4 +153,5 @@ def main(combination_number):
 
 if __name__ == "__main__":
     combination_number = int(sys.argv[1])
-    main(combination_number)
+    name_of_exploration = sys.argv[2]
+    main(combination_number, name_of_exploration)
