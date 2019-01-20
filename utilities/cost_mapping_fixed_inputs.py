@@ -16,7 +16,7 @@ BUS_DEFAULT = "BUS-DEFAULT"
 
 
 # 2. MODES TO SUBSIDIZE
-ON_DEMAND_RIDE = "OnDemand_ride"
+ON_DEMAND_RIDE = "ride_hail"
 DRIVE_TO_TRANSIT = "drive_transit"
 WALK_TO_TRANSIT = "walk_transit"
 
