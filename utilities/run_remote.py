@@ -60,8 +60,8 @@ if __name__ == '__main__':
 
     # TODO[vgv]: Check if venv exists and if not, create!
     # Kill all containers before running simulation
-    run('sudo  docker stop $(docker ps -aq) -t 0')
-
+    run('sudo pkill java')
+    run('sudo docker stop $(docker ps -aq) -t 0')
 
     # Commands to delete all search folders
     # cd / home / ubuntu / Uber - Prize - Starter - Kit & & \
