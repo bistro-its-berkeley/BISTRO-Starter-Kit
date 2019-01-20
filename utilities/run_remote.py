@@ -24,13 +24,10 @@ if __name__ == '__main__':
     # Args:
     #   - 1: path to key file
     #   - 2: number of host (1-5) below
+    #   - 3: Name of output folder
 
     # globals
     # TODO[vgv]: read these from config file
-    # Command line argument:
-    # arg1 : location of key file
-    # arg2 : host number on which to run the simulation
-    # arg3 : Name of output folder to save the results of latest run
 
     hosts = ["52.13.145.44", "52.89.179.9", "54.191.161.231", "54.218.172.167", "54.218.29.151"]
     key_file_loc = sys.argv[1]
