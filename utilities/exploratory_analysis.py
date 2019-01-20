@@ -2,11 +2,13 @@ import logging
 import os
 import tempfile
 from pathlib import Path
+from os import path
 
 import docker
 import numpy as np
 import pandas as pd
 import sys
+from glob import glob
 
 import input_sampler as sampler
 from cost_mapping_fixed_inputs import input_combinations
@@ -122,7 +124,15 @@ def search_iteration(docker_cmd, data_root, input_root, output_root, combination
     return paths
 
 def random_search(docker_cmd, n_iters, data_root, input_root, output_root, combination_number):
-    for _ in range(n_iters):
+    # Finding which simulations already exist:
+    subScoreFiles = glob(path.join(output_root, "*", "*", "*", "competition", "submissionScores.csv"))
+    if len(subScoreFiles) == 0:
+        start_iter = 0
+    else:
+        iteration = [int(i[i.index("_RS"):i.index("_RS") + 10].split("-")[0].replace("_RS", "")) for i in subScoreFiles]
+        start_iter = max(iteration) + 1
+
+    for _ in range(start_iter, n_iters):
         paths = search_iteration(docker_cmd, data_root, input_root, output_root, combination_number, _)
         logger.info("Iteration Number %s / %s" % (_ + 1, n_iters))
 
