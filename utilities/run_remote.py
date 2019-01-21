@@ -42,9 +42,12 @@ if __name__ == '__main__':
     host2_conn = connect_single(hosts[1], key_file_loc)
     host3_conn = connect_single(hosts[2], key_file_loc)
     host4_conn = connect_single(hosts[3], key_file_loc)
-    debug_conn = connect_single(hosts[4], key_file_loc)
+    host5_conn = connect_single(hosts[4], key_file_loc)
+    host6_conn = connect_single(hosts[5], key_file_loc)
+    host7_conn = connect_single(hosts[6], key_file_loc)
+    host8_conn = connect_single(hosts[7], key_file_loc)
 
-    connections = [host1_conn, host2_conn, host3_conn, host4_conn, debug_conn]
+    connections = [host1_conn, host2_conn, host3_conn, host4_conn, host5_conn, host6_conn, host7_conn, host8_conn]
     connection = connections[host_num]
 
     ###############################
