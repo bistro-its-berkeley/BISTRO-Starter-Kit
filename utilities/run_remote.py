@@ -27,9 +27,12 @@ if __name__ == '__main__':
     #   - 3: Name of output folder
 
     # globals
-    # TODO[vgv]: read these from config file
 
-    hosts = ["52.13.145.44", "52.89.179.9", "54.191.161.231", "54.218.172.167", "54.218.29.151"]
+    # Read the hosts from config file
+    config = pd.read_table("~/.ssh/config")
+    config = config["Host host1"].values
+    hosts = [i.split(" ")[1] for i in config if "HostName" in i]
+
     key_file_loc = sys.argv[1]
     host_num = int(sys.argv[2]) - 1
     output_folder = sys.argv[3]
