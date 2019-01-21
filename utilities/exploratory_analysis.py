@@ -132,6 +132,9 @@ def random_search(docker_cmd, n_iters, data_root, input_root, output_root, combi
         iteration = [int(i[i.index("_RS"):i.index("_RS") + 10].split("-")[0].replace("_RS", "")) for i in subScoreFiles]
         start_iter = max(iteration) + 1
 
+    for i in range(start_iter):
+        _ = sample_settings(data_root, combination_number)
+
     for _ in range(start_iter, n_iters):
         paths = search_iteration(docker_cmd, data_root, input_root, output_root, combination_number, _)
         logger.info("Iteration Number %s / %s" % (_ + 1, n_iters))
