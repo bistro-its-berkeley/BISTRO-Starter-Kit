@@ -1,5 +1,6 @@
 from fabric import ThreadingGroup, Connection
 from invoke.exceptions import UnexpectedExit
+import pandas as pd
 
 
 def connect_parallel(hosts, key_file_loc):
