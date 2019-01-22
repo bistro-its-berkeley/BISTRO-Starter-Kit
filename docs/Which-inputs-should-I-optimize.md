@@ -56,8 +56,8 @@ Your recommendation is to be submitted in a file named `VehicleFleetMix.csv` acc
 | Column Name| Data Type | Description | Validation Criteria |
 | :---:| :--- | :--- | :----|
 | `agencyId`|`String` | Agency identifier | Must equal agency Id found under `agencyId` in [`agencies.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/agency.txt) of corresponding GTFS file for transit agency with `agency_name` designated by parent directory of `gtfs_data` in starter kit `/reference-data` directory. Note that for Sioux Faux, SFBL is the only agency operating in the city (`agencId`="217"). Therefore, any entry in the .csv file will have "217" under `agencyId`.|
-| `routeId` |`String` | The route that will have its vehicle type assignment modified | A route can only have its assignment modified once. The `routeId` name must exist in the [`routes.txt`] file(../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/routes.txt) corresponding to the GTFS data for the agency specified by this entry's `agencyId`|
-| `vehicleTypeId`|`String` | The vehicle type identifier | Must be a member of the set of vehicle type Ids listed under `vehicleTypeId` in the [`availableVehicleTypes.txt`] file(../../reference-data/sioux_faux/sioux_faux_bus_lines/availableVehicleTypes.csv)|
+| `routeId` |`String` | The route that will have its vehicle type assignment modified | A route can only have its assignment modified once. The `routeId` name must exist in the [`routes.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/routes.txt) file corresponding to the GTFS data for the agency specified by this entry's `agencyId`|
+| `vehicleTypeId`|`String` | The vehicle type identifier | Must be a member of the set of vehicle type Ids listed under `vehicleTypeId` in the [`availableVehicleTypes.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/availableVehicleTypes.csv)file
 
 ***Table 1: Vehicle fleet mix input schema and constraint definitions***
 
@@ -100,21 +100,21 @@ Your recommendation is to be submitted in a file named `ModeIncentives.csv` acco
 
 #### 2.3. Example:
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/vgv/%2326-document_pt_fares_input/Images/Input_Subsidies.png)
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_ModeIncentives.png)
 ***Figure 5: Example of Mode Incentive Input***
 
 Figure 5 depicts an example input file describing the following situation:
 
- *Subsidies for walking to access transit*:
+ *Incentive for walking to access transit*:
  * Children 10 years old or younger receive $2 off of every transit trip
 
- *Subsidies for using rideshare to access transit*:
- * Seniors older than 50 and up through 75 years of age, earning up to $20,000/year receive $2.30 off of every transit trip
+ *Incentive for driving to access transit*:
+ * Adults older than 50 and up through 75 years of age, earning up to $20,000/year receive $2.30 off of every transit trip
 
- *Subsidies for rideshare trips*:
- * Anyone earning $40,000/year or less receives $3.20 off of every rideshare trip
- * Anyone earning more than $40,000/year, but no more than $50,000/year receives $2.20 off of every rideshare trip
- * Anyone earning more than $50,000/year, but no more than $60,000/year receives $1.10 off of every rideshare trip
+ *Incentives for on-demand rides*:
+ * Anyone earning $40,000/year or less receives $3.20 off of every on-demand ride
+ * Anyone earning more than $40,000/year, but no more than $50,000/year receives $2.20 off of every on-demand ride
+ * Anyone earning more than $50,000/year, but no more than $60,000/year receives $1.10 off of every on-demand ride
 
 
 ### **3. Adjustments to the Frequency of Buses on a Route**
