@@ -8,12 +8,13 @@ To optimize the transportation system of Sioux Faux, you will need to write an a
 As detailed in the [problem statement](docs/The_Sioux_Faux_case_pilot_study), to help the Sioux Faux Department of Transportation (SFDOT) combat congestion and improve overall mobility in Sioux Faux, you will prepare a set of inputs to the simulation engine, which represent the following transportation system interventions:
 
 1. Bus fleet composition;
-2. Adjustments to the frequency of buses on routes; and, 
-3. Distribution of subsidies for agents using on-demand carsharing and/or public transit.
+2. Distribution of subsidies for agents using on-demand carsharing and/or mass transit;
+3. Adjustments to the frequency of buses on routes; and, 
+4. Mass transit fares.
 
 A submission entry is a set of input files (i.e., `csv`s named according to the input type), which have been collected into a single folder.
 
-The following subsections provide a detailed description of what each input represents as well as technical details for the schema, data types, and constraints that specify the syntax of each input file. Files representing empty inputs can be found in the `submission-inputs` folder.
+The following subsections provide a detailed description of what each input represents as well as technical details for the schema, data types, and constraints that specify the syntax of each input file. Files representing empty inputs can be found in the [`submission-inputs` folder](../../submission-inputs).
 
 
 ## Input Types
@@ -22,7 +23,7 @@ The following subsections provide a detailed description of what each input repr
 
 #### 1.1. Description:
 
-Currently, Sioux Faux Bus Lines (SFBL) operates a small fleet of buses on 12 routes in Sioux Faux. Orginally purchased as a group, each bus in the fleet possesses identical attributes of seating capacity, fuel consumption, operations and maintenance cost, etc. SFBL is considering optimizing bus type in order to better match the specific demand characteristics of each route. Four types of buses (including the current one used by SFBL, called `BUS-DEFAULT`) are available from its supplier, each of them with different technical properties (`fixed-data/siouxfalls/availableVehicleTypes.csv`, see Figure 2) and cost characteristics (`fixed-data/siouxfalls/vehicleCosts.csv`, see Figure 3). Currently, the number of buses required to service each route is equal to the number of trips: after the a headway has expired, a new bus is used. For instance, if the bus frequency on a specific route is 10 minutes, a new bus is used every 10 minutes durung the service time on this route. This does not reflect a realistic scenario combining bus routes into runs, but, for now, it still allows for comparisons to a BAU case.
+Currently, Sioux Faux Bus Lines (SFBL) operates a small fleet of buses on 12 routes in Sioux Faux. Orginally purchased as a group, each bus in the fleet possesses identical attributes of seating capacity, fuel consumption, operations and maintenance cost, etc. SFBL is considering optimizing bus type in order to better match the specific demand characteristics of each route. Four types of buses (including the current one used by SFBL, called `BUS-DEFAULT`) are available from its supplier, each of them with different technical properties ([`availableVehicleTypes.csv`](../../reference-data/sioux_faux/sioux_faux_bus_lines/availableVehicleTypes.csv), see Figure 2) and cost characteristics[`vehicleCosts.csv`](../../reference-data/sioux_faux/sioux_faux_bus_lines/vehicleCosts.csv), see Figure 3). Currently, the number of buses required to service each route is equal to the number of trips: after the headway has expired, a new bus is used. For instance, if the bus frequency on a specific route is 10 minutes, a new bus is used every 10 minutes during the service time on this route. When one bus finishes its (unique) tour, it disappears from the simulation. This does not reflect a realistic scenario combining bus routes into runs, but, for now, it still allows for comparisons to a BAU case.
 
 
 
@@ -54,15 +55,15 @@ Your recommendation is to be submitted in a file named `VehicleFleetMix.csv` acc
 
 | Column Name| Data Type | Description | Validation Criteria |
 | :---:| :--- | :--- | :----|
-| `agencyId`|`String` | Agency identifier | Must equal agency Id found under `agencyId` in `agencies.txt` of corresponding GTFS file for transit agency with `agency_name` designated by parent directory of `gtfs_data` in starter kit `/reference-data` directory. Note that for Sioux Faux, SFBL is the only agency operating in the city (`agencId`="217"). Therefore, any entry in the .csv file will have "217" under `agencyId`.|
-| `routeId` |`String` | The route that will have its vehicle type assignment modified | A route can only have its assignment modified once. The `routeId` name must exist in the [`routes.txt` file](reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/routes.txt) corresponding to the GTFS data for the agency specified by this entry's `agencyId`|
-| `vehicleTypeId`|`String` | The vehicle type identifier | Must be a member of the set of vehicle type Ids listed under `vehicleTypeId` in the [`availableVehicleTypes.txt` file](reference-data/sioux_faux/sioux_faux_bus_lines/availableVehicleTypes.csv)|
+| `agencyId`|`String` | Agency identifier | Must equal agency Id found under `agencyId` in [`agencies.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/agency.txt) of corresponding GTFS file for transit agency with `agency_name` designated by parent directory of `gtfs_data` in starter kit `/reference-data` directory. Note that for Sioux Faux, SFBL is the only agency operating in the city (`agencId`="217"). Therefore, any entry in the .csv file will have "217" under `agencyId`.|
+| `routeId` |`String` | The route that will have its vehicle type assignment modified | A route can only have its assignment modified once. The `routeId` name must exist in the [`routes.txt`] file(../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/routes.txt) corresponding to the GTFS data for the agency specified by this entry's `agencyId`|
+| `vehicleTypeId`|`String` | The vehicle type identifier | Must be a member of the set of vehicle type Ids listed under `vehicleTypeId` in the [`availableVehicleTypes.txt`] file(../../reference-data/sioux_faux/sioux_faux_bus_lines/availableVehicleTypes.csv)|
 
 ***Table 1: Vehicle fleet mix input schema and constraint definitions***
 
 
 #### 1.3. Example:
-Figure 4 below depicts an example of Vehicle Fleet Mix input file. Only three routes (1342, 1350 and 1351) out of twelve are assigned a new bus type; all other routes operate with the default bus type (`BUS-DEFAULT`).
+Figure 4 below depicts an example of Vehicle Fleet Mix input file. Only three routes (`1342`, `1350` and `1351`) out of twelve are assigned a new bus type (respectively `BUS-STD-HD`, `BUS-SMALL-HD`, `BUS-STD-ART`); all other routes operate with the default bus type (`BUS-DEFAULT`).
 
 ![Bus fleet](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_VehicleFleetMix.png)\
 ***Figure 4: Example of Vehicle Fleet Mix Input.***
@@ -73,27 +74,27 @@ Figure 4 below depicts an example of Vehicle Fleet Mix input file. Only three ro
 
 #### 2.1. Description
 
-In an effort to encourage the use of sustainable transportation alternatives to private vehicles, SFBl is considering providing incentives to promote mass transit in Sioux Faux. SFBL is exploring options for citizens lacking access to quality transit or means to pay fares, including defraying the cost of certain qualified transit trips  and/or on-demand rides. 
+In an effort to encourage the use of sustainable transportation alternatives to private vehicles, SFBL is considering providing incentives to promote mass transit in Sioux Faux. SFBL is exploring options for citizens lacking access to quality transit or means to pay fares, including defraying the cost of certain qualified transit trips  and/or on-demand rides. 
 
-You may choose to defray the cost of on-demand rides and/or transit based on either age group, income group, or both. %, up to a total amount constrained by SFDOT's budget
-To do so, the range of qualifying socio-demographic characteristics and value of the incentive provided to each group must be defined for passengers using each of the following modes of transportation to complete a trip: 
+You may choose to defray the cost of on-demand rides and/or transit based on either age group, income group, or both.
+To do so, the *range of qualifying socio-demographic characteristics* and *value of the incentive provided to each group* must be defined for passengers using each of the following modes of transportation to complete a trip: 
   * "OnDemand_ride": use of on-demand rideshare as the main transport mode for the trip
   * "drive_transit": use of the personal car as an access/egress mode to/from transit (bus)
   * "walk_transit": walking as an access/egress mode to/from transit (bus)
 
-Qualification for an incentive can be based on **age** and/or **income**. You can find the distributions of Sioux Faux's population over age and income on the page [**INSERT LINK**].
+Qualification for an incentive can be based on *age* and/or *income*. You can find the distributions of Sioux Faux's population over age and income on the page [**INSERT LINK**].
 
 Incentives for one mode do not disqualify providing incentives for another mode. Additionally, the price of each leg in a multimodal trip will be adjusted by the amount of incentive allocated to the qualifying agent undertaking the trip. That is, for each trip (i.e. travel from the agent's origin to the goal activity), the best route for each multimodal type will include subsidies in the overall cost of the trip. This generalized cost will then factor into agent decision-making.
 
 #### 2.2. Technical Details:
-Your recommendation is to be submitted in a file named `ModeSubsidies.csv` according to the format specified in Table 2. See Figure 5 for an example.
+Your recommendation is to be submitted in a file named `ModeIncentives.csv` according to the format specified in Table 2. See Figure 5 for an example.
 
 | Column Name | Data Type |Description | Validation Criteria |
 | :---: |:--- | :--- | :----|
-| `mode` | [`Subsidizable`](#subsidizable)| Mode to provide incentive to. | None |
-| `age` | [`Range`](#range) | The range of ages of agents that qualify for this subsidy. | Must be greater than 0 and less than 120 (the maximum age of any resident in Sioux Faux)|
-| `income` | [`Range`](#range) | The range of individual incomes (in $US) of agents that qualify for this subsidy | Must be greater than 0. |
-| `amount` | `Float` | The amount (in $US/person) to subsidize this entry's `mode`| Must be greater than 0.|
+| `mode` | [`Incentive eligible`](#incentive-eligible)| Mode to provide incentive to. | None |
+| `age` | [`Range`](#range) | The range of ages of agents that qualify for this incentive. | Must be greater than 0 and less than 120 (the maximum age of any resident in Sioux Faux)|
+| `income` | [`Range`](#range) | The range of individual incomes (in $US) of agents that qualify for this incentive | Must be greater than 0. |
+| `amount` | `Float` | The amount (in $US/person) of the incentive to provide to this entry's `mode`| Must be greater than 0.|
 
 ***Table 2: Vehicle fleet mix input schema and constraint definitions***
 
@@ -210,6 +211,6 @@ The file describes the following fare policy:
 
 The following are data types that are specializations of simplified data types that are constrained according to a specific syntax
 
-<span id="subsidizable">`Subsidizable`</span>: `Enumeration`; must be a member of the set: {`"OnDemand_ride"`,`"drive_transit"`, `"walk_transit"`}
+<span id="incentive-eligible">`Incentive eligible`</span>: `Enumeration`; must be a member of the set: {`"OnDemand_ride"`,`"drive_transit"`, `"walk_transit"`}
 
 <span id="range">`Range`</span>: `String`; Ranges are defined according to typical mathematical notation conventions whereby parentheses "(" and ")" indicate exclusive bounds and brackets "\[" "]" indicate inclusive bounds. For example, "[0,100)" is interpreted to mean, "0 (inclusive) to 100 (exclusive)".
