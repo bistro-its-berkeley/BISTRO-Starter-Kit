@@ -149,7 +149,7 @@ def main(combination_number, name_of_exploration):
     n_sim_iters = 20
     seed = 123
 
-    n_search_iters = 100
+    n_search_iters = 160
     data_root = abspath2("../reference-data")
     input_root = abspath2("../search-input")
     output_root = abspath2("../search-output-%s"%name_of_exploration)
