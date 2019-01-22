@@ -31,12 +31,12 @@ LOW_INCOME = "(0:25000]"
 ALL_INCOMES = "(0:500000]"
 
 # 4. INCENTIVE AMOUNT
-transit_subsidy = np.random.uniform(0.01, 50)
-on_demand_ride_subsidy = np.random.uniform(0.01, 50)
+transit_subsidy = 50.00
+on_demand_ride_subsidy = 50.00
 
 # MASS TRANSIT FARES
-full_fare = np.random.uniform(0.01, 50)
-free = np.random.uniform(0.01, 50)
+full_fare = 50.00
+free = 0.01
 
 
 # 6. BAU DATA FRAMES (EMPTY DF TO BE FILLED UP WHEN TESTING OTHER INPUTS)
