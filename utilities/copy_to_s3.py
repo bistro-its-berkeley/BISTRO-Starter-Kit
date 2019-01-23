@@ -22,8 +22,14 @@ def main(name_of_exploration):
             # print(len(path) * '---', file)
             files_to_copy.append(path.join(root, file))
 
-    for f_i in files_to_copy:
+    n_files = len(files_to_copy)
+    for idx, f_i in enumerate(files_to_copy):
+        if idx % 50 == 0:
+            print(f"Copying {idx + 1} out of {n_files}")
         s3.upload_file(f_i, bucketName, f_i)
+
+    # First attempt at parallelization
+    # Parallel(n_jobs=-2)(delayed(s3.upload_file)(f_i, bucketName, f_i) for f_i in files_to_copy)
 
 
 if __name__ == "__main__":
