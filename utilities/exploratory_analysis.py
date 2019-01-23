@@ -48,20 +48,34 @@ def docker_exists(container_id, client):
     return True
 
 
-def sample_settings(data_root, combination_number):
+def sample_settings(data_root, combination_number, input_mode):
     max_bus_lines = 12
-    max_num_records = 24
+    max_num_records_frequency = 36
+    max_num_records = 10
+
     # TODO pull out data GTFS stuff to make this pure function
     agency_dict = sampler.scenario_agencies(Path(data_root), SCENARIO_NAME)
     sf_gtfs_manager = sampler.AgencyGtfsDataManager(agency_dict[AGENCY])
 
-    subsidies_combination, pt_fares_combination = input_combinations[combination_number]
+    if input_mode == "random":
+        samplers = [sampler.sample_frequency_adjustment_input,
+                    sampler.sample_mode_subsidies_input,
+                    sampler.sample_vehicle_fleet_mix_input,
+                    sampler.sample_pt_fares_input]
 
-    samples = [sampler.sample_frequency_adjustment_input(np.random.randint(0, max_num_records), sf_gtfs_manager),
-               subsidies_combination,
-               sampler.sample_vehicle_fleet_mix_input(np.random.randint(0, max_bus_lines), sf_gtfs_manager,
-                                                      ["BUS-SMALL-HD", "BUS-STD-ART", "BUS-DEFAULT"]),
-               pt_fares_combination]
+        samples = [sampler.sample_frequency_adjustment_input(np.random.randint(0, max_num_records_frequency), sf_gtfs_manager),
+                   sampler.sample_mode_subsidies_input(np.random.randint(0, max_num_records), sf_gtfs_manager),
+                   sampler.sample_vehicle_fleet_mix_input(np.random.randint(0, max_bus_lines), sf_gtfs_manager),
+                   sampler.sample_pt_fares_input(max_num_records, sf_gtfs_manager, max_fare_amount=50.0)]
+
+    elif input_mode == "fixed":
+        subsidies_combination, pt_fares_combination = input_combinations[combination_number]
+
+        samples = [sampler.sample_frequency_adjustment_input(np.random.randint(0, max_num_records), sf_gtfs_manager),
+                   subsidies_combination,
+                   sampler.sample_vehicle_fleet_mix_input(np.random.randint(0, max_bus_lines), sf_gtfs_manager,
+                                                          ["BUS-SMALL-HD", "BUS-STD-ART", "BUS-DEFAULT"]),
+                   pt_fares_combination]
 
     return tuple(samples)
 
@@ -87,7 +101,7 @@ def read_scores(output_dir):
     return scores
 
 
-def search_iteration(docker_cmd, data_root, input_root, output_root, combination_number, random_sample_number):
+def search_iteration(docker_cmd, data_root, input_root, output_root, combination_number, random_sample_number, input_mode):
     client = docker.from_env()  # TODO consider if cleanest that this is in main?
 
     assert os.path.isabs(data_root)
@@ -95,15 +109,20 @@ def search_iteration(docker_cmd, data_root, input_root, output_root, combination
     assert os.path.isabs(output_root)
 
     # Make temp dirs, race condition safe too
-    input_dir = tempfile.mkdtemp(prefix="input_C{0}_RS{1}".format(combination_number +1, random_sample_number+1) + DIR_DELIM, dir=input_root)
-    output_dir = tempfile.mkdtemp(prefix="output_C{0}_RS{1}".format(combination_number +1, random_sample_number+1) + DIR_DELIM, dir=output_root)
+    if input_mode == "fixed":
+        input_dir = tempfile.mkdtemp(prefix="input_C{0}_RS{1}".format(combination_number +1, random_sample_number+1) + DIR_DELIM, dir=input_root)
+        output_dir = tempfile.mkdtemp(prefix="output_C{0}_RS{1}".format(combination_number +1, random_sample_number+1) + DIR_DELIM, dir=output_root)
+
+    elif input_mode == "random":
+        input_dir = tempfile.mkdtemp(prefix="input_C9_RS{1}".format(random_sample_number + 1) + DIR_DELIM, dir=input_root)
+        output_dir = tempfile.mkdtemp(prefix="output_C9_RS{1}".format(random_sample_number + 1) + DIR_DELIM, dir=output_root)
 
     # Should be unique name here since folder is unique, also checks only one instance of delim
     _, submission_name = os.path.basename(input_dir).split(DIR_DELIM)
     # Add 'bm_bc_' prefix due to docker's restriction on container names
     submission_name = "bm_bc_{}".format(submission_name)
     # Call random input sampler
-    settings = sample_settings(data_root, combination_number)
+    settings = sample_settings(data_root, combination_number, input_mode)
     # Save all inputs
     save_inputs(input_dir, *settings)
 
@@ -123,7 +142,8 @@ def search_iteration(docker_cmd, data_root, input_root, output_root, combination
     paths = (input_dir, output_dir)
     return paths
 
-def random_search(docker_cmd, n_iters, data_root, input_root, output_root, combination_number):
+
+def random_search(docker_cmd, n_iters, data_root, input_root, output_root, combination_number, input_mode):
     # Finding which simulations already exist:
     subScoreFiles = glob(path.join(output_root, "*", "*", "*", "competition", "submissionScores.csv"))
     if len(subScoreFiles) == 0:
@@ -133,13 +153,14 @@ def random_search(docker_cmd, n_iters, data_root, input_root, output_root, combi
         start_iter = max(iteration) + 1
 
     for i in range(start_iter):
-        _ = sample_settings(data_root, combination_number)
+        _ = sample_settings(data_root, combination_number, input_mode)
 
     for _ in range(start_iter, n_iters):
-        paths = search_iteration(docker_cmd, data_root, input_root, output_root, combination_number, _)
+        paths = search_iteration(docker_cmd, data_root, input_root, output_root, combination_number, _, input_mode)
         logger.info("Iteration Number %s / %s" % (_ + 1, n_iters))
 
-def main(combination_number, name_of_exploration):
+
+def main(combination_number, name_of_exploration, input_mode):
     logging.basicConfig(level=logging.INFO)
 
     # TODO explain why this is different than SCENARIO_NAME
@@ -149,10 +170,10 @@ def main(combination_number, name_of_exploration):
     n_sim_iters = 20
     seed = 123
 
-    n_search_iters = 100
+    n_search_iters = 160
     data_root = abspath2("../reference-data")
     input_root = abspath2("../search-input")
-    output_root = abspath2("../search-output-%s"%name_of_exploration)
+    output_root = abspath2("../search-output-{0}{1}".format(name_of_exploration, input_mode))
 
     os.makedirs(input_root, exist_ok=True)
     os.makedirs(output_root, exist_ok=True)
@@ -162,9 +183,12 @@ def main(combination_number, name_of_exploration):
 
     # Some prints
     docker_cmd = CMD_TEMPLATE.format(SCENARIO_NAME, sample_size, n_sim_iters)
-    random_search(docker_cmd, n_search_iters, data_root, input_root, output_root, combination_number)
+    random_search(docker_cmd, n_search_iters, data_root, input_root, output_root, combination_number, input_mode)
+
 
 if __name__ == "__main__":
     combination_number = int(sys.argv[1])
     name_of_exploration = sys.argv[2]
-    main(combination_number, name_of_exploration)
+    input_mode = sys.argv[3]
+
+    main(combination_number, name_of_exploration, input_mode)

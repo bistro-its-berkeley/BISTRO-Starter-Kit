@@ -74,7 +74,6 @@ def save_inputs(input_dir, freq_df=None, mode_subsidy_df=None, vehicle_fleet_mix
     pt_fare_df.to_csv(os.path.join(input_dir, PT_FARE_FILE), header=True, index=False)
 
 
-
 def read_scores(output_dir):
     """Read scores from output directory as .csv file.
     """
