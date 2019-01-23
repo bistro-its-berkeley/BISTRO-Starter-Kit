@@ -5,7 +5,7 @@ To optimize the transportation system of Sioux Faux, you will need to write an a
  
 ## Introduction
 
-As detailed in the [problem statement](docs/The_Sioux_Faux_case_pilot_study), to help the Sioux Faux Department of Transportation (SFDOT) combat congestion and improve overall mobility in Sioux Faux, you will prepare a set of inputs to the simulation engine, which represent the following transportation system interventions:
+As detailed in the [problem statement](The_Sioux_Faux_case_pilot_study.md), to help the Sioux Faux Department of Transportation (SFDOT) combat congestion and improve overall mobility in Sioux Faux, you will prepare a set of inputs to the simulation engine, which represent the following transportation system interventions:
 
 1. Bus fleet composition;
 2. Adjustments to the frequency of buses on routes; and, 
