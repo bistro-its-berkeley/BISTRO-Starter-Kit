@@ -287,7 +287,7 @@ class AbstractCompetitionExecutor(ABC):
         - "ModeSubsidies": Subsidies DataFrame
         - "RoadPricing": Road Pricing DataFrame
         - "FrequencyAdjustment": Frequency Adjustment DataFrame
-        - "PtFares": Public Transportation (buses) Fares DataFrame
+        - "PtFares": Mass Transit (buses) Fares DataFrame
 
         The content of the different DataFrames can be understood by refering to the `Uber-Prize-Starter-Kit` repository
         documentation (`docs/Which-inputs-should-I-optimize.ms`)
@@ -299,7 +299,9 @@ class AbstractCompetitionExecutor(ABC):
 
         """
         input_root = self.input_root
-        list_inputs = ["VehicleFleetMix", "ModeSubsidies", "RoadPricing", "FrequencyAdjustment", "PtFares"]
+
+        list_inputs = ["VehicleFleetMix", "ModeSubsidies", "FrequencyAdjustment", "PtFares"]
+
 
         if input_root is None:
             if submission_input_root is not None:
@@ -470,7 +472,7 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
                        submission_id,
                        submission_output_root=None,
                        submission_input_root=None,
-                       scenario_name='siouxfalls',
+                       scenario_name='sioux_faux',
                        sample_size='1k',
                        num_iterations=10,
                        num_cpus=multiprocessing.cpu_count() - 1,
@@ -566,7 +568,7 @@ if __name__ == '__main__':
     except docker.errors.NotFound:
         print("Creating new simulation container...")
 
-    ex.run_simulation(CONTAINER_ID, num_iterations=1, num_cpus=10)
+    ex.run_simulation(CONTAINER_ID, num_iterations=1, num_cpus=10, sample_size='15k')
 
     # Let it roll for a bit (hopefully at least one or two iterations!)
     if len(sys.argv) < 4:

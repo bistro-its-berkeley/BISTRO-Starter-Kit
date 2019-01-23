@@ -1,10 +1,12 @@
 import logging
 import os
-from pathlib import Path
 import tempfile
+from pathlib import Path
+
 import docker
 import numpy as np
 import pandas as pd
+
 import input_sampler as sampler
 
 AGENCY = "sioux_faux_bus_lines"
@@ -18,7 +20,7 @@ FREQ_FILE = "FrequencyAdjustment.csv"
 SUB_FILE = "ModeSubsidies.csv"
 FLEET_FILE = "VehicleFleetMix.csv"
 PT_FARE_FILE = "PtFares.csv"
-SCORES_PATH = ("competition", "submissionScores.txt")
+SCORES_PATH = ("competition", "submissionScores.csv")
 
 logger = logging.getLogger(__name__)
 
@@ -42,62 +44,48 @@ def docker_exists(container_id, client):
     return True
 
 
-def sample_settings(num_records, data_root):
+def sample_settings(max_num_records, data_root):
     # TODO pull out data GTFS stuff to make this pure function
     agency_dict = sampler.scenario_agencies(Path(data_root), SCENARIO_NAME)
     sf_gtfs_manager = sampler.AgencyGtfsDataManager(agency_dict[AGENCY])
 
-    freq_df = sampler.sample_frequency_adjustment_input(num_records, sf_gtfs_manager)
-    mode_subsidy_df = sampler.sample_mode_subsidies_input(num_records)
-    vehicle_fleet_mix_df = sampler.sample_vehicle_fleet_mix_input(num_records, sf_gtfs_manager)
-    pt_fares_df = sampler.sample_pt_fares_input(num_records, sf_gtfs_manager)
+    samplers = [sampler.sample_frequency_adjustment_input,
+                sampler.sample_mode_subsidies_input,
+                sampler.sample_vehicle_fleet_mix_input,
+                sampler.sample_pt_fares_input]
 
-    return freq_df, mode_subsidy_df, vehicle_fleet_mix_df, pt_fares_df
+    samples = []
+    for input_sampler in samplers:
+        num_records = np.random.randint(0, max_num_records)
+        samples.append(input_sampler(num_records, sf_gtfs_manager))
+
+    return tuple(samples)
 
 
-def save_inputs(input_dir, freq_df, mode_subsidy_df, vehicle_fleet_mix_df, pt_fare_df):
-    freq_df.to_csv(os.path.join(input_dir, FREQ_FILE), header=True, index=False)
-    mode_subsidy_df.to_csv(os.path.join(input_dir, SUB_FILE), header=True, index=False)
-    vehicle_fleet_mix_df.to_csv(os.path.join(input_dir, FLEET_FILE), header=True, index=False)
+def save_inputs(input_dir, freq_df=None, mode_subsidy_df=None, vehicle_fleet_mix_df=None, pt_fare_df=None):
+    if freq_df is not None:
+        freq_df.to_csv(os.path.join(input_dir, FREQ_FILE), header=True, index=False)
+    if mode_subsidy_df is not None:
+        mode_subsidy_df.to_csv(os.path.join(input_dir, SUB_FILE), header=True, index=False)
+    if vehicle_fleet_mix_df is not None:
+        vehicle_fleet_mix_df.to_csv(os.path.join(input_dir, FLEET_FILE), header=True, index=False)
+    if pt_fare_df is None:
+        pt_fare_df = pd.read_csv('../submission-inputs/{0}'.format(PT_FARE_FILE))
     pt_fare_df.to_csv(os.path.join(input_dir, PT_FARE_FILE), header=True, index=False)
 
 
+
 def read_scores(output_dir):
-    """This function will become much simpler once sim is configured to output std csv file.
+    """Read scores from output directory as .csv file.
     """
-    # Need to go two levels deeper in useless nesting:
     output_dir = only_subdir(only_subdir(output_dir))
-
-    with open(os.path.join(output_dir, *SCORES_PATH), "r") as f:
-        lines = f.readlines()
-
-        data = []
-        for idx, l in enumerate(lines):
-            if idx == 0:
-                columns = l.rstrip("\n").split("|")
-                columns = [i.strip() for i in columns]
-                continue
-            elif idx == 1:
-                continue
-            values = l.rstrip("\n").split("|")
-            values = [i.strip() for i in values]
-            values = [i if len(i) > 0 else "0" for i in values]
-            data.append(values)
-
-    df = pd.DataFrame(data, columns=columns)
-
-    scores = []
-    for score_type in ["Weight", "Raw Score", "Weighted Score"]:
-        pivoted = pd.pivot_table(df, values=score_type, columns="Component Name", aggfunc="first").reset_index(drop=True)
-        pivoted.columns = ["%s_%s" % (i, score_type) for i in pivoted.columns]
-        scores.append(pivoted)
-    scores = pd.concat(scores, 1).astype(float)
-
+    df = pd.read_csv(os.path.join(output_dir, *SCORES_PATH), index_col="Component Name")
+    scores = df["Weighted Score"]
     return scores
 
 
 def search_iteration(docker_cmd, data_root, input_root, output_root):
-    num_records = 10  # TODO make this random as well
+    max_records = 10
 
     client = docker.from_env()  # TODO consider if cleanest that this is in main?
 
@@ -111,14 +99,17 @@ def search_iteration(docker_cmd, data_root, input_root, output_root):
 
     # Should be unique name here since folder is unique, also checks only one instance of delim
     _, submission_name = os.path.basename(input_dir).split(DIR_DELIM)
+    # Add 'bm_bc_' prefix due to docker's restriction on container names
     submission_name = "bm_bc_{}".format(submission_name)
     # Call random input sampler
-    settings = sample_settings(num_records, data_root)
+    settings = sample_settings(max_records, data_root)
     # Save all inputs
     save_inputs(input_dir, *settings)
 
     docker_dirs = {input_dir: {"bind": "/submission-inputs", "mode": "ro"},
-                   output_dir: {"bind": "/output", "mode": "rw"}}
+                   output_dir: {"bind": "/output", "mode": "rw"},
+                   "/tmp-data": {"bind": "/tmp-data", "mode": "rw"},
+                   "/var/run/docker.sock": {"bind": "/var/run/docker.sock", "mode": "rw"}}
 
     assert not docker_exists(submission_name, client)
     logger.info('%s start' % submission_name)
@@ -127,10 +118,9 @@ def search_iteration(docker_cmd, data_root, input_root, output_root):
                                  stdout=True, stderr=True)
     logger.debug(logs)
     logger.info('%s end' % submission_name)
-    assert not docker_exists(submission_name, client)  # Since we auto_removed it
 
     scores = read_scores(output_dir)
-    score, = scores["Submission Score_Weighted Score"]
+    score = scores["Submission Score"]
     score = float(score)  # verify simple float to keep simple
 
     paths = (input_dir, output_dir)
@@ -157,10 +147,10 @@ def main():
     logging.basicConfig(level=logging.INFO)
 
     # TODO explain why this is different than SCENARIO_NAME
-    scenario_name = "siouxfalls"
+
     # We can take these from cmd args later:
     sample_size = "1k"
-    n_sim_iters = 3
+    n_sim_iters = 20
     seed = 123
 
     n_search_iters = 100
@@ -175,7 +165,7 @@ def main():
     np.random.seed(seed)
 
     # Some prints
-    docker_cmd = CMD_TEMPLATE.format(scenario_name, sample_size, n_sim_iters)
+    docker_cmd = CMD_TEMPLATE.format(SCENARIO_NAME, sample_size, n_sim_iters)
     (input_dir, output_dir), best_score = random_search(docker_cmd, n_search_iters,
                                                         data_root, input_root, output_root)
 
