@@ -39,16 +39,7 @@ if __name__ == '__main__':
     output_folder = sys.argv[3]
     input_mode = sys.argv[4]
 
-    host1_conn = connect_single(hosts[0], key_file_loc)
-    host2_conn = connect_single(hosts[1], key_file_loc)
-    host3_conn = connect_single(hosts[2], key_file_loc)
-    host4_conn = connect_single(hosts[3], key_file_loc)
-    host5_conn = connect_single(hosts[4], key_file_loc)
-    host6_conn = connect_single(hosts[5], key_file_loc)
-    host7_conn = connect_single(hosts[6], key_file_loc)
-    host8_conn = connect_single(hosts[7], key_file_loc)
-
-    connections = [host1_conn, host2_conn, host3_conn, host4_conn, host5_conn, host6_conn, host7_conn, host8_conn]
+    connections = [connect_single(hosts[i], key_file_loc) for i in range(len(hosts))]
     connection = connections[host_num]
 
     ###############################
