@@ -251,14 +251,13 @@ def sample_mode_subsidies_input(num_records, gtfs_manager=None):
     df_columns = ['mode', 'age', 'income', 'amount']
     if num_records == 0:
         return pd.DataFrame({k: [] for k in df_columns})
-    possible_modes = ['walk_transit', 'ride_hail', 'walk_transit', 'walk',
-                      'car', 'drive_transit']
+    possible_modes = ['ride_hail', 'walk_transit', 'drive_transit']
     modes = np.random.choice(possible_modes, num_records).tolist()
     ages = [sample_format_range(tuple(sorted(np.random.choice(120, 2)))) for _ in
             range(num_records)]
-    incomes = [sample_format_range(tuple(sorted(np.random.choice(range(0, 300000, 1000), 2)))) for _
+    incomes = [sample_format_range(tuple(sorted(np.random.choice(range(0, 150000, 1000), 2)))) for _
                in range(num_records)]
-    amounts = [np.round(np.random.uniform(0.1, 20), 1) for _ in range(num_records)]
+    amounts = [np.round(np.random.uniform(0.1, 50), 1) for _ in range(num_records)]  # maximum subsidy is set to $50 here
     return pd.DataFrame(np.array([modes, ages, incomes, amounts]).T,
                         columns=df_columns)
 
