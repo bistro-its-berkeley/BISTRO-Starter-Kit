@@ -57,7 +57,7 @@ def sample_settings(data_root, combination_number, input_mode):
     agency_dict = sampler.scenario_agencies(Path(data_root), SCENARIO_NAME)
     sf_gtfs_manager = sampler.AgencyGtfsDataManager(agency_dict[AGENCY])
 
-    if input_mode == "random":
+    if input_mode == "random_inputs":
         samplers = [sampler.sample_frequency_adjustment_input,
                     sampler.sample_mode_subsidies_input,
                     sampler.sample_vehicle_fleet_mix_input,
@@ -68,7 +68,7 @@ def sample_settings(data_root, combination_number, input_mode):
                    sampler.sample_vehicle_fleet_mix_input(np.random.randint(0, max_bus_lines), sf_gtfs_manager),
                    sampler.sample_pt_fares_input(max_num_records, sf_gtfs_manager, max_fare_amount=50.0)]
 
-    elif input_mode == "fixed":
+    elif input_mode == "fixed_inputs":
         subsidies_combination, pt_fares_combination = input_combinations[combination_number]
 
         samples = [sampler.sample_frequency_adjustment_input(np.random.randint(0, max_num_records), sf_gtfs_manager),
@@ -109,11 +109,11 @@ def search_iteration(docker_cmd, data_root, input_root, output_root, combination
     assert os.path.isabs(output_root)
 
     # Make temp dirs, race condition safe too
-    if input_mode == "fixed":
+    if input_mode == "fixed_inputs":
         input_dir = tempfile.mkdtemp(prefix="input_C{0}_RS{1}".format(combination_number +1, random_sample_number+1) + DIR_DELIM, dir=input_root)
         output_dir = tempfile.mkdtemp(prefix="output_C{0}_RS{1}".format(combination_number +1, random_sample_number+1) + DIR_DELIM, dir=output_root)
 
-    elif input_mode == "random":
+    elif input_mode == "random_inputs":
         input_dir = tempfile.mkdtemp(prefix="input_C9_RS{0}".format(random_sample_number + 1) + DIR_DELIM, dir=input_root)
         output_dir = tempfile.mkdtemp(prefix="output_C9_RS{0}".format(random_sample_number + 1) + DIR_DELIM, dir=output_root)
 
