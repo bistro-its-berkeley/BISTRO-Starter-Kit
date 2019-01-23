@@ -298,7 +298,7 @@ def sample_pt_fares_input(num_records, gtfs_manager, max_fare_amount=10.0):
         If the `num_records` is in excess of the number of routes that an agency schedules
         buses on.
     """
-    df_columns = ['agency', 'routeId', 'age', 'amount']
+    df_columns = ['agencyId', 'routeId', 'age', 'amount']
     if num_records == 0:
         return pd.read_csv('../submission-inputs/{0}'.format(PT_FARE_FILE))
     max_num_routes = gtfs_manager.routes.shape[0]

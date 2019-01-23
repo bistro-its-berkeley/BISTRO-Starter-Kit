@@ -172,7 +172,7 @@ def main(combination_number, name_of_exploration, input_mode):
 
     n_search_iters = 160
     data_root = abspath2("../reference-data")
-    input_root = abspath2("../search-input")
+    input_root = abspath2("../search-input-{0}-{1}".format(name_of_exploration, input_mode))
     output_root = abspath2("../search-output-{0}-{1}".format(name_of_exploration, input_mode))
 
     os.makedirs(input_root, exist_ok=True)
