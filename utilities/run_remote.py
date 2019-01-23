@@ -37,6 +37,7 @@ if __name__ == '__main__':
     key_file_loc = sys.argv[1]
     host_num = int(sys.argv[2]) - 1
     output_folder = sys.argv[3]
+    input_mode = sys.argv[4]
 
     host1_conn = connect_single(hosts[0], key_file_loc)
     host2_conn = connect_single(hosts[1], key_file_loc)
@@ -78,4 +79,4 @@ if __name__ == '__main__':
     run('cd /home/ubuntu/venv/beam_competitions/bin && \
          source activate && \
          cd /home/ubuntu/Uber-Prize-Starter-Kit/utilities && \
-         python3 exploratory_analysis.py {0} {1}'.format(str(host_num - 1), output_folder), connection)
+         python3 exploratory_analysis.py {0} {1} {2}'.format(str(host_num - 1), output_folder, input_mode), connection)
