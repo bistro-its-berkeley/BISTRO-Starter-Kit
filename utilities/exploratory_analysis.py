@@ -163,7 +163,7 @@ def main(combination_number, name_of_exploration, input_mode):
     # We can take these from cmd args later:
     sample_size = "15k"
     n_sim_iters = 20
-    seed = 123
+    # seed = 123
 
     n_search_iters = 160
     data_root = abspath2("../reference-data")
@@ -173,8 +173,8 @@ def main(combination_number, name_of_exploration, input_mode):
     os.makedirs(input_root, exist_ok=True)
     os.makedirs(output_root, exist_ok=True)
 
-    # TODO also consider setting pyseed
-    np.random.seed(seed)
+    # # TODO also consider setting pyseed
+    # np.random.seed(seed)
 
     # Some prints
     docker_cmd = CMD_TEMPLATE.format(SCENARIO_NAME, sample_size, n_sim_iters)
