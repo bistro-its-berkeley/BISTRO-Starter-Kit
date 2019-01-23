@@ -257,7 +257,7 @@ def sample_mode_subsidies_input(num_records, gtfs_manager=None):
     df_columns = ['mode', 'age', 'income', 'amount']
     if num_records == 0:
         return pd.DataFrame({k: [] for k in df_columns})
-    possible_modes = ['ride_hail', 'walk_transit', 'drive_transit']
+    possible_modes = ['OnDemand_ride', 'walk_transit', 'drive_transit']
     modes = np.random.choice(possible_modes, num_records).tolist()
     ages = [sample_format_range(tuple(sorted(np.random.choice(120, 2)))) for _ in
             range(num_records)]
