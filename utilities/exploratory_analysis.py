@@ -132,12 +132,12 @@ def search_iteration(docker_cmd, data_root, input_root, output_root, combination
 
     assert not docker_exists(submission_name, client)
     logger.info('%s start' % submission_name)
-    # logs = client.containers.run(DOCKER_IMAGE, command=docker_cmd, auto_remove=True, detach=False,
-    #                              name=submission_name, volumes=docker_dirs,
-    #                              stdout=True, stderr=True)
-    #
-    # logger.debug(logs)
-    # logger.info('%s end' % submission_name)
+    logs = client.containers.run(DOCKER_IMAGE, command=docker_cmd, auto_remove=True, detach=False,
+                                 name=submission_name, volumes=docker_dirs,
+                                 stdout=True, stderr=True)
+
+    logger.debug(logs)
+    logger.info('%s end' % submission_name)
 
     paths = (input_dir, output_dir)
     return paths
