@@ -56,8 +56,8 @@ Your recommendation is to be submitted in a file named `VehicleFleetMix.csv` acc
 | Column Name| Data Type | Description | Validation Criteria |
 | :---:| :--- | :--- | :----|
 | `agencyId`|`String` | Agency identifier | Must equal agency Id found under `agencyId` in [`agencies.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/agency.txt) of corresponding GTFS file for transit agency with `agency_name` designated by parent directory of `gtfs_data` in starter kit `/reference-data` directory. Note that for Sioux Faux, SFBL is the only agency operating in the city (`agencId`="217"). Therefore, any entry in the .csv file will have "217" under `agencyId`.|
-| `routeId` |`String` | The route that will have its vehicle type assignment modified | A route can only have its assignment modified once. The `routeId` name must exist in the [`routes.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/routes.txt) file corresponding to the GTFS data for the agency specified by this entry's `agencyId`|
-| `vehicleTypeId`|`String` | The vehicle type identifier | Must be a member of the set of vehicle type Ids listed under `vehicleTypeId` in the [`availableVehicleTypes.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/availableVehicleTypes.csv)file
+| `routeId` |`String` | The route that will have its vehicle type assignment modified | A route can only have its assignment modified once. The `routeId` name must exist in the [`routes.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/routes.txt) file corresponding to the GTFS data for the agency specified by this entry's `agencyId`.|
+| `vehicleTypeId`|`String` | The vehicle type identifier | Must be a member of the set of vehicle type Ids listed under `vehicleTypeId` in the [`availableVehicleTypes.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/availableVehicleTypes.csv)file.
 
 ***Table 1: Vehicle fleet mix input schema and constraint definitions***
 
@@ -91,9 +91,9 @@ Your recommendation is to be submitted in a file named `ModeIncentives.csv` acco
 
 | Column Name | Data Type |Description | Validation Criteria |
 | :---: |:--- | :--- | :----|
-| `mode` | [`Incentive eligible`](#incentive-eligible)| Mode to provide incentive to. | None |
-| `age` | [`Range`](#range) | The range of ages of agents that qualify for this incentive. | Must be greater than 0 and less than 120 (the maximum age of any resident in Sioux Faux)|
-| `income` | [`Range`](#range) | The range of individual incomes (in $US) of agents that qualify for this incentive | Must be greater than 0. |
+| `mode` | [`Incentive eligible`](#incentive-eligible)| Mode to provide incentive to. | None. |
+| `age` | [`Range`](#range) | The range of ages of agents that qualify for this incentive. | Must be greater than 0 and less than 120 (the maximum age of any resident in Sioux Faux).|
+| `income` | [`Range`](#range) | The range of individual incomes (in $US) of agents that qualify for this incentive | Must be equal or greater than 0. |
 | `amount` | `Float` | The amount (in $US/person) of the incentive to provide to this entry's `mode`| Must be greater than 0.|
 
 ***Table 2: Vehicle fleet mix input schema and constraint definitions***
@@ -126,12 +126,12 @@ An essential aspect of transit system operations is capacity optimization. Route
 Before explaining how the input works, a few terms must be defined:
 
 * A **route** is made of a group of *trips* that are displayed to riders as a single service. Each bus route can be identified with a `route_id`. To understand the geospatial embedding of each Route corresponding to a `route_id`, please refer to Figure 1, above.   
-* A **trip** is a sequence of two or more *stops* that occurs at specific time and is identified by a `trip_id`. For Sioux Faux, the existing SFBL trips corresponding to each route are described in the [`trip.txt` file](reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file in the gtfs-data folder.
+* A **trip** is a sequence of two or more *stops* that occurs at specific time and is identified by a `trip_id`. For Sioux Faux, the existing SFBL trips corresponding to each route are described in the [`trip.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file in the gtfs-data folder.
 
-Currently, Sioux Faux buses follow a *non-frequency schedule* based on their arrival and departure times to and from each stop of their route. These arrival and departure times are listed in the [`stop_times.txt`](reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/stop_times.txt) file of Sioux Faux's GTFS data.
+Currently, Sioux Faux buses follow a *non-frequency schedule* based on their arrival and departure times to and from each stop of their route. These arrival and departure times are listed in the [`stop_times.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/stop_times.txt) file of Sioux Faux's GTFS data.
 You role here is to decide if some routes should follow a *frequency schedule* instead of a non frequency one. While we term the behavior of this input as frequency adjustment, in fact, it modifies the SFBL bus headways on a particular route. The adjustment wipes out all non-frequency trips from the route and converts them to frequency trips according to the given `headway_secs` defined between `start_time` and `end_time`. You can find a definition of these parameters in Table 3 below. Note that it is assumed that buses operate only on *week days* (i.e. from Monday to Friday).
 
-Here, we require you to provide the `trip_id` in order to derive the stop pattern and travel times and to implicitly reference a bus route. The trip_ids corresponding to each route were summarized in the [`route_id_trip_id_correspondance.csv` file](reference-data/sioux_faux/sioux_faux_bus_lines/route_id_trip_id_correspondance.csv) (see Figure 6 below).
+Here, we require you to provide the `trip_id` in order to derive the stop pattern and travel times and to implicitly reference a bus route. The trip_ids corresponding to each route were summarized in the [`route_id_trip_id_correspondance.csv` file](../../reference-data/sioux_faux/sioux_faux_bus_lines/route_id_trip_id_correspondance.csv) (see Figure 6 below).
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/vgv/%2326-document_pt_fares_input/reference-data/sioux_faux/sioux_faux_bus_lines/route_id_trip_id_correspondance.csv)
 ***Figure 6: Route ID-Trip ID correspondance***
