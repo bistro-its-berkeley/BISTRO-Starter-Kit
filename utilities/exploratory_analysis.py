@@ -114,8 +114,8 @@ def search_iteration(docker_cmd, data_root, input_root, output_root, combination
         output_dir = tempfile.mkdtemp(prefix="output_C{0}_RS{1}".format(combination_number +1, random_sample_number+1) + DIR_DELIM, dir=output_root)
 
     elif input_mode == "random":
-        input_dir = tempfile.mkdtemp(prefix="input_C9_RS{1}".format(random_sample_number + 1) + DIR_DELIM, dir=input_root)
-        output_dir = tempfile.mkdtemp(prefix="output_C9_RS{1}".format(random_sample_number + 1) + DIR_DELIM, dir=output_root)
+        input_dir = tempfile.mkdtemp(prefix="input_C9_RS{0}".format(random_sample_number + 1) + DIR_DELIM, dir=input_root)
+        output_dir = tempfile.mkdtemp(prefix="output_C9_RS{0}".format(random_sample_number + 1) + DIR_DELIM, dir=output_root)
 
     # Should be unique name here since folder is unique, also checks only one instance of delim
     _, submission_name = os.path.basename(input_dir).split(DIR_DELIM)
