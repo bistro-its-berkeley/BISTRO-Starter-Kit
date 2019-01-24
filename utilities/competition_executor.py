@@ -291,8 +291,9 @@ class AbstractCompetitionExecutor(ABC):
          The dictionary should be structured as follows:
         - "VehicleFleetMix": Bus fleet mix DataFrame
         - "ModeSubsidies": Subsidies DataFrame
+        - "RoadPricing": Road Pricing DataFrame
         - "FrequencyAdjustment": Frequency Adjustment DataFrame
-        - "RoadPricing":  Road Pricing DataFrame
+        - "PtFares": Mass Transit (buses) Fares DataFrame
 
         The content of the different DataFrames can be understood by refering to the `Uber-Prize-Starter-Kit` repository
         documentation (`docs/Which-inputs-should-I-optimize.ms`)
@@ -304,7 +305,9 @@ class AbstractCompetitionExecutor(ABC):
 
         """
         input_root = self.input_root
-        list_inputs = ["VehicleFleetMix", "ModeSubsidies", "FrequencyAdjustment", "RoadPricing", "PtFares"]
+
+        list_inputs = ["VehicleFleetMix", "ModeSubsidies", "FrequencyAdjustment", "PtFares"]
+
 
         if input_root is None:
             if submission_input_root is not None:
