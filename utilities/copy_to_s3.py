@@ -27,7 +27,8 @@ if __name__ == "__main__":
 
     for folder in all_output_folders:
         if folder not in right_output_folders:
-            rmtree(folder)
+            # rmtree(folder)
+            os.system(f"sudo rm -rf {folder}")
 
     # Launching s3 sync
     os.chdir(f"search-output-{output_folder_name}")
