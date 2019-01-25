@@ -3,6 +3,7 @@ import sys
 from os import path
 import pandas as pd
 
+
 def rsync_results(hostname, host_ip, output_folder_name, dest_folder):
     return os.system('rsync -avz -e "ssh -i ~/.ssh/beam_competitions_key.pem" ubuntu@{host_ip}:/home/ubuntu/'
                      'Uber-Prize-Starter-Kit/search-output-{output_folder_name}/ {dest_folder}/'
@@ -12,10 +13,17 @@ def rsync_results(hostname, host_ip, output_folder_name, dest_folder):
                                                  dest_folder=dest_folder))
 
 
+def find_output_folder_name(path_submission, iteration=4):
+    for i in range(iteration):
+        path_submission = path.dirname(path_submission)
+    return path_submission
+
+
 if __name__ == "__main__":
     # Args:
-    #   - 1: Name of the run to copy from
-    #   - 2: Path of the destination folder to copy on local machine (a folder named after the run will be created in it)
+    #   - 1: Name of the exploration to copy from
+    #   - 2: Path of the destination folder to copy on local machine (a folder named after the exploration will be
+    #        created in it)
 
     output_folder_name = sys.argv[1]
     dest_folder = sys.argv[2]
