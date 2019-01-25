@@ -1,51 +1,42 @@
-import boto3
-import sys
-import os
 from os import path
-from multiprocessing.pool import ThreadPool
-from datetime import datetime
+import sys
+import pandas as pd
+from glob import glob
+from shutil import rmtree
+import os
 
-bucketName = "uber-prize-testing-output"
-s3 = boto3.client('s3')
 
-
-def upload(filename):
-    s3.upload_file(filename, bucketName, filename)
-
-def main(name_of_exploration):
-    ## Setting working directory to Uber Prize starter kit root
-    os.chdir("..")
-
-    # search-output-all_randomrandom
-    ## Finding all relevant files
-    output_dir = f"search-output-{name_of_exploration}"
-
-    files_to_copy = []
-    for root, dirs, files in os.walk(output_dir, topdown=False):
-        # print((len(path) - 1) * '---', os.path.basename(root))
-        for file in files:
-            # print(len(path) * '---', file)
-            files_to_copy.append(path.join(root, file))
-
-    n_files = len(files_to_copy)
-    for idx, f_i in enumerate(files_to_copy):
-        if idx % 50 == 0:
-            print(f"Copying {idx + 1} out of {n_files}")
-        s3.upload_file(f_i, bucketName, f_i)
-
-    # First attempt at parallelization
-    # Raises an error because joblib does not want to parallelize a function with arguments
-    # that cannot be pickled
-    # Parallel(n_jobs=-2)(delayed(s3.upload_file)(f_i, bucketName, f_i) for f_i in files_to_copy)
-
-    # with multi-processing
-    # Seems to upload something but not sure if faste
-    # pool = ThreadPool(processes=2)
-    # pool.map(upload, files_to_copy)
+def find_output_folder_name(path_submission, iteration=4):
+    for i in range(iteration):
+        path_submission = path.dirname(path_submission)
+    return path_submission
 
 
 if __name__ == "__main__":
-    name_of_exploration = sys.argv[1]
-    main(name_of_exploration)
+    # Args:
+    #   - 1: Name of the exploration to copy from
 
+    output_folder_name = sys.argv[1]
 
+    # Read the hosts from config file
+    config = pd.read_table("~/.ssh/config")
+    config = config["Host host1"].values
+    hosts = [i.split(" ")[1] for i in config if "HostName" in i]
+
+    host_names = ["host{}".format(str(i+1)) for i in range(len(hosts)-1)]
+    host_names.append('debug')
+
+    # Check if the output folder contains a submissionScores.csv file, i.e. of the simulation worked
+    submissions = glob(r"Uber-Prize-Starter-Kit/search-output-{output_folder_name}/*/sioux_faux/sioux_faux-15k__*/"
+                       r"competition/submissionScores.csv".format(output_folder_name=output_folder_name))
+    right_output_folders = [find_output_folder_name(submissions[i], 4) for i in range(len(submissions))]
+    all_output_folders = glob(r"Uber-Prize-Starter-Kit/search-output-{output_folder_name}/output_C*_RS*".format(
+        output_folder_name=output_folder_name))
+
+    for folder in all_output_folders:
+        if folder not in right_output_folders:
+            rmtree(folder)
+
+    # Launching s3 sync
+    os.chdir(f"../search-output-{output_folder_name}")
+    os.system(f"aws s3 sync . s3://uber-prize-testing-output/search-output-{output_folder_name}")
