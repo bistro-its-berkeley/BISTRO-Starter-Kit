@@ -18,14 +18,6 @@ if __name__ == "__main__":
 
     output_folder_name = sys.argv[1]
 
-    # Read the hosts from config file
-    config = pd.read_table("~/.ssh/config")
-    config = config["Host host1"].values
-    hosts = [i.split(" ")[1] for i in config if "HostName" in i]
-
-    host_names = ["host{}".format(str(i+1)) for i in range(len(hosts)-1)]
-    host_names.append('debug')
-
     # Check if the output folder contains a submissionScores.csv file, i.e. of the simulation worked
     submissions = glob(r"Uber-Prize-Starter-Kit/search-output-{output_folder_name}/*/sioux_faux/sioux_faux-15k__*/"
                        r"competition/submissionScores.csv".format(output_folder_name=output_folder_name))
