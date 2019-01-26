@@ -74,4 +74,4 @@ if __name__ == '__main__':
     run('cd /home/ubuntu/venv/beam_competitions/bin && \
          source activate && \
          cd /home/ubuntu/Uber-Prize-Starter-Kit/utilities && \
-         python3 exploratory_analysis.py {0} {1} {2}'.format(str(host_num - 1), output_folder, input_mode), connection)
+         python3 exploratory_analysis.py {0} {1} {2}'.format(str(host_num), output_folder, input_mode), connection)
