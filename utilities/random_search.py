@@ -165,7 +165,7 @@ def main():
     os.makedirs(output_root, exist_ok=True)
 
     # TODO also consider setting pyseed
-    np.random.seed(seed)
+    # np.random.seed(seed)
 
     # Some prints
     docker_cmd = CMD_TEMPLATE.format(SCENARIO_NAME, sample_size, n_sim_iters)
