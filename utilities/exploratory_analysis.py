@@ -72,6 +72,9 @@ def sample_settings(data_root, combination_number, input_mode):
                                                           ["BUS-SMALL-HD", "BUS-STD-ART", "BUS-DEFAULT"]),
                    pt_fares_combination]
 
+    elif input_mode == "unit_tests_inputs":
+
+
     return tuple(samples)
 
 
