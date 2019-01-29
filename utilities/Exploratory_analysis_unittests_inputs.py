@@ -232,6 +232,7 @@ def change_amount_transit_subsidies_bau():
         transit_subsidies_inputs_bau.append(subsidies)
     return transit_subsidies_inputs_bau
 
+
 def change_amount_transit_subsidies():
     """ Automatically generates a list of input dictionaries, differing from the transit subsidies amount and given
     to people with low incomes.
