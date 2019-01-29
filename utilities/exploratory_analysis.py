@@ -73,7 +73,7 @@ def sample_settings(data_root, combination_number, input_mode):
                    pt_fares_combination]
 
     elif input_mode == "unit_tests_inputs":
-
+        pass
 
     return tuple(samples)
 
