@@ -115,6 +115,17 @@ medium_fare = 24
 high_fare = 36
 very_high_fare = 50
 
+no_fare_list = [no_fare] * all_routes
+low_fare_list = [low_fare] * all_routes
+medium_fare_list = [medium_fare] * all_routes
+high_fare_list = [high_fare] * all_routes
+fares = [no_fare_list, low_fare_list, medium_fare_list, high_fare_list]
+
+fares_list = []
+for fare in fares:
+    for element in fare:
+        fares_list.append(element)
+
 
 # 8. BAU DATA FRAMES (EMPTY DF TO BE FILLED UP WHEN TESTING OTHER INPUTS)
 bau_vehicle_type_input = pd.DataFrame({"agencyId": agencies, "routeId": route_id,"vehicleTypeId": [BUS_DEFAULT] * len(route_id)})
@@ -215,22 +226,22 @@ def change_subsidies_input(changed_column, initial_rows, input_variation):
     return input_sets_list
 
 
-def change_amount_transit_subsidies_bau():
-    """ Automatically generates a list of input dictionaries, differing from the transit subsidies amount and given
-    to people with low incomes.
-
-    Returns
-    -------
-    List of input dictionaries
-    """
-    transit_subsidies_inputs_bau = []
-    for income in [LOW_INCOME, MEDIUM_INCOME, HIGH_INCOME]:
-        subsidies = change_subsidies_input("amount",
-                                  [[DRIVE_TO_TRANSIT, ALL_AGES, income, None],
-                                   [WALK_TO_TRANSIT, ALL_AGES, income, None]],
-                                  [no_transit_subsidy, medium_transit_subsidy, very_high_transit_subsidy])
-        transit_subsidies_inputs_bau.append(subsidies)
-    return transit_subsidies_inputs_bau
+# def change_amount_transit_subsidies_bau():
+#     """ Automatically generates a list of input dictionaries, differing from the transit subsidies amount and given
+#     to people with low incomes.
+#
+#     Returns
+#     -------
+#     List of input dictionaries
+#     """
+#     transit_subsidies_inputs_bau = []
+#     for income in [LOW_INCOME, MEDIUM_INCOME, HIGH_INCOME]:
+#         subsidies = change_subsidies_input("amount",
+#                                   [[DRIVE_TO_TRANSIT, ALL_AGES, income, None],
+#                                    [WALK_TO_TRANSIT, ALL_AGES, income, None]],
+#                                   [no_transit_subsidy, medium_transit_subsidy, very_high_transit_subsidy])
+#         transit_subsidies_inputs_bau.append(subsidies)
+#     return transit_subsidies_inputs_bau
 
 
 def change_amount_transit_subsidies():
@@ -494,7 +505,7 @@ def change_amount_fare_for_all_routes_for_young_people_and_seniors_adults_bau():
     return change_public_transportation_fare_input("amount",
                                                    [list_route_ids_on_which_the_bus_fare_is_changed(all_routes, YOUNG, None),
                                                     list_route_ids_on_which_the_bus_fare_is_changed(all_routes, SENIORS,None)],
-                                                   [no_fare, low_fare, medium_fare, high_fare])
+                                                   fares_list)
 
 
 def change_amount_fare_for_all_routes_for_middle_age_people_young_people_and_seniors_bau():
@@ -508,7 +519,7 @@ def change_amount_fare_for_all_routes_for_middle_age_people_young_people_and_sen
     """
     return change_public_transportation_fare_input("amount",
                                                    [list_route_ids_on_which_the_bus_fare_is_changed(all_routes, ADULTS, None)],
-                                                   [no_fare, low_fare, medium_fare, high_fare])
+                                                   fares_list)
 
 
 def change_amount_fare_for_all_routes_for_young_people_and_seniors_adults_free():
@@ -524,7 +535,7 @@ def change_amount_fare_for_all_routes_for_young_people_and_seniors_adults_free()
                                                    [list_route_ids_on_which_the_bus_fare_is_changed(all_routes, YOUNG, None),
                                                     list_route_ids_on_which_the_bus_fare_is_changed(all_routes, SENIORS,None),
                                                     list_route_ids_on_which_the_bus_fare_is_changed(all_routes, ADULTS,no_fare)],
-                                                   [no_fare, low_fare, medium_fare, high_fare])
+                                                   fares_list)
 
 
 def change_amount_fare_for_all_routes_for_young_people_and_seniors_adults_low_fare():
@@ -540,7 +551,7 @@ def change_amount_fare_for_all_routes_for_young_people_and_seniors_adults_low_fa
                                                    [list_route_ids_on_which_the_bus_fare_is_changed(all_routes, YOUNG, None),
                                                     list_route_ids_on_which_the_bus_fare_is_changed(all_routes, SENIORS,None),
                                                     list_route_ids_on_which_the_bus_fare_is_changed(all_routes, ADULTS,low_fare)],
-                                                   [no_fare, low_fare, medium_fare, high_fare])
+                                                   fares_list)
 
 
 def change_amount_fare_for_all_routes_for_young_people_and_seniors_adults_medium_fare():
@@ -556,7 +567,7 @@ def change_amount_fare_for_all_routes_for_young_people_and_seniors_adults_medium
                                                    [list_route_ids_on_which_the_bus_fare_is_changed(all_routes, YOUNG, None),
                                                     list_route_ids_on_which_the_bus_fare_is_changed(all_routes, SENIORS,None),
                                                     list_route_ids_on_which_the_bus_fare_is_changed(all_routes, ADULTS,medium_fare)],
-                                                   [no_fare, low_fare, medium_fare, high_fare])
+                                                   fares_list)
 
 
 def change_amount_fare_for_all_routes_for_young_people_and_seniors_adults_high_fare():
@@ -572,7 +583,7 @@ def change_amount_fare_for_all_routes_for_young_people_and_seniors_adults_high_f
                                                    [list_route_ids_on_which_the_bus_fare_is_changed(all_routes, YOUNG, None),
                                                     list_route_ids_on_which_the_bus_fare_is_changed(all_routes, SENIORS,None),
                                                     list_route_ids_on_which_the_bus_fare_is_changed(all_routes, ADULTS,high_fare)],
-                                                   [no_fare, low_fare, medium_fare, high_fare])
+                                                   fares_list)
 
 
 
