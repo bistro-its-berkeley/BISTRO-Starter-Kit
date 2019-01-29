@@ -333,8 +333,8 @@ def list_trip_ids_on_which_frequency_is_reajusted(number_modified_bus_routes, st
 
     """
     initial_rows = []
-    input_list = [None, start_time, end_time, headway, 0]
     for i in range(number_modified_bus_routes):
+        input_list = [None, start_time, end_time, headway, 0]
         input_list[0] = trip_id_1["{0}".format(route_id[i])]
         initial_rows.append(input_list)
     return initial_rows
