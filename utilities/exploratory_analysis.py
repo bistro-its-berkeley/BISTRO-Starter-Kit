@@ -23,7 +23,7 @@ DIR_DELIM = "-"
 FREQ_FILE = "FrequencyAdjustment.csv"
 SUB_FILE = "ModeIncentives.csv"
 FLEET_FILE = "VehicleFleetMix.csv"
-PT_FARE_FILE = "PtFares.csv"
+MASS_TRANSIT_FARE_FILE = "MassTransitFares.csv"
 SCORES_PATH = ("competition", "submissionScores.csv")
 
 logger = logging.getLogger(__name__)
@@ -86,8 +86,8 @@ def save_inputs(input_dir, freq_df=None, mode_subsidy_df=None, vehicle_fleet_mix
     if vehicle_fleet_mix_df is not None:
         vehicle_fleet_mix_df.to_csv(os.path.join(input_dir, FLEET_FILE), header=True, index=False)
     if pt_fare_df is None:
-        pt_fare_df = pd.read_csv('../submission-inputs/{0}'.format(PT_FARE_FILE))
-    pt_fare_df.to_csv(os.path.join(input_dir, PT_FARE_FILE), header=True, index=False)
+        pt_fare_df = pd.read_csv('../submission-inputs/{0}'.format(MASS_TRANSIT_FARE_FILE))
+    pt_fare_df.to_csv(os.path.join(input_dir, MASS_TRANSIT_FARE_FILE), header=True, index=False)
 
 
 def read_scores(output_dir):

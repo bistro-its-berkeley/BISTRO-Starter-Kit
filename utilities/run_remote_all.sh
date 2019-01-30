@@ -1,5 +1,5 @@
-python run_remote.py /Users/vgolfi/.ssh/beam_competitions_key.pem 1 incentive_50_fare_50 &
-python run_remote.py /Users/vgolfi/.ssh/beam_competitions_key.pem 2 incentive_50_fare_50 &
-python run_remote.py /Users/vgolfi/.ssh/beam_competitions_key.pem 3 incentive_50_fare_50 &
-python run_remote.py /Users/vgolfi/.ssh/beam_competitions_key.pem 4 incentive_50_fare_50 &
-python run_remote.py /Users/vgolfi/.ssh/beam_competitions_key.pem 5 incentive_50_fare_50 &
+#!/bin/bash
+for i in 1 2 3 4 5 6 7 8
+do
+    python3 run_remote.py ~/.ssh/beam_competitions_key.pem ${i} Exploration_2 random_inputs
+done

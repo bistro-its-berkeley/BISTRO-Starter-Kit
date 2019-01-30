@@ -1,5 +1,6 @@
 from fabric import ThreadingGroup, Connection
 from invoke.exceptions import UnexpectedExit
+from pathlib import Path
 import pandas as pd
 
 
@@ -18,6 +19,17 @@ def run(cmd, connection):
 def run_n(cmd, connections):
     return [run(cmd, connection) for connection in connections]
 
+def get_ips_from_config(config_loc):
+
+    ips = []
+    with open(Path(config_loc).expanduser().absolute()) as f:
+        lines = f.readlines()
+        for line in lines:
+            if "HostName" in line:
+                _,host_ip = line.strip(" ").split(" ")
+                ips.append(host_ip.strip("\n"))
+    return ips
+
 
 if __name__ == '__main__':
     import sys
@@ -30,16 +42,15 @@ if __name__ == '__main__':
     # globals
 
     # Read the hosts from config file
-    config = pd.read_table("~/.ssh/config")
-    config = config["Host host1"].values
-    hosts = [i.split(" ")[1] for i in config if "HostName" in i]
+    config = "~/.ssh/config"
+    hosts = get_ips_from_config(config)
 
     key_file_loc = sys.argv[1]
     host_num = int(sys.argv[2]) - 1
     output_folder = sys.argv[3]
     input_mode = sys.argv[4]
 
-    connections = [connect_single(hosts[i], key_file_loc) for i in range(len(hosts))]
+    connections = [connect_single(hosts[i], str(Path(key_file_loc).expanduser().absolute())) for i in range(len(hosts))]
     connection = connections[host_num]
 
     ###############################
