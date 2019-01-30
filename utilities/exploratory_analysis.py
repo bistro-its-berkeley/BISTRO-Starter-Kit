@@ -145,16 +145,17 @@ def random_search(docker_cmd, n_iters, data_root, input_root, output_root, combi
     # Finding which simulations already exist:
     subScoreFiles = glob(path.join(output_root, "*", "*", "*", "competition", "submissionScores.csv"))
     if len(subScoreFiles) == 0:
-        start_iter = 0
+        iterations_left = [i for i in range(n_iters)]
     else:
-        iteration = set([int(i[i.index("_RS"):i.index("_RS") + 10].split("-")[0].replace("_RS", "")) for i in subScoreFiles])
+        iteration = [int(i[i.index("_RS"):i.index("_RS") + 10].split("-")[0].replace("_RS", "")) for i in subScoreFiles]
+        iteration = set([x-1 for x in iteration])
         iterations_left = [i for i in range(n_iters) if i not in iteration]
 
     for i_left in iterations_left:
         for i in range(i_left):
             _ = sample_settings(data_root, combination_number, input_mode)
         paths = search_iteration(docker_cmd, data_root, input_root, output_root, combination_number, _, input_mode)
-        logger.info("Iteration Number %s / %s" % (_ + 1, n_iters))
+        logger.info("Iteration Number %s / %s" % (i_left + 1, n_iters))
 
 
 def main(combination_number, name_of_exploration, input_mode):
