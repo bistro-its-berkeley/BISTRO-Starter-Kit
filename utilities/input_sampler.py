@@ -261,9 +261,9 @@ def sample_mode_subsidies_input(num_records, gtfs_manager=None):
     modes = np.random.choice(possible_modes, num_records).tolist()
     ages = [sample_format_range(tuple(sorted(np.random.choice(range(1, 120), 2)))) for _ in
             range(num_records)]
-    incomes = [sample_format_range(tuple(sorted(np.random.choice(range(0, 300000, 1000), 2)))) for _
+    incomes = [sample_format_range(tuple(sorted(np.random.choice(range(0, 150000, 1000), 2)))) for _
                in range(num_records)]
-    amounts = [np.round(np.random.uniform(0.1, 20), 1) for _ in range(num_records)]
+    amounts = [np.round(np.random.uniform(0.1, 10), 1) for _ in range(num_records)]
     return pd.DataFrame(np.array([modes, ages, incomes, amounts]).T,
                         columns=df_columns)
 

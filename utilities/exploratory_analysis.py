@@ -61,7 +61,7 @@ def sample_settings(data_root, combination_number, input_mode):
         samples = [sampler.sample_frequency_adjustment_input(np.random.randint(0, max_num_records_frequency), sf_gtfs_manager),
                    sampler.sample_mode_subsidies_input(np.random.randint(0, max_num_records), sf_gtfs_manager),
                    sampler.sample_vehicle_fleet_mix_input(np.random.randint(0, max_bus_lines), sf_gtfs_manager),
-                   sampler.sample_mass_transit_fares_input(max_num_records, sf_gtfs_manager, max_fare_amount=50.0)]
+                   sampler.sample_mass_transit_fares_input(max_num_records, sf_gtfs_manager, max_fare_amount=10.0)]
 
     elif input_mode == "fixed_inputs":
         subsidies_combination, mass_transit_fares_combination = input_combinations[combination_number]
