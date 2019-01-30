@@ -52,7 +52,7 @@ def sample_settings(max_num_records, data_root):
     samplers = [sampler.sample_frequency_adjustment_input,
                 sampler.sample_mode_subsidies_input,
                 sampler.sample_vehicle_fleet_mix_input,
-                sampler.sample_pt_fares_input]
+                sampler.sample_mass_transit_fares_input]
 
     samples = []
     for input_sampler in samplers:
