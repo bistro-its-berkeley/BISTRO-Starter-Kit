@@ -61,16 +61,16 @@ def sample_settings(data_root, combination_number, input_mode):
         samples = [sampler.sample_frequency_adjustment_input(np.random.randint(0, max_num_records_frequency), sf_gtfs_manager),
                    sampler.sample_mode_subsidies_input(np.random.randint(0, max_num_records), sf_gtfs_manager),
                    sampler.sample_vehicle_fleet_mix_input(np.random.randint(0, max_bus_lines), sf_gtfs_manager),
-                   sampler.sample_pt_fares_input(max_num_records, sf_gtfs_manager, max_fare_amount=50.0)]
+                   sampler.sample_mass_transit_fares_input(max_num_records, sf_gtfs_manager, max_fare_amount=50.0)]
 
     elif input_mode == "fixed_inputs":
-        subsidies_combination, pt_fares_combination = input_combinations[combination_number]
+        subsidies_combination, mass_transit_fares_combination = input_combinations[combination_number]
 
         samples = [sampler.sample_frequency_adjustment_input(np.random.randint(0, max_num_records), sf_gtfs_manager),
                    subsidies_combination,
                    sampler.sample_vehicle_fleet_mix_input(np.random.randint(0, max_bus_lines), sf_gtfs_manager,
                                                           ["BUS-SMALL-HD", "BUS-STD-ART", "BUS-DEFAULT"]),
-                   pt_fares_combination]
+                   mass_transit_fares_combination]
 
     elif input_mode == "unit_tests_inputs":
         pass
@@ -78,16 +78,16 @@ def sample_settings(data_root, combination_number, input_mode):
     return tuple(samples)
 
 
-def save_inputs(input_dir, freq_df=None, mode_subsidy_df=None, vehicle_fleet_mix_df=None, pt_fare_df=None):
+def save_inputs(input_dir, freq_df=None, mode_subsidy_df=None, vehicle_fleet_mix_df=None, mass_transit_fare_df=None):
     if freq_df is not None:
         freq_df.to_csv(os.path.join(input_dir, FREQ_FILE), header=True, index=False)
     if mode_subsidy_df is not None:
         mode_subsidy_df.to_csv(os.path.join(input_dir, SUB_FILE), header=True, index=False)
     if vehicle_fleet_mix_df is not None:
         vehicle_fleet_mix_df.to_csv(os.path.join(input_dir, FLEET_FILE), header=True, index=False)
-    if pt_fare_df is None:
-        pt_fare_df = pd.read_csv('../submission-inputs/{0}'.format(MASS_TRANSIT_FARE_FILE))
-    pt_fare_df.to_csv(os.path.join(input_dir, MASS_TRANSIT_FARE_FILE), header=True, index=False)
+    if mass_transit_fare_df is None:
+        mass_transit_fare_df = pd.read_csv('../submission-inputs/{0}'.format(MASS_TRANSIT_FARE_FILE))
+    mass_transit_fare_df.to_csv(os.path.join(input_dir, MASS_TRANSIT_FARE_FILE), header=True, index=False)
 
 
 def read_scores(output_dir):

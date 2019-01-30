@@ -268,7 +268,7 @@ def sample_mode_subsidies_input(num_records, gtfs_manager=None):
                         columns=df_columns)
 
 
-def sample_pt_fares_input(num_records, gtfs_manager, max_fare_amount=10.0):
+def sample_mass_transit_fares_input(num_records, gtfs_manager, max_fare_amount=10.0):
     """Generate `num_records` random `PtFares` for an
     agency (specified within `gtfs_manager`) by randomly sampling age and fare amount.
 
