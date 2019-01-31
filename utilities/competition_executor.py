@@ -291,7 +291,6 @@ class AbstractCompetitionExecutor(ABC):
          The dictionary should be structured as follows:
         - "VehicleFleetMix": Bus fleet mix DataFrame
         - "ModeSubsidies": Subsidies DataFrame
-        - "RoadPricing": Road Pricing DataFrame
         - "FrequencyAdjustment": Frequency Adjustment DataFrame
         - "PtFares": Mass Transit (buses) Fares DataFrame
 
@@ -560,7 +559,7 @@ if __name__ == '__main__':
 
     CONTAINER_ID = 'uber1'
 
-    # Must use absolute paths here
+    # Must use absolute paths here¶
     ex = CompetitionContainerExecutor(input_root=sys.argv[1],
                                       output_root=sys.argv[2])
 

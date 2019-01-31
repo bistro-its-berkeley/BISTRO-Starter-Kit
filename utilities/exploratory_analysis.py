@@ -12,9 +12,10 @@ from glob import glob
 
 import input_sampler as sampler
 from cost_mapping_fixed_inputs import input_combinations
-from exploratory_analysis_unittests_inputs import gather_fare_inputs, gather_incentives_inputs,\
+from exploratory_analysis_unittests_inputs import gather_fare_inputs, change_amount_transit_subsidies, \
+                                                         change_amount_ride_hail_subsidies,\
                                                          change_vehicle_fleet_mix, change_headway_for_all_bus_routes_all_day, \
-                                                         fares, transit_incentives, on_demand_incentives, bus_types, \
+                                                         fares, transit_incentives, on_demand_incentives, \
                                                          headways
 
 
@@ -48,9 +49,12 @@ changes_transit_incentives = ["{0}_{1}_{2}".format(low_income, medium_income, hi
            for low_income in transit_incentives
            ]
 
+bus_types = ["BUS_SMALL_HD", "BUS_STD_ART"]
 changes_fleet_mix = ["{0}".format(bus) for bus in bus_types]
 
 changes_frequency_adjustment = ["{0}".format(headway) for headway in headways]
+
+
 
 ##################
 
@@ -101,8 +105,26 @@ def sample_settings(data_root, combination_number, input_mode):
                    mass_transit_fares_combination]
 
     elif input_mode == "unit_tests_inputs":
-        samples = gather_fare_inputs() + gather_incentives_inputs() + change_vehicle_fleet_mix() +\
-                  change_headway_for_all_bus_routes_all_day()
+        if combination_number + 1 == 1:
+            return gather_fare_inputs()
+
+        elif combination_number + 1 == 2:
+            return change_amount_ride_hail_subsidies()[:int(len(change_amount_ride_hail_subsidies())/2)]
+
+        elif combination_number + 1 == 3:
+            return change_amount_ride_hail_subsidies()[int(len(change_amount_ride_hail_subsidies())/2):int(len(change_amount_ride_hail_subsidies()))]
+
+        elif combination_number + 1 == 4:
+            return change_amount_transit_subsidies()[:int(len(change_amount_transit_subsidies())/2)]
+
+        elif combination_number + 1 == 5:
+            return change_amount_transit_subsidies()[int(len(changes_transit_incentives) / 2):len(changes_transit_incentives)]
+
+        elif combination_number + 1 == 6:
+            return change_vehicle_fleet_mix()
+
+        elif combination_number + 1 == 7:
+            return change_headway_for_all_bus_routes_all_day()
 
     return tuple(samples)
 
@@ -117,6 +139,17 @@ def save_inputs(input_dir, freq_df=None, mode_subsidy_df=None, vehicle_fleet_mix
     if mass_transit_fare_df is None:
         mass_transit_fare_df = pd.read_csv('../submission-inputs/{0}'.format(MASS_TRANSIT_FARE_FILE))
     mass_transit_fare_df.to_csv(os.path.join(input_dir, MASS_TRANSIT_FARE_FILE), header=True, index=False)
+
+
+def save_input_dict(input_dictionary, input_root):
+
+    list_inputs = ["VehicleFleetMix", "ModeIncentives", "FrequencyAdjustment", "PtFares"]
+
+    for input_name, input_dataframe in input_dictionary.items():
+        if input_name not in list_inputs:
+            raise KeyError("{0} is not a valid key for `input_dictionary`.".format(input_name))
+
+        input_dataframe.to_csv(path.join(input_root, input_name +".csv"), index=False)
 
 
 def read_scores(output_dir):
@@ -196,20 +229,24 @@ def search_iteration(docker_cmd, data_root, input_root, output_root, combination
     submission_name = "bm_bc_{}".format(submission_name)
     # Call random input sampler
     settings = sample_settings(data_root, combination_number, input_mode)
+
     # Save all inputs
-    save_inputs(input_dir, *settings)
+    if input_mode == "fixed_inputs" or input_mode == "random_inputs":
+        save_inputs(input_dir, *settings)
+
+    elif input_mode == "unit_tests_inputs":
+        save_input_dict(settings[random_sample_number], input_dir)
 
     docker_dirs = {output_dir: {"bind": "/output", "mode": "rw"},
-                   input_dir: {"bind": "/submission-inputs",
-                                                             "mode": "ro"}}
+                   input_dir: {"bind": "/submission-inputs", "mode": "ro"}}
 
     assert not docker_exists(submission_name, client)
     logger.info('%s start' % submission_name)
-    logs = client.containers.run(DOCKER_IMAGE, command=docker_cmd, auto_remove=True, detach=False,
-                                 name=submission_name, volumes=docker_dirs,
-                                 stdout=True, stderr=True)
-
-    logger.debug(logs)
+    # logs = client.containers.run(DOCKER_IMAGE, command=docker_cmd, auto_remove=True, detach=False,
+    #                              name=submission_name, volumes=docker_dirs,
+    #                              stdout=True, stderr=True)
+    #
+    # logger.debug(logs)
     logger.info('%s end' % submission_name)
 
     paths = (input_dir, output_dir)
@@ -242,7 +279,6 @@ def main(combination_number, name_of_exploration, input_mode):
     sample_size = "15k"
     n_sim_iters = 20 #Number of iterations in Beam for 1 run
     # seed = 123
-
 
     if input_mode == "unit_tests_inputs":
         if combination_number + 1 == 1:
@@ -281,6 +317,5 @@ if __name__ == "__main__":
     combination_number = int(sys.argv[1])
     name_of_exploration = sys.argv[2]
     input_mode = sys.argv[3]
-
 
     main(combination_number, name_of_exploration, input_mode)

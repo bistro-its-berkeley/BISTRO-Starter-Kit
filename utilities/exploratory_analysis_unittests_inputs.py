@@ -138,7 +138,7 @@ def change_vehicle_fleet_mix():
 
         inputs_fleet_mix = {
             "VehicleFleetMix": vehicle_type_input,
-            "ModeSubsidies": bau_incentives_input,
+            "ModeIncentives": bau_incentives_input,
             "FrequencyAdjustment": bau_frequency_input,
             "PtFares": bau_bus_fare_input
         }
@@ -188,7 +188,7 @@ def change_subsidies_input(changed_column, number_of_rows_to_change, initial_row
 
         inputs_fleet_mix = {
             "VehicleFleetMix": bau_vehicle_type_input,
-            "ModeSubsidies": incentives_input.copy(),
+            "ModeIncentives": incentives_input.copy(),
             "FrequencyAdjustment": bau_frequency_input,
             "PtFares": bau_bus_fare_input
         }
@@ -232,16 +232,17 @@ def change_amount_ride_hail_subsidies():
         -------
         List of input dictionaries
         """
-    # ride_hail_subsidies = [no_ride_hail_subsidy, low_ride_hail_subsidy, medium_ride_hail_subsidy, high_ride_hail_subsidy]
+    # on_demand_subsidies = [no_ride_hail_subsidy, low_ride_hail_subsidy, medium_ride_hail_subsidy, high_ride_hail_subsidy]
 
     ride_hail_subsidies_inputs = []
-    for subsidy_medium_income in on_demand_incentives:
-        for subsidy_high_income in on_demand_incentives:
-            subsidies = change_subsidies_input("amount", 12,
+    for subsidy_medium_income in [no_ride_hail_subsidy, low_ride_hail_subsidy, medium_ride_hail_subsidy, high_ride_hail_subsidy]:
+        for subsidy_high_income in [no_ride_hail_subsidy, low_ride_hail_subsidy, medium_ride_hail_subsidy, high_ride_hail_subsidy]:
+            subsidies = change_subsidies_input("amount", 1,
                                                [[ON_DEMAND_RIDE, ALL_AGES, LOW_INCOME, None],
                                                 [ON_DEMAND_RIDE, ALL_AGES, MEDIUM_INCOME, subsidy_medium_income],
                                                 [ON_DEMAND_RIDE, ALL_AGES, HIGH_INCOME, subsidy_high_income]],
-                                               on_demand_incentives)
+                                               [no_ride_hail_subsidy, low_ride_hail_subsidy, medium_ride_hail_subsidy,
+                                                high_ride_hail_subsidy])
             ride_hail_subsidies_inputs = ride_hail_subsidies_inputs + subsidies
 
     return ride_hail_subsidies_inputs
@@ -342,7 +343,7 @@ def change_frequency_input(changed_column, initial_rows, input_variation):
 
         inputs_fleet_mix = {
             "VehicleFleetMix": bau_vehicle_type_input,
-            "ModeSubsidies": bau_incentives_input,
+            "ModeIncentives": bau_incentives_input,
             "FrequencyAdjustment": frequency_input.copy(),
             "PtFares": bau_bus_fare_input
         }
@@ -439,7 +440,7 @@ def change_public_transportation_fare_input(changed_column, number_of_rows_to_ch
 
         inputs_fleet_mix = {
             "VehicleFleetMix": bau_vehicle_type_input,
-            "ModeSubsidies": bau_incentives_input,
+            "ModeIncentives": bau_incentives_input,
             "FrequencyAdjustment": bau_frequency_input,
             "PtFares": pt_fare_input.copy()
         }
