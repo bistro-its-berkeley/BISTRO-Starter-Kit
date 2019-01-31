@@ -32,7 +32,7 @@ MASS_TRANSIT_FARE_FILE = "MassTransitFares.csv"
 SCORES_PATH = ("competition", "submissionScores.csv")
 
 # List the output folders names corresponding to the unit tests fixed inputs
-bau_fares = ["{0}-bau".format(fare) for fare in fares] + ["bau_{0}".format(fare) for fare in fares] +
+bau_fares = ["{0}-bau".format(fare) for fare in fares] + ["bau_{0}".format(fare) for fare in fares]
 other_fares = ["{0}-{1}".format(young_seniors_fare, adults_fare) for adults_fare in fares for young_seniors_fare in fares]
 changes_fares = bau_fares + other_fares
 
