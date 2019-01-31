@@ -154,7 +154,7 @@ def random_search(docker_cmd, n_iters, data_root, input_root, output_root, combi
     for i_left in iterations_left:
         # for i in range(i_left):
         #     _ = sample_settings(data_root, combination_number, input_mode)
-        paths = search_iteration(docker_cmd, data_root, input_root, output_root, combination_number, _, input_mode)
+        paths = search_iteration(docker_cmd, data_root, input_root, output_root, combination_number, i_left, input_mode)
         logger.info("Iteration Number %s / %s" % (i_left + 1, n_iters))
 
 
