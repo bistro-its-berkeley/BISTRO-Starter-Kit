@@ -143,7 +143,7 @@ def save_inputs(input_dir, freq_df=None, mode_subsidy_df=None, vehicle_fleet_mix
 
 def save_input_dict(input_dictionary, input_root):
 
-    list_inputs = ["VehicleFleetMix", "ModeIncentives", "FrequencyAdjustment", "PtFares"]
+    list_inputs = ["VehicleFleetMix", "ModeIncentives", "FrequencyAdjustment", "MassTransitFares"]
 
     for input_name, input_dataframe in input_dictionary.items():
         if input_name not in list_inputs:
