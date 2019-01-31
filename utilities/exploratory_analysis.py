@@ -12,6 +12,11 @@ from glob import glob
 
 import input_sampler as sampler
 from cost_mapping_fixed_inputs import input_combinations
+from exploratory_analysis_unittests_inputs import gather_fare_inputs, gather_incentives_inputs,\
+                                                         change_vehicle_fleet_mix, change_headway_for_all_bus_routes_all_day, \
+                                                         fares, transit_incentives, on_demand_incentives, bus_types, \
+                                                         headways
+
 
 AGENCY = "sioux_faux_bus_lines"
 SCENARIO_NAME = "sioux_faux"
@@ -25,6 +30,29 @@ SUB_FILE = "ModeIncentives.csv"
 FLEET_FILE = "VehicleFleetMix.csv"
 MASS_TRANSIT_FARE_FILE = "MassTransitFares.csv"
 SCORES_PATH = ("competition", "submissionScores.csv")
+
+# List the output folders names corresponding to the unit tests fixed inputs
+bau_fares = ["{0}-bau".format(fare) for fare in fares] + ["bau_{0}".format(fare) for fare in fares] +
+other_fares = ["{0}-{1}".format(young_seniors_fare, adults_fare) for adults_fare in fares for young_seniors_fare in fares]
+changes_fares = bau_fares + other_fares
+
+changes_on_demand_incentives = ["{0}-{1}-{2}".format(low_income, medium_income, high_income)
+           for medium_income in on_demand_incentives
+           for high_income in on_demand_incentives
+           for low_income in on_demand_incentives
+           ]
+
+changes_transit_incentives = ["{0}-{1}-{2}".format(low_income, medium_income, high_income)
+           for medium_income in transit_incentives
+           for high_income in transit_incentives
+           for low_income in transit_incentives
+           ]
+
+changes_fleet_mix = ["{0}".format(bus) for bus in bus_types]
+
+changes_frequency_adjustment = ["{0}".format(headway) for headway in headways]
+
+##################
 
 logger = logging.getLogger(__name__)
 
@@ -73,7 +101,8 @@ def sample_settings(data_root, combination_number, input_mode):
                    mass_transit_fares_combination]
 
     elif input_mode == "unit_tests_inputs":
-        pass
+        samples = gather_fare_inputs() + gather_incentives_inputs() + change_vehicle_fleet_mix() +\
+                  change_headway_for_all_bus_routes_all_day()
 
     return tuple(samples)
 
@@ -114,6 +143,52 @@ def search_iteration(docker_cmd, data_root, input_root, output_root, combination
     elif input_mode == "random_inputs":
         input_dir = tempfile.mkdtemp(prefix="input_C9_RS{0}".format(random_sample_number + 1) + DIR_DELIM, dir=input_root)
         output_dir = tempfile.mkdtemp(prefix="output_C9_RS{0}".format(random_sample_number + 1) + DIR_DELIM, dir=output_root)
+
+    elif input_mode == "unit_tests_inputs":
+        if combination_number + 1 == 1:
+            # name of the input which varies
+            changed_input = "fare"
+            # values of this input
+            changes = changes_fares
+
+        elif combination_number + 1 == 2:
+            # name of the input which varies
+            changed_input = "on_demand_incentive"
+            # values of this input
+            changes = changes_on_demand_incentives[0:int(len(changes_on_demand_incentives)/2)]
+
+        elif combination_number + 1 == 3:
+            # name of the input which varies
+            changed_input = "on_demand_incentive"
+            # values of this input
+            changes = changes_on_demand_incentives[int(len(changes_on_demand_incentives)/2):int(len(changes_on_demand_incentives))]
+
+        elif combination_number + 1 == 4:
+            # name of the input which varies
+            changed_input = "transit_incentive"
+            # values of this input
+            changes = changes_transit_incentives[0:int(len(changes_transit_incentives)/2)]
+
+        elif combination_number + 1 == 5:
+            # name of the input which varies
+            changed_input = "transit_incentive"
+            # values of this input
+            changes = changes_transit_incentives[int(len(changes_transit_incentives)/2):int(len(changes_transit_incentives))]
+
+        elif combination_number + 1 == 6:
+            # name of the input which varies
+            changed_input = "fleet_mix"
+            # values of this input
+            changes = changes_fleet_mix
+
+        elif combination_number + 1 == 7:
+            # name of the input which varies
+            changed_input = "frequency_adjustment"
+            # values of this input
+            changes = changes_frequency_adjustment
+
+        input_dir = tempfile.mkdtemp(prefix="input_{0}_{1}".format(changed_input, changes[random_sample_number]) + DIR_DELIM, dir=input_root)
+        output_dir = tempfile.mkdtemp(prefix="output_{0}_{1}".format(changed_input, changes[random_sample_number]) + DIR_DELIM, dir=output_root)
 
     # Should be unique name here since folder is unique, also checks only one instance of delim
     _, submission_name = os.path.basename(input_dir).split(DIR_DELIM)
@@ -165,10 +240,29 @@ def main(combination_number, name_of_exploration, input_mode):
 
     # We can take these from cmd args later:
     sample_size = "15k"
-    n_sim_iters = 20
+    n_sim_iters = 20 #Number of iterations in Beam for 1 run
     # seed = 123
 
-    n_search_iters = 100
+
+    if input_mode == "unit_tests_inputs":
+        if combination_number + 1 == 1:
+            n_search_iters = int(len(changes_fares))
+
+        elif combination_number + 1 == 2 or combination_number + 1 == 3:
+            n_search_iters = int(len(changes_on_demand_incentives)/2)
+
+        elif combination_number + 1 == 4 or combination_number + 1 == 5:
+            n_search_iters = int(len(changes_transit_incentives)/2)
+
+        elif combination_number + 1 == 6:
+            n_search_iters = int(len(changes_fleet_mix))
+
+        elif combination_number + 1 == 7:
+            n_search_iters = int(len(changes_frequency_adjustment))
+
+    else:
+        n_search_iters = 100 # Number
+
     data_root = abspath2("../reference-data")
     input_root = abspath2("../search-input-{0}-{1}".format(name_of_exploration, input_mode))
     output_root = abspath2("../search-output-{0}-{1}".format(name_of_exploration, input_mode))
@@ -183,10 +277,10 @@ def main(combination_number, name_of_exploration, input_mode):
     docker_cmd = CMD_TEMPLATE.format(SCENARIO_NAME, sample_size, n_sim_iters)
     random_search(docker_cmd, n_search_iters, data_root, input_root, output_root, combination_number, input_mode)
 
-
 if __name__ == "__main__":
     combination_number = int(sys.argv[1])
     name_of_exploration = sys.argv[2]
     input_mode = sys.argv[3]
+
 
     main(combination_number, name_of_exploration, input_mode)

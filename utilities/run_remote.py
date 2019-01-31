@@ -36,7 +36,7 @@ if __name__ == '__main__':
 
     # Args:
     #   - 1: path to key file
-    #   - 2: number of host (1-5) below
+    #   - 2: number of host (1-8) below
     #   - 3: Name of output folder
 
     # globals
