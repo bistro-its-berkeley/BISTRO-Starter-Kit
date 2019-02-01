@@ -93,8 +93,8 @@ Your recommendation is to be submitted in a file named `ModeIncentives.csv` acco
 | :---: |:--- | :--- | :----|
 | `mode` | [`Incentive eligible`](#incentive-eligible)| Mode to provide incentive to. | None. |
 | `age` | [`Range`](#range) | The range of ages of agents that qualify for this incentive. | Must be greater than 0 and less than 120 (the maximum age of any resident in Sioux Faux).|
-| `income` | [`Range`](#range) | The range of individual incomes (in $US) of agents that qualify for this incentive | Must be equal or greater than 0 and equal or smaller than 150000. |
-| `amount` | `Float` | The amount (in $US/person) of the incentive to provide to this entry's `mode`| Must be greater than 0 and equal or smaller than 50.|
+| `income` | [`Range`](#range) | The range of individual incomes (in $US) of agents that qualify for this incentive. | Must be equal or greater than 0 and equal or smaller than 150000. |
+| `amount` | `Float` | The amount (in $US/person) of the incentive to provide to this entry's `mode`.| Must be greater than 0 and equal or smaller than 50.|
 
 ***Table 2: Vehicle fleet mix input schema and constraint definitions***
 
@@ -146,11 +146,11 @@ The format for this  input is identical to the `frequencies.txt` component of th
 
 | Column Name | Data Type |Description | Validation Criteria |
 | :---: |:--- | :--- | :----|
-| `tripId` | `String` | The trip corresponding to the route for which frequencies will be adjusted. | Must reference a `tripId` in the `trips.txt` (and implicitly a `routeId` in the `routes.txt` file) corresponding to the GTFS data for the agency specified by this entry's `agencyId`. |
-| `startTime` | `Integer`  | The `start_time` field specifies the starting time of the service period operating with the new headway. In other words, it is the time (in seconds past midnight) at which the first vehicle departs from the first stop of the trip with the specified frequency. | Must be greater than 0 and less than 86400 (the number of seconds in a day).|
-| `endTime` | `Integer`  | The `end_time` field indicates the end time of the service period operating with the new headway. In other words, it is the time at which service changes to a different frequency (or ceases) at the first stop in the trip. | Must be greater than 0 and less than 86400 (the number of seconds in a day). |
+| `trip_id` | `String` | The trip corresponding to the route for which frequencies will be adjusted. | Must reference a `tripId` in the `trips.txt` (and implicitly a `routeId` in the `routes.txt` file) corresponding to the GTFS data for the agency specified by this entry's `agencyId`. |
+| `start_time` | `Integer`  | The `start_time` field specifies the starting time of the service period operating with the new headway. In other words, it is the time (in seconds past midnight) at which the first vehicle departs from the first stop of the trip with the specified frequency. | Must be greater than 0 and less than 86400 (the number of seconds in a day).|
+| `end_time` | `Integer`  | The `end_time` field indicates the end time of the service period operating with the new headway. In other words, it is the time at which service changes to a different frequency (or ceases) at the first stop in the trip. | Must be greater than 0 and less than 86400 (the number of seconds in a day). |
 | `headway_secs` | `Integer`| 	The `headway_secs` field indicates the time between departures from the same stop (headway) for this trip type, during the time interval specified by `start_time` and `end_time`. The headway value must be entered in seconds. | Must be greater than 1sec and less than 7200sec (2h). <br> Periods in which headways are defined (the rows in frequencies.txt) shouldn't overlap for the same trip (and route), since it's hard to determine what should be inferred from two overlapping headways. However, a headway period may begin at the exact same time that another one ends. |
-| `exact_time` | `Integer`|Determines if frequency-based trips should be exactly scheduled based on the specified headway information. |Must be entered as 1 for the purposes of this round of the contest. See the <a href="https://developers.google.com/transit/gtfs/reference/#frequenciestxt">GTFS specification</a> for further information about what this field represents. |
+| `exact_times` | `Integer`|Determines if frequency-based trips should be exactly scheduled based on the specified headway information. |Must be entered as 1 for the purposes of this round of the contest. See the <a href="https://developers.google.com/transit/gtfs/reference/#frequenciestxt">GTFS specification</a> for further information about what this field represents. |
 
 ***Table 3: Frequency Adjustments input schema and constraint definitions***
 
@@ -181,7 +181,7 @@ SFBL would like to use this simulation experiment to explore the effect of chang
 * Children 5 yrs. and under: FREE
 * Children 6 to 10 yrs. : $0.75
 * Children 10 to 18 yrs and Adults 65 yrs. and under: $1.50
-* Persons over 65 yrs: $0.75
+* Persons over 65 yrs: FREE
 
 Perhaps a lower fare for young adults (ages 12-18) would significantly increase ridership among this population. Alternatively, perhaps a higher fare for middle-aged adults (40-55) would be well-tolerated, while boosting fare-box revenue."
 
@@ -190,8 +190,8 @@ For each new bus fare that you want to introduce, you need to specify the amount
 #### 4.2. Technical Details
 
 
-| Column Name | Description | Validation Criteria |
-| :---: | :--- | :----|
+| Column Name | Data Type | Description | Validation Criteria |
+| :---: |:--- | :--- | :----|
 | `agencyId`| `String` | Agency identifier | Must equal agency Id found under `agencyId` in `agencies.txt` of corresponding GTFS file for transit agency with `agency_name` designated by parent directory of `gtfs_data` in starter kit `/reference-data` directory. Note that for Sioux Faux, SFBL is the only agency operating in the city (`agencyId`="217"). Therefore, any entry in the .csv file will have "217" under `agencyId`.|
 | `routeId` | `String` | The route that will have its fare specified. | A route can only have its fare set once. The `routeId` name must exist in the `routes.txt` file corresponding to the GTFS data for the agency specified by this entry's `agencyId`|
 | `age` | [`Range`](#range) | The range of ages of agents that this fare pertains to. | Must be greater than 0 and less than 120 (the maximum age of any resident in Sioux Faux)|
