@@ -131,7 +131,9 @@ Before explaining how the input works, a few terms must be defined:
 Currently, Sioux Faux buses follow a *non-frequency schedule* based on their arrival and departure times to and from each stop of their route. These arrival and departure times are listed in the [`stop_times.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/stop_times.txt) file of Sioux Faux's GTFS data.
 You role here is to decide if some routes should follow a *frequency schedule* instead of a non frequency one. While we term the behavior of this input as frequency adjustment, in fact, it modifies the SFBL bus headways on a particular route. The adjustment wipes out all non-frequency trips from the route during the specified *service period* (defined between `start_time` and `end_time`) and converts them to frequency trips according to the given `headway_secs`. You can find a definition of these parameters in Table 3 below. Note that it is assumed that buses operate only on *week days* (i.e. from Monday to Friday).
 
-Here, we require you to provide the `trip_id` in order to derive the stop pattern and travel times as well as to implicitly reference a bus route. The trip_ids corresponding to each route_ids are gathered in the [`trip.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file. An troncated extract of the `trips.txt` file is shown on Figure 6 below.
+Here, we require you to provide the `trip_id` in order to derive the stop pattern and travel times as well as to implicitly reference a bus route. The `trip_id`s corresponding to each `route_id` are gathered in the [`trip.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file. An troncated extract of the `trips.txt` file is shown on Figure 6 below.
+
+Each route is associated with a list of `trip_id`s
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/trips_txt_extract.png)\
 ***Figure 6: Extract of the trips.txt file***
@@ -161,7 +163,7 @@ Figure 7 below depicts an example input file.
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_FrequencyAdjustment.png)
 ***Figure 7: Example of Frequency Adjustment Input***
 
-To find the correspondance between tripd ids and route ids, refer to the [`trip.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file of Sioux-Faux's GTFS data (see Figure 6 above). 
+To find the correspondance between `trip_id`s and `route id`s, refer to the [`trip.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file of Sioux-Faux's GTFS data (see Figure 6 above). 
 
 In this case, two routes will see their bus frequency adjusted: route 1340 (trip id `t_75335_b_219_tn_1`) and route 1341 (trip ids `t_75384_b_219_tn_1` and `t_75384_b_219_tn_2`). 
 * `trip_id` = `t_75335_b_219_tn_1`: the bus schedule on route 1340 is changed between 6am (21600sec) and 10pm (79200sec) to a 15minute frequency-schedule (900sec) . Outside of this time-window, the bus schedule on the route follow the non-frequency schedule defined by the gtfs-data of the agency.
