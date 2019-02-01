@@ -93,8 +93,8 @@ Your recommendation is to be submitted in a file named `ModeIncentives.csv` acco
 | :---: |:--- | :--- | :----|
 | `mode` | [`Incentive eligible`](#incentive-eligible)| Mode to provide incentive to. | None. |
 | `age` | [`Range`](#range) | The range of ages of agents that qualify for this incentive. | Must be greater than 0 and less than 120 (the maximum age of any resident in Sioux Faux).|
-| `income` | [`Range`](#range) | The range of individual incomes (in $US) of agents that qualify for this incentive | Must be equal or greater than 0. |
-| `amount` | `Float` | The amount (in $US/person) of the incentive to provide to this entry's `mode`| Must be greater than 0.|
+| `income` | [`Range`](#range) | The range of individual incomes (in $US) of agents that qualify for this incentive | Must be equal or greater than 0 and equal or smaller than 150000. |
+| `amount` | `Float` | The amount (in $US/person) of the incentive to provide to this entry's `mode`| Must be greater than 0 and equal or smaller than 50.|
 
 ***Table 2: Vehicle fleet mix input schema and constraint definitions***
 
@@ -167,8 +167,8 @@ To find the correspondance between `trip_id`s and `route id`s, refer to the [`tr
 
 In this case, two routes will see their bus frequency adjusted: route 1340 (trip id `t_75335_b_219_tn_1`) and route 1341 (trip ids `t_75384_b_219_tn_1` and `t_75384_b_219_tn_2`). 
 * `trip_id` = `t_75335_b_219_tn_1`: the bus schedule on route 1340 is changed between 6am (21600sec) and 10pm (79200sec) to a 15minute frequency-schedule (900sec) . Outside of this time-window, the bus schedule on the route follow the non-frequency schedule defined by the gtfs-data of the agency.
-* `trip_id` =`t_75384_b_219_tn_1`: the bus frequency on route 1341 is changed between 6am (21600sec) and 10am (36000sec) to a 5minute frequency-schedule (900sec).
-* `trip_id` = `t_75384_b_219_tn_2`: the bus frequency on route 1341 is changed between 5pm (61200sec) and 8pm (72000sec) to a 5minute frequency-schedule (900sec).
+* `trip_id` =`t_75384_b_219_tn_1`: the bus frequency on route 1341 is changed between 6am (21600sec) and 10am (36000sec) to a 5 minute frequency-schedule (900sec).
+* `trip_id` = `t_75384_b_219_tn_2`: the bus frequency on route 1341 is changed between 5pm (61200sec) and 8pm (72000sec) to a 5 minute frequency-schedule (900sec).
 * Buses operating on all other routes follow the original non-frequency schedule
 
 You will note that to define several discrete service periods for a *same* route, there must be several rows in the input file with *different* `trip_id`s from this same route for each new service period.
