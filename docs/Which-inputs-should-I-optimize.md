@@ -126,14 +126,14 @@ An essential aspect of transit system operations is capacity optimization. Route
 Before explaining how the input works, a few terms must be defined:
 
 * A **route** is made of a group of *trips* that are displayed to riders as a single service. Each bus route can be identified with a `route_id`. To understand the geospatial embedding of each Route corresponding to a `route_id`, please refer to Figure 1, above.   
-* A **trip** is a sequence of two or more *stops* that occurs at specific time and is identified by a `trip_id`. For Sioux Faux, the existing SFBL trips corresponding to each route are described in the [`trip.txt`](/../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file in the gtfs-data folder.
+* A **trip** is a sequence of two or more *stops* that occurs at specific time and is identified by a `trip_id`. For Sioux Faux, the existing SFBL trips corresponding to each route are described in the [`trip.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file in the gtfs-data folder.
 
-Currently, Sioux Faux buses follow a *non-frequency schedule* based on their arrival and departure times to and from each stop of their route. These arrival and departure times are listed in the [`stop_times.txt`](/../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/stop_times.txt) file of Sioux Faux's GTFS data.
+Currently, Sioux Faux buses follow a *non-frequency schedule* based on their arrival and departure times to and from each stop of their route. These arrival and departure times are listed in the [`stop_times.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/stop_times.txt) file of Sioux Faux's GTFS data.
 You role here is to decide if some routes should follow a *frequency schedule* instead of a non frequency one. While we term the behavior of this input as frequency adjustment, in fact, it modifies the SFBL bus headways on a particular route. The adjustment wipes out all non-frequency trips from the route during the specified *service period* (defined between `start_time` and `end_time`) and converts them to frequency trips according to the given `headway_secs`. You can find a definition of these parameters in Table 3 below. Note that it is assumed that buses operate only on *week days* (i.e. from Monday to Friday).
 
 Here, we require you to provide the `trip_id` in order to derive the stop pattern and travel times as well as to implicitly reference a bus route. The trip_ids corresponding to each route_ids are gathered in the [`trip.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file. An troncated extract of the `trips.txt` file is shown on Figure 6 below.
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/trips_txt_extract.png){:height="50%" width="50%"}
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/trips_txt_extract.png)\
 ***Figure 6: Extract of the trips.txt file***
 
 
@@ -144,10 +144,10 @@ The format for this  input is identical to the `frequencies.txt` component of th
 
 | Column Name | Data Type |Description | Validation Criteria |
 | :---: |:--- | :--- | :----|
-| `tripId` | `String` | The trip corresponding to the route for which frequencies will be adjusted. | Must reference a `tripId` in the `trips.txt` (and implicitly a `routeId` in the `routes.txt` file) corresponding to the GTFS data for the agency specified by this entry's `agencyId`. A list of trip_ids corresponding to each route were gathered in the [`route_id_trip_id_correspondance.csv` file](reference-data/sioux_faux/sioux_faux_bus_lines/route_id_trip_id_correspondance.csv) (see Figure 6) |
-| `startTime` | `Integer`  | The `start_time` field specifies the time (in seconds past midnight) at which the first vehicle departs from the first stop of the trip with the specified frequency. | Must be greater than 0 and less 86400 (the number of seconds in a day).|
-| `endTime` | `Integer`  | The end_time field indicates the time at which service changes to a different frequency (or ceases) at the first stop in the trip. | Must be greater than 0 and less 86400 (the number of seconds in a day). |
-| `headway_secs` | `Integer`| 	The headway_secs field indicates the time between departures from the same stop (headway) for this trip type, during the time interval specified by start_time and end_time. The headway value must be entered in seconds. | Must be greater than the number of headway seconds. 	Periods in which headways are defined (the rows in frequencies.txt) shouldn't overlap for the same trip, since it's hard to determine what should be inferred from two overlapping headways. However, a headway period may begin at the exact same time that another one ends. |
+| `tripId` | `String` | The trip corresponding to the route for which frequencies will be adjusted. | Must reference a `tripId` in the `trips.txt` (and implicitly a `routeId` in the `routes.txt` file) corresponding to the GTFS data for the agency specified by this entry's `agencyId`. |
+| `startTime` | `Integer`  | The `start_time` field specifies the starting time of the service period operating with the new headway. In other words, it is the time (in seconds past midnight) at which the first vehicle departs from the first stop of the trip with the specified frequency. | Must be greater than 0 and less 86400 (the number of seconds in a day).|
+| `endTime` | `Integer`  | The `end_time` field indicates the end time of the service period operating with the new headway. In other words, it is the time at which service changes to a different frequency (or ceases) at the first stop in the trip. | Must be greater than 0 and less 86400 (the number of seconds in a day). |
+| `headway_secs` | `Integer`| 	The `headway_secs` field indicates the time between departures from the same stop (headway) for this trip type, during the time interval specified by `start_time` and `end_time`. The headway value must be entered in seconds. | Must be greater than the number of headway seconds. 	Periods in which headways are defined (the rows in frequencies.txt) shouldn't overlap for the same trip, since it's hard to determine what should be inferred from two overlapping headways. However, a headway period may begin at the exact same time that another one ends. |
 | `exact_time` | `Integer`|Determines if frequency-based trips should be exactly scheduled based on the specified headway information. |Must be entered as 1 for the purposes of this round of the contest. See the <a href="https://developers.google.com/transit/gtfs/reference/#frequenciestxt">GTFS specification</a> for further information about what this field represents. |
 
 ***Table 3: Frequency Adjustments input schema and constraint definitions***
@@ -161,10 +161,12 @@ Figure 7 below depicts an example input file.
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_FrequencyAdjustment.png)
 ***Figure 7: Example of Frequency Adjustment Input***
 
-In this case, two routes will see their bus frequency adjusted: route 1340 (`trip_id` "t_75335_b_219_tn_1") and route 1341 (`trip_id`s "t_75384_b_219_tn_1" and "t_75384_b_219_tn_2", see reference in Figure 6 above). 
-* `trip_id` "t_75335_b_219_tn_1": the bus schedule on route 1340 is changed between 6am (21600sec) and 10pm (79200sec) to a 15minute frequency-schedule (900sec) . Outside of this time-window, the bus schedule on the route follow the non-frequency schedule defined by the gtfs-data of the agency.
-* `trip_id` "t_75384_b_219_tn_1": the bus frequency on route 1341 is changed between 6am (21600sec) and 10am (36000sec) to a 5minute frequency-schedule (900sec).
-* `trip_id` "t_75384_b_219_tn_2": the bus frequency on route 1341 is changed between 5pm (61200sec) and 8pm (72000sec) to a 5minute frequency-schedule (900sec).
+To find the correspondance between tripd ids and route ids, refer to the [`trip.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file of Sioux-Faux's GTFS data (see Figure 6 above). 
+
+In this case, two routes will see their bus frequency adjusted: route 1340 (trip id `t_75335_b_219_tn_1`) and route 1341 (trip ids `t_75384_b_219_tn_1` and `t_75384_b_219_tn_2`). 
+* `trip_id` = `t_75335_b_219_tn_1`: the bus schedule on route 1340 is changed between 6am (21600sec) and 10pm (79200sec) to a 15minute frequency-schedule (900sec) . Outside of this time-window, the bus schedule on the route follow the non-frequency schedule defined by the gtfs-data of the agency.
+* `trip_id` =`t_75384_b_219_tn_1`: the bus frequency on route 1341 is changed between 6am (21600sec) and 10am (36000sec) to a 5minute frequency-schedule (900sec).
+* `trip_id` = `t_75384_b_219_tn_2`: the bus frequency on route 1341 is changed between 5pm (61200sec) and 8pm (72000sec) to a 5minute frequency-schedule (900sec).
 * Buses operating on all other routes follow the original non-frequency schedule
 
 
