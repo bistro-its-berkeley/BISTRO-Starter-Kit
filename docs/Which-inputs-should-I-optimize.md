@@ -106,7 +106,7 @@ Your recommendation is to be submitted in a file named `ModeIncentives.csv` acco
 Figure 5 depicts an example input file describing the following situation:
 
  *Incentive for walking to access transit*:
- * Children 10 years old or younger receive $2 off of every transit trip
+ * Children 10 years old or younger receive $2.00 off of every transit trip
 
  *Incentive for driving to access transit*:
  * Adults older than 50 and up through 75 years of age, earning up to $20,000/year receive $2.30 off of every transit trip
@@ -129,12 +129,12 @@ Before explaining how the input works, a few terms must be defined:
 * A **trip** is a sequence of two or more *stops* that occurs at specific time and is identified by a `trip_id`. For Sioux Faux, the existing SFBL trips corresponding to each route are described in the [`trip.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file in the gtfs-data folder.
 
 Currently, Sioux Faux buses follow a *non-frequency schedule* based on their arrival and departure times to and from each stop of their route. These arrival and departure times are listed in the [`stop_times.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/stop_times.txt) file of Sioux Faux's GTFS data.
-You role here is to decide if some routes should follow a *frequency schedule* instead of a non frequency one. While we term the behavior of this input as frequency adjustment, in fact, it modifies the SFBL bus headways on a particular route. The adjustment wipes out all non-frequency trips from the route and converts them to frequency trips according to the given `headway_secs` defined between `start_time` and `end_time`. You can find a definition of these parameters in Table 3 below. Note that it is assumed that buses operate only on *week days* (i.e. from Monday to Friday).
+You role here is to decide if some routes should follow a *frequency schedule* instead of a non frequency one. While we term the behavior of this input as frequency adjustment, in fact, it modifies the SFBL bus headways on a particular route. The adjustment wipes out all non-frequency trips from the route during the specified *service period* (defined between `start_time` and `end_time`) and converts them to frequency trips according to the given `headway_secs`. You can find a definition of these parameters in Table 3 below. Note that it is assumed that buses operate only on *week days* (i.e. from Monday to Friday).
 
-Here, we require you to provide the `trip_id` in order to derive the stop pattern and travel times and to implicitly reference a bus route. The trip_ids corresponding to each route were summarized in the [`route_id_trip_id_correspondance.csv` file](../../reference-data/sioux_faux/sioux_faux_bus_lines/route_id_trip_id_correspondance.csv) (see Figure 6 below).
+Here, we require you to provide the `trip_id` in order to derive the stop pattern and travel times as well as to implicitly reference a bus route. The trip_ids corresponding to each route_ids are gathered in the [`trip.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file. An troncated extract of the `trips.txt` file is shown on Figure 6 below.
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/vgv/%2326-document_pt_fares_input/reference-data/sioux_faux/sioux_faux_bus_lines/route_id_trip_id_correspondance.csv)
-***Figure 6: Route ID-Trip ID correspondance***
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/trips_txt_extract.png)
+***Figure 6: Extract of the trips.txt file***
 
 
 #### 3.2. Technical Details
@@ -173,9 +173,9 @@ In this case, two routes will see their bus frequency adjusted: route 1340 (`tri
 #### 4.1. Description
 SFBL would like to use this simulation experiment to explore the effect of changing **bus fares**, i.e. the cost to a passenger of traveling by bus. Currently, the Sioux Faux bus fare policy works as follow: 
 * Children 5 yrs. and under: FREE
-* Children 6 to 10 yrs. : $0,75
-* Children 10 to 18 yrs and Adults 65 yrs. and under: $1,50
-* Persons over 65 yrs: $0,75
+* Children 6 to 10 yrs. : $0.75
+* Children 10 to 18 yrs and Adults 65 yrs. and under: $1.50
+* Persons over 65 yrs: $0.75
 
 Perhaps a lower fare for young adults (ages 12-18) would significantly increase ridership among this population. Alternatively, perhaps a higher fare for middle-aged adults (40-55) would be well-tolerated, while boosting fare-box revenue."
 
@@ -201,7 +201,7 @@ Figure 8 depicts an example input file for Mass Transit Fare Adjustment.
 
 The file describes the following fare policy:
 * Passengers 5 to 25 yrs. and under pay a reduced fare of $0.50
-* Passengers over 65 yrs. pay a reduced fare of 0.5 centime
+* Passengers over 65 yrs. pay a reduced fare of $0.50
 * All other passengers pay the fare defined in the original Sioux Faux policy 
 
 
