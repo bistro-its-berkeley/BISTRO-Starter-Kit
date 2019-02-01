@@ -71,6 +71,7 @@ if __name__ == '__main__':
     # TODO[vgv]: Check if venv exists and if not, create!
     # Kill all containers before running simulation
     # run('sudo pkill java', connection)
+
     try:
         run('sudo docker stop $(docker ps -aq) -t 0', connection)
     except Exception as e:

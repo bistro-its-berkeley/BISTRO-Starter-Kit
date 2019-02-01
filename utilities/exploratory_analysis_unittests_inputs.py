@@ -140,7 +140,7 @@ def change_vehicle_fleet_mix():
             "VehicleFleetMix": vehicle_type_input,
             "ModeIncentives": bau_incentives_input,
             "FrequencyAdjustment": bau_frequency_input,
-            "PtFares": bau_bus_fare_input
+            "MassTransitFares": bau_bus_fare_input
         }
 
         input_sets_list.append(inputs_fleet_mix)
@@ -190,7 +190,7 @@ def change_subsidies_input(changed_column, number_of_rows_to_change, initial_row
             "VehicleFleetMix": bau_vehicle_type_input,
             "ModeIncentives": incentives_input.copy(),
             "FrequencyAdjustment": bau_frequency_input,
-            "PtFares": bau_bus_fare_input
+            "MassTransitFares": bau_bus_fare_input
         }
 
         input_sets_list.append(inputs_fleet_mix)
@@ -345,7 +345,7 @@ def change_frequency_input(changed_column, initial_rows, input_variation):
             "VehicleFleetMix": bau_vehicle_type_input,
             "ModeIncentives": bau_incentives_input,
             "FrequencyAdjustment": frequency_input.copy(),
-            "PtFares": bau_bus_fare_input
+            "MassTransitFares": bau_bus_fare_input
         }
 
         input_sets_list.append(inputs_fleet_mix)
@@ -372,7 +372,7 @@ def change_headway_for_all_bus_routes_all_day():
 # 4. PUBLIC TRANSPORTATION FARES
 
 def list_route_ids_on_which_the_bus_fare_is_changed(number_modified_bus_routes, age, amount):
-    """Creates the initial rows (format and values) of the future PtFares input DataFrame, with one row per
+    """Creates the initial rows (format and values) of the future MassTransitFares input DataFrame, with one row per
     route for which the bus fare must be changed
 
     Parameters
@@ -442,7 +442,7 @@ def change_public_transportation_fare_input(changed_column, number_of_rows_to_ch
             "VehicleFleetMix": bau_vehicle_type_input,
             "ModeIncentives": bau_incentives_input,
             "FrequencyAdjustment": bau_frequency_input,
-            "PtFares": pt_fare_input.copy()
+            "MassTransitFares": pt_fare_input.copy()
         }
 
         input_sets_list.append(inputs_fleet_mix)
