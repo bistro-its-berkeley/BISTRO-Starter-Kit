@@ -126,14 +126,14 @@ An essential aspect of transit system operations is capacity optimization. Route
 Before explaining how the input works, a few terms must be defined:
 
 * A **route** is made of a group of *trips* that are displayed to riders as a single service. Each bus route can be identified with a `route_id`. To understand the geospatial embedding of each Route corresponding to a `route_id`, please refer to Figure 1, above.   
-* A **trip** is a sequence of two or more *stops* that occurs at specific time and is identified by a `trip_id`. For Sioux Faux, the existing SFBL trips corresponding to each route are described in the [`trip.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file in the gtfs-data folder.
+* A **trip** is a sequence of two or more *stops* that occurs at specific time and is identified by a `trip_id`. For Sioux Faux, the existing SFBL trips corresponding to each route are described in the [`trip.txt`](/../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file in the gtfs-data folder.
 
-Currently, Sioux Faux buses follow a *non-frequency schedule* based on their arrival and departure times to and from each stop of their route. These arrival and departure times are listed in the [`stop_times.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/stop_times.txt) file of Sioux Faux's GTFS data.
+Currently, Sioux Faux buses follow a *non-frequency schedule* based on their arrival and departure times to and from each stop of their route. These arrival and departure times are listed in the [`stop_times.txt`](/../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/stop_times.txt) file of Sioux Faux's GTFS data.
 You role here is to decide if some routes should follow a *frequency schedule* instead of a non frequency one. While we term the behavior of this input as frequency adjustment, in fact, it modifies the SFBL bus headways on a particular route. The adjustment wipes out all non-frequency trips from the route during the specified *service period* (defined between `start_time` and `end_time`) and converts them to frequency trips according to the given `headway_secs`. You can find a definition of these parameters in Table 3 below. Note that it is assumed that buses operate only on *week days* (i.e. from Monday to Friday).
 
 Here, we require you to provide the `trip_id` in order to derive the stop pattern and travel times as well as to implicitly reference a bus route. The trip_ids corresponding to each route_ids are gathered in the [`trip.txt`](../../reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file. An troncated extract of the `trips.txt` file is shown on Figure 6 below.
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/trips_txt_extract.png)
+![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/trips_txt_extract.png){:height="50%" width="50%"}
 ***Figure 6: Extract of the trips.txt file***
 
 
