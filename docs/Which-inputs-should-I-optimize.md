@@ -8,13 +8,13 @@ To optimize the transportation system of Sioux Faux, you will need to write an a
 As detailed in the [problem statement](docs/The_Sioux_Faux_case_pilot_study), to help the Sioux Faux Department of Transportation (SFDOT) combat congestion and improve overall mobility in Sioux Faux, you will prepare a set of inputs to the simulation engine, which represent the following transportation system interventions:
 
 1. Bus fleet composition;
-2. Distribution of subsidies for agents using on-demand carsharing and/or mass transit;
+2. Distribution of incentives for agents using on-demand carsharing and/or mass transit;
 3. Adjustments to the frequency of buses on routes; and, 
 4. Mass transit fares.
 
 A submission entry is a set of input files (i.e., `csv`s named according to the input type), which have been collected into a single folder.
 
-The following subsections provide a detailed description of what each input represents as well as technical details for the schema, data types, and constraints that specify the syntax of each input file. Files representing empty inputs can be found in the [`submission-inputs` folder](../../submission-inputs).
+The following subsections provide a detailed description of what each input represents as well as technical details for the schema, data types, and constraints that specify the syntax of each input file. Files representing empty inputs can be found in the [`submission-inputs`](../../submission-inputs) folder.
 
 
 ## Input Types
@@ -84,7 +84,7 @@ To do so, the *range of qualifying socio-demographic characteristics* and *value
 
 Qualification for an incentive can be based on *age* and/or *income*. You can find the distributions of Sioux Faux's population over age and income on the page [**INSERT LINK**].
 
-Incentives for one mode do not disqualify providing incentives for another mode. Additionally, the price of each leg in a multimodal trip will be adjusted by the amount of incentive allocated to the qualifying agent undertaking the trip. That is, for each trip (i.e. travel from the agent's origin to the goal activity), the best route for each multimodal type will include subsidies in the overall cost of the trip. This generalized cost will then factor into agent decision-making.
+Incentives for one mode do not disqualify providing incentives for another mode. Additionally, the price of each leg in a multimodal trip will be adjusted by the amount of incentive allocated to the qualifying agent undertaking the trip. That is, for each trip (i.e. travel from the agent's origin to the goal activity), the best route for each multimodal type will include incentives in the overall cost of the trip. This generalized cost will then factor into agent decision-making.
 
 #### 2.2. Technical Details:
 Your recommendation is to be submitted in a file named `ModeIncentives.csv` according to the format specified in Table 2. See Figure 5 for an example.
@@ -168,7 +168,7 @@ In this case, two routes will see their bus frequency adjusted: route 1340 (`tri
 * Buses operating on all other routes follow the original non-frequency schedule
 
 
-### 4. Public Transit Fare Adjustment
+### 4. Mass Transit Fare Adjustment
 
 #### 4.1. Description
 SFBL would like to use this simulation experiment to explore the effect of changing **bus fares**, i.e. the cost to a passenger of traveling by bus. Currently, the Sioux Faux bus fare policy works as follow: 
@@ -194,10 +194,10 @@ For each new bus fare that you want to introduce, you need to specify the amount
 ***Table 4: Pt Fares input schema and constraint definitions***
 
 #### 4.3. Example
-Figure 8 depicts an example input file for Public Transit Fare Adjustment.
+Figure 8 depicts an example input file for Mass Transit Fare Adjustment.
 
 ![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Input_Ptfares.png)
-***Figure 8: Example of Public Transportation Fare input***
+***Figure 8: Example of Mass Transit Fare input***
 
 The file describes the following fare policy:
 * Passengers 5 to 25 yrs. and under pay a reduced fare of $0.50
