@@ -15,7 +15,7 @@ As detailed in the [problem statement](docs/The_Sioux_Faux_case_pilot_study), to
 A submission entry is a set of input files (i.e., `csv`s named according to the input type), which have been collected into a single folder.
 
 The following subsections provide a detailed description of what each input represents as well as technical details for the schema, data types, and constraints that specify the syntax of each input file. Files representing empty inputs can be found in the [`submission-inputs`](../../submission-inputs) folder.
-
+[root](/../../)
 
 ## Input Types
 
