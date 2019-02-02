@@ -16,7 +16,7 @@ The main outputs you should focus on are located in the `competition` folder. It
 * The [input files](./Which-inputs-should-I-optimize.md) you used for the simulation run
 * The *component scores* and the *submission score* from the scoring function, which evaluates the quality of the policy-based transportation sytsem 
 
-![Alt text](/../../master/Images/The_scoring_function.png)
+![Alt text](/../../master/Images/Subscores.png)
 Figure 2: Score and component scores
 
 The *scoring function* is a weighted sum of several components, listed below. ***Weights are pre-determined based upon...\[fill in]*** 
