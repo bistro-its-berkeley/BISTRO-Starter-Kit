@@ -32,7 +32,7 @@ We recommend that you proceed through the documentation in the following order:
   * an [introduction to the urban transportation system optimization problem](./docs/Introduction_transportation_problem.md)
   * a note on [how to run a simulation](./docs/How_to_run_a_simulation.md)
   * a description of the [input schema](./docs/Which-inputs-should-I-optimize.md)
-  * a description of the [simulation outputs and the scoring function](./docs/Understanding_the_outputs_and_the scoring_function.md)
+  * a description of the [simulation outputs and the scoring function](./docs/Understanding_the_outputs_and_the%20scoring_function.md)
   * an outline of [the Sioux Faux scenario](./docs/The_Sioux_Faux_scenario.md)
   * the [problem statement for round 1](./docs/Problem_statement_Phase%20I.pdf)
   * a note on [what and how to submit](./docs/What_and_how_to_submit.md)
