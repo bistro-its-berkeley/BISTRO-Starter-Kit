@@ -1,5 +1,6 @@
 # Input Specification
 
+[docs/How_to_run_a_simulation.md](./How_to_run_a_simulation.md)
 
 To optimize the transportation system of Sioux Faux, you will need to write an algorithm that generates different inputs as `csv`files. This document describes the nature of inputs available to contestants and provides *detailed schema for the files comprising a valid competition submission entry*.
  
@@ -15,7 +16,6 @@ As detailed in the [problem statement](docs/The_Sioux_Faux_case_pilot_study), to
 A submission entry is a set of input files (i.e., `csv`s named according to the input type), which have been collected into a single folder.
 
 The following subsections provide a detailed description of what each input represents as well as technical details for the schema, data types, and constraints that specify the syntax of each input file. Files representing empty inputs can be found in the [`submission-inputs`](../../submission-inputs) folder.
-[root](/../../)
 
 ## Input Types
 
