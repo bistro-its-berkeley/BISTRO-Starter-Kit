@@ -91,9 +91,9 @@ The `summaryStats.csv` file gathers many of the raw outputs of the simulation, w
 * `totalCost_ride_hail`: total cost of a on-demand ride \[$US]
 * `totalCost_drive_transit`: total cost of a transit trip where driving alone is the access or egress mode \[$US]
 * `totalCost_walk_transit`: total cost of a transit trip where walk is the access or egress mode \[$US]
-* `totalSubsidy_drive_transit`: total incentives \[$US/person] received by all agents to incentivize trips that access mass transit by car \[$US]
-* `totalSubsidy_ride_hail`: total incentives \[$US/person] received by all agents to incentivize trips using on-demand rideshare \[$US]
-* `totalSubsidy_walk_transit`: total incentives \[$US/person] received by all agents to incentivize trips that access mass transit on foot \[$US]
+* `totalIncentive_drive_transit`: total incentives \[$US/person] received by all agents to incentivize trips that access mass transit by car \[$US]
+* `totalIncentive_ride_hail`: total incentives \[$US/person] received by all agents to incentivize trips using on-demand rideshare \[$US]
+* `totalIncentive_walk_transit`: total incentives \[$US/person] received by all agents to incentivize trips that access mass transit on foot \[$US]
 * `totalTravelTime`: total time spent traveling by all agents during the day \[person-hours]
 * `totalVehicleDelay`: total hours of delay experienced by all motorized vehicles of the system during the simulation \[vehicle-hours]
 * `vehicleHoursTraveled_BODY-TYPE-DEFAULT`: total time traveled by foot during the day \[vehicle-hours]. Note that in BEAM, person agents are considered to be "human body vehicles".

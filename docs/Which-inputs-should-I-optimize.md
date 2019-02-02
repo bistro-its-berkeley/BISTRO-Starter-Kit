@@ -75,7 +75,7 @@ In an effort to encourage the use of sustainable transportation alternatives to 
 
 You may choose to defray the cost of on-demand rides and/or transit based on either age group, income group, or both.
 To do so, the *range of qualifying socio-demographic characteristics* and *value of the incentive provided to each group* must be defined for passengers using each of the following modes of transportation to complete a trip: 
-  * "OnDemand_ride": use of on-demand rideshare as the main transport mode for the trip
+  * "OnDemand_ride": use of on-demand ride(s) as the main transport mode for the trip
   * "drive_transit": use of the personal car as an access/egress mode to/from transit (bus)
   * "walk_transit": walking as an access/egress mode to/from transit (bus)
 
@@ -199,7 +199,7 @@ For each new bus fare that you want to introduce, you need to specify the amount
 #### 4.3. Example
 Figure 8 depicts an example input file for Mass Transit Fare Adjustment.
 
-![Alt text](/../../master/Images/Input_Ptfares.png)
+![Alt text](/../../master/Images/Input_MassTransitFares.png)
 ***Figure 8: Example of Mass Transit Fare input***
 
 The file describes the following fare policy:
