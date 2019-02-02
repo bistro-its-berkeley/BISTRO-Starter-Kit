@@ -49,6 +49,6 @@ The performance of this new policy-based transportation system is measured by a 
 * How easily can the agents *access* opportunities or points of interest via available modes of travel?
 * How *sustainable* is the transportation system?
 
-Total raw scores smaller than 1 indicate that, under the evaluated policy portfolio, the system is performing better compared to the BAU scenario.
+A total submission score smaller than 1 indicate that, under the evaluated policy portfolio, the system is performing better compared to the BAU scenario.
 
 You will find more information on the outputs of the simulation, how to interpret them, and the scoring function on the [outputs and the scoring function](./Understanding_the_outputs_and_the scoring_function.md) page.
