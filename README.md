@@ -13,17 +13,17 @@ While the problem setting may not be as familiar as that of previous machine lea
 
 We recommend that you proceed through the documentation in the following order:
 
-  * **Introduction to the Urban Transportation System Optimization Problem**: First, read the brief [introduction to the Urban Transportation System problem](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md), which will give you a general understanding of the framework of problem you need to solve as well as the relevant optimization challenges. 
+  * **Introduction to the Urban Transportation System Optimization Problem**: First, read the brief [introduction to the Urban Transportation System problem](./docs/Introduction_transportation_problem.md), which will give you a general understanding of the framework of problem you need to solve as well as the relevant optimization challenges. 
 
-  * **Problem statement for internal pilot testing**: Then, review the [presentation of the Sioux Faux scenario](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/The_Sioux_Faux_case_pilot_study.md), which introduces the problem setting and particulars of transportation system running in the simulation environment.
+  * **Problem statement**: Then, review the [presentation of the Sioux Faux scenario](./docs/The_Sioux_Faux_case_pilot_study.md), which introduces the problem setting and particulars of transportation system running in the simulation environment.
   
-  * **Inputs to optimize**: Next, please refer to the [input file specification schema](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Which-inputs-should-I-optimize.md), which describes the structure of the input files and their relationship to quantities computed in the context of the virtual transportation environment.
+  * **Inputs to optimize**: Next, please refer to the [input file specification schema](./docs/Which-inputs-should-I-optimize.md), which describes the structure of the input files and their relationship to quantities computed in the context of the virtual transportation environment.
   
-  * **Submission evaluation and outputs**: The page describing [the outputs and scoring function](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md) will help you to familiarize youself with the outputs of the simulation, where they are stored after a simulation run, what they describe, and how to interpret them. Here you will also find details on how the outputs are used to construct the challenge scoring function.
+  * **Submission evaluation and outputs**: The page describing [the outputs and scoring function](./docs/Understanding_the_outputs_and_the%20scoring_function.md) will help you to familiarize youself with the outputs of the simulation, where they are stored after a simulation run, what they describe, and how to interpret them. Here you will also find details on how the outputs are used to construct the challenge scoring function.
   
-  * **Simulation tutorial**: Once you are clear about the inputs you can manipulate, the outputs, and the effects of changes in inputs on the outputs, try [running a simulation](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/How_to_run_a_simulation.md).
+  * **Simulation tutorial**: Once you are clear about the inputs you can manipulate, the outputs, and the effects of changes in inputs on the outputs, try [running a simulation](./docs/How_to_run_a_simulation.md).
   
-  * **Submission instructions** When you are ready, please follow [these instructions](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit.md) to submit your solution.
+  * **Submission instructions** When you are ready, please follow [these instructions](./docs/What_and_how_to_submit.md) to submit your solution.
   
 
 ## What can I find in this repository?
