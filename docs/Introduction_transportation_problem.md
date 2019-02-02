@@ -2,15 +2,15 @@
 
 This document describes the goal and main components of the Uber Prize challenge, that is, the daily travel simulation environment, its inputs, and its outputs.
 
-![Alt text](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/Images/Simulation_Framework.png)
+![Alt text](/../../master/Images/Simulation_Framework.png)
 
 ## Goal of Round I:
 
-The overall goal of the preliminary round of the Uber Prize is to develop an algorithms that **finds the *policy* that will best improve several indicators of the quality of the transportation system in Sioux Faux**. Here, we use *policy* to refer to a combination of inputs (as `.csv` files) representing changes in mass transit vehicle fleet composition, bus frequencies, and subsidies that could reduce the cost of multimodal transport for commuters.
+The overall goal of the preliminary round of the Uber Prize is to develop an algorithms that **finds the *policy* that will best improve several indicators of the quality of the transportation system in Sioux Faux**. Here, we use *policy* to refer to a combination of inputs (as `.csv` files) representing changes in mass transit vehicle fleet composition, bus frequencies, and incentives that could reduce the cost of multimodal transport for commuters.
 
 Policies are tested by simulating the daily travels of a synthetic population of individuals called `Agents`, each with their own socio-demographic characteristics. The *agent-based simulation* is hosted by the BEAM simulator. During the simulated day, each *Agent* has a defined `Plan`, i.e. a sequence of activities with specific locations ordered by activity end times. Throughout the day, the `Agents` will make decisions on which transportation modes they will use, their departure times, and the routes they take to travel between activities. 
 
-By simulating the daily travel behavior of the whole population, the quality of the city's transportation system can be evaluated, based upon scoring criteria, detailed [here](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md).
+By simulating the daily travel behavior of the whole population, the quality of the city's transportation system can be evaluated, based upon scoring criteria, detailed [here](./Understanding_the_outputs_and_the scoring_function.md).
 
 ### What is BEAM?
 
@@ -26,14 +26,14 @@ Once all agents of the system have chosen their optimal transportation mode to a
 
 ## The simulation inputs
 
-The simulation inputs for BEAM are comprised of specifications regarding public transit operations, ridehail partnerships and subsidies, and public transit finances.
+The simulation inputs for BEAM are comprised of specifications regarding mass transit operations, on-demand rideshare partnerships and incentives, and mass transit finances.
 
-For the **pilot test**, the input parameters specify:
+For **round I**, the input parameters specify:
 * **purchases and sales of buses serving a route**.
 * **adjustments to the frequency of buses on routes**.
-* **distribution of subsidies** for agents using ridehail and/or public transit.
+* **distribution of incentives** for agents using on-demand rides and/or mass transit.
 
-You will find more information on the Sioux Faux simulation inputs, where they are stored, and how to control them on the [inputs to optimize](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Which-inputs-should-I-optimize.md) page.
+You will find more information on the Sioux Faux simulation inputs, where they are stored, and how to control them on the [inputs to optimize](/../../master/docs/Which-inputs-should-I-optimize.md) page.
 
 
 
@@ -42,15 +42,14 @@ You will find more information on the Sioux Faux simulation inputs, where they a
 
 The quality of the new policy-based transportation system is evaluated based upon a comparison against the business as usual (BAU) scenario. The BAU scenario represents the baseline or "current" status-quo of the Sioux Faux transportation system. In other words, this is a "do-nothing" approach. This comparison answers the following question: **How will the new policy improve over the current state of the transportation system**?
 
-The performance of this new policy-based transportation system is measured by a **scoring function**, which computes the weighted sum of three groups of outputs:
+The performance of this new policy-based transportation system is measured by a **scoring function**, which computes the weighted sum of five groups of outputs:
 
 * How much *congestion* did the agents experience during the day? 
 * What *level of service* did the transportation system offer to agents? 
-* What were the *budgetary* impacts?
+* What were the *budgetary* constraints and impacts?
+* How easily can the agents *access* opportunities or points of interest via available modes of travel?
+* How *sustainable* is the transportation system?
 
-Positive total scores indicate that, under the evaluated policy portfolio, the system is performing better compared to the BAU scenario<sup id="a1">[1](#f1)</sup>.
+Total raw scores smaller than 1 indicate that, under the evaluated policy portfolio, the system is performing better compared to the BAU scenario<sup id="a1">[1](#f1)</sup>.
 
-
-You will find more information on the outputs of the simulation, how to interpret them, and the scoring function on the [outputs and the scoring function](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md) page.
-
-<sup id="f1">1</sup> Pilot testers, please note the following: We understand that the simulator is inherently stochastic and that score outputs will vary to some extent on the **same** set of input variables. We have not yet officially established what is a statistically difference in scores. There are quite a few subtleties here, and we would love to get your feedback on what seems appropriate.[↩](#a1)
+You will find more information on the outputs of the simulation, how to interpret them, and the scoring function on the [outputs and the scoring function](./Understanding_the_outputs_and_the scoring_function.md) page.
