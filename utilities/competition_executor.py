@@ -8,10 +8,23 @@ from os import path
 import docker
 import pandas as pd
 
+#TODO: Change to map after first competition done
+SCENARIO_NAME = 'sioux_faux'
+
+SAMPLE_SIZES = ['15k','1k']
+
+MODE_CHOICE_CSV = "modeChoice.csv"
+
+SUMMARY_STATS_CSV = "summaryStats.csv"
+
+SUBMISSION_SCORES_FILE = "submissionScores.csv"
+
+SUBMISSION_SCORES_DIR = "competition"
+
 
 def lazy_property(fn):
-    '''Decorator that makes a property lazy-evaluated.
-    '''
+    """Decorator that makes a property lazy-evaluated.
+    """
     attr_name = '_lazy_' + fn.__name__
 
     @property
@@ -47,7 +60,7 @@ class Results:
                 the simulation run.
         """
 
-        with open(path.join(self.output_directory, "competition", "submissionScores.txt"), "r") as f:
+        with open(path.join(self.output_directory, SUBMISSION_SCORES_DIR, SUBMISSION_SCORES_FILE), "r") as f:
             lines = f.readlines()
 
             data = []
@@ -90,7 +103,7 @@ class Results:
 
         """
 
-        summary_file = path.join(self.output_directory, "summaryStats.csv")
+        summary_file = path.join(self.output_directory, SUMMARY_STATS_CSV)
         summary_stats = pd.read_csv(summary_file)
         return summary_stats
 
@@ -105,7 +118,7 @@ class Results:
         mode_choice: pandas DataFrame
             Summary of the number of users per transportaion mode.
         """
-        mode_choice_file = path.join(self.output_directory, "modeChoice.csv")
+        mode_choice_file = path.join(self.output_directory, MODE_CHOICE_CSV)
         mode_choice = pd.read_csv(mode_choice_file)
         return mode_choice
 
@@ -228,7 +241,8 @@ class Submission(object):
 
         """
 
-        path_submission_scores = path.join(self.output_directory, "competition", "submissionScores.txt")
+
+        path_submission_scores = path.join(self.output_directory, SUBMISSION_SCORES_DIR, SUBMISSION_SCORES_FILE)
         return path.exists(path_submission_scores)
 
     def __str__(self):
@@ -300,7 +314,7 @@ class AbstractCompetitionExecutor(ABC):
         """
         input_root = self.input_root
 
-        list_inputs = ["VehicleFleetMix", "ModeSubsidies", "FrequencyAdjustment", "PtFares"]
+        list_inputs = ["VehicleFleetMix", "ModeSubsidies", "FrequencyAdjustment", "MassTransitFares"]
 
 
         if input_root is None:
@@ -472,9 +486,9 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
                        submission_id,
                        submission_output_root=None,
                        submission_input_root=None,
-                       scenario_name='sioux_faux',
-                       sample_size='1k',
-                       num_iterations=10,
+                       scenario_name=SCENARIO_NAME,
+                       sample_size=SAMPLE_SIZES[0],
+                       num_iterations=1,
                        num_cpus=multiprocessing.cpu_count() - 1,
                        mem_limit="4g"):
         """Creates a new container running an Uber Prize competition simulation on a specified set of inputs.
@@ -501,7 +515,7 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
         num_iterations : int
             Number of iterations for which to run the BEAM simulation engine.
         num_cpus : str
-            Number of cpus to allocate to container (0.01 - Runtime.getRuntime().availableProcessors())
+            Number of cpus to allocate to container (multiprocessing.cpu_count()-1 by default)
         mem_limit : int
 
 
@@ -529,7 +543,8 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
                     "No input location specified. One must be provided by default "
                     "on object instantiation or supplied to this method as an argument.")
 
-        container = self.client.containers.run('beammodel/beam-competition:0.0.1-SNAPSHOT',
+        IMAGE_NAME = 'beammodel/beam-competition:0.0.1-SNAPSHOT'
+        container = self.client.containers.run(IMAGE_NAME,
                                                name=submission_id,
                                                command=r"--scenario {0} --sample-size {1} --iters {2}".format(
                                                    scenario_name, sample_size, num_iterations),
@@ -552,6 +567,8 @@ if __name__ == '__main__':
     # Example to demonstrate/test usage. Not a production script. For more detailed explanations, read the API-tutorial
     # Jupyter Notebook in the Starter-Kit repository.
 
+    # Ensure docker is running before using this module!
+
     CONTAINER_ID = 'uber1'
 
     # Must use absolute paths here
@@ -568,7 +585,7 @@ if __name__ == '__main__':
     except docker.errors.NotFound:
         print("Creating new simulation container...")
 
-    ex.run_simulation(CONTAINER_ID, num_iterations=1, num_cpus=10, sample_size='15k')
+    ex.run_simulation(CONTAINER_ID, num_iterations=1, num_cpus=2, sample_size='15k')
 
     # Let it roll for a bit (hopefully at least one or two iterations!)
     if len(sys.argv) < 4:
