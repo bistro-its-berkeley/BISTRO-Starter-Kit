@@ -3,6 +3,7 @@ After reading this document, you will have a better understanding of the outputs
 
 ## Where are the outputs stored?
 
+
 Outputs are produced after the simulation's last iteration (see the [Introduction to the Urban Transportation System Optimization Framework](./Introduction_transportation_problem.md) page). All the outputs generated during this last run are stored in a unique output folder called `output/siouxfaux-<sample_size>__\<date>_\<time>`. It ends with the date and time of the simulation you have just run (see Figure 1). Note that the figure references a simulation run with a 1k population sample.
 
 ![Alt text](/../../master/Images/Output_folder_2.png)
@@ -52,7 +53,8 @@ If you want to know more about the mathematical formulation of each of these sco
 In addition to the scores, the `output/siouxfaux-<sample_size>__\<date>_\<time>` folder contains graphs describing performance outputs of the system along with their corresponding data files. Two of them are described below.
 
 * **Mode choice**
-The mode choice graph describes the overall distribution of chosen modes for each iteration of the simulation. In the example shown in Figure 3 below, the simulation ended after 100 iterations. In the simulation, every agent received a $20 incentive per ride for on-demand rideshare. As the iterations progressed, you can see that providing a monetary incentive for some agents to use on-demand rideshare indeed shifted more agents towards using this mode.
+
+The mode choice graph describes the overall distribution of chosen modes for each iteration of the simulation. In the example shown in Figure 3 below, the simulation ended after 100 iterations. In the simulation, every agent received a $20.00 incentive per ride for on-demand rideshare. As the iterations progressed, you can see that providing a monetary incentive for some agents to use on-demand rideshare indeed shifted more agents towards using this mode.
 ![Alt text](/../../master/Images/Mode_choice_histogram.png)
 Figure 3: Mode choice of agents for each iteration of the simulation
 
@@ -63,7 +65,8 @@ The on-demand rides revenues component describes the net revenues earned by the 
 The score statistics represent the evolution of the agent's plans scores during the simulation. Each iteration simulates one entire day. At the end of each iteration, the daily plan of each agent is evaluated according to how well it performed in the transportation scenario. Based on this score, some agents may change their daily plan (which modes they use to travel from and to their activities) for the next iteration in an attempt to improve it. This learning mechanism can be observed in the Figure 4 below: as iterations progress, the agents' plan scores keep increasing until they reach a plateau after about 50 iterations. Once each agent can no longer find plans that improve their score, the system has reached an equilibrium state.
 
 ![alt text](/../../master/Images/scorestats.png)
-Figure 4: Statistics of agent scores 
+***Figure 3: Statistics of agent scores***
+
 
 ## Summary stats
 
