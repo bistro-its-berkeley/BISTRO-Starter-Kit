@@ -40,12 +40,12 @@ In addition to the scores, the `output/sioux_faux-1k__<date>_<time>` folder cont
 
 
 * **Mode choice**
-The mode choice graph describes the overall distribution of chosen modes for each iteration of the simulation. In the example shown in Figure 2 below, the simulation ended after 100 iterations. In the simulation, every agent received a $20 incentive per ride for ride-hail. As the iterations progressed, you can see that providing a monetary incentive for some agents to use on-demand rideshare indeed shifted more agents towards using this mode.
+The mode choice graph describes the overall distribution of chosen modes for each iteration of the simulation. In the example shown in Figure 2 below, the simulation ended after 100 iterations. In the simulation, every agent received a $20 incentive per ride for on-demand ride. As the iterations progressed, you can see that providing a monetary incentive for some agents to use on-demand rideshare indeed shifted more agents towards using this mode.
 ![Alt text](/../../master/Images/Mode_choice_histogram.png)
 ***Figure 2: Mode choice of agents for each iteration of the simulation***
 
-* **Ride-hail revenue**
-The ride-hail revenues describes the net revenues earned by the ride-hail company .
+* **On-demand ride revenue**
+The on-demand ride revenues describes the net revenues earned by the on-demand ride company .
 
 * **Score Statistics**
 The score statistics represent the evolution of the agent's plans scores during the simulation. Each iteration simulates one entire day. At the end of each iteration, the daily plan of each agent is evaluated according to how well it performed in the transportation scenario. Based on this score, some agents may change their daily plan (which modes they use to travel from and to their activities) for the next iteration in an attempt to improve it. This learning mechanism can be observed in the Figure 3 below: as iterations progress, the agents' plan scores keep increasing until they reach a plateau after about 50 iterations. Once each agent can no longer find plans that improve their score, the system has reached an equilibrium state.
