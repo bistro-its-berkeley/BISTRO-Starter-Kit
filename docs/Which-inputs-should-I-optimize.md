@@ -6,7 +6,7 @@ To optimize the transportation system of Sioux Faux, you will need to write an a
  
 ## Introduction
 
-As detailed in the [problem statement](./The_Sioux_Faux_case.md), to help the Sioux Faux Department of Transportation (SFDOT) combat congestion and improve overall mobility in Sioux Faux, you will prepare a set of inputs to the simulation engine, which represent the following transportation system interventions:
+As detailed in the [problem statement](./The_Sioux_Faux_scenario.md), to help the Sioux Faux Department of Transportation (SFDOT) combat congestion and improve overall mobility in Sioux Faux, you will prepare a set of inputs to the simulation engine, which represent the following transportation system interventions:
 
 1. Bus fleet composition;
 2. Distribution of incentives for agents using on-demand carsharing and/or mass transit;
@@ -82,7 +82,7 @@ To do so, the *range of qualifying socio-demographic characteristics* and *value
   * "drive_transit": use of the personal car as an access/egress mode to/from transit (bus)
   * "walk_transit": walking as an access/egress mode to/from transit (bus)
 
-Qualification for an incentive can be based on *age* and/or *income*. You can find the distributions of Sioux Faux's population over age and income on the page [The_Sioux_Faux_case](./The_Sioux_Faux_case.md).
+Qualification for an incentive can be based on *age* and/or *income*. You can find the distributions of Sioux Faux's population over age and income on the page [The_Sioux_Faux_scenario](./The_Sioux_Faux_scenario.md).
 
 Incentives for one mode do not disqualify providing incentives for another mode. Additionally, the price of each leg in a multimodal trip will be adjusted by the amount of incentive allocated to the qualifying agent undertaking the trip. That is, for each trip (i.e. travel from the agent's origin to the goal activity), the best route for each multimodal type will include incentives in the overall cost of the trip. This generalized cost will then factor into agent decision-making.
 
