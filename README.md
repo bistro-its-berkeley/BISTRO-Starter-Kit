@@ -39,7 +39,7 @@ We recommend that you proceed through the documentation in the following order:
 
 * `submission-inputs` folder:
   * the input file for the [bus fleet composition](./submission-inputs/VehicleFleetMix.csv)
-  * the input file for the [mode subsidies](./submission-inputs/ModeIncentives.csv)
+  * the input file for the [mode incentives](./submission-inputs/ModeIncentives.csv)
   * the input file for the [bus frequency adjustments](./submission-inputs/FrequencyAdjustment.csv)
   * the input file for the [mass transit fares](./submission-inputs/MassTransitFares.csv)
 
