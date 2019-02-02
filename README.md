@@ -1,6 +1,6 @@
-# Uber Prize Starter Kit
+<!--Logo Goes Here!-->
 
-This repository is a starter kit for the **Uber Prize Challenge** on **[Crowd AI](https://www.crowdai.org/)** where you may find background material and competition guidelines to help you get started. 
+This repository is a starter kit for the **Uber Prize Challenge** on **[AICrowd](https://www.aicrowd.com/challenges/uber-prize)**. 
 
 ## Competition Rounds
 The competition will be split into two rounds:
@@ -47,19 +47,19 @@ We recommend that you proceed through the documentation in the following order:
 * `reference-data/sioux_faux_gtfs_data` folder: <br> <br>
 List of the Sioux Faux GTFS data (General Transit Feed Specification). It is a series of text files, each of them modeling a particular aspect of the transit agency's operations: stops, routes, trips, and other schedule data. The details of each file and their relationships are defined in the [GTFS reference](https://developers.google.com/transit/gtfs/reference/).
 
+## Updates to the Starter Kit
+
+In order to expedite bug support, we may periodically push new Docker images to DockerHub as well as update this 
+repository. Whenever such an update is announced, please run `git pull` in this directory (you might wish to move [submission-inputs](./submission-inputs) and update execution paths appropriately. Please also run `docker pull beammodel/beam-competition:0.0.1-SNAPSHOT` to ensure the image is up-to-date as well.
+
+
 ## Contributing
 
-We always welcome bug reports and enhancement requests from both competitors as well as developers on the Uber Prize-Berkeley Working Group team and elsewhere. Guidelines and suggestions on how to contribute code to this repository may be found in [./github/CONTRIBUTING.md](./github/CONTRIBUTING.md].
+We always welcome bug reports and enhancement requests from both competitors as well as developers on the Uber Prize-Berkeley Working Group team and elsewhere. Guidelines and suggestions on how to contribute code to this repository may be found in [./github/CONTRIBUTING.md](./.github/CONTRIBUTING.md).
 
 ## Contact Information
 
-If you have any questions about the challenge, you can ask them on uChat:
-* https://uchat.uberinternal.com/uber/channels/uber_prize_round1_pilot_test
 
 Alternatively, to contact the Uber Prize working group technical team directly, please e-mail:
-* Sid Feygin: sfeygi@ext.uber.com
-* Valentine Golfier-Vetterli: vgolfi@ext.uber.com
-
-
-
-<!--*Note to organizers: Consider setting up a troubleshooting email account so you don't have to use your personal ones*-->
+* Sid Feygin: [sfeygi@ext.uber.com](mailto:sfeygin@ext.uber.com)
+* Valentine Golfier-Vetterli: [vgolfi@ext.uber.com](mailto:vgolfi@ext.uber.com)
