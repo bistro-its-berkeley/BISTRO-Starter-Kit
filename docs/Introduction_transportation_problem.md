@@ -33,7 +33,7 @@ For **round I**, the input parameters specify:
 * **adjustments to the frequency of buses on routes**.
 * **distribution of incentives** for agents using on-demand rides and/or mass transit.
 
-You will find more information on the Sioux Faux simulation inputs, where they are stored, and how to control them on the [inputs to optimize](/../../master/docs/Which-inputs-should-I-optimize.md) page.
+You will find more information on the Sioux Faux simulation inputs, where they are stored, and how to control them on the [inputs to optimize](./Which-inputs-should-I-optimize.md) page.
 
 
 
