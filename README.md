@@ -15,7 +15,7 @@ We recommend that you proceed through the documentation in the following order:
 
   * **Introduction to the Urban Transportation System Optimization Problem**: First, read the brief [introduction to the Urban Transportation System problem](./docs/Introduction_transportation_problem.md), which will give you a general understanding of the framework of problem you need to solve as well as the relevant optimization challenges. 
 
-  * **Problem statement**: Then, review the [presentation of the Sioux Faux scenario](./docs/The_Sioux_Faux_case_pilot_study.md), which introduces the problem setting and particulars of transportation system running in the simulation environment.
+  * **Problem statement**: Then, review the [presentation of the Sioux Faux scenario](./docs/The_Sioux_Faux_scenario.md), which introduces the problem setting and particulars of transportation system running in the simulation environment.
   
   * **Inputs to optimize**: Next, please refer to the [input file specification schema](./docs/Which-inputs-should-I-optimize.md), which describes the structure of the input files and their relationship to quantities computed in the context of the virtual transportation environment.
   
@@ -29,19 +29,20 @@ We recommend that you proceed through the documentation in the following order:
 ## What can I find in this repository?
 
 * `docs` folder: 
-  * an [introduction to the urban transportation system optimization problem](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Introduction_transportation_problem.md)
-  * a note on [how to run a simulation](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/How_to_run_a_simulation.md)
-  * a description of the [input schema](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Which-inputs-should-I-optimize.md)
-  * a description of the [simulation outputs and the scoring function](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Understanding_the_outputs_and_the%20scoring_function.md)
-  * an outline of [the Sioux Faux scenario](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/The_Sioux_Faux_case_pilot_study.md)
-  * the [problem statement for the pilot test](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/Problem_Statement_Pilot_Study.pdf)
-  * the [problem statement for round 1](https://github.com/vgolfier/Uber-Prize-Starter-Kit-/blob/master/docs/Problem_statement_Phase%20I.pdf)
-  * a note on [what and how to submit](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/docs/What_and_how_to_submit.md)
+  * an [introduction to the urban transportation system optimization problem](./docs/Introduction_transportation_problem.md)
+  * a note on [how to run a simulation](./docs/How_to_run_a_simulation.md)
+  * a description of the [input schema](./docs/Which-inputs-should-I-optimize.md)
+  * a description of the [simulation outputs and the scoring function](./docs/Understanding_the_outputs_and_the_scoring_function.md)
+  * an outline of [the Sioux Faux scenario](./docs/The_Sioux_Faux_scenario.md)
+  * the [problem statement for round 1](./docs/Problem_statement_Phase%20I.pdf)
+  * a note on [what and how to submit](./docs/What_and_how_to_submit.md)
 
 * `submission-inputs` folder:
-  * the input file for the [bus fleet composition](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/submission-inputs/VehicleFleetMix.csv)
-  * the input file for the [mode subsidies](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/submission-inputs/ModeSubsidies.csv)
-  * the input file for the [bus frequency adjustments](https://github.com/vgolfier/Uber-Prize-Starter-Kit/blob/master/submission-inputs/FrequencyAdjustment.csv)
+  * the input file for the [bus fleet composition](./submission-inputs/VehicleFleetMix.csv)
+  * the input file for the [mode subsidies](./submission-inputs/ModeIncentives.csv)
+  * the input file for the [bus frequency adjustments](./submission-inputs/FrequencyAdjustment.csv)
+  * the input file for the [mass transit fares](./submission-inputs/MassTransitFares.csv)
+
 
 * `reference-data/sioux_faux_gtfs_data` folder: <br> <br>
 List of the Sioux Faux GTFS data (General Transit Feed Specification). It is a series of text files, each of them modeling a particular aspect of the transit agency's operations: stops, routes, trips, and other schedule data. The details of each file and their relationships are defined in the [GTFS reference](https://developers.google.com/transit/gtfs/reference/).
