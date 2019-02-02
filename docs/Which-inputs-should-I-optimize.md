@@ -1,6 +1,6 @@
 # Input Specification
 
-[docs/How_to_run_a_simulation.md](./How_to_run_a_simulation.md)
+[file](./How_to_run_a_simulation.md)
 
 To optimize the transportation system of Sioux Faux, you will need to write an algorithm that generates different inputs as `csv`files. This document describes the nature of inputs available to contestants and provides *detailed schema for the files comprising a valid competition submission entry*.
  
