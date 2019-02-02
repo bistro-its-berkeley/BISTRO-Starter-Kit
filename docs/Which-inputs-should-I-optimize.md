@@ -57,7 +57,7 @@ Your recommendation is to be submitted in a file named `VehicleFleetMix.csv` acc
 | :---:| :--- | :--- | :----|
 | `agencyId`|`String` | Agency identifier | Must equal agency Id found under `agencyId` in [`agencies.txt`](/../../master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/agency.txt) of corresponding GTFS file for transit agency with `agency_name` designated by parent directory of `gtfs_data` in starter kit `/reference-data` directory. Note that for Sioux Faux, SFBL is the only agency operating in the city (`agencId`="217"). Therefore, any entry in the .csv file will have "217" under `agencyId`.|
 | `routeId` |`String` | The route that will have its vehicle type assignment modified | A route can only have its assignment modified once. The `routeId` name must exist in the [`routes.txt`](/../../master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/routes.txt) file corresponding to the GTFS data for the agency specified by this entry's `agencyId`.|
-| `vehicleTypeId`|`String` | The vehicle type identifier | Must be a member of the set of vehicle type Ids listed under `vehicleTypeId` in the [`availableVehicleTypes.txt`](/../../master/reference-data/sioux_faux/sioux_faux_bus_lines/availableVehicleTypes.csv)file.
+| `vehicleTypeId`|`String` | The vehicle type identifier | Must be a member of the set of vehicle type Ids listed under `vehicleTypeId` in the [`availableVehicleTypes.csv`](/../../master/reference-data/sioux_faux/sioux_faux_bus_lines/availableVehicleTypes.csv)file.
 
 ***Table 1: Vehicle fleet mix input schema and constraint definitions***
 
