@@ -27,7 +27,7 @@ Sioux Faux), but you can just iterate through the agency mapping if more agencie
     sf_gtfs_manager = AgencyGtfsDataManager(agency_dict[agency])
 
     freq_df = sample_frequency_adjustments(num_records, sf_gtfs_manager)
-    mode_subsidy_df = sample_mode_subsidies(num_records)
+    mode_incentive_df = sample_mode_incentives(num_records)
     vehicle_fleet_mix_df = sample_vehicle_fleet_mix(num_records, sf_gtfs_manager)
     }}
 
@@ -39,7 +39,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from random_search import PT_FARE_FILE
+from random_search import MASS_TRANSIT_FILE
 from utils import lazyprop
 
 
@@ -218,18 +218,18 @@ def sample_format_range(tuple_range):
     return "{}{}:{}{}".format(left_inc, a, b, right_inc)
 
 
-def sample_mode_subsidies_input(num_records, gtfs_manager=None):
-    """Generate random mode subsidies inputs based on modes available for
-    subsidies.
+def sample_mode_incentives_input(num_records, gtfs_manager=None):
+    """Generate random mode incentive inputs based on modes available for
+    incentives.
 
-    Creates `num_records` ModeSubsidyInput records where fields for each record
+    Creates `num_records` ModeIncentiveInput records where fields for each record
     are randomly sampled as follows:
         * `age` : uniformly from `range(0,120,1)`.
         * `mode` : uniformly from list of available modes for scenario.
         * `income` : uniformly from `range(0,300000,1000)`.
         * `amount` : uniformly from `range(0.1,20)`.
 
-    The amount of subsidy is rounded to the nearest $0.10.
+    The amount of incentive is rounded to the nearest $0.10.
 
     Parameters
     ----------
@@ -245,14 +245,13 @@ def sample_mode_subsidies_input(num_records, gtfs_manager=None):
     Returns
     -------
     `DataFrame`
-        `num_records` `ModeSubsidyInput` records.
+        `num_records` `ModeIncentiveInput` records.
 
     """
     df_columns = ['mode', 'age', 'income', 'amount']
     if num_records == 0:
         return pd.DataFrame({k: [] for k in df_columns})
-    possible_modes = ['walk_transit', 'ride_hail', 'walk_transit', 'walk',
-                      'car', 'drive_transit']
+    possible_modes = ['ondemand_ride', 'walk_transit', 'drive_transit']
     modes = np.random.choice(possible_modes, num_records).tolist()
     ages = [sample_format_range(tuple(sorted(np.random.choice(120, 2)))) for _ in
             range(num_records)]
@@ -263,8 +262,8 @@ def sample_mode_subsidies_input(num_records, gtfs_manager=None):
                         columns=df_columns)
 
 
-def sample_pt_fares_input(num_records, gtfs_manager, max_fare_amount=10.0):
-    """Generate `num_records` random `PtFares` for an
+def sample_mass_transit_fares_input(num_records, gtfs_manager, max_fare_amount=10.0):
+    """Generate `num_records` random `MassTransitFares` inputs for an
     agency (specified within `gtfs_manager`) by randomly sampling age and fare amount.
 
     The fare amount will not exceed the maximum fare amount and cannot be less than $0.10 (else,
@@ -284,7 +283,7 @@ def sample_pt_fares_input(num_records, gtfs_manager, max_fare_amount=10.0):
     Returns
     -------
     `pd.DataFrame`
-        `num_records` `PtFares` records. These are unique by `routeId`
+        `num_records` `MassTransitFares` records. These are unique by `routeId`
         for the `agencyId` specified on the `gtfs_manager`
 
     Raises
@@ -295,7 +294,7 @@ def sample_pt_fares_input(num_records, gtfs_manager, max_fare_amount=10.0):
     """
     df_columns = ['agency', 'routeId', 'age', 'amount']
     if num_records == 0:
-        return pd.read_csv('../submission-inputs/{0}'.format(PT_FARE_FILE))
+        return pd.read_csv('../submission-inputs/{0}'.format(MASS_TRANSIT_FILE))
     max_num_routes = gtfs_manager.routes.shape[0]
     if num_records > max_num_routes:
         raise ValueError(
