@@ -2,7 +2,6 @@
 
 This document describes the goal and main components of the Uber Prize challenge, that is, the daily travel simulation environment, its inputs, and its outputs.
 
-![Alt text](/../../master/Images/Simulation_Framework.png)
 
 ## Goal of Round I:
 
@@ -50,6 +49,6 @@ The performance of this new policy-based transportation system is measured by a 
 * How easily can the agents *access* opportunities or points of interest via available modes of travel?
 * How *sustainable* is the transportation system?
 
-Total raw scores smaller than 1 indicate that, under the evaluated policy portfolio, the system is performing better compared to the BAU scenario<sup id="a1">[1](#f1)</sup>.
+Total raw scores smaller than 1 indicate that, under the evaluated policy portfolio, the system is performing better compared to the BAU scenario.
 
 You will find more information on the outputs of the simulation, how to interpret them, and the scoring function on the [outputs and the scoring function](./Understanding_the_outputs_and_the scoring_function.md) page.
