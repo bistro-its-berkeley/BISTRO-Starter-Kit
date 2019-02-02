@@ -2,7 +2,7 @@
 After reading this document, you will have a better understanding of the outputs of the simulation, where they are stored after a simulation run, what they describe, and how to interpret them.
 
 ## Where are the outputs stored?
-Outputs are produced after the simulation's last iteration (see the [introduction](../docs/Introduction_transportation_problem.md))). All the outputs generated during this last run are stored in a unique output folder called `output/sioux_faux/sioux_faux-1k__\<date>_\<time>`. It ends with the date and time of the simulation you have just run (see Figure 1). Note that the figure references a simulation run with a 1k population sample.
+Outputs are produced after the simulation's last iteration (see the [introduction](../docs/Introduction_transportation_problem.md)). All the outputs generated during this last run are stored in a unique output folder called `output/sioux_faux/sioux_faux-1k__\<date>_\<time>`. It ends with the date and time of the simulation you have just run (see Figure 1). Note that the figure references a simulation run with a 1k population sample.
 
 ![Alt text](/../../master/Images/Output_folder_2.png)
 
@@ -13,7 +13,7 @@ Outputs are produced after the simulation's last iteration (see the [introductio
 The main outputs you should focus on are located in the `competition` folder. It contains: 
 
 * The [input files](./Which-inputs-should-I-optimize.md) you used for the simulation run
-* The *component scores* and the *submission score* from the scoring function, which evaluates the quality of the policy-based transportation sytsem 
+* The *component scores* and the *submission score* from the scoring function, which evaluates the quality of the policy-based transportation system 
 
 ![Alt text](/../../master/Images/The_scoring_function.png)
 ***Table 1: Score and component scores***
