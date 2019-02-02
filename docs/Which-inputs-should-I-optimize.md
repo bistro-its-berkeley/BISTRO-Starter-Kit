@@ -218,4 +218,4 @@ The following are data types that are specializations of simplified data types t
 
 <span id="incentive-eligible">`Incentive eligible`</span>: `Enumeration`; must be a member of the set: {`"OnDemand_ride"`,`"drive_transit"`, `"walk_transit"`}
 
-<span id="range">`Range`</span>: `String`; Ranges are defined according to typical mathematical notation conventions whereby parentheses "(" and ")" indicate exclusive bounds and brackets "\[" "]" indicate inclusive bounds. For example, "[0,100)" is interpreted to mean, "0 (inclusive) to 100 (exclusive)".
+<span id="range">`Range`</span>: `String`; Ranges are defined according to typical mathematical notation conventions whereby parentheses "(" and ")" indicate exclusive bounds and brackets "\[" "]" indicate inclusive bounds. For example, `"[0,100)"` is interpreted to mean, "0 (inclusive) to 100 (exclusive)".
