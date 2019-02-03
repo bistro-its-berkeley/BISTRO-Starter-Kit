@@ -31,12 +31,12 @@ Currently, Sioux Faux Bus Lines (SFBL) operates a small fleet of buses on 12 rou
 <br/>
 
 
-To provide guidance on vehicle procurement for SFBL, you can recommend purchase of new types of buses possessing attributes (seating capacity, fuel usage, operations and maintenance cost, etc.) that might improve the level of service for transit along a route while (ideally) reducing operational costs and greenhouse gas emissions (see Figure 2 below).
+To provide guidance on vehicle procurement for SFBL, you can recommend purchase of new types of buses possessing attributes (seating capacity, fuel usage, operations and maintenance cost, etc.) that might improve the level of service for transit along a route while (ideally) reducing operational costs and particulate matter (PM2.5) emissions (see Figure 2 below).
 
 
  You can decide to update the type of bus (i.e. `vehicleTypeId`) that will provide service for all trips on each route (`routeID`, see Figures 1 & 2). Each route can utilize only **one type of bus**.
 
-For each bus that you purchase, the default bus on the route (i.e., buses designated by `vehicleTypeId` `BUS-DEFAULT`) is automatically sold for a price of <a href="https://www.codecogs.com/eqnedit.php?latex=\$10,000&space;&plus;&space;\$20,000&space;\times&space;\mathcal{N}(0,1)" target="_blank"><img src="https://latex.codecogs.com/png.latex?\$10,000&space;&plus;&space;\$20,000&space;\times&space;\mathcal{N}(0,1)" title="\$10,000 + \$20,000 \times \mathcal{N}(0,1)" /></a>
+
 
 ![Alt text](/../../master/Images/Bus_types.png)\
 ***Figure 2: Set of available bus types***
@@ -71,11 +71,11 @@ Figure 4 below depicts an example of Vehicle Fleet Mix input file. Only three ro
 
 #### 2.1. Description
 
-In an effort to encourage the use of sustainable transportation alternatives to private vehicles, SFBL is considering providing incentives to promote mass transit in Sioux Faux. SFBL is exploring options for citizens lacking access to quality transit or means to pay fares, including defraying the cost of certain qualified transit trips  and/or on-demand rides. 
+In an effort to encourage the use of sustainable transportation alternatives to private vehicles, SFBL is considering providing incentives to promote mass transit in Sioux Faux. SFBL is exploring options for citizens lacking access to quality transit or means to pay fares, including defraying the cost of certain qualified transit trips and/or on-demand rides. 
 
 You may choose to defray the cost of on-demand rides and/or transit based on either age group, income group, or both.
 To do so, the *range of qualifying socio-demographic characteristics* and *value of the incentive provided to each group* must be defined for passengers using each of the following modes of transportation to complete a trip: 
-  * "OnDemand_ride": use of on-demand rideshare as the main transport mode for the trip
+  * "OnDemand_ride": use of on-demand ride(s) as the main transport mode for the trip
   * "drive_transit": use of the personal car as an access/egress mode to/from transit (bus)
   * "walk_transit": walking as an access/egress mode to/from transit (bus)
 
@@ -199,7 +199,7 @@ For each new bus fare that you want to introduce, you need to specify the amount
 #### 4.3. Example
 Figure 8 depicts an example input file for Mass Transit Fare Adjustment.
 
-![Alt text](/../../master/Images/Input_Ptfares.png)
+![Alt text](/../../master/Images/Input_MassTransitFares.png)
 ***Figure 8: Example of Mass Transit Fare input***
 
 The file describes the following fare policy:

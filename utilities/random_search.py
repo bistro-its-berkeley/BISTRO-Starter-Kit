@@ -19,7 +19,7 @@ DIR_DELIM = "-"
 FREQ_FILE = "FrequencyAdjustment.csv"
 SUB_FILE = "ModeSubsidies.csv"
 FLEET_FILE = "VehicleFleetMix.csv"
-MASS_TRANSIT_FILE = "PtFares.csv"
+MASS_TRANSIT_FILE = "MassTransitFares.csv"
 SCORES_PATH = ("competition", "submissionScores.csv")
 
 logger = logging.getLogger(__name__)
@@ -62,11 +62,11 @@ def sample_settings(max_num_records, data_root):
     return tuple(samples)
 
 
-def save_inputs(input_dir, freq_df=None, mode_subsidy_df=None, vehicle_fleet_mix_df=None, pt_fare_df=None):
+def save_inputs(input_dir, freq_df=None, mode_incentive_df=None, vehicle_fleet_mix_df=None, pt_fare_df=None):
     if freq_df is not None:
         freq_df.to_csv(os.path.join(input_dir, FREQ_FILE), header=True, index=False)
-    if mode_subsidy_df is not None:
-        mode_subsidy_df.to_csv(os.path.join(input_dir, SUB_FILE), header=True, index=False)
+    if mode_incentive_df is not None:
+        mode_incentive_df.to_csv(os.path.join(input_dir, SUB_FILE), header=True, index=False)
     if vehicle_fleet_mix_df is not None:
         vehicle_fleet_mix_df.to_csv(os.path.join(input_dir, FLEET_FILE), header=True, index=False)
     if pt_fare_df is None:
