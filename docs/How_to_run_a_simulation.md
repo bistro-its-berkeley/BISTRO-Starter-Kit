@@ -46,7 +46,7 @@ one machine, it is not very useful for multiple runs (one CPU is left to run bac
 
 For convenience, the `docker run` command is wrapped by a bash script, `competition.sh`.
 
-To run the script, users may enter, for example, `./competition.sh -m 4g -c 2 -s siouxfaux -sz 15k -n 10 -i <absolute_path_to_submission-inputs>`, where
+To run the script, users may enter, for example, `./competition.sh -m 4g -c 2 -s sioux_faux -sz 15k -n 10 -i <absolute_path_to_submission-inputs>`, where
 
 * `-m` is the memory limit
 * `-c` is the number of CPUs
@@ -56,4 +56,12 @@ To run the script, users may enter, for example, `./competition.sh -m 4g -c 2 -s
 * `-i` is the input folder path
 
 _Reminder_: Substitute `<path_to_submission-inputs>` as appropriate.
+
+An example run with existing data can be run like so:
+
+```bash
+./competition.sh -m 4g -c 2 -s sioux_faux -sz 1k -n 1 -i ../submission-inputs/
+```
+
+*Note:* When you run the simulation again via the competition script, you will have to delete the container created via the previous `./competition.sh` run. You can do so with `sudo docker rm <container id>`, after looking up the <container id> via `sudo docker ps | grep beam-competition`
 
