@@ -13,7 +13,7 @@ As detailed in the [problem statement](./The_Sioux_Faux_scenario.md), to help th
 
 A submission entry is a set of input files (i.e., `csv`s named according to the input type), which have been collected into a single folder.
 
-The following subsections provide a detailed description of what each input represents as well as technical details for the schema, data types, and constraints that specify the syntax of each input file. Files representing empty inputs can be found in the [`submission-inputs`](/../../master/submission-inputs/) folder.
+The following subsections provide a detailed description of what each input represents as well as technical details for the schema, data types, and constraints that specify the syntax of each input file. Files representing empty inputs can be found in the [`submission-inputs`](/submission-inputs/) folder.
 
 ## Input Types
 
@@ -25,7 +25,7 @@ Currently, Sioux Faux Bus Lines (SFBL) operates a small fleet of buses on 12 rou
 
 
 
-![Route IDs](/../../master/Images/sf_route_guide.png) <br/>
+![Route IDs](/Images/sf_route_guide.png) <br/>
 ***Figure 1: Sioux Faux route IDs guide***
 <br/>
 <br/>
@@ -38,13 +38,13 @@ To provide guidance on vehicle procurement for SFBL, you can recommend purchase 
 
 
 
-![Alt text](/../../master/Images/Bus_types.png)\
+![Alt text](/Images/Bus_types.png)\
 ***Figure 2: Set of available bus types***
 <br/>
 <br/>
 
 
-![Alt text](/../../master/Images/BusCosts.png)\
+![Alt text](/Images/BusCosts.png)\
 ***Figure 3: Costs of available bus types***
 <br/>
 
@@ -55,14 +55,15 @@ Your recommendation is to be submitted in a file named `VehicleFleetMix.csv` acc
 | :---:| :--- | :--- | :----|
 | `agencyId`|`String` | Agency identifier | Must equal agency Id found under `agencyId` in [`agencies.txt`](/../../master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/agency.txt) of corresponding GTFS file for transit agency with `agency_name` designated by parent directory of `gtfs_data` in starter kit `/reference-data` directory. Note that for Sioux Faux, SFBL is the only agency operating in the city (`agencId`="217"). Therefore, any entry in the .csv file will have "217" under `agencyId`.|
 | `routeId` |`String` | The route that will have its vehicle type assignment modified | A route can only have its assignment modified once. The `routeId` name must exist in the [`routes.txt`](/../../master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/routes.txt) file corresponding to the GTFS data for the agency specified by this entry's `agencyId`.|
-| `vehicleTypeId`|`String` | The vehicle type identifier | Must be a member of the set of vehicle type Ids listed under `vehicleTypeId` in the [`availableVehicleTypes.csv`](/../../master/reference-data/sioux_faux/sioux_faux_bus_lines/availableVehicleTypes.csv)file.
+| `vehicleTypeId`|`String` | The vehicle type identifier | Must be a member of the set of vehicle type Ids listed under `vehicleTypeId` in the [`availableVehicleTypes.csv`](/../../master/reference-data/sioux_faux/sioux_faux_bus_lines/availableVehicleTypes.csv)file. |
+
 ***Table 1: Vehicle fleet mix input schema and constraint definitions***
 
 
 #### 1.3. Example:
 Figure 4 below depicts an example of Vehicle Fleet Mix input file. Only three routes (`1342`, `1350` and `1351`) out of twelve are assigned a new bus type (respectively `BUS-STD-HD`, `BUS-SMALL-HD`, `BUS-STD-ART`); all other routes operate with the default bus type (`BUS-DEFAULT`).
 
-![Bus fleet](/../../master/Images/Input_VehicleFleetMix.png)\
+![Bus fleet](/Images/Input_VehicleFleetMix.png)\
 ***Figure 4: Example of Vehicle Fleet Mix Input.***
 
 
@@ -97,7 +98,7 @@ Your recommendation is to be submitted in a file named `ModeIncentives.csv` acco
 
 #### 2.3. Example:
 
-![Alt text](/../../master/Images/Input_ModeIncentives.png)
+![Alt text](/Images/Input_ModeIncentives.png)
 ***Figure 5: Example of Mode Incentive Input***
 
 Figure 5 depicts an example input file describing the following situation:
@@ -123,22 +124,22 @@ An essential aspect of transit system operations is capacity optimization. Route
 Before explaining how the input works, a few terms must be defined:
 
 * A **route** is made of a group of *trips* that are displayed to riders as a single service. Each bus route can be identified with a `route_id`. To understand the geospatial embedding of each Route corresponding to a `route_id`, please refer to Figure 1, above.   
-* A **trip** is a sequence of two or more *stops* that occurs at specific time and is identified by a `trip_id`. For Sioux Faux, the existing SFBL trips corresponding to each route are described in the [`trip.txt`](/../../master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file in the gtfs-data folder.
+* A **trip** is a sequence of two or more *stops* that occurs at specific time and is identified by a `trip_id`. For Sioux Faux, the existing SFBL trips corresponding to each route are described in the [`trip.txt`](/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file in the gtfs-data folder.
 
-Currently, Sioux Faux buses follow a *non-frequency schedule* based on their arrival and departure times to and from each stop of their route. These arrival and departure times are listed in the [`stop_times.txt`](/../../master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/stop_times.txt) file of Sioux Faux's GTFS data.
-You role here is to decide if some routes should follow a *frequency schedule* instead of a non frequency one. While we term the behavior of this input as frequency adjustment, in fact, it modifies the SFBL bus headways on a particular route. The adjustment wipes out all non-frequency trips from the route during the specified *service period* (defined between `start_time` and `end_time`) and converts them to frequency trips according to the given `headway_secs`. You can find a definition of these parameters in Table 3 below. Note that it is assumed that buses operate only on *week days* (i.e. from Monday to Friday).
+Currently, Sioux Faux buses follow a *non-frequency schedule* based on their arrival and departure times to and from each stop of their route. These arrival and departure times are listed in the [`stop_times.txt`](/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/stop_times.txt) file of Sioux Faux's GTFS data.
+Your role here is to decide if some routes should follow a *frequency schedule* instead of a non frequency one. While we term the behavior of this input as frequency adjustment, in fact, it modifies the SFBL bus headways on a particular route. The adjustment wipes out all non-frequency trips from the route during the specified *service period* (defined between `start_time` and `end_time`) and converts them to frequency trips according to the given `headway_secs`. You can find a definition of these parameters in Table 3 below. Note that it is assumed that buses operate only on *week days* (i.e. from Monday to Friday).
 
-Here, we require you to provide the `trip_id` in order to derive the stop pattern and travel times as well as to implicitly reference a bus route. The `trip_id`s corresponding to each `route_id` are gathered in the [`trip.txt`](/../../master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file. An troncated extract of the `trips.txt` file is shown on Figure 6 below.
+Here, we require you to provide the `trip_id` in order to derive the stop pattern and travel times as well as to implicitly reference a bus route. The `trip_id`s corresponding to each `route_id` are gathered in the [`trip.txt`](/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file. A truncated extract of the `trips.txt` file is shown on Figure 6 below.
 
 Each route is associated with a list of unique `trip_id`s. These multiple `trip_id`s for each route will allow to define multiple service periods with a new headway for a same route. See example in pararaph 3.3 for more details.
 
-![Alt text](/../../master/Images/trips_txt_extract.png)\
+![Alt text](/Images/trips_txt_extract.png)\
 ***Figure 6: Extract of the trips.txt file***
 
 
 #### 3.2. Technical Details
 
-The format for this  input is identical to the `frequencies.txt` component of the <a href="https://developers.google.com/transit/gtfs/reference/#frequenciestxt">GTFS specification</a>. The GTFS data of Sioux Faux are stored in the [reference-data](/../../master/reference-data/sioux_faux/sioux_faux_bus_lines/) folder.
+The format for this  input is identical to the `frequencies.txt` component of the <a href="https://developers.google.com/transit/gtfs/reference/#frequenciestxt">GTFS specification</a>. The GTFS data of Sioux Faux are stored in the [reference-data](/reference-data/sioux_faux/sioux_faux_bus_lines/) folder.
 
 
 | Column Name | Data Type |Description | Validation Criteria |
@@ -157,10 +158,10 @@ The format for this  input is identical to the `frequencies.txt` component of th
 
 Figure 7 below depicts an example input file.
 
-![Alt text](/../../master/Images/Input_FrequencyAdjustment.png)
+![Alt text](/Images/Input_FrequencyAdjustment.png)
 ***Figure 7: Example of Frequency Adjustment Input***
 
-To find the correspondance between `trip_id`s and `route id`s, refer to the [`trip.txt`](/../../master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file of Sioux-Faux's GTFS data (see Figure 6 above). 
+To find the correspondance between `trip_id`s and `route id`s, refer to the [`trip.txt`](/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file of Sioux-Faux's GTFS data (see Figure 6 above). 
 
 In this case, two routes will see their bus frequency adjusted: route 1340 (trip id `t_75335_b_219_tn_1`) and route 1341 (trip ids `t_75384_b_219_tn_1` and `t_75384_b_219_tn_2`). 
 * `trip_id` = `t_75335_b_219_tn_1`: the bus schedule on route 1340 is changed between 6am (21600sec) and 10pm (79200sec) to a 15minute frequency-schedule (900sec) . Outside of this time-window, the bus schedule on the route follow the non-frequency schedule defined by the gtfs-data of the agency.
@@ -189,8 +190,8 @@ For each new bus fare that you want to introduce, you need to specify the amount
 
 | Column Name | Data Type | Description | Validation Criteria |
 | :---: |:--- | :--- | :----|
-| `agencyId`| `String` | Agency identifier | Must equal agency Id found under `agency_id` in [`agencies.txt`](/../../master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/agencies.txt) of corresponding GTFS file for transit agency with `agency_name` designated by parent directory of `gtfs_data` in starter kit `/reference-data` directory. Note that for Sioux Faux, SFBL is the only agency operating in the city (`agencyId`="217"). Therefore, any entry in the .csv file will have "217" under `agencyId`.|
-| `routeId` | `String` | The route that will have its fare specified. | A route can only have its fare set once. The `routeId` name must exist in the [`routes.txt`](/../../master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/routes.txt) file corresponding to the GTFS data for the agency specified by this entry's `agencyId`|
+| `agencyId`| `String` | Agency identifier | Must equal agency Id found under `agency_id` in [`agencies.txt`](/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/agencies.txt) of corresponding GTFS file for transit agency with `agency_name` designated by parent directory of `gtfs_data` in starter kit `/reference-data` directory. Note that for Sioux Faux, SFBL is the only agency operating in the city (`agencyId`="217"). Therefore, any entry in the .csv file will have "217" under `agencyId`.|
+| `routeId` | `String` | The route that will have its fare specified. | A route can only have its fare set once. The `routeId` name must exist in the [`routes.txt`](/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/routes.txt) file corresponding to the GTFS data for the agency specified by this entry's `agencyId`|
 | `age` | [`Range`](#range) | The range of ages of agents that this fare pertains to. | Must be greater than 0 and less than 120 (the maximum age of any resident in Sioux Faux)|
 | `amount` | `Float` | The amount (in $US) to charge an agent in the corresponding fare group. | Must be greater than 0 and equal or smaller than 10.|
 
@@ -199,7 +200,7 @@ For each new bus fare that you want to introduce, you need to specify the amount
 #### 4.3. Example
 Figure 8 depicts an example input file for Mass Transit Fare Adjustment.
 
-![Alt text](/../../master/Images/Input_MassTransitFares.png)
+![Alt text](/Images/Input_MassTransitFares.png)
 ***Figure 8: Example of Mass Transit Fare input***
 
 The file describes the following fare policy:
