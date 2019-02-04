@@ -25,7 +25,7 @@ Currently, Sioux Faux Bus Lines (SFBL) operates a small fleet of buses on 12 rou
 
 
 
-![Route IDs](/../../master/Images/sf_route_guide.png) <br/>
+![Route IDs](/Images/sf_route_guide.png) <br/>
 ***Figure 1: Sioux Faux route IDs guide***
 <br/>
 <br/>
