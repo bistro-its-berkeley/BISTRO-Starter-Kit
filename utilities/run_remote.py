@@ -26,7 +26,7 @@ def get_ips_from_config(config_loc):
         lines = f.readlines()
         for line in lines:
             if "HostName" in line:
-                _,host_ip = line.strip(" ").split(" ")
+                host_ip = line.strip(" ").split(" ")[2]
                 ips.append(host_ip.strip("\n"))
     return ips
 
