@@ -1,0 +1,12 @@
+Component Name,Weight,Raw Score,Weighted Score
+Level of service: costs and benefits,1.0,0.7478323254155731,0.7478323254155731
+Accessibility: Number of work locations accessible within 15 minutes,1.0,0.941632875687095,0.941632875687095
+Accessibility: Number of secondary locations accessible within 15 minutes,1.0,0.9581001649190808,0.9581001649190808
+Sustainability: Total PM 2.5 Emissions,1.0,0.9773354200896097,0.9773354200896097
+Level of service: average on-demand ride wait times,1.0,1.0582454339301326,1.0582454339301326
+Level of service: average bus crowding experienced,1.0,0.4043311031811173,0.4043311031811173
+Level of service: average trip expenditure - secondary,1.0,0.8603105044971724,0.8603105044971724
+Level of service: average trip expenditure - work,1.0,1.0764836874167145,1.0764836874167145
+Congestion: average vehicle delay per passenger trip,1.0,1.0267805169007245,1.0267805169007245
+Congestion: total vehicle miles traveled,1.0,0.9679792402477652,0.9679792402477652
+Submission Score,,,-0.7403009890697613022585427364820382
