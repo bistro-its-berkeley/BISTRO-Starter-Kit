@@ -48,16 +48,11 @@ def sample_settings(max_num_records, data_root):
     # TODO pull out data GTFS stuff to make this pure function
     agency_dict = sampler.scenario_agencies(Path(data_root), SCENARIO_NAME)
     sf_gtfs_manager = sampler.AgencyGtfsDataManager(agency_dict[AGENCY])
-
-    samplers = [sampler.sample_frequency_adjustment_input,
-                sampler.sample_mode_subsidies_input,
-                sampler.sample_vehicle_fleet_mix_input,
-                sampler.sample_mass_transit_fares_input]
-
-    samples = []
-    for input_sampler in samplers:
-        num_records = np.random.randint(0, max_num_records)
-        samples.append(input_sampler(num_records, sf_gtfs_manager))
+    num_records = np.random.randint(0, max_num_records, 3)
+    samples = [sampler.sample_frequency_adjustment_input(np.random.randint(0, 5), sf_gtfs_manager),
+               sampler.sample_mode_subsidies_input(num_records[0], sf_gtfs_manager),
+               sampler.sample_vehicle_fleet_mix_input(num_records[1], sf_gtfs_manager),
+               sampler.sample_mass_transit_fares_input(num_records[2], sf_gtfs_manager)]
 
     return tuple(samples)
 
@@ -84,7 +79,7 @@ def read_scores(output_dir):
 
 
 def search_iteration(docker_cmd, data_root, input_root, output_root):
-    max_records = 10
+    max_records = 12
 
     client = docker.from_env()  # TODO consider if cleanest that this is in main?
 

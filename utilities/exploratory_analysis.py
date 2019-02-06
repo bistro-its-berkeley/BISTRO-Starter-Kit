@@ -82,7 +82,6 @@ def docker_exists(container_id, client):
 
 def sample_settings(data_root, combination_number, input_mode):
     max_bus_lines = 12
-    max_num_records_frequency = 36
     max_num_records = 10
 
     # TODO pull out data GTFS stuff to make this pure function
@@ -90,7 +89,7 @@ def sample_settings(data_root, combination_number, input_mode):
     sf_gtfs_manager = sampler.AgencyGtfsDataManager(agency_dict[AGENCY])
 
     if input_mode == "random_inputs":
-        samples = [sampler.sample_frequency_adjustment_input(np.random.randint(0, max_num_records_frequency), sf_gtfs_manager),
+        samples = [sampler.sample_frequency_adjustment_input(np.random.randint(0, 5), sf_gtfs_manager),
                    sampler.sample_mode_subsidies_input(np.random.randint(0, max_num_records), sf_gtfs_manager),
                    sampler.sample_vehicle_fleet_mix_input(np.random.randint(0, max_bus_lines), sf_gtfs_manager),
                    sampler.sample_mass_transit_fares_input(max_num_records, sf_gtfs_manager, max_fare_amount=10.0)]
@@ -312,6 +311,7 @@ def main(combination_number, name_of_exploration, input_mode):
     # Some prints
     docker_cmd = CMD_TEMPLATE.format(SCENARIO_NAME, sample_size, n_sim_iters)
     random_search(docker_cmd, n_search_iters, data_root, input_root, output_root, combination_number, input_mode)
+
 
 if __name__ == "__main__":
     combination_number = int(sys.argv[1])
