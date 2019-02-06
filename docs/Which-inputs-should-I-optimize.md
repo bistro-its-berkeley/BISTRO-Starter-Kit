@@ -178,7 +178,7 @@ You will note that to define several discrete service periods for a *same* route
 SFBL would like to use this simulation experiment to explore the effect of changing **bus fares**, i.e. the cost to a passenger of traveling by bus. Currently, the Sioux Faux bus fare policy works as follow: 
 * Children 5 yrs. and under: FREE
 * Children 6 to 10 yrs. : $0.75
-* Children 10 to 18 yrs and Adults 65 yrs. and under: $1.50
+* Children 11 to 18 yrs and Adults 65 yrs. and under: $1.50
 * Persons over 65 yrs: FREE
 
 Perhaps a lower fare for young adults (ages 12-18) would significantly increase ridership among this population. Alternatively, perhaps a higher fare for middle-aged adults (40-55) would be well-tolerated, while boosting fare-box revenue."
