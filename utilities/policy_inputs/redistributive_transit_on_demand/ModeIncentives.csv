@@ -1,0 +1,4 @@
+mode,age,income,amount
+On-demand,(0,120),6.00
+walk_transit,(0,120),6.00
+drive_transit,(0,120),6.00
