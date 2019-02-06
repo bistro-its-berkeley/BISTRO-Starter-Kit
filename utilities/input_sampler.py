@@ -42,6 +42,8 @@ import pandas as pd
 from random_search import PT_FARE_FILE
 from utils import lazyprop
 
+from collections import Counter
+from random import shuffle, sample
 
 def scenario_agencies(data_dir, scenario_name):
     """Given root data directory and scenario name, computes a mapping
@@ -152,8 +154,15 @@ def _get_valid_start_end_time(min_secs, max_secs, headway_secs):
     else:
         return st, et
 
+def _get_non_overlapping_service_periods(number_of_routes, min_secs, max_secs, min_headway_seconds):
+    picked_st_et = np.sort(np.random.choice(np.arange(min_secs, max_secs, 60), number_of_routes * 2, replace=False))
+    service_period_durations = [picked_st_et[i+1] - picked_st_et[i] for i in range(0, len(picked_st_et), 2)]
+    if any([i <= min_headway_seconds for i in service_period_durations]):
+        return _get_non_overlapping_service_periods(number_of_routes, min_secs, max_secs, min_headway_seconds)
+    return picked_st_et
 
-def sample_frequency_adjustment_input(num_records, gtfs_manager):
+
+def sample_frequency_adjustment_input(num_service_periods, gtfs_manager):
     """Generate random `FrequencyAdjustment` inputs according to trips run by
     an agency.
 
@@ -171,8 +180,8 @@ def sample_frequency_adjustment_input(num_records, gtfs_manager):
 
     Parameters
     ----------
-    num_records : int
-        Number of randomly sampled records to create.
+    num_service_periods : int
+        Number of service periods with a new headway that can be added to a route.
     gtfs_manager : `AgencyGtfsDataManager`
         An instance of the `AgencyGtfsDataManager` for the target agency.
 
@@ -181,24 +190,47 @@ def sample_frequency_adjustment_input(num_records, gtfs_manager):
     `pd.DataFrame`
         `num_records` `FrequencyAdjustmentInput` records.
     """
-    df_columns = ['trip_id', 'start_time', 'end_time', 'headway_secs']
+    if num_service_periods > 5:
+        raise ValueError("The maximum number of service periods per route is equal to {0} although it should not exceed 5.".format(num_service_periods))
+
+    df_columns = ['route_id', 'start_time', 'end_time', 'headway_secs']
+
+    if num_service_periods == 0:
+        return pd.DataFrame({k: [] for k in df_columns})
+
+    num_records = np.random.choice(num_service_periods * len(gtfs_manager.routes.values))
     if num_records == 0:
         return pd.DataFrame({k: [] for k in df_columns})
+
+    route_id_list = list(gtfs_manager.routes.index.values) * num_service_periods
+    shuffle(route_id_list)
+    route_id_list = route_id_list[:num_records]
+
     min_secs = 0
     max_secs = 86340
+    min_headway_seconds = 180
+    max_headway_seconds = 7199
 
-    min_headway_mins_by_trip = gtfs_manager.trips.join(gtfs_manager.routes.min_headway_minutes,
-                                                       on='route_id').min_headway_minutes
-    trip_ids = pd.Series(gtfs_manager.trips.sample(num_records).index.values)
-    headway_secs_arr = [np.random.choice(range(m * 60, 7200, 60)) for m in
-                        min_headway_mins_by_trip[trip_ids].values]
-    times_df = pd.DataFrame(
-        [_get_valid_start_end_time(min_secs, max_secs, headway_secs) for headway_secs in
-         headway_secs_arr])
-    res_df = pd.concat([trip_ids, times_df, pd.Series(headway_secs_arr)], axis=1, ignore_index=True)
-    res_df.columns = df_columns
-    res_df['exact_times'] = 0
-    return res_df
+    # trip_ids = pd.Series(gtfs_manager.trips.sample(num_records).index.values)
+
+    res_df = []
+
+    frequency_data = []
+    route_frequency = Counter(route_id_list).items()
+    for route_id, number_entries in route_frequency:
+        start_end_times = _get_non_overlapping_service_periods(number_entries, min_secs, max_secs, min_headway_seconds)
+        service_periods = [(start_end_times[i], start_end_times[i + 1]) for i in range(0, len(start_end_times), 2)]
+
+        for s in service_periods:
+            if s[1] - s[0] > max_headway_seconds:
+                headway = np.random.choice(np.arange(min_headway_seconds, max_headway_seconds, 60))
+            else:
+                headway = np.random.choice(np.arange(min_headway_seconds, s[1] - s[0], 60))
+            frequency_data.append([route_id, s[0], s[1], headway])
+
+    frequency_adjustment_df = pd.DataFrame(frequency_data, columns=df_columns)
+    frequency_adjustment_df['exact_times'] = 0
+    return frequency_adjustment_df
 
 
 def sample_format_range(tuple_range):
@@ -230,10 +262,10 @@ def sample_mode_subsidies_input(num_records, gtfs_manager=None):
 
     Creates `num_records` ModeSubsidyInput records where fields for each record
     are randomly sampled as follows:
-        * `age` : uniformly from `range(0,120,1)`.
+        * `age` : uniformly from `range(1,120,5)`.
         * `mode` : uniformly from list of available modes for scenario.
-        * `income` : uniformly from `range(0,300000,1000)`.
-        * `amount` : uniformly from `range(0.1,20)`.
+        * `income` : uniformly from `range(0,150000,5000)`.
+        * `amount` : uniformly from `range(0.1,50)`.
 
     The amount of subsidy is rounded to the nearest $0.10.
 
@@ -259,9 +291,10 @@ def sample_mode_subsidies_input(num_records, gtfs_manager=None):
         return pd.DataFrame({k: [] for k in df_columns})
     possible_modes = ['OnDemand_ride', 'walk_transit', 'drive_transit']
     modes = np.random.choice(possible_modes, num_records).tolist()
-    ages = [sample_format_range(tuple(sorted(np.random.choice(range(1, 120), 2)))) for _ in
+    ages_range = [i for i in range(5, 120, 5)] + [1,120]
+    ages = [sample_format_range(tuple(sorted(np.random.choice(ages_range, 2)))) for _ in
             range(num_records)]
-    incomes = [sample_format_range(tuple(sorted(np.random.choice(range(0, 150000, 1000), 2)))) for _
+    incomes = [sample_format_range(tuple(sorted(np.random.choice(range(0, 150000, 5000), 2)))) for _
                in range(num_records)]
     amounts = [np.round(np.random.uniform(0.1, 10), 1) for _ in range(num_records)]
     return pd.DataFrame(np.array([modes, ages, incomes, amounts]).T,
@@ -311,7 +344,8 @@ def sample_mass_transit_fares_input(num_records, gtfs_manager, max_fare_amount=1
     routes = pd.Series(route_agency_sample.index.values)
     agency = pd.Series(route_agency_sample.agency_id.values)
     amounts = [np.round(np.random.uniform(0.1, max_fare_amount), 1) for _ in range(num_records)]
-    ages = [sample_format_range(tuple(sorted(np.random.choice(120, 2)))) for _ in
+    ages_range = [i for i in range(5, 120, 5)] + [1,120]
+    ages = [sample_format_range(tuple(sorted(np.random.choice(ages_range, 2)))) for _ in
             range(num_records)]
     return pd.DataFrame(np.array([agency, routes, ages, amounts]).T,
                         columns=df_columns)
