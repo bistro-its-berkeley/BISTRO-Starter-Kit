@@ -1,4 +1,4 @@
 mode,age,income,amount
-OnDemand_ride,[0:120),[1:149999),6.00
-walk_transit,[0:120),[1:149999),6.00
-drive_transit,[0:120),[1:149999),6.00
+OnDemand_ride,[0:120),[1:20000),6.00
+walk_transit,[0:120),[1:20000),6.00
+drive_transit,[0:120),[1:20000),6.00
