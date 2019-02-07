@@ -121,17 +121,8 @@ Figure 5 depicts an example input file describing the following situation:
 
 An essential aspect of transit system operations is capacity optimization. Route capacity is the number of passengers that can be moved past a fixed point in a given unit of time. In addition to allocating buses with larger or smaller total occupancies, SFBL wants to alter the frequency of buses on a given route. The `FrequencyAdjustment` input works in concert with the `VehicleFleetMix` input so that the capacity of the route is more likely to meet demand as it changes throughout a typical workday.
 
-Before explaining how the input works, a few terms must be defined:
-
-* A **route** is made of a group of *trips* that are displayed to riders as a single service. Each bus route can be identified with a `route_id`. To understand the geospatial embedding of each Route corresponding to a `route_id`, please refer to Figure 1, above.   
-* A **trip** is a sequence of two or more *stops* that occurs at specific time and is identified by a `trip_id`. For Sioux Faux, the existing SFBL trips corresponding to each route are described in the [`trip.txt`](/../../blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file in the gtfs-data folder.
-
 Currently, Sioux Faux buses follow a *non-frequency schedule* based on their arrival and departure times to and from each stop of their route. These arrival and departure times are listed in the [`stop_times.txt`](/../../blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/stop_times.txt) file of Sioux Faux's GTFS data.
-Your role here is to decide if some routes should follow a *frequency schedule* instead of a non frequency one. While we term the behavior of this input as frequency adjustment, in fact, it modifies the SFBL bus headways on a particular route. The adjustment wipes out all non-frequency trips from the route during the specified *service period* (defined between `start_time` and `end_time`) and converts them to frequency trips according to the given `headway_secs`. You can find a definition of these parameters in Table 3 below. Note that it is assumed that buses operate only on *week days* (i.e. from Monday to Friday).
-
-Here, we require you to provide the `trip_id` in order to derive the stop pattern and travel times as well as to implicitly reference a bus route. The `trip_id`s corresponding to each `route_id` are gathered in the [`trip.txt`](/../../blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file. A truncated extract of the `trips.txt` file is shown on Figure 6 below.
-
-Each route is associated with a list of unique `trip_id`s. These multiple `trip_id`s for each route will allow to define multiple service periods with a new headway for a same route. See example in pararaph 3.3 for more details.
+Your role here is to decide if some routes (identified by their `route_id`s) should follow a *frequency schedule* instead of a non frequency one. While we term the behavior of this input as frequency adjustment, in fact, it modifies the SFBL bus headways on a particular route. The adjustment wipes out the whole non-frequency schedule from the route and converts it to frequency trips according to the given `headway_secs` and within the specified *service period* (defined between `start_time` and `end_time`). You can find a definition of these parameters in Table 3 below. Note that it is assumed that buses operate only on *week days* (i.e. from Monday to Friday).
 
 ![Alt text](/Images/trips_txt_extract.png)\
 ***Figure 6: Extract of the trips.txt file***
@@ -139,15 +130,15 @@ Each route is associated with a list of unique `trip_id`s. These multiple `trip_
 
 #### 3.2. Technical Details
 
-The format for this  input is identical to the `frequencies.txt` component of the <a href="https://developers.google.com/transit/gtfs/reference/#frequenciestxt">GTFS specification</a>. The GTFS data of Sioux Faux are stored in the [reference-data](/../../blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/) folder.
+The format for this input is described in the Table 3 below. 
 
 
 | Column Name | Data Type |Description | Validation Criteria |
 | :---: |:--- | :--- | :----|
-| `trip_id` | `String` | The trip corresponding to the route for which frequencies will be adjusted. | Must reference a `tripId` in the `trips.txt` (and implicitly a `routeId` in the `routes.txt` file) corresponding to the GTFS data for the agency specified by this entry's `agencyId`. |
+| `route_id` | `String` | The route for which frequencies will be adjusted with a new time-window/headway combination . | Must reference a `route_id` in the `routes.txt` file corresponding to the GTFS data for the agency specified by this entry's `agencyId`. |
 | `start_time` | `Integer`  | The `start_time` field specifies the starting time (in seconds) of the service period operating with the new headway. In other words, it is the time (in seconds past midnight) at which the first vehicle departs from the first stop of the trip with the specified frequency. | Must be greater than 0 and less than 86400 (the number of seconds in a day).|
 | `end_time` | `Integer`  | The `end_time` field indicates the end time (in seconds) of the service period operating with the new headway. In other words, it is the time at which service changes to a different frequency (or ceases) at the first stop in the trip. | Must be greater than 0 and less than 86400 (the number of seconds in a day). |
-| `headway_secs` | `Integer`| 	The `headway_secs` field indicates the time (in seconds) between departures from the same stop (headway) for this trip type, during the time interval specified by `start_time` and `end_time`. The headway value must be entered in seconds. | Must be greater than 1sec and less than 7200sec (2h). <br> Periods in which headways are defined (the rows in frequencies.txt) shouldn't overlap for the same trip (and route), since it's hard to determine what should be inferred from two overlapping headways. However, a headway period may begin at the exact same time that another one ends. |
+| `headway_secs` | `Integer`| 	The `headway_secs` field indicates the time (in seconds) between departures from the same stop (headway) for this trip type, during the time interval specified by `start_time` and `end_time`. The headway value must be entered in seconds. | Must be greater than 180sec (3min) and less than 7200sec (2h). <br> Periods in which headways are defined (the rows in frequencies.txt) shouldn't overlap for the same route, since it's hard to determine what should be inferred from two overlapping headways. However, a headway period may begin at the exact same time that another one ends. |
 | `exact_times` | `Integer`|Determines if frequency-based trips should be exactly scheduled based on the specified headway information. |Must be entered as 1 for the purposes of this round of the contest. See the <a href="https://developers.google.com/transit/gtfs/reference/#frequenciestxt">GTFS specification</a> for further information about what this field represents. |
 
 ***Table 3: Frequency Adjustments input schema and constraint definitions***
