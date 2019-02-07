@@ -1,17 +1,17 @@
+import docker
 import multiprocessing
+import pandas as pd
 import sys
 import time
 from abc import ABC, abstractmethod
 from functools import wraps
 from os import path
 
-import docker
-import pandas as pd
 
-#TODO: Change to map after first competition done
+# TODO: Change to map after first competition done
 SCENARIO_NAME = 'sioux_faux'
 
-SAMPLE_SIZES = ['15k','1k']
+SAMPLE_SIZES = ['15k', '1k']
 
 MODE_CHOICE_CSV = "modeChoice.csv"
 
@@ -20,6 +20,8 @@ SUMMARY_STATS_CSV = "summaryStats.csv"
 SUBMISSION_SCORES_FILE = "submissionScores.csv"
 
 SUBMISSION_SCORES_DIR = "competition"
+
+SCORES_PATH = ("competition", "submissionScores.csv")
 
 
 def lazy_property(fn):
@@ -50,42 +52,18 @@ class Results:
     def scores(self):
         """ Extracts the submission scores from the simulation outputs and creates a pandas DataFrame from it.
 
-        Parses the submissionScores.txt output file containing the raw and weighted subscores, as well as the general
-        score of the simulation run. Stores the result in a pandas DataFrame
+              Parses the submissionScores.csv output file containing the raw and weighted subscores, as well as the general
+              score of the simulation run. Stores the result in a pandas DataFrame
 
-        Returns
-        -------
-        scores: pandas DataFrame
-                Summary of the raw and weighted subscores, as well as the general score of
-                the simulation run.
-        """
-
-        with open(path.join(self.output_directory, SUBMISSION_SCORES_DIR, SUBMISSION_SCORES_FILE), "r") as f:
-            lines = f.readlines()
-
-            data = []
-            for idx, l in enumerate(lines):
-                if idx == 0:
-                    columns = l.rstrip('\n').split("|")
-                    columns = [i.strip() for i in columns]
-                    continue
-                elif idx == 1:
-                    continue
-                values = l.rstrip('\n').split("|")
-                values = [i.strip() for i in values]
-                values = [i if len(i) > 0 else "0" for i in values]
-                data.append(values)
-
-        df = pd.DataFrame(data, columns=columns)
-
-        scores = []
-
-        for score_type in ["Weight", "Raw Score", "Weighted Score"]:
-            pivoted = pd.pivot_table(df, values=score_type, columns="Component Name", aggfunc="first").reset_index(
-                drop=True)
-            pivoted.columns = ["%s_%s" % (i, score_type) for i in pivoted.columns]
-            scores.append(pivoted)
-        scores = pd.concat(scores, 1).astype(float)
+              Returns
+              -------
+              scores: pandas DataFrame
+                      Summary of the raw and weighted subscores, as well as the general score of
+                      the simulation run.
+              """
+        output_path = path.join(self.output_directory, SUBMISSION_SCORES_DIR, SUBMISSION_SCORES_FILE)
+        df = pd.read_csv(output_path, index_col="Component Name")
+        scores = df["Weighted Score"]
         return scores
 
     @lazy_property
@@ -241,7 +219,6 @@ class Submission(object):
 
         """
 
-
         path_submission_scores = path.join(self.output_directory, SUBMISSION_SCORES_DIR, SUBMISSION_SCORES_FILE)
         return path.exists(path_submission_scores)
 
@@ -250,6 +227,7 @@ class Submission(object):
                                                                                                     self.scenario_name,
                                                                                                     self.num_iterations,
                                                                                                     self.sample_size)
+
 
 def verify_submission_id(func):
     """Checks that the container id exists in the CompetitionContainerExecutor object."""
@@ -263,6 +241,7 @@ def verify_submission_id(func):
             return func(*args, **kwargs)
 
     return wrapper
+
 
 def _get_submission_timestamp_from_log(log):
     """Parses the logs (as a string) of a container to find the precise time at which the output directory was
@@ -316,7 +295,6 @@ class AbstractCompetitionExecutor(ABC):
 
         list_inputs = ["VehicleFleetMix", "ModeSubsidies", "FrequencyAdjustment", "MassTransitFares"]
 
-
         if input_root is None:
             if submission_input_root is not None:
                 input_root = submission_input_root
@@ -329,7 +307,7 @@ class AbstractCompetitionExecutor(ABC):
             if input_name not in list_inputs:
                 raise KeyError("{0} is not a valid key for `input_dictionary`.".format(input_name))
 
-            input_dataframe.to_csv(path.join(input_root, input_name +".csv"), index=False)
+            input_dataframe.to_csv(path.join(input_root, input_name + ".csv"), index=False)
 
     @abstractmethod
     def get_submission_scores_and_stats(self, *args, **kwargs):
@@ -361,12 +339,12 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
         else you will need to do so for every container you create)
 
     """
+
     def __init__(self, input_root=None,
                  output_root=None):
         super().__init__(input_root, output_root)
         self.client = docker.from_env()
         self.containers = {}
-
 
     def list_running_simulations(self):
         """Queries the run status for executed containers cached on this object in turn
