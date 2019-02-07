@@ -61,8 +61,8 @@ class Results:
                       Summary of the raw and weighted subscores, as well as the general score of
                       the simulation run.
               """
-        output_dir = path.join(self.output_directory, SUBMISSION_SCORES_DIR, SUBMISSION_SCORES_FILE)
-        df = pd.read_csv(path.join(output_dir, *SCORES_PATH), index_col="Component Name")
+        output_path = path.join(self.output_directory, SUBMISSION_SCORES_DIR, SUBMISSION_SCORES_FILE)
+        df = pd.read_csv(output_path, index_col="Component Name")
         scores = df["Weighted Score"]
         return scores
 
