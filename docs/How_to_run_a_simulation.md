@@ -37,7 +37,7 @@ This section explains how to run simulations directly from the command line usin
 To run a container based on the image containing the BISTRO framework, users need to specify the submission folder and output folder and then run the following command (subsititute <x> as appropriate, keeping in mind that there are sample submission inputs in the root of this repo i.e., `/submission-inputs`). For example, you may run
 
 ```bash
-$ docker run -v <absolute_path_to_submission_inputs>:/submission-inputs:ro -v <path_to_output_root>:/output:rw beammodel/beam-competition:0.0.1-SNAPSHOT --scenario siouxfaux --sample-size 15k --iters 10
+$ docker run -v <absolute_path_to_submission_inputs>:/submission-inputs:ro -v <path_to_output_root>:/output:rw beammodel/beam-competition:0.0.1-SNAPSHOT --scenario sioux_faux --sample-size 15k --iters 10
 ```
 
 to execute the 15k Sioux Faux scenario for 10 iterations.
@@ -47,7 +47,7 @@ _Note_: To those unfamiliar with the `docker run` command, `-v` binds a local vo
 If desired, users may pass Java Virtual Machine (JVM) attributes and add JAVA_OPTS `env` arguments to the `docker run` command. For example:
 
 ```bash
-$ docker run -it --memory=4g --cpus=2 -v <absolute_path_to_submission_inputs>:/submission-inputs:ro -v <path_to_output_root>/output:/output:rw -e JAVA_OPTS='"-Xmx4g" "-Xms2g"' beammodel/beam-competition:0.0.1-SNAPSHOT --scenario siouxfaux --sample-size 15k --iters 10
+$ docker run -it --memory=4g --cpus=2 -v <absolute_path_to_submission_inputs>:/submission-inputs:ro -v <path_to_output_root>/output:/output:rw -e JAVA_OPTS='"-Xmx4g" "-Xms2g"' beammodel/beam-competition:0.0.1-SNAPSHOT --scenario sioux_faux --sample-size 15k --iters 10
 ```
 
 sets the memory used by docker instance to 4 GB and uses 2 cpus. BISTRO, in fact, uses _ncpu_-1 for each run, where _ncpu_ is the number of CPUs available on the host machine (virtual or otherwise). While this is sensible for a single run on
