@@ -90,8 +90,8 @@ Your recommendation is to be submitted in a file named `ModeIncentives.csv` acco
 | Column Name | Data Type |Description | Validation Criteria |
 | :---: |:--- | :--- | :----|
 | `mode` | [`Incentive eligible`](#incentive-eligible)| Mode to provide incentive to. | None. |
-| `age` | [`Range`](#range) | The range of ages of agents that qualify for this incentive. | Must be greater than 0 and less than 120 (the maximum age of any resident in Sioux Faux).|
-| `income` | [`Range`](#range) | The range of individual incomes (in $US/person) of agents that qualify for this incentive. | Must be equal or greater than 0 and equal or smaller than 150000. |
+| `age` | [`Range`](#range) | The range of ages of agents that qualify for this incentive. | Must be greater than 0 and less than 120 (the maximum age of any resident in Sioux Faux). Mode incentives may not isolate a single age; incentives must be defined in bins no smaller than five years in range.|
+| `income` | [`Range`](#range) | The range of individual incomes (in $US/person) of agents that qualify for this incentive. | Must be equal or greater than 0 and equal or smaller than 150000. Mode incentives must be defined in bins no smaller than $5,000 in range.|
 | `amount` | `Float` | The amount (in $US) of the incentive to provide to this entry's `mode`.| Must be greater than 0 and equal or smaller than 50.|
 
 ***Table 2: Vehicle fleet mix input schema and constraint definitions***
@@ -122,7 +122,7 @@ Figure 5 depicts an example input file describing the following situation:
 An essential aspect of transit system operations is capacity optimization. Route capacity is the number of passengers that can be moved past a fixed point in a given unit of time. In addition to allocating buses with larger or smaller total occupancies, SFBL wants to alter the frequency of buses on a given route. The `FrequencyAdjustment` input works in concert with the `VehicleFleetMix` input so that the capacity of the route is more likely to meet demand as it changes throughout a typical workday.
 
 Currently, Sioux Faux buses follow a *non-frequency schedule* based on their arrival and departure times to and from each stop of their route. These arrival and departure times are listed in the [`stop_times.txt`](/../../blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/stop_times.txt) file of Sioux Faux's GTFS data.
-Your role here is to decide if some routes (identified by their `route_id`s, see Figure 6 below) should follow a *frequency schedule* instead of a non frequency one. While we term the behavior of this input as frequency adjustment, in fact, it modifies the SFBL bus headways on a particular route. The adjustment wipes out the *whole* non-frequency schedule from the route and converts it to a frequency schedule according to the given `headway_secs` and within the specified *time-window* (defined between `start_time` and `end_time`). You can find a definition of these parameters in Table 3 below. Note that it is assumed that buses operate only on *week days* (i.e. from Monday to Friday).
+Your role here is to decide if some routes (identified by their `route_id`s, see Figure 6 below) should follow a *frequency schedule* instead of a non frequency one. While we term the behavior of this input as frequency adjustment, in fact, it modifies the SFBL bus headways on a particular route. The adjustment wipes out the *whole* non-frequency schedule from the route and converts it to a frequency schedule according to the given `headway_secs` and within the specified *service period* (defined between `start_time` and `end_time`). You can find a definition of these parameters in Table 3 below. Note that it is assumed that buses operate only on *week days* (i.e. from Monday to Friday).
 
 ![Alt text](/Images/routes_txt_truncated.png)\
 ***Figure 6: Route id's as defined in the routes.txt file (truncated version displayed)***
@@ -135,16 +135,17 @@ The format for this input is described in the Table 3 below.
 
 | Column Name | Data Type |Description | Validation Criteria |
 | :---: |:--- | :--- | :----|
-| `route_id` | `String` | The route for which frequencies will be adjusted with a new time-window (defined between `start_time` and `end_time`) / headway combination . | Must reference a `route_id` in the [`routes.txt`](/../../blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/routes.txt) file corresponding to the GTFS data for the agency specified by this entry's `agencyId` (see Figure 6). |
+| `route_id` | `String` | The route for which frequencies will be adjusted with a new service period (defined between `start_time` and `end_time`) / headway combination . | Must reference a `route_id` in the [`routes.txt`](/../../blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/routes.txt) file corresponding to the GTFS data for the agency specified by this entry's `agencyId` (see Figure 6). |
 | `start_time` | `Integer`  | The `start_time` field specifies the starting time (in seconds) of the service period operating with the new headway. In other words, it is the time (in seconds past midnight) at which the first vehicle departs from the first stop of the trip with the specified frequency. | Must be greater than 0 and less than 86400 (the number of seconds in a day).|
 | `end_time` | `Integer`  | The `end_time` field indicates the end time (in seconds) of the service period operating with the new headway. In other words, it is the time at which service changes to a different frequency (or ceases) at the first stop in the trip. | Must be greater than 0 and less than 86400 (the number of seconds in a day). |
 | `headway_secs` | `Integer`| 	The `headway_secs` field indicates the time (in seconds) between departures from the same stop (headway) for this trip type, during the time interval specified by `start_time` and `end_time`. The headway value must be entered in seconds. | Must be greater than 180sec (3min) and less than 7200sec (2h). <br> Periods in which headways are defined (the rows in frequencies.txt) shouldn't overlap for the same route, since it's hard to determine what should be inferred from two overlapping headways. However, a headway period may begin at the exact same time that another one ends. |
 | `exact_times` | `Integer`|Determines if frequency-based trips should be exactly scheduled based on the specified headway information. |Must be entered as 1 for the purposes of this round of the contest. See the <a href="https://developers.google.com/transit/gtfs/reference/#frequenciestxt">GTFS specification</a> for further information about what this field represents. |
 
 ***Table 3: Frequency Adjustments input schema and constraint definitions***
-Please, note some important business rules: 
-* Each route can 
 
+Please, note some important business rules ane remarks: 
+* There can be **no more than five** distinct bus service periods per route (this mimics the typical delineation: am peak, midday, pm peak, evening, late night/early morning). Technically, it means that there cannot be more than 5 rows with the same `route_id` in the FrequencyAdjustment.csv input file.
+* Giving that defining a new frequency input for a route wipes the whole initial non-frequency schedule, it means that for each modified route, **no bus is operating during the time periods outside of the newly defined service periods**. It is up to you to decide if the new service periods should connect or not to provide a continuous bus service.
 
 <!--TODO: Suppress exact time?-->
 
@@ -152,18 +153,13 @@ Please, note some important business rules:
 
 Figure 7 below depicts an example input file.
 
-![Alt text](/Images/Input_FrequencyAdjustment.png)
+![Alt text](/Images/Input_FrequencyAdjustment.txt)
 ***Figure 7: Example of Frequency Adjustment Input***
 
-To find the correspondance between `trip_id`s and `route id`s, refer to the [`trip.txt`](/../../blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt) file of Sioux-Faux's GTFS data (see Figure 6 above). 
-
-In this case, two routes will see their bus frequency adjusted: route 1340 (trip id `t_75335_b_219_tn_1`) and route 1341 (trip ids `t_75384_b_219_tn_1` and `t_75384_b_219_tn_2`). 
-* `trip_id` = `t_75335_b_219_tn_1`: the bus schedule on route 1340 is changed between 6am (21600sec) and 10pm (79200sec) to a 15minute frequency-schedule (900sec) . Outside of this time-window, the bus schedule on the route follow the non-frequency schedule defined by the gtfs-data of the agency.
-* `trip_id` =`t_75384_b_219_tn_1`: the bus frequency on route 1341 is changed between 6am (21600sec) and 10am (36000sec) to a 5 minute frequency-schedule (900sec).
-* `trip_id` = `t_75384_b_219_tn_2`: the bus frequency on route 1341 is changed between 5pm (61200sec) and 8pm (72000sec) to a 5 minute frequency-schedule (900sec).
-* Buses operating on all other routes follow the original non-frequency schedule
-
-You will note that to define several discrete service periods for a *same* route, there must be several rows in the input file with *different* `trip_id`s from this same route for each new service period.
+In this case, two routes will see their bus frequency adjusted: route 1340 and route 1341. 
+*  The bus schedule on route 1340 is changed between 6am (21600sec) and 10pm (79200sec) to a 15minute frequency-schedule (900sec). Outside of this time-window, the bus schedule on the route follow the non-frequency schedule defined by the gtfs-data of the agency.
+* The bus frequency on route 1341 is changed between 6am (21600sec) and 10am (36000sec) and between 5pm (61200sec) and 8pm (72000sec) to a 5 minute frequency-schedule (900sec).
+* Buses operating on all other routes follow the original non-frequency schedule.
 
 
 ### 4. Mass Transit Fare Adjustment
@@ -186,7 +182,7 @@ For each new bus fare that you want to introduce, you need to specify the amount
 | :---: |:--- | :--- | :----|
 | `agencyId`| `String` | Agency identifier | Must equal agency Id found under `agency_id` in [`agencies.txt`](/../../blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/agency.txt) of corresponding GTFS file for transit agency with `agency_name` designated by parent directory of `gtfs_data` in starter kit `/reference-data` directory. Note that for Sioux Faux, SFBL is the only agency operating in the city (`agencyId`="217"). Therefore, any entry in the .csv file will have "217" under `agencyId`.|
 | `routeId` | `String` | The route that will have its fare specified. | A route can only have its fare set once. The `routeId` name must exist in the [`routes.txt`](/../../blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/routes.txt) file corresponding to the GTFS data for the agency specified by this entry's `agencyId`|
-| `age` | [`Range`](#range) | The range of ages of agents that this fare pertains to. | Must be greater than 0 and less than 120 (the maximum age of any resident in Sioux Faux)|
+| `age` | [`Range`](#range) | The range of ages of agents that this fare pertains to. | Must be greater than 0 and less than 120 (the maximum age of any resident in Sioux Faux). Bus fares may not isolate a single age; fares must be defined in bins no smaller than five years in range.|
 | `amount` | `Float` | The amount (in $US) to charge an agent in the corresponding fare group. | Must be greater than 0 and equal or smaller than 10.|
 
 ***Table 4: Pt Fares input schema and constraint definitions***
