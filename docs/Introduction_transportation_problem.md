@@ -28,9 +28,11 @@ Once all agents of the system have chosen their optimal transportation mode to a
 The simulation inputs for BEAM are comprised of specifications regarding mass transit operations, on-demand rideshare partnerships and incentives, and mass transit finances.
 
 For **round I**, the input parameters specify:
-* **purchases and sales of buses serving a route**.
-* **adjustments to the frequency of buses on routes**.
-* **distribution of incentives** for agents using on-demand rides and/or mass transit.
+* **Bus fleet composition**;
+* **Distribution of incentives for agents using on-demand carsharing and/or mass transit**;
+* **Adjustments to the frequency of buses on routes**; and,
+* **Mass transit fares**.
+
 
 You will find more information on the Sioux Faux simulation inputs, where they are stored, and how to control them on the [inputs to optimize](./Which-inputs-should-I-optimize.md) page.
 
