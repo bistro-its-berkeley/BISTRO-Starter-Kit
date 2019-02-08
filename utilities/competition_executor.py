@@ -151,6 +151,14 @@ class Submission(object):
 
         self.results = Results(self.output_directory)
 
+    @lazy_property
+    def id(self):
+        return self._container.short_id
+
+    @lazy_property
+    def name(self):
+        return self._container.name
+
     def logs(self):
         return self._container.logs()
 
@@ -348,7 +356,15 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
                  output_root=None):
         super().__init__(input_root, output_root)
         self.client = docker.from_env()
-        self.containers = {}
+        self.containers = self.find_existing_simulation_containers()
+
+    def find_existing_simulation_containers(self):
+        all_containers = self.client.containers.list(all=True)
+        if all_containers is not None:
+            return {c.name: c for c in self.client.containers.list(all=True) if c.image.tag('beammodel/beam_competition:0.0.1-SNAPSHOT')}
+        else:
+            return {}
+
 
     def list_running_simulations(self):
         """Queries the run status for executed containers cached on this object in turn
@@ -364,6 +380,27 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
             if container.status == 'running':
                 running.append(name)
         return running
+
+    @verify_submission_id
+    def find_last_completed_simulation_path(self, submission_id):
+        lines = self.output_simulation_logs(submission_id).decode("utf-8").split("\n")
+
+        for line in lines:
+            if "Beam output directory is" in line:
+                words = line.split(' ')
+                output_dir = words[-1]
+                timestamp = output_dir.split('/')[-1].split('__')[-1]
+                # assumes simulation params stay the same
+                simulation_output_root = path.join(self.output_root, SCENARIO_NAME,
+                                                   "{}-{}__{}".format(SCENARIO_NAME, SAMPLE_SIZES[0], timestamp))
+                score_path = path.join(simulation_output_root, "competition", "submissionScores.csv")
+                if score_path is not None and path.exists(path):
+                    return score_path
+                else:
+                    # don't keep going... there is nothing else to find here.
+                    break
+
+        return "Simulation run not completed!"
 
     @verify_submission_id
     def get_submission_scores_and_stats(self, submission_id):
@@ -453,7 +490,7 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
                                        stream=stream, decode=decode)
 
     @verify_submission_id
-    def output_simulation_logs(self, sim_name, filename=None, stream=False, tail='all', follow=False):
+    def output_simulation_logs(self, sim_name, filename=None):
         """Prints a specified simulation log or writes to file if filename is provided.
 
 
