@@ -7,7 +7,7 @@ This document describes the goal and main components of the Uber Prize challenge
 
 The overall goal of the preliminary round of the Uber Prize is to develop an algorithms that **finds the *policy* that will best improve several indicators of the quality of the transportation system in Sioux Faux**. Here, we use *policy* to refer to a combination of inputs (as `.csv` files) representing changes in mass transit vehicle fleet composition, bus frequencies, and incentives that could reduce the cost of multimodal transport for commuters.
 
-Policies are tested by simulating the daily travels of a synthetic population of individuals called `Agents`, each with their own socio-demographic characteristics. The *agent-based simulation* is hosted by the BEAM simulator. During the simulated day, each *Agent* has a defined `Plan`, i.e. a sequence of activities with specific locations ordered by activity end times. Throughout the day, the `Agents` will make decisions on which transportation modes they will use, their departure times, and the routes they take to travel between activities. 
+Policies are tested via the BISTRO engine (see below), by simulating the daily travels of a synthetic population of individuals called `Agents`, each with their own socio-demographic characteristics. The *agent-based simulation* is hosted by the BEAM simulator. During the simulated day, each *Agent* has a defined `Plan`, i.e. a sequence of activities with specific locations ordered by activity end times. Throughout the day, the `Agents` will make decisions on which transportation modes they will use, their departure times, and the routes they take to travel between activities. 
 
 By simulating the daily travel behavior of the whole population, the quality of the city's transportation system can be evaluated, based upon scoring criteria, detailed [here](./Understanding_the_outputs_and_the%20scoring_function.md).
 
@@ -28,7 +28,7 @@ Once all agents of the system have chosen their optimal transportation mode to a
 
 ## The simulation inputs
 
-The simulation inputs for BISTRO are comprised of specifications regarding mass transit operations, on-demand rideshare partnerships and incentives, and mass transit finances.
+The simulation inputs are comprised of specifications regarding mass transit operations, on-demand rideshare partnerships and incentives, and mass transit finances.
 
 For **round I**, the input parameters specify:
 * **purchases and sales of buses serving a route**.
