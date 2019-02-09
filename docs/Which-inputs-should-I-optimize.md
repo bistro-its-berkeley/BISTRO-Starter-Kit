@@ -157,8 +157,8 @@ Figure 7 below depicts an example input file.
 ***Figure 7: Example of Frequency Adjustment Input***
 
 In this case, two routes will see their bus frequency adjusted: route 1340 and route 1341. 
-*  The bus schedule on route 1340 is changed between 6am (21600sec) and 10pm (79200sec) to a 15minute frequency-schedule (900sec). Outside of this time-window, the bus schedule on the route follow the non-frequency schedule defined by the gtfs-data of the agency.
-* The bus frequency on route 1341 is changed between 6am (21600sec) and 10am (36000sec) and between 5pm (61200sec) and 8pm (72000sec) to a 5 minute frequency-schedule (900sec).
+*  The bus schedule on route 1340 is changed between 6am (21600 sec) and 10pm (79200 sec) to a 15 minute frequency-schedule (900sec). Outside of this time-window, the bus schedule on the route follow the non-frequency schedule defined by the gtfs-data of the agency.
+* The bus frequency on route 1341 is changed between 6am (21600 sec) and 10am (36000 sec) and between 5pm (61200 sec) and 8pm (72000 sec) to a 5 minute frequency-schedule (900 sec).
 * Buses operating on all other routes follow the original non-frequency schedule.
 
 
