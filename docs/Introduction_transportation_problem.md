@@ -1,6 +1,6 @@
 # A Brief Introduction to the Urban Transportation System Optimization Framework
 
-This document describes the goal and main components of the Uber Prize challenge, that is, the daily travel simulation environment, its inputs, and its outputs.
+This document describes the goal and main components of the Uber Prize challenge, that is, the daily travel simulation environment of BISTRO, its inputs, and its outputs.
 
 
 ## Goal of Round I:
