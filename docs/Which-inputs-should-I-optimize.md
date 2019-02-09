@@ -173,7 +173,7 @@ SFBL would like to use this simulation experiment to explore the effect of chang
 
 Perhaps a lower fare for young adults (ages 12-18) would significantly increase ridership among this population. Alternatively, perhaps a higher fare for middle-aged adults (40-55) would be well-tolerated, while boosting fare-box revenue."
 
-For each new bus fare that you want to introduce, you need to specify the amount of the new fare (`amount`), to which bus route it will apply (`routeID`), which bus company operated this bus route (`agendyID`) and to which age group (`age`) this fare will apply. 
+For each new bus fare that you want to introduce, you need to specify the amount of the new fare (`amount`), to which bus route it will apply (`routeId`), which bus company operated this bus route (`agendyId`) and to which age group (`age`) this fare will apply. 
 
 #### 4.2. Technical Details
 
