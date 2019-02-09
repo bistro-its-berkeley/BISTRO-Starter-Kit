@@ -7,9 +7,13 @@ This document describes the goal and main components of the Uber Prize challenge
 
 The overall goal of the preliminary round of the Uber Prize is to develop an algorithm that **finds the *policy* that will best improve several indicators of the quality of the transportation system in Sioux Faux**. Here, we use *policy* to refer to a combination of inputs (as `.csv` files) representing changes in mass transit vehicle fleet composition, bus frequencies, and incentives that could reduce the cost of multimodal transport for commuters.
 
-Policies can be evaluated after simulating the daily travels of a synthetic population of individuals called *agents*, each with their own socio-demographic characteristics. The *agent-based simulation* is executed by the BEAM simulator. During the simulated day, each *agent* has a defined *plan*, i.e. a sequence of activities with specific locations ordered by activity end times. Throughout the day, these *agents* will make *decisions* as to which transportation *modes* they will use, their *departure times*, and the *routes* they take to travel between activities.
+Policies are tested via the BISTRO engine (see below), by simulating the daily travels of a synthetic population of individuals called `Agents`, each with their own socio-demographic characteristics. The *agent-based simulation* is hosted by the BEAM simulator. During the simulated day, each *Agent* has a defined `Plan`, i.e. a sequence of activities with specific locations ordered by activity end times. Throughout the day, the `Agents` will make *decisions* on which transportation *modes* they will use, their *departure times*, and the *routes* they take to travel between activities. 
 
 By simulating the daily travel behavior of the whole population, the quality of the city's transportation system can be evaluated, based upon scoring criteria, detailed [here](./Understanding_the_outputs_and_the%20scoring_function.md).
+
+### What is BISTRO?
+
+The Berkeley Integrated System for Transportation Optimization (BISTRO) is the engine through which the Uber Prize will be run. BISTRO is an analysis and evaluation superlayer that works in concert with an agent-based simulation: Behavior, Energy, Autonomy, and Mobility (BEAM) to enable the open-sourced development and evaluation of transportation optimization methods in response to given policy priorities. 
 
 ### What is BEAM?
 
@@ -24,14 +28,13 @@ Once all agents of the system have chosen their optimal transportation mode to a
 
 ## Policy Inputs
 
-Inputs for **Round I** target improving transit operations, vehicle fleet assignment, and incentives to use non-motorized or on-demand transport.
+The simulation inputs or **Round I** are comprised of specifications regarding mass transit operations, on-demand rideshare partnerships and incentives, and mass transit finances.
 
-For , the inputs specify:
+They specify: 
 * **Bus fleet composition changes**;
 * **Distribution of incentives for agents using on-demand carsharing and/or mass transit**;
 * **Adjustments to the frequency of buses on routes**; and,
 * **Mass transit fares**.
-
 
 You will find more information on the Sioux Faux simulation inputs, where they are stored, and how to control them on the [inputs to optimize](./Which-inputs-should-I-optimize.md) page.
 
@@ -39,7 +42,7 @@ You will find more information on the Sioux Faux simulation inputs, where they a
 
 ## Evaluation metrics (scoring criteria)
 
-The quality of changes to the transportation system induced by new policy are evaluated based upon a comparison against a *business as usual (BAU)* scenario. The BAU scenario represents the baseline or "current" status-quo of the Sioux Faux transportation system. In other words, this is the "do-nothing" scenario.
+The quality of the new policy-based transportation system is evaluated based upon a comparison against the *business as usual (BAU) scenario*. The BAU scenario represents the baseline or "current" status-quo of the Sioux Faux transportation system. In other words, this is a "do-nothing" approach. This comparison answers the following question: **How will the new policy improve over the current state of the transportation system**?
 
 The performance of simulated policies over the baseline is measured using a **scoring function**. The scoring function is comprised of quantitative *metrics* that assess how well policies addressed the following questions:
 
@@ -53,4 +56,4 @@ Overall, this comparison answers the following question: *"How much can your pol
 
 A total submission score less than 1 indicates that, under the evaluated policy portfolio, the system is performing *better* compared to the BAU scenario.
 
-You will find more information on the outputs of the simulation, how to interpret them, and the scoring function on the [outputs and the scoring function](./Understanding_the_outputs_and_the%20scoring_function.md) page.
+You will find more information on the outputs of the BISTRO simulation, how to interpret them, and the scoring function on the [outputs and the scoring function](./Understanding_the_outputs_and_the%20scoring_function.md) page.
