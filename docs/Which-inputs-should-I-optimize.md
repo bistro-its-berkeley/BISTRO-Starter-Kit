@@ -125,7 +125,7 @@ Currently, Sioux Faux buses follow a *non-frequency schedule* based on their arr
 Your role here is to decide if some routes (identified by their `route_id`s, see Figure 6 below) should follow a *frequency schedule* instead of a non frequency one. While we term the behavior of this input as frequency adjustment, in fact, it modifies the SFBL bus headways on a particular route. The adjustment wipes out the *whole* non-frequency schedule from the route and converts it to a frequency schedule according to the given `headway_secs` and within the specified *service period* (defined between `start_time` and `end_time`). You can find a definition of these parameters in Table 3 below. Note that it is assumed that buses operate only on *week days* (i.e. from Monday to Friday).
 
 ![Alt text](/Images/routes_txt_truncated.png)\
-***Figure 6: Route id's as defined in the routes.txt file (truncated version displayed)***
+***Figure 6: `Route_id`s as defined in the routes.txt file (truncated version displayed)***
 
 
 #### 3.2. Technical Details
