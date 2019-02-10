@@ -1,4 +1,4 @@
-# A Brief Introduction to the Berkeley Integrated System for Transportation Optimization: the BISTRO Framework 
+# A Brief Introduction to BISTRO: the Berkeley Integrated System for Transportation Optimization
 
 This document describes the goal and main components of the Uber Prize challenge, that is, the daily travel simulation environment of BISTRO, its inputs, and its outputs.
 
@@ -36,7 +36,6 @@ For **round I**, the input parameters specify:
 * **distribution of incentives** for agents using on-demand rides and/or mass transit.
 
 You will find more information on the Sioux Faux simulation inputs, where they are stored, and how to control them on the [inputs to optimize](./Which-inputs-should-I-optimize.md) page.
-
 
 
 ## The simulation outputs: evaluating the system 
