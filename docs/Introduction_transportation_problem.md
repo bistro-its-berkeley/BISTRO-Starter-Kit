@@ -1,4 +1,4 @@
-# A Brief Introduction to the Urban Transportation System Optimization Framework
+# A Brief Introduction to the Berkeley Integrated System for Transportation Optimization: the BISTRO Framework 
 
 This document describes the goal and main components of the Uber Prize challenge, that is, the daily travel simulation environment of BISTRO, its inputs, and its outputs.
 
