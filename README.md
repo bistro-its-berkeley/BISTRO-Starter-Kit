@@ -9,11 +9,11 @@ The competition will be split into two rounds:
 
 ## How do I get started?
 
-While the problem setting may not be as familiar as that of previous machine learning and AI competitions, our aim has been to make on-boarding to this competition as straightforward as possible for practitioners both with and without domain expertise. However, prior to jumping into developing a solution, please review the background material and preliminaries provided in this repository. Although you will not have to deal with complex transit analysis (the simulation engine will do it for you!), understanding a few transportation planning terms and concepts concepts will likely improve your understanding of the system that you will be modeling. 
+While the problem setting may not be as familiar as that of previous machine learning and AI competitions, our aim has been to make on-boarding to this competition as straightforward as possible for practitioners both with and without domain expertise. However, prior to jumping into developing a solution, please review the background material and preliminaries provided in this repository. Although you will not have to deal with complex transit analysis (the simulation engine will do it for you!), understanding a few transportation planning terms and concepts will likely improve your understanding of the system that you will be modeling. 
 
 We recommend that you proceed through the documentation in the following order:
 
-  * **Introduction to the Urban Transportation System Optimization Problem**: First, read the brief [introduction to the Urban Transportation System problem](./docs/Introduction_transportation_problem.md), which will give you a general understanding of the framework of problem you need to solve as well as the relevant optimization challenges. 
+  * **Introduction to BISTRO: the Berkeley Integrated System for Transportation Optimization**: First, read the brief [introduction to BISTRO](./docs/Introduction_transportation_problem.md), which will give you a general understanding of the framework of the problem you need to solve as well as the relevant optimization challenges. 
 
   * **Problem statement**: Then, review the [presentation of the Sioux Faux scenario](./docs/The_Sioux_Faux_scenario.md), which introduces the problem setting and particulars of transportation system running in the simulation environment.
   
@@ -27,7 +27,7 @@ We recommend that you proceed through the documentation in the following order:
 ## What can I find in this repository?
 
 * `docs` folder: 
-  * an [introduction to the urban transportation system optimization problem](./docs/Introduction_transportation_problem.md)
+  * an [introduction to BISTRO: the Berkeley Integrated System for Transportation Optimization](./docs/Introduction_transportation_problem.md)
   * a note on [how to run a simulation](./docs/How_to_run_a_simulation.md)
   * a description of the [input schema](./docs/Which-inputs-should-I-optimize.md)
   * a description of the [simulation outputs and the scoring function](./docs/Understanding_the_outputs_and_the%20scoring_function.md)

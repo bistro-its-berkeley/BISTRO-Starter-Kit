@@ -22,7 +22,7 @@ Sioux Faux), but you can just iterate through the agency mapping if more agencie
 
     {{
     agency = 'sioux_faux_bus_lines'
-    agency_dict = scenario_agencies(DATA_DIR,"siouxfalls")
+    agency_dict = scenario_agencies(DATA_DIR,{}.format(SCENARIO_NAME))
     # Create a lazy cache of GTFS data for the agency:
     sf_gtfs_manager = AgencyGtfsDataManager(agency_dict[agency])
 
@@ -68,7 +68,7 @@ def scenario_agencies(data_dir, scenario_name):
 class AgencyGtfsDataManager(object):
 
     def __init__(self, agency_gtfs_path):
-        """Used to cache an agency's GTFS data for sampling purposes
+        """Used to cache an agency's GTFS and vehicle data for sampling purposes
 
         Parameters
         ----------

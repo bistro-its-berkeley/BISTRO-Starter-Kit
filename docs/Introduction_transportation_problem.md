@@ -1,6 +1,6 @@
-# A Brief Introduction to the Urban Transportation System Optimization Framework
+# A Brief Introduction to BISTRO: the Berkeley Integrated System for Transportation Optimization
 
-This document describes the goal and main components of the Uber Prize challenge, that is, the daily travel simulation environment, its inputs, and its outputs.
+This document describes the goal and main components of the Uber Prize challenge, that is, the daily travel simulation environment of BISTRO, its inputs, and its outputs.
 
 
 ## Goal of Round I:
@@ -9,7 +9,7 @@ The overall goal of the preliminary round of the Uber Prize is to develop an alg
 
 Policies are tested via the BISTRO engine (see below), by simulating the daily travels of a synthetic population of individuals called `Agents`, each with their own socio-demographic characteristics. The *agent-based simulation* is hosted by the BEAM simulator. During the simulated day, each *Agent* has a defined `Plan`, i.e. a sequence of activities with specific locations ordered by activity end times. Throughout the day, the `Agents` will make *decisions* on which transportation *modes* they will use, their *departure times*, and the *routes* they take to travel between activities. 
 
-By simulating the daily travel behavior of the whole population, the quality of the city's transportation system can be evaluated, based upon scoring criteria, detailed [here](./Understanding_the_outputs_and_the%20scoring_function.md).
+Policies can be evaluated after simulating the daily travels of a synthetic population of individuals called *agents*, each with their own socio-demographic characteristics. The *agent-based simulation* is executed by the BEAM simulator. During the simulated day, each *agent* has a defined *plan*, i.e. a sequence of activities with specific locations ordered by activity end times. Throughout the day, these *agents* will make *decisions* as to which transportation *modes* they will use, their *departure times*, and the *routes* they take to travel between activities.
 
 ### What is BISTRO?
 
@@ -28,7 +28,7 @@ Once all agents of the system have chosen their optimal transportation mode to a
 
 ## Policy Inputs
 
-The simulation inputs or **Round I** are comprised of specifications regarding mass transit operations, on-demand rideshare partnerships and incentives, and mass transit finances.
+Inputs for **Round I** target improving transit operations, vehicle fleet assignment, and incentives to use non-motorized or on-demand transport.
 
 They specify: 
 * **Bus fleet composition changes**;
@@ -37,7 +37,6 @@ They specify:
 * **Mass transit fares**.
 
 You will find more information on the Sioux Faux simulation inputs, where they are stored, and how to control them on the [inputs to optimize](./Which-inputs-should-I-optimize.md) page.
-
 
 
 ## Evaluation metrics (scoring criteria)
@@ -54,6 +53,6 @@ The performance of simulated policies over the baseline is measured using a **sc
 
 Overall, this comparison answers the following question: *"How much can your policies **improve** the current state of the transportation system"*?
 
-A total submission score less than 1 indicates that, under the evaluated policy portfolio, the system is performing *better* compared to the BAU scenario.
+A total submission score less than 1 indicates that, under the evaluated policy portfolio, the system is performing *better* in comparison to the BAU scenario.
 
 You will find more information on the outputs of the BISTRO simulation, how to interpret them, and the scoring function on the [outputs and the scoring function](./Understanding_the_outputs_and_the%20scoring_function.md) page.
