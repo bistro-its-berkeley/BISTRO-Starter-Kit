@@ -9,8 +9,6 @@ The overall goal of the preliminary round of the Uber Prize is to develop an alg
 
 Policies are tested via the BISTRO engine (see below), by simulating the daily travels of a synthetic population of individuals called `Agents`, each with their own socio-demographic characteristics. The *agent-based simulation* is hosted by the BEAM simulator. During the simulated day, each *Agent* has a defined `Plan`, i.e. a sequence of activities with specific locations ordered by activity end times. Throughout the day, the `Agents` will make *decisions* on which transportation *modes* they will use, their *departure times*, and the *routes* they take to travel between activities. 
 
-Policies can be evaluated after simulating the daily travels of a synthetic population of individuals called *agents*, each with their own socio-demographic characteristics. The *agent-based simulation* is executed by the BEAM simulator. During the simulated day, each *agent* has a defined *plan*, i.e. a sequence of activities with specific locations ordered by activity end times. Throughout the day, these *agents* will make *decisions* as to which transportation *modes* they will use, their *departure times*, and the *routes* they take to travel between activities.
-
 ### What is BISTRO?
 
 The Berkeley Integrated System for Transportation Optimization (BISTRO) is the engine through which the Uber Prize will be run. BISTRO is an analysis and evaluation superlayer that works in concert with an agent-based simulation: Behavior, Energy, Autonomy, and Mobility (BEAM) to enable the open-sourced development and evaluation of transportation optimization methods in response to given policy priorities. 
