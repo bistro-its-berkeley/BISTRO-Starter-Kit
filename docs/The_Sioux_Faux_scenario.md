@@ -1,6 +1,6 @@
 # The Sioux Faux Scenario
 
-For this first Round, you are asked to optimize the transportation network for a *sample of citizens* from a mock city: Sioux Faux. The city’s 157,000 citizens travel between activities using either their personal automobiles, buses provided via a public transit system, taxis enabled via an on-demand ridehail company, active modes such as walking, or a combination of multiple modes in accordance with their preferences. You will compete with other contestants to produce the best transportation outcomes as computed by the [scoring function](./Understanding_the_outputs_and_the%20scoring_function.md).
+For this first Round, you are asked to optimize the transportation network for a *sample of citizens* from a mock city: Sioux Faux. The city’s 157,000 citizens travel between activities using either their personal automobiles, buses provided via a public transit system, taxis enabled via an on-demand carsharing company, active modes such as walking, or a combination of multiple modes in accordance with their preferences. You will compete with other contestants to produce the best transportation outcomes as computed by the [scoring function](./Understanding_the_outputs_and_the%20scoring_function.md).
 
 ## Sioux Faux network
 The Sioux Faux road network is shown below (Fig. 1). Currently, the Sioux Faux Bus Lines (SFBL) transportation company operates twelve bus lines in the city.
