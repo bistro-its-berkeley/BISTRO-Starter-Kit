@@ -19,7 +19,7 @@ DIR_DELIM = "-"
 FREQ_FILE = "FrequencyAdjustment.csv"
 SUB_FILE = "ModeSubsidies.csv"
 FLEET_FILE = "VehicleFleetMix.csv"
-PT_FARE_FILE = "PtFares.csv"
+MASS_TRANSIT_FILE = "MassTransitFares.csv"
 SCORES_PATH = ("competition", "submissionScores.csv")
 
 logger = logging.getLogger(__name__)
@@ -50,9 +50,9 @@ def sample_settings(max_num_records, data_root):
     sf_gtfs_manager = sampler.AgencyGtfsDataManager(agency_dict[AGENCY])
 
     samplers = [sampler.sample_frequency_adjustment_input,
-                sampler.sample_mode_subsidies_input,
+                sampler.sample_mode_incentives_input,
                 sampler.sample_vehicle_fleet_mix_input,
-                sampler.sample_pt_fares_input]
+                sampler.sample_mass_transit_fares_input]
 
     samples = []
     for input_sampler in samplers:
@@ -62,16 +62,16 @@ def sample_settings(max_num_records, data_root):
     return tuple(samples)
 
 
-def save_inputs(input_dir, freq_df=None, mode_subsidy_df=None, vehicle_fleet_mix_df=None, pt_fare_df=None):
+def save_inputs(input_dir, freq_df=None, mode_incentive_df=None, vehicle_fleet_mix_df=None, pt_fare_df=None):
     if freq_df is not None:
         freq_df.to_csv(os.path.join(input_dir, FREQ_FILE), header=True, index=False)
-    if mode_subsidy_df is not None:
-        mode_subsidy_df.to_csv(os.path.join(input_dir, SUB_FILE), header=True, index=False)
+    if mode_incentive_df is not None:
+        mode_incentive_df.to_csv(os.path.join(input_dir, SUB_FILE), header=True, index=False)
     if vehicle_fleet_mix_df is not None:
         vehicle_fleet_mix_df.to_csv(os.path.join(input_dir, FLEET_FILE), header=True, index=False)
     if pt_fare_df is None:
-        pt_fare_df = pd.read_csv('../submission-inputs/{0}'.format(PT_FARE_FILE))
-    pt_fare_df.to_csv(os.path.join(input_dir, PT_FARE_FILE), header=True, index=False)
+        pt_fare_df = pd.read_csv('../submission-inputs/{0}'.format(MASS_TRANSIT_FILE))
+    pt_fare_df.to_csv(os.path.join(input_dir, MASS_TRANSIT_FILE), header=True, index=False)
 
 
 
