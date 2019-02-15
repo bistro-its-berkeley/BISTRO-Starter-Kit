@@ -21,10 +21,7 @@ A BEAM simulation computes the interaction of *supply* and *demand* in a virtual
 
 Like MATSim, each *iteration* of a BEAM *run* simulates the simultaneous execution of *daily activity schedules* also known as *plans* on the virtual road network, which consist of sequences of activities, one for each agent. A single run consists of many iterations-- permitting agents to adjust their plans. <br>
 
-![Alt text](/Images/Mode_choice_diagram.png)
-***Figure 1: The mode choice process of Sioux Faux's agents*** 
 
-<br>
 Once all agents of the system have chosen their optimal transportation mode to attend their daily activities, the system reaches what we call an *equilibrium state*. Based on this equilibrium state, the simulator produces a series of outputs concerning the individual agents and the overall system. 
 
 
