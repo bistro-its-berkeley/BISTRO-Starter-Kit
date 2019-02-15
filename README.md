@@ -53,7 +53,7 @@ List of utility scripts provided to simplify the interface with the BISTRO simul
  
 * `examples` folder: <br> 
 Exmaple python notebooks demonstrating the use of the `competition_executor.py`, `input_sampler.py`and `visualization.py` scripts. 
-  * the [Starter Kit Utilities Tutorial](./examples/Starter_Kit_Utilities_Tutorial.ipynb) notebook : to run a simulation and to generate random inputs
+  * the [Starter Kit Utilities Tutorial](./examples/Starter_Kit_Utilities_Tutorial.ipynb) notebook : to run a simulation and generate random inputs
   * the *Visualization* notebook : to plot input and output parameters
 
 ## Updates to the Starter Kit
