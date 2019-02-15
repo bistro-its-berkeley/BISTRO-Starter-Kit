@@ -152,7 +152,7 @@ Please, note some important business rules ane remarks:
 
 Figure 7 below depicts an example input file.
 
-![Alt text](/Images/Input_frequency_adjustment.csv)
+![Alt text](/Images/Input_frequency_adjustment.png)
 ***Figure 7: Example of Frequency Adjustment Input***
 
 In this case, two routes will see their bus frequency adjusted: route 1340 and route 1341. 
