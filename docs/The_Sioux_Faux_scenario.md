@@ -16,6 +16,9 @@ For Round 1, you have access to two sample populations with which you can run si
 * a 1,000 (1k) individuals sample
 * a 15,000 (15k) individuals sample
 
+<img src="/Images/Demographics.png"> <br>
+***Figure 3: Demographics of Sioux Faux***
+
 It is permissible to use either sample as you generate training data for your algorithm. For example, you can develop your algorithm using the 1k scenario and then test it with the 15K population scenario. However, official submissions must be run with the 15K sample population.
 
 ## Problem statement 
