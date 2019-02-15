@@ -8,8 +8,8 @@
 [Docker](https://www.docker.com).
 
 You can find the instructions to install Docker **for Mac** [here](https://docs.docker.com/docker-for-mac/install/#install-and-run-docker-for-mac) and **for Windows** [here](https://docs.docker.com/docker-for-windows/install/). <br>
-  - Note that for Windows, the *Windows 10 64bit: Pro, Enterprise or Education* (1607 Anniversary Update, Build 14393 or later) version must be installed. <br>
-  - See [www.get.docker.com](http://get.docker.com) for an automated Linux installation.
+      * Note that for Windows, the *Windows 10 64bit: Pro, Enterprise or Education* (1607 Anniversary Update, Build 14393 or later) version must be installed. <br>
+      * See [www.get.docker.com](http://get.docker.com) for an automated Linux installation.
 
 Thus, the code is OS-agnostic.
 
