@@ -20,7 +20,7 @@ The main outputs you should focus on are located in the `competition` folder. It
 ![Alt text](/Images/Subscores.png)
 Figure 2: Score and component scores
 
-The *scoring function* is a weighted sum of several components, listed below. ***Weights are pre-determined based upon...\[fill in]*** 
+The *scoring function* is a weighted sum of several components, listed below. If you want to read more about the weights of the scoring function, go to section 5.2 of the [scoring document](./Problem_statement_Phase%20I.pdf).
 
 * Measures of **accessibility**:
   * **work-based trips** (`Accessibility: Number of work locations accessible within 15 minutes`): The sum of the average number of work locations accessible from each node by automotive modes within 15 minutes during the AM peak (7-10 am) and PM peak (5-8 pm) periods.
