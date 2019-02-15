@@ -5,12 +5,11 @@ from matplotlib.cm import ScalarMappable
 
 import pandas as pd
 import numpy as np
-import datetime
-
 import seaborn as sns
 from pathlib import Path
 import math
 
+# Defining matplolib parameters
 plt.rcParams["axes.titlesize"] = 15
 plt.rcParams["axes.titleweight"] = "bold"
 plt.rcParams["axes.titlepad"] = 12
@@ -21,32 +20,46 @@ plt.rcParams["xtick.labelsize"] = 11
 plt.rcParams["ytick.labelsize"] = 11
 
 
-def unzip_file(folder_path):
+def unzip_file(element_path):
     """Checking if the path points to an existing folder or to its .zip format; if only the .zip format exists,
     it unzips the folder.
 
     Parameters
     ----------
-    folder_path: PosixPath
-        Absolute path of the folder of interest.
+    element_path: PosixPath
+        Absolute path of the folder or file of interest.
 
     Returns
     -------
         Absolute path of the (unzipped) folder of interest.
     """
     import zipfile
-    if folder_path.exists():
-        return folder_path
+    import gzip
+    import shutil
 
-    elif Path(str(folder_path) + ".zip").exists():
-        zip_folder = zipfile.ZipFile(str(folder_path) + ".zip", 'r')
-        zip_folder.extractall(folder_path)
+    if element_path.exists():
+        return element_path
+
+    elif Path(str(element_path) + ".zip").exists():
+        zip_folder = zipfile.ZipFile(str(element_path) + ".zip", 'r')
+        zip_folder.extractall(element_path)
         zip_folder.close()
-        return folder_path
+        return element_path
+
+    elif Path(str(element_path) + ".gz").exists():
+        with gzip.open(str(element_path) + ".gz", 'rb') as f_in:
+            with open(str(element_path), 'wb') as f_out:
+                shutil.copyfileobj(f_in, f_out)
+        return element_path
 
     else:
         raise FileNotFoundError(f"{folder_path} does not exist")
 
+
+
+########## PROCESS AND PLOT STATISTICS ##########
+
+### 1- INPUTS ###
 
 def splitting_min_max(df, name_column):
     """ Parsing and splitting the ranges in the "age" (or "income") columns into two new columns:
@@ -80,12 +93,12 @@ def splitting_min_max(df, name_column):
     return df
 
 
-def process_incentives_data(input_file_path, max_incentive):
+def process_incentives_data(incentives_data_path, max_incentive):
     """ Processing and reorganizing the data in an input dataframe to be ready for plotting
 
     Parameters
     ----------
-    input_file_path: PosixPath
+    incentives_data_path: PosixPath
         Absolute path of the ModeIncentives.csv input file
 
     max_incentive: float
@@ -96,7 +109,7 @@ def process_incentives_data(input_file_path, max_incentive):
     incentives: pandas dataframe
         Incentives input data that is ready for plotting
     """
-    incentives = pd.read_csv(input_file_path)
+    incentives = pd.read_csv(incentives_data_path)
     incentives["amount"] = incentives["amount"].astype(float)
 
     # Completing the dataframe with the missing subsidized modes (so that they appear in the plot)
@@ -132,23 +145,29 @@ def process_incentives_data(input_file_path, max_incentive):
     return incentives
 
 
-def plot_incentives_inputs(input_file_path, max_incentive, max_age, max_income ):
+def plot_incentives_inputs(incentives_data_path, max_incentive, max_age, max_income):
     """Plot the incentives input
 
     Parameters
     ----------
-    input_file_path: PosixPath
+    incentives_data_path: PosixPath
         Absolute path of the ModeIncentives.csv input file
 
     max_incentive: float
         Maximum amount allowed for an incentive as defined in the Starter Kit "Inputs Specifications" page
+
+    max_age: int
+        Maximum age of any resident in Sioux Faux as defined in the Starter Kit "Inputs Specifications" page
+
+    max_income: int
+        Maximum income of any resident in Sioux Faux as defined in the Starter Kit "Inputs Specifications" page
 
     Returns
     -------
     ax: matplotlib axes object
 
     """
-    incentives = process_incentives_data(input_file_path, max_incentive)
+    incentives = process_incentives_data(incentives_data_path, max_incentive)
 
     fig, ax = plt.subplots(1, 2, figsize=(14, 5), sharey=True, gridspec_kw={'width_ratios': [4, 5]})
 
@@ -171,18 +190,18 @@ def plot_incentives_inputs(input_file_path, max_incentive, max_age, max_income )
     sm = ScalarMappable(cmap=my_cmap, norm=plt.Normalize(0, np.max(incentives["amount"])))
     sm.set_array([])
     sm.set_clim(0, max_incentive)
-    cbar = fig.colorbar(sm, ticks=[i for i in range(0, max_incentive+1, 10)])
+    cbar = fig.colorbar(sm, ticks=[i for i in range(0, max_incentive + 1, 10)])
     cbar.set_label('Incentive amount [$/person-trip]', rotation=270, labelpad=25)
 
     return ax
 
 
-def process_bus_data(input_file_path, route_ids, buses_list, agency_ids):
+def process_bus_data(vehicle_fleet_mix_data_path, route_ids, buses_list, agency_ids):
     """Processing and reorganizing the data in an input dataframe to be ready for plotting
 
     Parameters
     ----------
-    input_file_path: PosixPath
+    vehicle_fleet_mix_data_path: PosixPath
         Absolute path of the FleetMix.csv input file
 
     route_ids: list
@@ -201,10 +220,10 @@ def process_bus_data(input_file_path, route_ids, buses_list, agency_ids):
         FleetMix input data that is ready for plotting
 
     """
-    fleet_mix = pd.read_csv(input_file_path)
+    fleet_mix = pd.read_csv(vehicle_fleet_mix_data_path)
 
     if fleet_mix.empty:
-        fleet_mix = pd.DataFrame([[agency_ids, f"{route_id}", "BUS-DEFAULT"] for route_id in route_ids for agency_id in agency_ids],
+        fleet_mix = pd.DataFrame([[agency_id, f"{route_id}", "BUS-DEFAULT"] for route_id in route_ids for agency_id in agency_ids],
                                  columns=["agencyId", "routeId", "vehicleTypeId"])
 
     df = pd.DataFrame([agency_ids[0], 1, buses_list[0]]).T
@@ -238,23 +257,19 @@ def process_bus_data(input_file_path, route_ids, buses_list, agency_ids):
     return fleet_mix
 
 
-def plot_vehicle_fleet_mix_inputs(input_file_path, route_ids, buses_list, agency_ids):
+def plot_vehicle_fleet_mix_inputs(vehicle_fleet_mix_data_path, route_ids, buses_list, agency_ids):
     """Plot the vehicle fleet mix input
 
     Parameters
     ----------
-    input_file_path: PosixPath
-        Absolute path of the VehicleFleetMix.csv input file
-
-    route_ids: list
-        Ids of the bus routes
+   See `process_bus_data()`
 
     Returns
     -------
     ax: matplotlib axes object
 
     """
-    buses = process_bus_data(input_file_path, route_ids, buses_list, agency_ids)
+    buses = process_bus_data(vehicle_fleet_mix_data_path, route_ids, buses_list, agency_ids)
 
     fig, ax = plt.subplots(figsize=(6.5, 5))
 
@@ -271,6 +286,29 @@ def plot_vehicle_fleet_mix_inputs(input_file_path, route_ids, buses_list, agency
 
 
 def process_fares_data(fares_data_path, bau_fares_data_path, max_fare, route_ids):
+    """Processing and reorganizing the data in an input dataframe to be ready for plotting
+
+
+    Parameters
+    ----------
+    fares_data_path: PosixPath
+        Absolute path of the MassTransitFares.csv input file
+
+    bau_fares_data_path: PosixPath
+        Absolute path of the BAUFleetMix.csv input file
+
+    max_fare: float
+        Maximum fare of a bus trip as defined in the Starter Kit "Inputs Specifications" page
+
+    route_ids: list
+        All routes ids where buses operate (from `routes.txt` file in the GTFS data)
+
+
+    Returns
+    -------
+    fares: pandas DataFrame
+        Mass Transit Fares input data that is ready for plotting
+    """
     fares = pd.read_csv(fares_data_path)
     fares_bau = pd.read_csv(bau_fares_data_path)
 
@@ -304,14 +342,22 @@ def process_fares_data(fares_data_path, bau_fares_data_path, max_fare, route_ids
     fares = fares.sort_values(by=["amount", "routeId"])
     fares["amount_normalized"] = fares["amount"] / max_fare
 
-    fares
-
     return fares
 
 
-def plot_mass_transit_fares_inputs(input_file_path, bau_fares_data, max_fare, route_ids):
+def plot_mass_transit_fares_inputs(fares_data_path, bau_fares_data, max_fare, route_ids):
+    """Plot the Mass Transit Fares input
 
-    fares = process_fares_data(input_file_path, bau_fares_data, max_fare, route_ids)
+        Parameters
+        ----------
+       See `process_fares_data()`
+
+        Returns
+        -------
+        ax: matplotlib axes object
+
+        """
+    fares = process_fares_data(fares_data_path, bau_fares_data, max_fare, route_ids)
 
     fig, ax = plt.subplots(figsize = (7,5))
 
@@ -340,10 +386,27 @@ def plot_mass_transit_fares_inputs(input_file_path, bau_fares_data, max_fare, ro
     cbar.ax.set_yticklabels(y_ticks_labels)
 
     plt.title("Input - Mass Transit Fares")
+    return ax
 
 
-def process_frequency_data(bus_frequencies_data, route_ids):
-    frequency = pd.read_csv(bus_frequencies_data)
+def process_frequency_data(bus_frequencies_data_path, route_ids):
+    """Processing and reorganizing the data in an input dataframe to be ready for plotting
+
+    Parameters
+    ----------
+    bus_frequencies_data_path : PosixPath
+        Absolute path of the `FrequencyAdjustment.csv` input file
+
+    route_ids: list
+        All routes ids where buses operate (from `routes.txt` file in the GTFS data)
+
+    Returns
+    -------
+    frequency : pandas DataFrame
+        Frequency Adjustment input data that is ready for plotting.
+
+    """
+    frequency = pd.read_csv(bus_frequencies_data_path)
 
     # Add all missing routes (the ones that were not changed) in the DF so that they appear int he plot
     df = pd.DataFrame([0, 0, 0, 1]).T
@@ -366,6 +429,17 @@ def process_frequency_data(bus_frequencies_data, route_ids):
 
 
 def plot_bus_frequency(bus_frequencies_data, route_ids):
+    """Plotting the Frequency Adjustment input
+
+    Parameters
+    ----------
+    See `process_frequency_data()`
+
+    Returns
+    -------
+    ax: matplotlib axes object
+
+    """
 
     frequencies = process_frequency_data(bus_frequencies_data, route_ids)
 
@@ -399,9 +473,23 @@ def plot_bus_frequency(bus_frequencies_data, route_ids):
 
     return ax
 
+### 2 - OUTPUTS ###
 
-def process_overall_mode_choice(mode_choice_data):
-    mode_choice = pd.read_csv(mode_choice_data)
+def process_overall_mode_choice(mode_choice_data_path):
+    """Processing and reorganizing the data in a dataframe ready for plotting
+
+    Parameters
+    ----------
+    mode_choice_data_path:  PosixPath
+        Absolute path of the `modeChoice.csv` input file (located in the output directory of the simulation)
+
+    Returns
+    -------
+    mode_choice: pandas DataFrame
+        Mode choice data that is ready for plotting.
+
+    """
+    mode_choice = pd.read_csv(mode_choice_data_path)
     # Select columns w/ modes
     mode_choice = mode_choice.iloc[-1,:]
     mode_choice = mode_choice.drop(["iterations"])
@@ -410,20 +498,48 @@ def process_overall_mode_choice(mode_choice_data):
     return mode_choice
 
 
-def plot_overall_mode_choice(mode_choice_data):
-    mode_choice = process_mode_choice(mode_choice_data)
+def plot_overall_mode_choice(mode_choice_data_path):
+    """Plotting the Overall Mode choice output
+
+    Parameters
+    ----------
+    see process_overall_mode_choice()
+
+    Returns
+    -------
+    ax: matplotlib axes object
+
+    """
+    mode_choice = process_overall_mode_choice(mode_choice_data_path)
+    fig, ax = plt.subplots(figsize=(7, 5))
     mode_choice.plot(kind="pie", startangle=90, labels=None, autopct='%1.1f%%', pctdistance=0.8)
     plt.axis("image")
     plt.ylabel("")
+
     labels = mode_choice.index.values
-    plt.legend(labels, bbox_to_anchor=(1.1, 0.5), loc="center right", fontsize=11, bbox_transform=plt.gcf().transFigure,
+    ax.legend(labels, bbox_to_anchor=(1.1, 0.5), loc="center right", fontsize=11, bbox_transform=plt.gcf().transFigure,
                title="Mode", palette="Set2")
 
-    plt.title("Output - Overall mode choice")
+    ax.set_title("Output - Overall mode choice")
+    return ax
 
 
-def process_mode_choice_by_hour(mode_choice_data):
-    mode_choice_by_hour = pd.read_csv(mode_choice_data, index_col=0).T
+def process_mode_choice_by_hour(mode_choice_by_hour_data_path):
+    """Processing and reorganizing the data in a dataframe ready for plotting
+
+    Parameters
+    ----------
+    mode_choice_by_hour_data_path:  PosixPath
+        Absolute path of the `{ITER_NUMBER}modeChoice.csv` input file (located in the
+        <output directory>/ITERS/it.<ITER_NUMBER>/ directory of the simulation)
+
+    Returns
+    -------
+    mode_choice_by_hour: pandas DataFrame
+        Mode choice by hour data ready for plotting.
+
+        """
+    mode_choice_by_hour = pd.read_csv(mode_choice_by_hour_data_path, index_col=0).T
     mode_choice_by_hour.reset_index(inplace=True)
     mode_choice_by_hour.dropna(inplace=True)
     mode_choice_by_hour.loc[:, "hours"] = mode_choice_by_hour["index"].apply(lambda x: x.split("_")[1])
@@ -434,19 +550,45 @@ def process_mode_choice_by_hour(mode_choice_data):
     return mode_choice_by_hour
 
 
-def plot_mode_choice_by_hour(mode_choice_data):
-    mode_choice_per_hour = process_mode_choice_by_hour(mode_choice_data)
+def plot_mode_choice_by_hour(mode_choice_by_hour_data_path):
+    """Plotting the Overall Mode choice By Hour output
 
+    Parameters
+    ----------
+    see process_mode_choice_by_hour()
+
+    Returns
+    -------
+    ax: matplotlib axes object
+    """
+    mode_choice_per_hour = process_mode_choice_by_hour(mode_choice_by_hour_data_path)
+
+    fig, ax = plt.subplots(figsize=(7, 5))
     mode_choice_per_hour.plot.bar(stacked=True, figsize=(15, 5))
-    plt.legend(bbox_to_anchor=(1.01, 1), loc="upper left", title="Mode")
+    ax.legend(bbox_to_anchor=(1.01, 1), loc="upper left", title="Mode")
     plt.xlabel("Hours")
     plt.ylabel("Number of trips chosing the mode")
     plt.grid(alpha=0.9)
 
-    plt.title("Output - Mode choice over the agent's day \n (goes past midnight)")
+    ax.set_title("Output - Mode choice over the agent's day \n (goes past midnight)")
+    return ax
 
 
 def plot_mode_choice_by_income_group(person_df, trips_df):
+    """Plotting the Overall Mode choice By Income Group output
+
+    Parameters
+    ----------
+    person_df: pandas DataFrame
+        parsed and processed xml.files
+
+    trips_df: pandas DataFrame
+        parsed and processed xml.files
+
+    Returns
+    -------
+    ax: matplotlib axes object
+    """
     person_df = person_df[['PID', 'Age', 'income']]
     mode_df = trips_df[['PID', 'Mode']]
     people_age_income_mode = person_df.merge(mode_df, on=['PID'])
@@ -463,11 +605,25 @@ def plot_mode_choice_by_income_group(person_df, trips_df):
     fig, ax = plt.subplots(figsize=(8, 6))
     sns.barplot(data=people_income_mode_grouped, x="Mode", y="num_people", hue="income_group", ax=ax)
     ax.legend(title="Income group")
-    plt.title("Output - Mode choice by income group")
+    ax.set_title("Output - Mode choice by income group")
     return ax
 
 
 def plot_mode_choice_by_age_group(person_df, trips_df):
+    """Plotting the Overall Mode choice By Age Group output
+
+    Parameters
+    ----------
+    person_df: pandas DataFrame
+        parsed and processed xml.files
+
+    trips_df: pandas DataFrame
+        parsed and processed xml.files
+
+    Returns
+    -------
+    ax: matplotlib axes object
+    """
     person_df = person_df[['PID', 'Age', 'income']]
     mode_df = trips_df[['PID', 'Mode']]
     people_age_mode = person_df.merge(mode_df, on=['PID'])
@@ -491,6 +647,17 @@ def plot_mode_choice_by_age_group(person_df, trips_df):
 
 
 def plot_average_travel_expenditure_per_trip_per_mode_over_day(legs_df):
+    """Plotting the Averge Travel Expenditure Per Trip and By MOde Over THe Day output
+
+    Parameters
+    ----------
+    legs_df: pandas DataFrame
+        parsed and processed xml.files
+
+    Returns
+    -------
+    ax: matplotlib axes object
+    """
     legs_df.loc[:, "trip_cost"] = legs_df.FuelCost.values + legs_df.Fare.values + legs_df.Cost.values - legs_df.Incentive
     legs_df.loc[:, "hour_of_day"] = np.floor(legs_df.Start_time/3600)
     grouped_data = legs_df.groupby(by=["Mode", "hour_of_day"]).agg("mean")["trip_cost"].reset_index()
@@ -503,15 +670,36 @@ def plot_average_travel_expenditure_per_trip_per_mode_over_day(legs_df):
     return ax
 
 
-def plot_average_bus_crowding_by_bus_route_by_period_of_day(path_df, trip_to_route, available_bus_types):
+def plot_average_bus_crowding_by_bus_route_by_period_of_day(path_df, trip_to_route, seating_capacities, transit_scale_factor):
+    """Plotting the Average hours of bus crowding output
+
+    Parameters
+    ----------
+    path_df: pandas DataFrame
+        parsed and processed xml.files
+
+    trip_to_route: dictionary
+        Correspondance between trip_ids and route_ids
+
+    seating_capacities: dictionary
+        Correspondance between each bus type and its seating capacity
+
+    transit_scale_factor: float
+        Downsizing factor defined in the config file (=0.1 for Sioux Faux)
+
+    Returns
+    -------
+    ax: matplotlib axes object
+        """
     bus_slice_df = path_df.loc[lambda df: df["mode"] == "bus"][["vehicle", "numPassengers",
                                                                 "capacity", "departureTime",
                                                                 "arrivalTime", "fuel", "vehicleType"]]
     bus_slice_df.loc[:, "route_id"] = bus_slice_df.vehicle.apply(lambda x: trip_to_route[x.split(":")[1]])
     bus_slice_df.loc[:, "serviceTime"] = (bus_slice_df.arrivalTime - bus_slice_df.departureTime) / 3600
-    bus_slice_df.loc[:, "seatingCapacity"] = bus_slice_df.vehicleType.apply(lambda x: 0.1 * available_bus_types[x])
+    bus_slice_df.loc[:, "seatingCapacity"] = bus_slice_df.vehicleType.apply(lambda x: transit_scale_factor * seating_capacities[x])
     bus_slice_df.loc[:, "passengerOverflow"] = bus_slice_df.numPassengers > bus_slice_df.seatingCapacity
-    bus_slice_df.loc[:, "servicePeriod"] = pd.cut(bus_slice_df.departureTime, [0, 21600, 32400, 54000, 68400, 86400],
+    # AM peak = 7am-10am, PM Peak = 5pm-8pm, Early Morning, Midday, Late Evening = in between
+    bus_slice_df.loc[:, "servicePeriod"] = pd.cut(bus_slice_df.departureTime, [0, 25200, 36000, 61200, 72000, 86400],
                                                   labels=["Early Morning", "AM Peak", "Midday", "PM Peak",
                                                           "Late Evening"])
 
@@ -528,8 +716,22 @@ def plot_average_bus_crowding_by_bus_route_by_period_of_day(path_df, trip_to_rou
     return ax
 
 
-def process_travel_time(travel_time_data):
-    travel_time = pd.read_csv(travel_time_data)
+def process_travel_time(travel_time_data_path):
+    """Processing and reorganizing the data in a dataframe ready for plotting
+
+    Parameters
+    ----------
+    travel_time_data_path:  PosixPath
+        Absolute path of the `{ITER_NUMBER}.averageTravelTimes.csv` input file (located in the
+        <output directory>/ITERS/it.<ITER_NUMBER>/ directory of the simulation)
+
+    Returns
+    -------
+    travel_time: pandas DataFrame
+        Average travel_time by mode data that is ready for plotting.
+
+        """
+    travel_time = pd.read_csv(travel_time_data_path)
     travel_time = travel_time.set_index("TravelTimeMode\Hour")
     travel_time.rename({"ride_hail": "on_demand ride"}, inplace=True)
     travel_time["mean"] = travel_time.mean(axis=1)
@@ -538,8 +740,19 @@ def process_travel_time(travel_time_data):
 
     return travel_time
 
-def plot_travel_time_by_mode(travel_time_data):
-    travel_time = process_travel_time(travel_time_data)
+
+def plot_travel_time_by_mode(travel_time_data_path):
+    """Plotting the Average Travel Time by Mode output
+
+    Parameters
+    ----------
+    see process_travel_time()
+
+    Returns
+    -------
+    ax: matplotlib axes object
+    """
+    travel_time = process_travel_time(travel_time_data_path)
 
     fig, ax = plt.subplots()
 
@@ -552,8 +765,23 @@ def plot_travel_time_by_mode(travel_time_data):
     return ax
 
 
-def process_travel_time_over_the_day(travel_time_data):
-    travel_time = pd.read_csv(travel_time_data)
+def process_travel_time_over_the_day(travel_time_data_path):
+    """Processing and reorganizing the data in a dataframe ready for plotting
+
+    Parameters
+    ----------
+    travel_time_data_path:  PosixPath
+        Absolute path of the `{ITER_NUMBER}.averageTravelTimes.csv` input file (located in the
+        <output directory>/ITERS/it.<ITER_NUMBER>/ directory of the simulation)
+
+    Returns
+    -------
+    travel_time: pandas DataFrame
+        Average travel_time by mode and over the day data that is ready for plotting.
+
+        """
+
+    travel_time = pd.read_csv(travel_time_data_path)
     travel_time = travel_time.set_index("TravelTimeMode\Hour")
     travel_time.rename({"ride_hail": "on_demand ride"}, inplace=True)
     travel_time = travel_time.drop(labels="others", axis=0)
@@ -568,8 +796,18 @@ def process_travel_time_over_the_day(travel_time_data):
     return melted_travel_time
 
 
-def plot_travel_time_over_the_day(travel_time_data):
-    melted_travel_time = process_travel_time_over_the_day(travel_time_data)
+def plot_travel_time_over_the_day(travel_time_data_path):
+    """Plotting the Average Travel Time by Mode and by Hour of the Day output
+
+    Parameters
+    ----------
+    see process_travel_time_over_the_day()
+
+    Returns
+    -------
+    ax: matplotlib axes object
+    """
+    melted_travel_time = process_travel_time_over_the_day(travel_time_data_path)
 
     fig, ax = plt.subplots()
 
@@ -588,16 +826,39 @@ def plot_travel_time_over_the_day(travel_time_data):
     return ax
 
 
-def plot_cost_benefits(path_df, operational_costs, trip_to_route):
+def plot_cost_benefits(path_df, legs_df, operational_costs, trip_to_route):
+    """Plotting the Costs and Benefits by bus route output
+
+    Parameters
+    ----------
+    path_df: pandas DataFrame
+        parsed and processed xml.files
+
+    legs_df: pandas DataFrame
+        parsed and processed xml.files
+
+    operational_costs: dictionary
+        Operational costs for each bus vehicle type as defined under "operational_costs" in the
+        availableVehicleTypes.csv in the`reference-data` folder of the Starter Kit
+
+    trip_to_route: dictionary
+        Correspondance between trip_ids and route_ids
+
+    Returns
+    -------
+    ax: matplotlib axes object
+        """
     bus_slice_df = path_df.loc[lambda df: df["mode"] == "bus"][
         ["vehicle", "numPassengers", "capacity", "departureTime", "arrivalTime", "fuel", "vehicleType"]]
     bus_slice_df.loc[:, "route_id"] = bus_slice_df.vehicle.apply(lambda x: trip_to_route[x.split(":")[1]])
     bus_slice_df.loc[:, "Trip_ID"] = bus_slice_df.vehicle.apply(lambda x: x.split(":")[1])
     bus_slice_df.loc[:, "operational_costs_per_bus"] = bus_slice_df.vehicleType.apply(
-        lambda x: 0.1 * operational_costs[x])
+        lambda x: operational_costs[x])
     bus_slice_df.loc[:, "serviceTime"] = (bus_slice_df.arrivalTime - bus_slice_df.departureTime) / 3600
     bus_slice_df.loc[:, "operational_costs"] = bus_slice_df.operational_costs_per_bus * bus_slice_df.serviceTime
     bus_slice_df.loc[:, "fuelCosts"] = bus_slice_df.fuel * 0.02
+
+
     # return pd.merge(bus_slice_df, trips_df[["Trip_ID", "Fare"]], on="Trip_ID")
     grouped_data = bus_slice_df.groupby(by="route_id").agg("sum")[["operational_costs", "fuelCosts"]]
 
@@ -608,3 +869,82 @@ def plot_cost_benefits(path_df, operational_costs, trip_to_route):
     plt.ylabel("Amount [$]")
     ax.legend(title="Costs and Benefits")
     return ax
+
+
+
+####### PROCESS AND PLOT SPATIAL DATA ######
+
+# Defining matsim_network_to_graph(``)
+
+class TravelTimeAccessibilityAnalysis(object):
+
+    def __init__(self,
+                 network_file,
+                 linkstats_file,
+                 population_file,
+                 utm_zone):
+        self.network_file = network_file
+        self.linkstats_file = linkstats_file
+        self.population_file = population_file
+        self.utm_zone_number = re.match("\d*", utm_zone)
+        self.utm_zone_letter = re.match("[N|S]", utm_zone)
+        self.poi_dict = self._make_poi_dict()
+
+    def _convert_crs(self, c):
+        return utm.to_latlon(c[0], c[1],
+                             self.utm_zone_number,
+                             self.utm_zone_letter)
+
+    def make_net_for_timerange(self, timerange):
+        traveltime_df = self.make_traveltime_df(timerange)
+        node_df = make_node_df(self.network_file)
+        return create_pandana_net(node_df, traveltime_df)
+
+    def make_pandana_nets(self, poi_types, timeranges, max_time):
+        nets = {}
+        for label, timerange in timeranges.items():
+            net = self.make_net_for_timerange(timerange)
+            for poi_type in poi_types:
+                net.precompute(max_time)
+                poi_locs = np.array(self.poi_dict[poi_type])
+                x, y = poi_locs[:, 1], poi_locs[:, 0]
+                net.set_pois(poi_type, max_time, 10, x, y)
+                nets[label] = net
+        return nets
+
+    def make_node_df(self):
+        matsimnet = open_xml(self.network_file).getroot()
+        nodes = matsimnet[1]
+        links = matsimnet[3]
+        node_data = []
+
+        # populate node dataframes
+        for node in nodes:
+            coords = convert_crs((float(node.get('x')), float(node.get('y'))))
+            node_data.append([int(node.get('id')), coords[1], coords[0]])
+        node_data = np.array(node_data)
+
+        node_df = pd.DataFrame({'x': node_data[:, 1], 'y': node_data[:, 2]}, index=node_data[:, 0].astype(int))
+        node_df.index.name = 'id'
+        return node_df
+
+    def make_traveltime_df(self, timerange):
+        link_df = pd.read_csv(self.linkstats_file, compression='gzip')
+        link_df = link_df[link_df.stat == 'AVG']
+        link_df.drop(link_df.hour[link_df.hour == '0.0 - 30.0'].index, inplace=True)
+        link_df.hour = link_df.hour.astype(float).astype(int)
+        traveltime_link_df = link_df[link_df.hour.map(lambda x: x in timerange)].groupby('link').mean()[
+            ['from', 'to', 'traveltime']]
+        return traveltime_link_df
+
+    def _make_poi_dict(self):
+        population_xml = open_xml(self.population_file).getroot()
+        persons = population_xml.findall('person')
+        poi_dict = defaultdict(list)
+        for person in persons:
+            for activity in person[1]:
+                actType = activity.get('type').lower()
+                coords = convert_crs([float(activity.get('x')), float(activity.get('y'))])
+                poi_dict[actType].append(coords)
+        return poi_dict
+
