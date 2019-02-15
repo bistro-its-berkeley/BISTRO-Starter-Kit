@@ -1,6 +1,16 @@
 import matplotlib.pyplot as plt
-from matplotlib import cm
 from matplotlib.cm import ScalarMappable
+
+import pandana as pdna
+from lxml import etree as ET
+import utm
+import geopandas as gpd
+from shapely.geometry import Point, Polygon
+from collections import defaultdict
+import re
+import zipfile
+import gzip
+import shutil
 
 
 import pandas as pd
@@ -33,10 +43,6 @@ def unzip_file(element_path):
     -------
         Absolute path of the (unzipped) folder of interest.
     """
-    import zipfile
-    import gzip
-    import shutil
-
     if element_path.exists():
         return element_path
 
@@ -55,6 +61,12 @@ def unzip_file(element_path):
     else:
         raise FileNotFoundError(f"{folder_path} does not exist")
 
+def open_xml(path):
+    # Open xml and xml.gz files into ElementTree
+    if path.endswith('.gz'):
+        return ET.parse(gzip.open(path))
+    else:
+        return ET.parse(path)
 
 
 ########## PROCESS AND PLOT STATISTICS ##########
@@ -875,6 +887,40 @@ def plot_cost_benefits(path_df, legs_df, operational_costs, trip_to_route):
 ####### PROCESS AND PLOT SPATIAL DATA ######
 
 # Defining matsim_network_to_graph(``)
+def convert_crs(c):
+    return utm.to_latlon(c[0],c[1],14,'N')
+
+
+def make_traveltime_dfs(linkstats_filename, morning_peak, evening_peak):
+    link_df = pd.read_csv(linkstats_filename,compression='gzip')
+    link_df = link_df[link_df.stat == 'AVG']
+    link_df.drop(link_df.hour[link_df.hour ==  '0.0 - 30.0'].index,inplace=True)
+    link_df.hour=link_df.hour.astype(float).astype(int)
+    morning_link_df = link_df[link_df.hour.map(lambda x: x in morning_peak)].groupby('link').mean()[['from','to','traveltime']]
+    evening_link_df = link_df[link_df.hour.map(lambda x: x in evening_peak)].groupby('link').mean()[['from','to','traveltime']]
+    return morning_link_df,evening_link_df
+
+
+def make_node_df(network_filename):
+    matsimnet = open_xml(network_filename).getroot()
+    nodes = matsimnet[1]
+    links = matsimnet[3]
+    node_data = []
+
+    # populate node dataframes
+    for node in nodes:
+        coords = convert_crs((float(node.get('x')), float(node.get('y'))))
+        node_data.append([int(node.get('id')), coords[1],coords[0]])
+    node_data = np.array(node_data)
+
+    node_df = pd.DataFrame({'x':node_data[:,1],'y':node_data[:,2]},index=node_data[:,0].astype(int))
+    node_df.index.name = 'id'
+    return node_df
+
+
+def create_pandana_net(nodes,edges):
+    return pdna.Network(nodes.x, nodes.y, edges['from'], edges['to'], edges[['traveltime']])
+
 
 class TravelTimeAccessibilityAnalysis(object):
 
@@ -900,18 +946,6 @@ class TravelTimeAccessibilityAnalysis(object):
         node_df = make_node_df(self.network_file)
         return create_pandana_net(node_df, traveltime_df)
 
-    def make_pandana_nets(self, poi_types, timeranges, max_time):
-        nets = {}
-        for label, timerange in timeranges.items():
-            net = self.make_net_for_timerange(timerange)
-            for poi_type in poi_types:
-                net.precompute(max_time)
-                poi_locs = np.array(self.poi_dict[poi_type])
-                x, y = poi_locs[:, 1], poi_locs[:, 0]
-                net.set_pois(poi_type, max_time, 10, x, y)
-                nets[label] = net
-        return nets
-
     def make_node_df(self):
         matsimnet = open_xml(self.network_file).getroot()
         nodes = matsimnet[1]
@@ -927,6 +961,18 @@ class TravelTimeAccessibilityAnalysis(object):
         node_df = pd.DataFrame({'x': node_data[:, 1], 'y': node_data[:, 2]}, index=node_data[:, 0].astype(int))
         node_df.index.name = 'id'
         return node_df
+
+    def make_pandana_nets(self, poi_types, timeranges, max_time):
+        nets = {}
+        for label, timerange in timeranges.items():
+            net = self.make_net_for_timerange(timerange)
+            for poi_type in poi_types:
+                net.precompute(max_time)
+                poi_locs = np.array(self.poi_dict[poi_type])
+                x, y = poi_locs[:, 1], poi_locs[:, 0]
+                net.set_pois(poi_type, max_time, 10, x, y)
+                nets[label] = net
+        return nets
 
     def make_traveltime_df(self, timerange):
         link_df = pd.read_csv(self.linkstats_file, compression='gzip')
@@ -947,4 +993,47 @@ class TravelTimeAccessibilityAnalysis(object):
                 coords = convert_crs([float(activity.get('x')), float(activity.get('y'))])
                 poi_dict[actType].append(coords)
         return poi_dict
+
+
+def plot_accessibility(sample_name, network_file, bau_linkstats_file, population_file, utm_zone, poi_types, time_ranges, max_time, morning_peak, evening_peak):
+
+    ttta_bau = bau_ttaa = TravelTimeAccessibilityAnalysis(network_file,bau_linkstats_file,population_file, utm_zone)
+    nets = bau_ttaa.make_pandana_nets(poi_types,time_ranges,max_time)
+    node_df=bau_ttaa.make_node_df()
+    bau_poi_dict = bau_ttaa._make_poi_dict()
+    works = bau_poi_dict['work']
+    secondaries = bau_poi_dict['secondary']
+    evening_peak,morning_peak = make_traveltime_dfs(bau_linkstats_file, morning_peak, evening_peak)
+
+    bau_gdfs = {}
+    for label_poi,poi_data in bau_ttaa.poi_dict.items():
+        fig,ax=plt.subplots()
+        fig.set_size_inches(10,10)
+        ax.set_facecolor('k')
+        ax.set_title("{}: {} locations accessible within {} minutes".format(sample_name,label_poi.title(),max_time/60))
+        legend=fig.legend()
+        legend.set_visible(True)
+        poi_data = np.array(poi_data)
+        x,y = poi_data[:,1],poi_data[:,0]
+
+        for label_timerange,net in nets.items():
+            node_ids = net.get_node_ids(x,y)
+            net.set(node_ids)
+            a = net.aggregate(max_time, type="sum",decay="linear")
+
+        bau_gdf = gpd.GeoDataFrame(node_df, geometry=[Point(row.x, row.y) for _, row in node_df.iterrows()])
+        ax.axis('equal')
+        net.set(node_ids)
+        w = net.aggregate(max_time, type="sum", decay="linear")
+        bau_gdf["15min_{}".format(label_poi)]=w
+        bau_gdf = bau_gdf[bau_gdf["15min_{}".format(label_poi)]>0]
+        bau_gdf.plot(markersize=5, column="15min_{}".format(label_poi),ax=ax,legend=True,vmin=0,vmax=2000)
+
+        bau_gdfs[label_poi]=bau_gdf
+        ax.xaxis.set_ticks_position('none')
+        ax.yaxis.set_ticks_position('none')
+        ax.xaxis.set_ticklabels([])
+        ax.yaxis.set_ticklabels([])
+    return ax
+
 
