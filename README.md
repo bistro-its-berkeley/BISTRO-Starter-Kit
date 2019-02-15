@@ -52,8 +52,8 @@ List of utility scripts provided to simplify the interface with the BISTRO simul
   * the [input_sampler.py](./utilities/input_sampler.py) script
  
 * `examples` folder: <br> 
-Exmaple python notebooks demonstrating the use of the `competition_executor.py`, `input_sampler.py`and `visualization.py` scripts. provided to simplify the interface with the BISTRO simulator and its inputs / outputs.
-  * the [Starter Kit Utilities Tutorial.ipynb](./examples/Starter Kit Utilities Tutorial.ipynb) script
+Exmaple python notebooks demonstrating the use of the `competition_executor.py`, `input_sampler.py`and `visualization.py` scripts. 
+  * the [Starter Kit Utilities Tutorial](./examples/Starter_Kit_Utilities_Tutorial.ipynb) script
   * the *Visualization.ipynb* script 
 
 ## Updates to the Starter Kit
