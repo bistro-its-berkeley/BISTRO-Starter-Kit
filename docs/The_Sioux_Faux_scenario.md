@@ -5,7 +5,7 @@ For this first Round, you are asked to optimize the transportation network for a
 ## Sioux Faux network
 The Sioux Faux road network is shown below (Fig. 1). Currently, the Sioux Faux Bus Lines (SFBL) transportation company operates twelve bus lines in the city.
 
-![Alt text](/Images/sf_route_guide.png){:height="36px" width="36px"}
+![Alt text|30%](/Images/sf_route_guide.png)
 Figure 1: Sioux Faux Network
 
 ## Sioux Faux sample population
