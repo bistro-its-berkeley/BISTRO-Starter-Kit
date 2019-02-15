@@ -19,11 +19,12 @@ BEAM stands for Behavior, Energy, Autonomy, and Mobility. It is an extension of 
 
 A BEAM simulation computes the interaction of *supply* and *demand* in a virtual urban transportation system. Supply is represented by the physical transportation infrastructure such as roads and subway lines as well as vehicles (personal, mass transit, and shared). Demand, on the other hand, consists of the planned *activities* of the synthetic commuters populating the virtual urban space. This may seem counter-intuitive, as we do not directly model the demand for transportation services. However, per modern transportation science, travel is theorized to be a by-product of our desire to participate in activities that are distributed in time and space. The less time a person spends traveling, the more *utility* the person gets from time spent at activities. Accordingly, the model of demand implemented in BEAM and MATSim is an *activity-based model*, which operates on the principle that activities *induce demand* for travel. 
 
-Like MATSim, each *iteration* of a BEAM *run* simulates the simultaneous execution of *daily activity schedules* also known as *plans* on the virtual road network, which consist of sequences of activities, one for each agent. A single run consists of many iterations-- permitting agents to adjust their plans.
+Like MATSim, each *iteration* of a BEAM *run* simulates the simultaneous execution of *daily activity schedules* also known as *plans* on the virtual road network, which consist of sequences of activities, one for each agent. A single run consists of many iterations-- permitting agents to adjust their plans. <br>
 
 ![Alt text](/Images/Mode_choice_diagram.png)
-Figure 1: The mode choice process of Sioux Faux's agents 
+***Figure 1: The mode choice process of Sioux Faux's agents*** 
 
+<br>
 Once all agents of the system have chosen their optimal transportation mode to attend their daily activities, the system reaches what we call an *equilibrium state*. Based on this equilibrium state, the simulator produces a series of outputs concerning the individual agents and the overall system. 
 
 
