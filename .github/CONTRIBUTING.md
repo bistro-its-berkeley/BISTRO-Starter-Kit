@@ -91,7 +91,7 @@ Before creating enhancement suggestions, please check [this list](#before-submit
 #### Before Submitting An Enhancement Suggestion
 
 * **Perform a [cursory search](https://github.com/vgolfier/Uber-Prize-Starter-Kit/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement)** to see if the enhancement has already been suggested. If it has, add a comment to the existing issue instead of opening a new one.
-* TODO: Add more pre-requisites for enhancement suggestion
+<!--* TODO: Add more pre-requisites for enhancement suggestion-->
 
 #### Submitting a (Good) Enhancement Suggestion
 
@@ -131,7 +131,6 @@ Enhancement suggestions are tracked as [GitHub issues](https://guides.github.com
 
     ![Screenshots and GIFs which demonstrate the steps or part of BEAM the enhancement suggestion is related to](url)
 
-    **BEAM Version:** [Enter BEAM version here]
     **OS and Version:** [Enter OS name and version here]
 ### Your First Code Contribution
 
@@ -148,8 +147,8 @@ Enhancement suggestions are tracked as [GitHub issues](https://guides.github.com
 
 * Include screenshots and animated GIFs in your pull request whenever possible.
 * End files with a newline.
-* TODO: Add more pre-requisites for Pull Requests.
-* TODO: Add Documentation Styleguide.
+<!--TODO: Add more pre-requisites for Pull Requests.-->
+<!--TODO: Add Documentation Styleguide.-->
 
 ## Styleguides
 
@@ -204,7 +203,7 @@ labeling and referencing functionality of this tool, we make extensive use of se
 ## Need Help?
 
 If the above seems daunting to you, please feel free to reach out to the
-Uber Prize community forum (TODO: Add link) or contact the Uber Prize working group technical team leads directly:
+Uber ML Hackathon uChat Group or contact the Uber Prize working group technical team leads directly:
 * Sid Feygin: sfeygi@ext.uber.com
 * Valentine Golfier-Vetterli: vgolfi@ext.uber.com
 
