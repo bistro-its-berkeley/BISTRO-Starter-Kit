@@ -5,7 +5,7 @@ This document gathers the recurrent questions about the Uber Prize in general, t
 
 ### 1. TRANSPORTATION PROBLEM
 <details>
-<summary><strong>Why are alternatives to the car limited to buses and on-demand rideshare? What about metro, bikes, scooters ..etc?</strong></summary>
+<summary><strong>Why are alternatives to the car limited to buses and on-demand rideshare? What about metro, bikes, scooters..etc?</strong></summary>
 <br>
 to be filled
 </details>
@@ -64,7 +64,7 @@ to be filled
 </details>
 
 <details>
-<summary><strong>A simulation run takes way too long! Why? How can I make the simulation run more quickly? What is the maximum performance that I can expect?**</summary>
+<summary><strong>A simulation run takes way too long! Why? How can I make the simulation run more quickly? What is the maximum performance that I can expect?</summary>
 <br>
 to be filled
 </details>
