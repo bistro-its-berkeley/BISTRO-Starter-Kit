@@ -1,7 +1,7 @@
 # Technical FAQ
 
 
-### 1.TRANSPORTATION PROBLEM
+### 1. TRANSPORTATION PROBLEM
 <details>
 <summary><strong>Why are alternatives to the car limited to buses and on-demand rideshare? What about metro, bikes, scooters ..etc?</strong></summary>
 <br>
@@ -15,9 +15,9 @@ to be filled
 to be filled
 </details>
 
-### 2.SIMULATION
+### 2. SIMULATION
 
-#### Simulation Variability
+*2.1. Simulation Variability*
 
 <details>
 <summary><strong>Is the simulation deterministic?</strong></summary>
@@ -31,7 +31,7 @@ to be filled
 to be filled
 </details>
 
-#### Simulation Settings
+*2.2. Simulation Settings*
 
 <details>
 <summary><strong>What is warm start and how is it used?</strong></summary>
@@ -41,8 +41,9 @@ to be filled
 
 
 
-### TROUBLESHOOTING
-#### Computational Complexity
+### 3. TROUBLESHOOTING
+
+*3.1.Computational Complexity*
 
 <details>
 <summary><strong>Nothing is happening! Is the simulation stuck?</strong></summary>
