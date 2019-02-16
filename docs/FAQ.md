@@ -1,7 +1,7 @@
 # Technical FAQ
 
 
-## TRANSPORTATION PROBLEM
+### 1.TRANSPORTATION PROBLEM
 <details>
 <summary><strong>Why are alternatives to the car limited to buses and on-demand rideshare? What about metro, bikes, scooters ..etc?</strong></summary>
 <br>
@@ -10,54 +10,54 @@ to be filled
 
 
 <details>
-<summary>strong>Why is Sioux Falls/ Sioux Faux used as a benchmark city?</strong></summary>
+<summary><strong>Why is Sioux Falls/ Sioux Faux used as a benchmark city?</strong></summary>
 <br>
 to be filled
 </details>
 
-## SIMULATION
+### 2.SIMULATION
 
-## Simulation Variability
-
-<details>
-<summary>strong>Is the simulation deterministic?</strong></summary>
-<br>
-to be filled
-</details>
+#### Simulation Variability
 
 <details>
-<summary>**Is the score reproducible/numerically stable between runs using identical inputs?**</summary>
-<br>
-to be filled
-</details>
-
-## Simulation Settings
-
-<details>
-<summary>**What is warm start and how is it used?**</summary>
-<br>
-to be filled
-</details>
-
-
-
-## TROUBLESHOOTING
-## Computational Complexity
-
-<details>
-<summary>**Nothing is happening! Is the simulation stuck?**</summary>
+<summary><strong>Is the simulation deterministic?</strong></summary>
 <br>
 to be filled
 </details>
 
 <details>
-<summary>**How can I maximize use of compute resources available to me?**</summary>
+<summary><strong>Is the score reproducible/numerically stable between runs using identical inputs?</strong></summary>
+<br>
+to be filled
+</details>
+
+#### Simulation Settings
+
+<details>
+<summary><strong>What is warm start and how is it used?</strong></summary>
+<br>
+to be filled
+</details>
+
+
+
+### TROUBLESHOOTING
+#### Computational Complexity
+
+<details>
+<summary><strong>Nothing is happening! Is the simulation stuck?</strong></summary>
 <br>
 to be filled
 </details>
 
 <details>
-<summary>**A simulation run takes way too long! Why? How can I make the simulation run more quickly? What is the maximum performance that I can expect?**</summary>
+<summary><strong>How can I maximize use of compute resources available to me?</strong></summary>
+<br>
+to be filled
+</details>
+
+<details>
+<summary><strong>A simulation run takes way too long! Why? How can I make the simulation run more quickly? What is the maximum performance that I can expect?**</summary>
 <br>
 to be filled
 </details>
