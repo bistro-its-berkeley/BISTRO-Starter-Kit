@@ -1,6 +1,11 @@
 # Technical FAQ
 
-This document gathers the recurrent questions about the Uber Prize in general, the transportatino problem, the BISTRO simulations and include also a Troubleshooting page.
+This document gathers the recurrent questions about the Uber Prize in general, the transportatino problem, the BISTRO simulations and includes also a Troubleshooting page.
+
+### Table of Contents
+1. [Transportation problem](### 1. TRANSPORTATION PROBLEM)
+2. [Example2](#example2)
+3. [Third Example](#third-example)
 
 
 ### 1. TRANSPORTATION PROBLEM
