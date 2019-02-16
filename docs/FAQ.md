@@ -6,14 +6,14 @@
 <summary>** Why are alternatives to the car limited to buses and on-demand rideshare? What about metro, bikes, scooters ..etc?**</summary>
 <br>
 to be filled
-<details>
+</details>
 
 
 <details open>
 <summary>** Why is Sioux Falls/ Sioux Faux used as a benchmark city?**</summary>
 <br>
 to be filled
-<details>
+</details>
 
 ## SIMULATION
 
@@ -23,13 +23,13 @@ to be filled
 <summary>**Is the simulation deterministic?**</summary>
 <br>
 to be filled
-<details>
+</details>
 
 <details open>
 <summary>**Is the score reproducible/numerically stable between runs using identical inputs?**</summary>
 <br>
 to be filled
-<details>
+</details>
 
 ## Simulation Settings
 
@@ -37,7 +37,7 @@ to be filled
 <summary>**What is warm start and how is it used?**</summary>
 <br>
 to be filled
-<details>
+</details>
 
 
 
@@ -48,18 +48,18 @@ to be filled
 <summary>**Nothing is happening! Is the simulation stuck?**</summary>
 <br>
 to be filled
-<details>
+</details>
 
 <details open>
 <summary>**How can I maximize use of compute resources available to me?**</summary>
 <br>
 to be filled
-<details>
+</details>
 
 <details open>
 <summary>**A simulation run takes way too long! Why? How can I make the simulation run more quickly? What is the maximum performance that I can expect?**</summary>
 <br>
 to be filled
-<details>
+</details>
 
 
