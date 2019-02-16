@@ -3,14 +3,14 @@
 
 ## TRANSPORTATION PROBLEM
 <details>
-<summary>** Why are alternatives to the car limited to buses and on-demand rideshare? What about metro, bikes, scooters ..etc?**</summary>
+<summary><strong>Why are alternatives to the car limited to buses and on-demand rideshare? What about metro, bikes, scooters ..etc?</strong></summary>
 <br>
 to be filled
 </details>
 
 
 <details>
-<summary>** Why is Sioux Falls/ Sioux Faux used as a benchmark city?**</summary>
+<summary>strong>Why is Sioux Falls/ Sioux Faux used as a benchmark city?</strong></summary>
 <br>
 to be filled
 </details>
@@ -20,7 +20,7 @@ to be filled
 ## Simulation Variability
 
 <details>
-<summary>**Is the simulation deterministic?**</summary>
+<summary>strong>Is the simulation deterministic?</strong></summary>
 <br>
 to be filled
 </details>
