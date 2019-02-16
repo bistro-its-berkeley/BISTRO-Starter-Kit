@@ -41,8 +41,20 @@ We recommend that you proceed through the documentation in the following order:
   * the input file for the [mass transit fares](./submission-inputs/MassTransitFares.csv)
 
 
-* `reference-data/sioux_faux_gtfs_data` folder: <br> <br>
+* `reference-data/sioux_faux_gtfs_data` folder: <br> 
 List of the Sioux Faux GTFS data (General Transit Feed Specification). It is a series of text files, each of them modeling a particular aspect of the transit agency's operations: stops, routes, trips, and other schedule data. The details of each file and their relationships are defined in the [GTFS reference](https://developers.google.com/transit/gtfs/reference/).
+
+* `utilities` folder: <br> 
+List of utility scripts provided to simplify the interface with the BISTRO simulator and its inputs / outputs.
+  * the [competition_executor.py](./utilities/competition_executor.py) script
+  * the [visualization.py](./utilities/visualization.py) script 
+  * the [random_search.py](./utilities/random_search.py) script
+  * the [input_sampler.py](./utilities/input_sampler.py) script
+ 
+* `examples` folder: <br> 
+Exmaple python notebooks demonstrating the use of the `competition_executor.py`, `input_sampler.py`and `visualization.py` scripts. 
+  * the [Starter Kit Utilities Tutorial](./examples/Starter_Kit_Utilities_Tutorial.ipynb) notebook : to run a simulation and generate random inputs
+  * the *Visualization* notebook : to plot input and output parameters
 
 ## Updates to the Starter Kit
 
