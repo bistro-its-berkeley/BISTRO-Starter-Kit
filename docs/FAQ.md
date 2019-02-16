@@ -47,7 +47,9 @@ to be filled
 
 ### 3. TROUBLESHOOTING
 
-*3.1.Computational Complexity*
+Contestants may complain that simulations take a long time. The following items suggest some hints to improve execution time or otherwise accelerate search.
+
+*3.1. Computational Complexity*
 
 <details>
 <summary><strong>Nothing is happening! Is the simulation stuck?</strong></summary>
