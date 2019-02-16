@@ -1,5 +1,7 @@
 # Technical FAQ
 
+This document gathers the recurrent questions about the Uber Prize in general, the transportatino problem, the BISTRO simulations and include also a Troubleshooting page.
+
 
 ### 1. TRANSPORTATION PROBLEM
 <details>
@@ -19,6 +21,8 @@ to be filled
 
 *2.1. Simulation Variability*
 
+Contestants may notice that their scores vary between runs when using the same inputs combinations. The following items describe the nature of this variance and how we plan to account for it in when differentiating between top-ranked entries.
+
 <details>
 <summary><strong>Is the simulation deterministic?</strong></summary>
 <br>
@@ -29,7 +33,7 @@ to be filled
 <summary><strong>Is the score reproducible/numerically stable between runs using identical inputs?</strong></summary>
 <br>
 to be filled
-</details>
+</details><br>
 
 *2.2. Simulation Settings*
 
