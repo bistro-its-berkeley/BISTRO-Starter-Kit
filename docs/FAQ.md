@@ -2,12 +2,6 @@
 
 This document gathers the recurrent questions about the Uber Prize in general, the transportatino problem, the BISTRO simulations and includes also a Troubleshooting page.
 
-### Table of Contents
-1. [Transportation problem](### 1. TRANSPORTATION PROBLEM)
-2. [Example2](#example2)
-3. [Third Example](#third-example)
-
-
 ### 1. TRANSPORTATION PROBLEM
 <details>
 <summary><strong>Why are alternatives to the car limited to buses and on-demand rideshare? What about metro, bikes, scooters..etc?</strong></summary>
