@@ -30,7 +30,7 @@ There are no strict hardware requirements; however, performance will increase su
 For your convenience, we've provided several interfaces to running simulations.
 
 ### 2.1. Running Using Python API
-A python utility, [/competition_executor.py](./utilities/competition_executor.py) is available in [/utilities](./utilities) to simplify the interface to docker. See the accompanying ["Starter Kit Utilities Tutorial" Jupyter notebook](./examples/Starter Kit Utilities Tutorial.ipynb) for instructions on its use.
+A python utility, [`competition_executor.py`](/utilities/competition_executor.py) is available in the [`utilities`](/utilities) folder to simplify the interface to docker. See the accompanying ["Starter Kit Utilities Tutorial" Jupyter notebook](/examples/Starter Kit Utilities Tutorial.ipynb) for instructions on its use.
 
 ### 2.2. Running a Container From the Command Line
 
