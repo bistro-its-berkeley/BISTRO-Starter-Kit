@@ -23,6 +23,8 @@ We recommend that you proceed through the documentation in the following order:
   
   * **Submission steps**: When you feel ready to submit a solution, follow [these steps](./docs/What_and_how_to_submit%3F.md).
   
+  * **FAQ**: If you have any questions about the transportation problem, simulations or troubleshooting, you may find your answer in the [FAQ](./docs/FAQ.md) page.
+  
 
 ## What can I find in this repository?
 
@@ -34,6 +36,7 @@ We recommend that you proceed through the documentation in the following order:
   * an outline of [the Sioux Faux scenario](./docs/The_Sioux_Faux_scenario.md)
   * the [problem statement for round 1](./docs/PS_SD_Uber_hackathon_2019.pdf)
   * the steps to [submit a solution](./docs/What_and_how_to_submit%3F.md)
+  * an [FAQ](./docs/FAQ.md) page
 
 * `submission-inputs` folder:
   * the input file for the [bus fleet composition](./submission-inputs/VehicleFleetMix.csv)
@@ -70,9 +73,9 @@ repository. Whenever such an update is announced, please run `git pull` in this 
 We always welcome bug reports and enhancement requests from both competitors as well as developers on the Uber Prize-Berkeley Working Group team and elsewhere. Guidelines and suggestions on how to contribute code to this repository may be found in [./github/CONTRIBUTING.md](./.github/CONTRIBUTING.md).
 
 ## Contact Information
-If you have any questions concerning the competition, please, review first the [FAQ page](link).
+If you have any questions concerning the competition, please, review first the [FAQ page](./docs/FAQ.md).
 
-If your question was note answered in the FAQ page, please, use the [2019 Uber Prize ML Hackathon](https://uchat.uberinternal.com/uber/channels/2019-uber-prize-ml-hackathon) Uchat channel.
+If your question was note answered in the FAQ page, you can ask it on the [2019 Uber Prize ML Hackathon](https://uchat.uberinternal.com/uber/channels/2019-uber-prize-ml-hackathon) Uchat channel.
 
 <!-- Alternatively, to contact the Uber Prize working group technical team directly, please e-mail:
 * Sid Feygin: [sfeygi@ext.uber.com](mailto:sfeygin@ext.uber.com)
