@@ -36,7 +36,7 @@ We recommend that you proceed through the documentation in the following order:
   * an outline of [the Sioux Faux scenario](./docs/The_Sioux_Faux_scenario.md)
   * the [problem statement for round 1](./docs/PS_SD_Uber_hackathon_2019.pdf)
   * the steps to [submit a solution](./docs/What_and_how_to_submit%3F.md)
-  * an [FAQ](./docs/FAQ.md) page
+  * a [FAQ](./docs/FAQ.md) page
 
 * `submission-inputs` folder:
   * the input file for the [bus fleet composition](./submission-inputs/VehicleFleetMix.csv)
