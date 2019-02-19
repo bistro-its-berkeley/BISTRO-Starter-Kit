@@ -23,7 +23,7 @@ We recommend that you proceed through the documentation in the following order:
   
   * **Simulation tutorial**: Once you are clear about the inputs you can manipulate, the outputs, and the effects of changes in inputs on the outputs, try [running a simulation](./docs/How_to_run_a_simulation.md).
   
-  * **Submission steps**: When you feel ready to submit a solution, follow [these steps](./doc/What_and_how_to_submit?.md).
+  * **Submission steps**: When you feel ready to submit a solution, follow [these steps](./docs/What_and_how_to_submit?.md).
   
 
 ## What can I find in this repository?
@@ -35,6 +35,7 @@ We recommend that you proceed through the documentation in the following order:
   * a description of the [simulation outputs and the scoring function](./docs/Understanding_the_outputs_and_the%20scoring_function.md)
   * an outline of [the Sioux Faux scenario](./docs/The_Sioux_Faux_scenario.md)
   * the [problem statement for round 1](./docs/Problem_statement_Phase%20I.pdf)
+  * the steps to [submit a solution](./docs/What_and_how_to_submit%3F.md)
 
 * `submission-inputs` folder:
   * the input file for the [bus fleet composition](./submission-inputs/VehicleFleetMix.csv)
