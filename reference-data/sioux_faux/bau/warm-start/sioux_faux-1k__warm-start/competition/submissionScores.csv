@@ -1,0 +1,11 @@
+Component Name,Weight,Raw Score,Weighted Score
+ Mass transit level of service intervention: costs and benefits,1.0,1.0006194186028416,1.0006194186028416
+Accessibility: Number of work locations accessible within 15 minutes,0.9,1.0162200908594445,1.014586312480766
+Accessibility: Number of secondary locations accessible within 15 minutes,0.9,1.0126185766631715,1.0113495866498725
+Congestion: total vehicle miles traveled,1.0,1.0051683322995564,1.0051683322995564
+Congestion: average vehicle delay per passenger trip,1.0,1.126062969701064,1.126062969701064
+Level of service: Average bus crowding experienced,0.05,0.0,0.0
+Level of service: average trip expenditure - work,1.0,1.056995596696348,1.056995596696348
+Level of service: average on-demand ride wait times,1.0,1.1017641740669493,1.1017641740669493
+Level of service: average trip expenditure - secondary,1.0,1.4511168046874365,1.4511168046874365
+Submission Score,,,-1.000000000000000000000000000000000000000000000000000000000000000000000000000000000
