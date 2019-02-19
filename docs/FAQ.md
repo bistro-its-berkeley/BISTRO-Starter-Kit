@@ -73,8 +73,10 @@ Consider using the “1k”-scenario (see <link to PS section> for more info).
 <summary><strong>A simulation run takes way too long! Why? How can I make the simulation run more quickly? What is the maximum performance that I can expect?</summary>
 <br>
 * This is to be expected. The simulation may run slowly depending on your computational environment. Currently, the primary bottleneck is routing. Even for the 15k scenario, the routing engine generates millions of routes (reflecting multimodal options for agents to choose between) for a single simulation run.  
+  
 * Routing is highly CPU-bound, so once you’ve met the minimum memory requirements (~8-16GB) the more CPUs you can throw at it, the better! 
-* Depending on whether you run on a local machine meeting minimal hardware requirements (4 CPU/8GB)  or a beefy cloud server (72 CPU/148 GB) you should expect the following times for a single simulation run of 100 iterations:
-</details><>br
+
+* Depending on whether you run on a local machine meeting minimal hardware requirements (4 CPU/8GB)  or a beefy cloud server (72 CPU/148 GB) you should expect the following times for a single simulation run of 100 iterations: <br>
+</details>
 
 
