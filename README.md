@@ -32,7 +32,7 @@ We recommend that you proceed through the documentation in the following order:
   * a description of the [input schema](./docs/Which-inputs-should-I-optimize.md)
   * a description of the [simulation outputs and the scoring function](./docs/Understanding_the_outputs_and_the%20scoring_function.md)
   * an outline of [the Sioux Faux scenario](./docs/The_Sioux_Faux_scenario.md)
-  * the [problem statement for round 1](./docs/Problem_statement_Phase%20I.pdf)
+  * the [problem statement for round 1](./docs/PS_SD_Uber_hackathon_2019.pdf)
   * the steps to [submit a solution](./docs/What_and_how_to_submit%3F.md)
 
 * `submission-inputs` folder:
@@ -70,8 +70,10 @@ repository. Whenever such an update is announced, please run `git pull` in this 
 We always welcome bug reports and enhancement requests from both competitors as well as developers on the Uber Prize-Berkeley Working Group team and elsewhere. Guidelines and suggestions on how to contribute code to this repository may be found in [./github/CONTRIBUTING.md](./.github/CONTRIBUTING.md).
 
 ## Contact Information
+If you have any questions concerning the competition, please, review first the [FAQ page](link).
 
+If your question was note answered in the FAQ page, please, use the [2019 Uber Prize ML Hackathon](https://uchat.uberinternal.com/uber/channels/2019-uber-prize-ml-hackathon) Uchat channel.
 
-Alternatively, to contact the Uber Prize working group technical team directly, please e-mail:
+<!-- Alternatively, to contact the Uber Prize working group technical team directly, please e-mail:
 * Sid Feygin: [sfeygi@ext.uber.com](mailto:sfeygin@ext.uber.com)
-* Valentine Golfier-Vetterli: [vgolfi@ext.uber.com](mailto:vgolfi@ext.uber.com)
+* Valentine Golfier-Vetterli: [vgolfi@ext.uber.com](mailto:vgolfi@ext.uber.com)-->
