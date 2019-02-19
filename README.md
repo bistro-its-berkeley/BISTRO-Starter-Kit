@@ -1,11 +1,10 @@
 <!--Logo Goes Here!-->
 
-This repository is a starter kit for the **Uber Prize Challenge** on **[AICrowd](https://www.aicrowd.com/challenges/uber-prize)**. 
+This repository is a Starter Kit for the **Uber 2019 ML Hackathon** on **[AICrowd](https://www.aicrowd.com/challenges/uber-prize)**. 
 
-## Competition Rounds
-The competition will be split into two rounds:
-* The first round of the Uber Prize (and the one and only round of the Uber 2019 ML Hackathon), challenges contestants to optimize the transportation network of a small fictitious city: Sioux Faux 
-* The second round will require contestants to apply their optimization algorithms to a real city, which will be announced prior to the launch of the Uber Prize.
+## Competition
+The competition aims at solving and hacking the first round of the inaugural Uber Prize, which will be launched in the Spring 2019. It challenges contestants to optimize the transportation network of a small mock city: Sioux Faux. 
+%% The second round will require contestants to apply their optimization algorithms to a real city, which will be announced prior to the launch of the Uber Prize. %%
 
 ## How do I get started?
 
