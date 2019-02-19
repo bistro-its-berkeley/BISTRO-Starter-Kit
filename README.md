@@ -23,7 +23,7 @@ We recommend that you proceed through the documentation in the following order:
   
   * **Simulation tutorial**: Once you are clear about the inputs you can manipulate, the outputs, and the effects of changes in inputs on the outputs, try [running a simulation](./docs/How_to_run_a_simulation.md).
   
-  * **Submission steps**: When you feel ready to submit a solution, follow [these steps](./doc/).
+  * **Submission steps**: When you feel ready to submit a solution, follow [these steps](./doc/What_and_how_to_submit?.md).
   
 
 ## What can I find in this repository?
