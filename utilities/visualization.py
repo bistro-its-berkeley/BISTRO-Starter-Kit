@@ -920,35 +920,35 @@ def plot_raw_scores(raw_scores_data):
     plt.ylabel("Score component name")
     plt.title("Raw Subscores", fontweight="bold", pad=12, fontsize=15)
 
-def plot_standardized_scores(scores_data_path, ):
-    sns.set_context('notebook')
-    sns.set_palette('Set1')
-    fig, ax = plt.subplots()
-    fig.set_size_inches(7, 5)
-
-    sc_fit = StandardScaler().fit(wide_scores.values)
-    sample1 = pd.Series(dict(zip(wide_scores.columns.tolist(), np.squeeze(
-        sc_fit.transform(wide_scores.loc[sample1_key].values.reshape(1, -1))).tolist())))
-    sample2 = pd.Series(dict(zip(wide_scores.columns.tolist(), np.squeeze(
-        sc_fit.transform(wide_scores.loc[sample2_key].values.reshape(1, -1))).tolist())))
-
-    # flip accessibility:
-    # sample1.iloc[0:2]=np.reciprocal(sample1.iloc[0:2])
-
-    std_raw_scores = pd.DataFrame({"Sample 1": sample1, "Sample 2": sample2})
-    # sns.barplot(data=std_raw_scores)
-    std_raw_scores.index.name = "Score Component"
-    std_raw_scores.columns.name = 'Sample'
-    std_raw_scores.index = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
-    std_raw_scores.plot(kind='barh', ax=ax)
-    # plt.axvline(x=1.0,linewidth=1, color='k', ls='dashed', label = "baseline")
-    plt.xlabel("Standardized Score")
-    ax.set_title('Policy Focus: Agnostic')
-    # plt.xlim(right = 0.7,left=-0.7)
-
-    sns.despine()
-    plt.savefig('img/random_inputs/Policy Agnostic_standardized_scores.png', format='png', dpi=150, bbox_inches="tight")
-    # plt.xlim(xmax = 1.4)
+# def plot_standardized_scores(scores_data_path, ):
+#     sns.set_context('notebook')
+#     sns.set_palette('Set1')
+#     fig, ax = plt.subplots()
+#     fig.set_size_inches(7, 5)
+#
+#     sc_fit = StandardScaler().fit(wide_scores.values)
+#     sample1 = pd.Series(dict(zip(wide_scores.columns.tolist(), np.squeeze(
+#         sc_fit.transform(wide_scores.loc[sample1_key].values.reshape(1, -1))).tolist())))
+#     sample2 = pd.Series(dict(zip(wide_scores.columns.tolist(), np.squeeze(
+#         sc_fit.transform(wide_scores.loc[sample2_key].values.reshape(1, -1))).tolist())))
+#
+#     # flip accessibility:
+#     # sample1.iloc[0:2]=np.reciprocal(sample1.iloc[0:2])
+#
+#     std_raw_scores = pd.DataFrame({"Sample 1": sample1, "Sample 2": sample2})
+#     # sns.barplot(data=std_raw_scores)
+#     std_raw_scores.index.name = "Score Component"
+#     std_raw_scores.columns.name = 'Sample'
+#     std_raw_scores.index = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
+#     std_raw_scores.plot(kind='barh', ax=ax)
+#     # plt.axvline(x=1.0,linewidth=1, color='k', ls='dashed', label = "baseline")
+#     plt.xlabel("Standardized Score")
+#     ax.set_title('Policy Focus: Agnostic')
+#     # plt.xlim(right = 0.7,left=-0.7)
+#
+#     sns.despine()
+#     plt.savefig('img/random_inputs/Policy Agnostic_standardized_scores.png', format='png', dpi=150, bbox_inches="tight")
+#     # plt.xlim(xmax = 1.4)
 
 
 ####### PROCESS AND PLOT SPATIAL DATA ######              --> Need to be run w/ Python 2!
