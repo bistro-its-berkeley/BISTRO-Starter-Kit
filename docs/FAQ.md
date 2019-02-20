@@ -76,7 +76,16 @@ Consider using the “1k”-scenario. For more info, please refer to  Part II, S
   
 * Routing is highly CPU-bound, so once you’ve met the minimum memory requirements (~8-16GB) the more CPUs you can throw at it, the better! 
 
-* Depending on whether you run on a local machine meeting minimal hardware requirements (4 CPU/8GB)  or a beefy cloud server (72 CPU/148 GB) you should expect the following times for a single simulation run of 100 iterations: <br>
+* Depending on whether you run on a local machine meeting minimal hardware requirements (4 CPU/8GB)  or a beefy cloud server (72 CPU/148 GB) you should expect the following times for a single simulation run of 100 iterations:
+
+| Sample Size| Computational Environment | Runtime Benchmark |
+| :---:| :--- | :--- |
+| 15k | Cloud | 1hr | 
+| 15k | Local | 1 day? | 
+| 1k | Cloud | 1/2 hr | 
+| 1k | Local| 3-4 hrs| 
+
+<br>
 </details>
 
 
