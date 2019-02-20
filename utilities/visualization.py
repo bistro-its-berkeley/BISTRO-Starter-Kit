@@ -906,7 +906,12 @@ def plot_cost_benefits(path_df, legs_df, operational_costs, trip_to_route, name_
     bus_slice_df.loc[:, "serviceTime"] = (bus_slice_df.arrivalTime - bus_slice_df.departureTime) / 3600
     bus_slice_df.loc[:, "operational_costs"] = bus_slice_df.operational_costs_per_bus * bus_slice_df.serviceTime
 
-    grouped_data = bus_slice_df.groupby(by="route_id").agg("sum")[["operational_costs", "FuelCost", "Fare"]]
+    bus_fares_df = legs_df.loc[legs_df["Mode"] =="bus"]["Fare", "Veh"]
+    bus_fares_df.loc[:, "route_id"] = bus_fares_df.Veh.apply(lambda x: trip_to_route[x.split(":")[-1]])
+
+    merged_df = pd.merge(bus_slice_df, bus_fares_df, on=["route_id"])
+
+    grouped_data = merged_df.groupby(by="route_id").agg("sum")[["operational_costs", "FuelCost", "Fare"]]
 
     fig, ax = plt.subplots(figsize=(8, 6))
     grouped_data.plot.bar(stacked=True, ax=ax)
