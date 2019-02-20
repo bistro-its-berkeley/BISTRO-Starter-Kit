@@ -25,4 +25,4 @@ For Round 1, you have access to two sample populations with which you can run si
 It is permissible to use either sample as you generate training data for your algorithm. For example, you can develop your algorithm using the 1k scenario and then test it with the 15K population scenario. However, official submissions must be run with the 15K sample population.
 
 ## Problem statement 
-To get a more thorough description of the Sioux Faux challenge, please refer to the [Problem Statement](./Problem_statement_Phase%20I.pdf).
+To get a more thorough description of the Sioux Faux challenge, please refer to the [Hackathon bucket](./PS_SD_Uber_hackathon_2019.pdf).
