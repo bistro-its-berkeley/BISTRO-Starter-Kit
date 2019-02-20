@@ -66,7 +66,7 @@ Most likely not! You will have probably seen a validation error if your inputs d
 <details>
 <summary><strong>How can I maximize use of compute resources available to me?</strong></summary>
 <br>
-Consider using the “1k”-scenario (see <link to PS section> for more info).
+Consider using the “1k”-scenario. For more info, please refer to  Part II, Section 5 of the [Scoring Document](./docs/PS_SD_Uber_hackathon_2019.pdf): "The Role of and Rationale for Subsampled Scenarios in BISTRO".
 </details><br>
 
 <details>
