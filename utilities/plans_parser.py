@@ -361,7 +361,7 @@ def extract_person_dataframes(out_plans_path, persons_path, hhd_path, output_fol
     out_plans_xml = open_xml(out_plans_path)
     persons_xml = open_xml(persons_path)
     hhd_xml = open_xml(hhd_path)
-    persons_df = get_person_output(out_plans_xml, persons_xml, hhd_xml)
+    persons_df = get_person_output(out_plans_xml, persons_xml, hhd_xml, output_folder)
     persons_df.to_csv(str(output_folder) + "/persons_dataframe.csv")
     print("persons_dataframe.csv complete")
     return persons_df
@@ -371,7 +371,7 @@ def extract_plans_dataframes(plans_path, output_folder):
     # opens the experiencedPlans and passes the xml file to get_activity_trip_output
     # returns the actitivities_dataframe and trips_dataframe
 
-    plans_xml = open_xml(plans_path, output_folder)
+    plans_xml = open_xml(plans_path)
     acts_df, trips_df = get_activity_trip_output(plans_xml)
     acts_df.to_csv(str(output_folder) + "/activities_dataframe.csv")
     print("activities_dataframe.csv complete")
@@ -386,7 +386,7 @@ def extract_legs_dataframes(events_path, trips_df, output_folder):
     # returns the legs_dataframe
 
     all_events_df = extract_dataframe(str(events_path))
-    legs_df = get_legs_output(all_events_df, trips_df)
+    legs_df = get_legs_output(all_events_df, trips_df, output_folder)
     fuel_cost_dict = {'Gasoline': 0.03, 'Diesel': 0.02, 'Electricity': 0.01, 'Food': 0}
     legs_df_new = calc_fuel_costs(legs_df, fuel_cost_dict)
     ride_hail_fares = {'base': 0.0, 'distance': 1.0, 'duration': 0.5}
