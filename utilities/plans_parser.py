@@ -11,7 +11,6 @@ from collections import defaultdict
 
 
 
-
 def open_xml(path):
     # Open xml and xml.gz files into ElementTree
     if str(path).endswith('.gz'):
@@ -514,6 +513,7 @@ def output_parse(output_plans_data, persons_data, hhd_data, plans_data, events_d
     activities_df, trips_df = extract_plans_dataframes(plans_data, output_folder)
     print("activities_dataframe.csv generated")
     legs_df = extract_legs_dataframes(events_data, trips_df, output_folder)
+    print("legs_dataframe.csv generated")
     final_t_df = merge_legs_trips(legs_df, trips_df)
     final_t_df.to_csv(str(output_folder) +'/trips_dataframe.csv')
     print("trips_dataframe.csv generated")
