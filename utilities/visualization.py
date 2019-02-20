@@ -732,7 +732,7 @@ def plot_average_bus_crowding_by_bus_route_by_period_of_day(path_df, trip_to_rou
     -------
     ax: matplotlib axes object
         """
-    bus_slice_df = path_df.loc[lambda df: df["mode"] == "bus"][["vehicle", "numPassengers",
+    bus_slice_df = path_df.loc[path_df["mode"] == "bus"][["vehicle", "numPassengers",
                                                                 "capacity", "departureTime",
                                                                 "arrivalTime", "fuel", "vehicleType"]]
     bus_slice_df.loc[:, "route_id"] = bus_slice_df.vehicle.apply(lambda x: trip_to_route[x.split(":")[1]])
@@ -873,7 +873,7 @@ def plot_travel_time_over_the_day(travel_time_data_path, name_run):
     return ax
 
 
-def plot_cost_benefits(trips_df, operational_costs, trip_to_route, name_run):
+def plot_cost_benefits(path_df, legs_df, operational_costs, trip_to_route, name_run):
     """Plotting the Costs and Benefits by bus route output
 
     Parameters
@@ -898,21 +898,19 @@ def plot_cost_benefits(trips_df, operational_costs, trip_to_route, name_run):
     -------
     ax: matplotlib axes object
         """
-    bus_slice_df = trips_df.loc[lambda df: df["realizedTripMode"] == "walk_transit" | "drive_transit"]
-    # [["vehicle", "numPassengers", "capacity", "departureTime", "arrivalTime", "fuel", "vehicleType"]]
-    bus_slice_df.loc[:, "route_id"] = bus_slice_df.Trip_ID.apply(lambda x: trip_to_route[x])
+    bus_slice_df = path_df.loc[legs_df["mode"] == "bus"][["vehicle", "numPassengers", "capacity", "departureTime",
+                                                          "arrivalTime", "fuel", "vehicleType"]]
+    bus_slice_df.loc[:, "route_id"] = bus_slice_df.vehicle.apply(lambda x: trip_to_route[x.split(":")[-1]])
     bus_slice_df.loc[:, "operational_costs_per_bus"] = bus_slice_df.vehicleType.apply(
         lambda x: operational_costs[x])
-    bus_slice_df.loc[:, "serviceTime"] = (bus_slice_df.End_time - bus_slice_df.Start_time) / 3600
+    bus_slice_df.loc[:, "serviceTime"] = (bus_slice_df.arrivalTime - bus_slice_df.departureTime) / 3600
     bus_slice_df.loc[:, "operational_costs"] = bus_slice_df.operational_costs_per_bus * bus_slice_df.serviceTime
 
-
-    # return pd.merge(bus_slice_df, trips_df[["Trip_ID", "Fare"]], on="Trip_ID")
-    grouped_data = bus_slice_df.groupby(by="route_id").agg("sum")[["operational_costs", "FuelCost"]]
+    grouped_data = bus_slice_df.groupby(by="route_id").agg("sum")[["operational_costs", "FuelCost", "Fare"]]
 
     fig, ax = plt.subplots(figsize=(8, 6))
     grouped_data.plot.bar(stacked=True, ax=ax)
-    plt.title(f"Output - Costs and Benefits by bus route - {name_run}")
+    plt.title(f"Output - Costs and Benefits of Mass Transit Level of Service Intervention by bus route - {name_run}")
     plt.xlabel("Bus route")
     plt.ylabel("Amount [$]")
     ax.legend(title="Costs and Benefits")
