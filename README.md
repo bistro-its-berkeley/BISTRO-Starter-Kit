@@ -77,6 +77,8 @@ If you have any questions concerning the competition, please, review first the [
 
 If your question was note answered in the FAQ page, you can ask it on the [2019 Uber Prize ML Hackathon](https://uchat.uberinternal.com/uber/channels/2019-uber-prize-ml-hackathon) Uchat channel.
 
+If your problem has still not been resolved, you can contact the Hackathon organizing team at ml-hackathon@ (email).
+
 <!-- Alternatively, to contact the Uber Prize working group technical team directly, please e-mail:
 * Sid Feygin: [sfeygi@ext.uber.com](mailto:sfeygin@ext.uber.com)
 * Valentine Golfier-Vetterli: [vgolfi@ext.uber.com](mailto:vgolfi@ext.uber.com)-->
