@@ -20,7 +20,7 @@ The main outputs you should focus on are located in the `competition` folder. It
 ![Alt text](/Images/Subscores.png)
 Figure 2: Score and component scores
 
-The *scoring function* is a weighted sum of several components, listed below. ***Weights are pre-determined based upon...\[fill in]*** 
+The *scoring function* is a weighted sum of several components, listed below. If you want to read more about the weights of the scoring function, go to section 6.2 of the [scoring document](./Problem_statement_Phase%20I.pdf).
 
 * Measures of **accessibility**:
   * **work-based trips** (`Accessibility: Number of work locations accessible within 15 minutes`): The sum of the average number of work locations accessible from each node by automotive modes within 15 minutes during the AM peak (7-10 am) and PM peak (5-8 pm) periods.
@@ -46,7 +46,7 @@ will be known by contestants.
 * Measures of the **Sustainability**:
   * **Particulate (PM 2.5) Emissions** (`Sustainability: Total PM 2.5 Emissions`, \[g]): total PM 2.5 emissions produced by all motorized vehicles during the simulation.
 
-If you want to know more about the mathematical formulation of each of these scoring function components, read section 4.3 of the [Sioux Faux  problem statement](./Problem_statement_Phase%20I.pdf).
+If you want to know more about the mathematical formulation of each of these scoring function components, read sections 4.3 and 5.3 of the [Sioux Faux  problem statement](./Problem_statement_Phase%20I.pdf).
 
 ## Other outputs
 

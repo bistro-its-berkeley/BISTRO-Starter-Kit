@@ -1,11 +1,9 @@
 <!--Logo Goes Here!-->
 
-This repository is a starter kit for the **Uber Prize Challenge** on **[AICrowd](https://www.aicrowd.com/challenges/uber-prize)**. 
+This repository is a Starter Kit for the **Uber 2019 ML Hackathon** on **[AICrowd](https://www.aicrowd.com/challenges/uber-prize)**. 
 
-## Competition Rounds
-The competition will be split into two rounds:
-* The first round challenges contestants to optimize the transportation network of a small fictitious city: Sioux Faux 
-* The second round will require contestants to apply their optimization algorithms to a real city, which will be announced prior to the launch of the Uber Prize.
+## Competition
+The competition aims at solving and hacking the first round of the inaugural Uber Prize, which will be launched in the Spring 2019. It challenges contestants to optimize the transportation network of a small mock city: Sioux Faux. 
 
 ## How do I get started?
 
@@ -23,6 +21,10 @@ We recommend that you proceed through the documentation in the following order:
   
   * **Simulation tutorial**: Once you are clear about the inputs you can manipulate, the outputs, and the effects of changes in inputs on the outputs, try [running a simulation](./docs/How_to_run_a_simulation.md).
   
+  * **Submission steps**: When you feel ready to submit a solution, follow [these steps](./docs/What_and_how_to_submit%3F.md).
+  
+  * **FAQ**: If you have any questions about the transportation problem, simulations or troubleshooting, you may find your answer in the [FAQ](./docs/FAQ.md) page.
+  
 
 ## What can I find in this repository?
 
@@ -32,7 +34,9 @@ We recommend that you proceed through the documentation in the following order:
   * a description of the [input schema](./docs/Which-inputs-should-I-optimize.md)
   * a description of the [simulation outputs and the scoring function](./docs/Understanding_the_outputs_and_the%20scoring_function.md)
   * an outline of [the Sioux Faux scenario](./docs/The_Sioux_Faux_scenario.md)
-  * the [problem statement for round 1](./docs/Problem_statement_Phase%20I.pdf)
+  * the [problem statement for round 1](./docs/PS_SD_Uber_hackathon_2019.pdf)
+  * the steps to [submit a solution](./docs/What_and_how_to_submit%3F.md)
+  * a [FAQ](./docs/FAQ.md) page
 
 * `submission-inputs` folder:
   * the input file for the [bus fleet composition](./submission-inputs/VehicleFleetMix.csv)
@@ -41,8 +45,20 @@ We recommend that you proceed through the documentation in the following order:
   * the input file for the [mass transit fares](./submission-inputs/MassTransitFares.csv)
 
 
-* `reference-data/sioux_faux_gtfs_data` folder: <br> <br>
+* `reference-data/sioux_faux_gtfs_data` folder: <br> 
 List of the Sioux Faux GTFS data (General Transit Feed Specification). It is a series of text files, each of them modeling a particular aspect of the transit agency's operations: stops, routes, trips, and other schedule data. The details of each file and their relationships are defined in the [GTFS reference](https://developers.google.com/transit/gtfs/reference/).
+
+* `utilities` folder: <br> 
+List of utility scripts provided to simplify the interface with the BISTRO simulator and its inputs / outputs.
+  * the [competition_executor.py](./utilities/competition_executor.py) script
+  * the [visualization.py](./utilities/visualization.py) script 
+  * the [random_search.py](./utilities/random_search.py) script
+  * the [input_sampler.py](./utilities/input_sampler.py) script
+ 
+* `examples` folder: <br> 
+Exmaple python notebooks demonstrating the use of the `competition_executor.py`, `input_sampler.py`and `visualization.py` scripts. 
+  * the [Starter Kit Utilities Tutorial](./examples/Starter_Kit_Utilities_Tutorial.ipynb) notebook : to run a simulation and generate random inputs
+  * the *Visualization* notebook : to plot input and output parameters
 
 ## Updates to the Starter Kit
 
@@ -57,8 +73,12 @@ repository. Whenever such an update is announced, please run `git pull` in this 
 We always welcome bug reports and enhancement requests from both competitors as well as developers on the Uber Prize-Berkeley Working Group team and elsewhere. Guidelines and suggestions on how to contribute code to this repository may be found in [./github/CONTRIBUTING.md](./.github/CONTRIBUTING.md).
 
 ## Contact Information
+If you have any questions concerning the competition, please, review first the [FAQ page](./docs/FAQ.md).
 
+If your question was note answered in the FAQ page, you can ask it on the [2019 Uber Prize ML Hackathon](https://uchat.uberinternal.com/uber/channels/2019-uber-prize-ml-hackathon) Uchat channel.
 
-Alternatively, to contact the Uber Prize working group technical team directly, please e-mail:
+If your problem has still not been resolved, you can contact the Hackathon organizing team at ml-hackathon@ (email).
+
+<!-- Alternatively, to contact the Uber Prize working group technical team directly, please e-mail:
 * Sid Feygin: [sfeygi@ext.uber.com](mailto:sfeygin@ext.uber.com)
-* Valentine Golfier-Vetterli: [vgolfi@ext.uber.com](mailto:vgolfi@ext.uber.com)
+* Valentine Golfier-Vetterli: [vgolfi@ext.uber.com](mailto:vgolfi@ext.uber.com)-->

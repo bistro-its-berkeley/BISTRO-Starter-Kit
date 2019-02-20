@@ -7,7 +7,9 @@
 * There is only one firm software requirement at the moment:
 [Docker](https://www.docker.com).
 
-You can find the instructions to install Docker **for Mac** [here](https://docs.docker.com/docker-for-mac/install/#install-and-run-docker-for-mac) and **for Windows** [here](https://docs.docker.com/docker-for-windows/install/). See [www.get.docker.com](http://get.docker.com) for an automated Linux installation.
+You can find the instructions to install Docker **for Mac** [here](https://docs.docker.com/docker-for-mac/install/#install-and-run-docker-for-mac) and **for Windows** [here](https://docs.docker.com/docker-for-windows/install/). <br>
+      * Note that for Windows, the *Windows 10 64bit: Pro, Enterprise or Education* (1607 Anniversary Update, Build 14393 or later) version must be installed. <br>
+      * See [www.get.docker.com](http://get.docker.com) for an automated Linux installation.
 
 Thus, the code is OS-agnostic.
 
@@ -28,7 +30,7 @@ There are no strict hardware requirements; however, performance will increase su
 For your convenience, we've provided several interfaces to running simulations.
 
 ### 2.1. Running Using Python API
-A python utility, [/competition_executor.py](../utilities/competition_executor.py) is available in [/utilities](../utilities) to simplify the interface to docker. See the accompanying ["Starter Kit Utilities Tutorial" Jupyter notebook](../examples/Starter Kit Utilities Tutorial.ipynb) for instructions on its use.
+A python utility, [`competition_executor.py`](/utilities/competition_executor.py) is available in the [`utilities`](/utilities) folder to simplify the interface to docker. See the accompanying ["Starter Kit Utilities Tutorial" Jupyter notebook](//examples/Starter_Kit_Utilities_Tutorial.ipynb) for instructions on its use.
 
 ### 2.2. Running a Container From the Command Line
 

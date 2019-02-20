@@ -79,7 +79,7 @@ To do so, the *range of qualifying socio-demographic characteristics* and *value
   * "drive_transit": use of the personal car as an access/egress mode to/from transit (bus)
   * "walk_transit": walking as an access/egress mode to/from transit (bus)
 
-Qualification for an incentive can be based on *age* and/or *income*. You can find the distributions of Sioux Faux's population over age and income on the page [The_Sioux_Faux_scenario](./The_Sioux_Faux_scenario.md).
+Qualification for an incentive can be based on *age* and/or *income*. You can find the distributions of Sioux Faux's population over age and income on the [The_Sioux_Faux_scenario](./The_Sioux_Faux_scenario.md) page.
 
 Incentives for one mode do not disqualify providing incentives for another mode. Additionally, the price of each leg in a multimodal trip will be adjusted by the amount of incentive allocated to the qualifying agent undertaking the trip. That is, for each trip (i.e. travel from the agent's origin to the goal activity), the best route for each multimodal type will include incentives in the overall cost of the trip. This generalized cost will then factor into agent decision-making.
 
@@ -152,7 +152,7 @@ Please, note some important business rules ane remarks:
 
 Figure 7 below depicts an example input file.
 
-![Alt text](/Images/Input_FrequencyAdjustment.txt)
+![Alt text](/Images/Input_frequency_adjustment.png)
 ***Figure 7: Example of Frequency Adjustment Input***
 
 In this case, two routes will see their bus frequency adjusted: route 1340 and route 1341. 
