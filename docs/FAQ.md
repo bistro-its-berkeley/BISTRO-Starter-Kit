@@ -86,6 +86,10 @@ Consider using the “1k”-scenario. For more info, please refer to  Part II, S
 | 1k | Cloud | 1/2 hr | 
 | 1k | Local| 3-4 hrs| 
 
+As you can see, it is not advised to run the 15k scenario on your local 
+machine. However, it is plausible to develop locally using the 1k scenario, 
+since a single iteration may take only ~30 seconds. 
+
 <br>
 </details>
 
