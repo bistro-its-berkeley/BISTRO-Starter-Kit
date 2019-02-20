@@ -1,7 +1,0 @@
-04:35:08.539 [main] INFO  beam.competition.run.RunCompetition$ - Starting beam on branch master at commit HEAD.
-04:35:08.546 [main] INFO  beam.competition.run.RunCompetition$ - Config [sioux_faux-15k] copied to /output/sioux_faux/sioux_faux-15k__2019-01-30_04-35-08/beam.conf.
-04:35:08.554 [main] INFO  b.r.r.FrequencyAdjustingNetworkCoordinator - Initializing router by reading network from: /fixed-data/sioux_faux/r5/network.dat
-04:35:10.171 [main] INFO  hsqldb.db.HSQLDB4AD417742A.ENGINE - dataFileCache open start
-04:35:14.268 [main] INFO  b.sim.LoggingParallelEventsManager - Created ParallelEventsManagerImpl with hashcode: 814150784
-04:35:15.059 [main] INFO  beam.router.osm.TollCalculator - Ways keys size: 0
-04:35:15.097 [main] DEBUG beam.utils.FileUtils$ - Beam output directory is: /output/sioux_faux/sioux_faux-15k__2019-01-30_04-35-08

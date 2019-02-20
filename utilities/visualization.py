@@ -906,7 +906,6 @@ def plot_cost_benefits(path_df, legs_df, operational_costs, trip_to_route, name_
     bus_slice_df.loc[:, "serviceTime"] = (bus_slice_df.arrivalTime - bus_slice_df.departureTime) / 3600
     bus_slice_df.loc[:, "operational_costs"] = bus_slice_df.operational_costs_per_bus * bus_slice_df.serviceTime
 
-
     bus_fare_df = legs_df.loc[legs_df["Mode"] == "bus"]["Veh", "Fare"]
     bus_fare_df.loc[:, "route_id"] = bus_slice_df.Veh.apply(lambda x: trip_to_route[x.split(":")[-1]])
     merged_df = pd.merge(bus_slice_df,bus_fare_df, on=["route_id"])
