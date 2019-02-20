@@ -1,0 +1,33 @@
+20:00:57.521 [main] INFO  beam.competition.run.RunCompetition$ - Starting beam on branch master at commit HEAD.
+20:00:57.528 [main] INFO  beam.competition.run.RunCompetition$ - Config [sioux_faux-15k] copied to /output/sioux_faux/sioux_faux-15k__2019-02-06_20-00-57/beam.conf.
+20:00:57.825 [main] INFO  c.conveyal.gtfs.model.Entity$Loader - Loading GTFS table feed_info from feed_info.txt
+20:00:57.834 [main] INFO  com.conveyal.gtfs.GTFSFeed - Feed ID is 'siouxareametro-sd-us'.
+20:00:57.834 [main] INFO  c.conveyal.gtfs.model.Entity$Loader - Loading GTFS table agency from agency.txt
+20:00:57.835 [main] INFO  c.conveyal.gtfs.model.Entity$Loader - Loading GTFS table calendar from calendar.txt
+20:00:57.837 [main] INFO  c.conveyal.gtfs.model.Entity$Loader - Loading GTFS table calendar_dates from calendar_dates.txt
+20:00:57.838 [main] INFO  c.conveyal.gtfs.model.Entity$Loader - Loading GTFS table fare_attributes from fare_attributes.txt
+20:00:57.839 [main] INFO  c.conveyal.gtfs.model.Entity$Loader - Loading GTFS table fare_rules from fare_rules.txt
+20:00:57.840 [main] INFO  c.conveyal.gtfs.model.Entity$Loader - Loading GTFS table routes from routes.txt
+20:00:57.842 [main] INFO  c.conveyal.gtfs.model.Entity$Loader - Loading GTFS table shapes from shapes.txt
+20:00:57.906 [main] INFO  c.conveyal.gtfs.model.Entity$Loader - Loading GTFS table stops from stops.txt
+20:00:57.910 [main] INFO  c.conveyal.gtfs.model.Entity$Loader - Loading GTFS table transfers from transfers.txt
+20:00:57.911 [main] INFO  c.conveyal.gtfs.model.Entity$Loader - Loading GTFS table trips from trips.txt
+20:00:57.915 [main] INFO  c.conveyal.gtfs.model.Entity$Loader - Loading GTFS table frequencies from frequencies.txt
+20:00:57.916 [main] INFO  c.conveyal.gtfs.model.Entity$Loader - Loading GTFS table stop_times from stop_times.txt
+20:00:57.996 [main] INFO  com.conveyal.gtfs.GTFSFeed - 3 errors
+20:00:57.996 [main] INFO  com.conveyal.gtfs.GTFSFeed - GTFSError: fare_rules line 0: Table is present in zip file, but it has no entries.
+20:00:57.997 [main] INFO  com.conveyal.gtfs.GTFSFeed - GTFSError: frequencies line 0: Table is present in zip file, but it has no entries.
+20:00:57.997 [main] INFO  com.conveyal.gtfs.GTFSFeed - GTFSError: transfers line 0: Table is present in zip file, but it has no entries.
+20:00:57.997 [main] INFO  com.conveyal.gtfs.GTFSFeed - Building stop to stop times index
+20:00:58.038 [main] INFO  com.conveyal.gtfs.GTFSFeed - Building trips per service index
+20:00:58.039 [main] INFO  com.conveyal.gtfs.GTFSFeed - Building services per date index
+20:00:58.080 [main] INFO  b.r.r.FrequencyAdjustingNetworkCoordinator - Initializing router by reading network from: /fixed-data/sioux_faux/r5/network.dat
+20:00:59.401 [main] INFO  hsqldb.db.HSQLDB4AD417742A.ENGINE - dataFileCache open start
+20:01:00.396 [main] INFO  beam.sim.BeamWarmStart - Population successfully warm started from /tmp/sioux_faux-15k__warm-start/ITERS/it.100/100.plans.xml.gz
+20:01:04.995 [main] INFO  beam.utils.NetworkHelperImpl - Build linkId2LinkWithIndex with size: 5918 of type class java.util.HashMap
+20:01:04.996 [main] INFO  beam.utils.NetworkHelperImpl - Build index2LinkId with size: 5918
+20:01:04.996 [main] INFO  beam.utils.NetworkHelperImpl - NetworkHelperImpl initialized in 27 ms
+20:01:05.562 [main] INFO  b.sim.LoggingParallelEventsManager - Created ParallelEventsManagerImpl with hashcode: 958267004
+20:01:06.183 [main] INFO  beam.router.osm.TollCalculator - tollsByLinkId size: 0
+20:01:06.183 [main] INFO  beam.router.osm.TollCalculator - tollsByWayId size: 0
+20:01:06.209 [main] DEBUG beam.utils.FileUtils$ - Beam output directory is: /output/sioux_faux/sioux_faux-15k__2019-02-06_20-00-57

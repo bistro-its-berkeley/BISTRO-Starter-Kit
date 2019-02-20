@@ -158,7 +158,7 @@ def process_incentives_data(incentives_data_path, max_incentive):
     return incentives
 
 
-def plot_incentives_inputs(incentives_data_path, max_incentive, max_age, max_income):
+def plot_incentives_inputs(incentives_data_path, max_incentive, max_age, max_income, name_run):
     """Plot the incentives input
 
     Parameters
@@ -174,6 +174,9 @@ def plot_incentives_inputs(incentives_data_path, max_incentive, max_age, max_inc
 
     max_income: int
         Maximum income of any resident in Sioux Faux as defined in the Starter Kit "Inputs Specifications" page
+
+    name_run: str
+        Name of the run , e.g. "BAU", "Run 1", "Submission"...
 
     Returns
     -------
@@ -198,7 +201,7 @@ def plot_incentives_inputs(incentives_data_path, max_incentive, max_age, max_inc
     ax[1].set_xlabel("income")
     ax[1].set_xlim((0, max_income))
 
-    plt.suptitle("Input - Incentives by age and income group")
+    plt.suptitle(f"Input - Incentives by age and income group - {name_run}", fontsize=15, fontweight="bold")
 
     sm = ScalarMappable(cmap=my_cmap, norm=plt.Normalize(0, np.max(incentives["amount"])))
     sm.set_array([])
@@ -270,12 +273,15 @@ def process_bus_data(vehicle_fleet_mix_data_path, route_ids, buses_list, agency_
     return fleet_mix
 
 
-def plot_vehicle_fleet_mix_inputs(vehicle_fleet_mix_data_path, route_ids, buses_list, agency_ids):
+def plot_vehicle_fleet_mix_inputs(vehicle_fleet_mix_data_path, route_ids, buses_list, agency_ids, name_run):
     """Plot the vehicle fleet mix input
 
     Parameters
     ----------
    See `process_bus_data()`
+
+   name_run: str
+    Name of the run , e.g. "BAU", "Run 1", "Submission"...
 
     Returns
     -------
@@ -293,7 +299,7 @@ def plot_vehicle_fleet_mix_inputs(vehicle_fleet_mix_data_path, route_ids, buses_
     plt.ylim((1339.5, 1351.5))
     ax.yaxis.set_major_locator(plt.MultipleLocator(1))
 
-    plt.title("Input - Bus fleet mix")
+    plt.title(f"Input - Bus fleet mix - {name_run}")
 
     return ax
 
@@ -308,7 +314,7 @@ def process_fares_data(fares_data_path, bau_fares_data_path, max_fare, route_ids
         Absolute path of the MassTransitFares.csv input file
 
     bau_fares_data_path: PosixPath
-        Absolute path of the BAUFleetMix.csv input file
+        Absolute path of the BAU FleetMix.csv input file
 
     max_fare: float
         Maximum fare of a bus trip as defined in the Starter Kit "Inputs Specifications" page
@@ -358,18 +364,21 @@ def process_fares_data(fares_data_path, bau_fares_data_path, max_fare, route_ids
     return fares
 
 
-def plot_mass_transit_fares_inputs(fares_data_path, bau_fares_data, max_fare, route_ids):
+def plot_mass_transit_fares_inputs(fares_data_path, bau_fares_data, max_fare, route_ids, name_run):
     """Plot the Mass Transit Fares input
 
-        Parameters
-        ----------
-       See `process_fares_data()`
+    Parameters
+    ----------
+    See `process_fares_data()`
 
-        Returns
-        -------
-        ax: matplotlib axes object
+    name_run: str
+        Name of the run , e.g. "BAU", "Run 1", "Submission"...
 
-        """
+    Returns
+    -------
+    ax: matplotlib axes object
+
+    """
     fares = process_fares_data(fares_data_path, bau_fares_data, max_fare, route_ids)
 
     fig, ax = plt.subplots(figsize = (7,5))
@@ -398,16 +407,16 @@ def plot_mass_transit_fares_inputs(fares_data_path, bau_fares_data, max_fare, ro
     y_ticks_labels[0] = "0.01"
     cbar.ax.set_yticklabels(y_ticks_labels)
 
-    plt.title("Input - Mass Transit Fares")
+    plt.title(f"Input - Mass Transit Fares - {name_run}")
     return ax
 
 
-def process_frequency_data(bus_frequencies_data_path, route_ids):
+def process_frequency_data(bus_frequencies_path, route_ids):
     """Processing and reorganizing the data in an input dataframe to be ready for plotting
 
     Parameters
     ----------
-    bus_frequencies_data_path : PosixPath
+    bus_frequencies_path : PosixPath
         Absolute path of the `FrequencyAdjustment.csv` input file
 
     route_ids: list
@@ -419,7 +428,7 @@ def process_frequency_data(bus_frequencies_data_path, route_ids):
         Frequency Adjustment input data that is ready for plotting.
 
     """
-    frequency = pd.read_csv(bus_frequencies_data_path)
+    frequency = pd.read_csv(bus_frequencies_path)
 
     # Add all missing routes (the ones that were not changed) in the DF so that they appear int he plot
     df = pd.DataFrame([0, 0, 0, 1]).T
@@ -441,12 +450,15 @@ def process_frequency_data(bus_frequencies_data_path, route_ids):
     return frequency
 
 
-def plot_bus_frequency(bus_frequencies_data, route_ids):
+def plot_bus_frequency(bus_frequencies_path, route_ids, name_run):
     """Plotting the Frequency Adjustment input
 
     Parameters
     ----------
     See `process_frequency_data()`
+
+    name_run: str
+        Name of the run , e.g. "BAU", "Run 1", "Submission"...
 
     Returns
     -------
@@ -454,7 +466,7 @@ def plot_bus_frequency(bus_frequencies_data, route_ids):
 
     """
 
-    frequencies = process_frequency_data(bus_frequencies_data, route_ids)
+    frequencies = process_frequency_data(bus_frequencies_path, route_ids)
 
     fig, ax = plt.subplots(figsize=(15, 4))
     plotted_lines = []
@@ -482,7 +494,7 @@ def plot_bus_frequency(bus_frequencies_data, route_ids):
     ax.set_xlim(0, 24)
     plt.ylabel("Headway [h]")
     plt.xlabel("Hours of the day")
-    plt.title("Input - Frequency Adjustment")
+    plt.title(f"Input - Frequency Adjustment - {name_run}")
 
     return ax
 
@@ -511,12 +523,15 @@ def process_overall_mode_choice(mode_choice_data_path):
     return mode_choice
 
 
-def plot_overall_mode_choice(mode_choice_data_path):
+def plot_overall_mode_choice(mode_choice_data_path, name_run):
     """Plotting the Overall Mode choice output
 
     Parameters
     ----------
     see process_overall_mode_choice()
+
+    name_run: str
+        Name of the run , e.g. "BAU", "Run 1", "Submission"...
 
     Returns
     -------
@@ -531,9 +546,9 @@ def plot_overall_mode_choice(mode_choice_data_path):
 
     labels = mode_choice.index.values
     ax.legend(labels, bbox_to_anchor=(1.1, 0.5), loc="center right", fontsize=11, bbox_transform=plt.gcf().transFigure,
-               title="Mode", palette="Set2")
+               title="Mode")
 
-    ax.set_title("Output - Overall mode choice")
+    ax.set_title(f"Output - Overall mode choice - {name_run}")
     return ax
 
 
@@ -563,12 +578,15 @@ def process_mode_choice_by_hour(mode_choice_by_hour_data_path):
     return mode_choice_by_hour
 
 
-def plot_mode_choice_by_hour(mode_choice_by_hour_data_path):
+def plot_mode_choice_by_hour(mode_choice_by_hour_data_path, name_run):
     """Plotting the Overall Mode choice By Hour output
 
     Parameters
     ----------
     see process_mode_choice_by_hour()
+
+    name_run: str
+        Name of the run , e.g. "BAU", "Run 1", "Submission"...
 
     Returns
     -------
@@ -576,18 +594,16 @@ def plot_mode_choice_by_hour(mode_choice_by_hour_data_path):
     """
     mode_choice_per_hour = process_mode_choice_by_hour(mode_choice_by_hour_data_path)
 
-    fig, ax = plt.subplots(figsize=(7, 5))
     mode_choice_per_hour.plot.bar(stacked=True, figsize=(15, 5))
-    ax.legend(bbox_to_anchor=(1.01, 1), loc="upper left", title="Mode")
+    plt.legend(bbox_to_anchor=(1.01, 1), loc="upper left", title="Mode")
     plt.xlabel("Hours")
     plt.ylabel("Number of trips chosing the mode")
     plt.grid(alpha=0.9)
 
-    ax.set_title("Output - Mode choice over the agent's day \n (goes past midnight)")
-    return ax
+    plt.title(f"Output - Mode choice over the agent's day \n (goes past midnight) - {name_run}")
 
 
-def plot_mode_choice_by_income_group(person_df, trips_df):
+def plot_mode_choice_by_income_group(person_df, trips_df, name_run):
     """Plotting the Overall Mode choice By Income Group output
 
     Parameters
@@ -597,6 +613,9 @@ def plot_mode_choice_by_income_group(person_df, trips_df):
 
     trips_df: pandas DataFrame
         parsed and processed xml.files
+
+    name_run: str
+        Name of the run , e.g. "BAU", "Run 1", "Submission"...
 
     Returns
     -------
@@ -618,11 +637,11 @@ def plot_mode_choice_by_income_group(person_df, trips_df):
     fig, ax = plt.subplots(figsize=(8, 6))
     sns.barplot(data=people_income_mode_grouped, x="Mode", y="num_people", hue="income_group", ax=ax)
     ax.legend(title="Income group")
-    ax.set_title("Output - Mode choice by income group")
+    ax.set_title(f"Output - Mode choice by income group - {name_run}")
     return ax
 
 
-def plot_mode_choice_by_age_group(person_df, trips_df):
+def plot_mode_choice_by_age_group(person_df, trips_df, name_run):
     """Plotting the Overall Mode choice By Age Group output
 
     Parameters
@@ -632,6 +651,9 @@ def plot_mode_choice_by_age_group(person_df, trips_df):
 
     trips_df: pandas DataFrame
         parsed and processed xml.files
+
+    name_run: str
+        Name of the run , e.g. "BAU", "Run 1", "Submission"...
 
     Returns
     -------
@@ -654,18 +676,21 @@ def plot_mode_choice_by_age_group(person_df, trips_df):
     fig, ax = plt.subplots(figsize=(9, 6))
     sns.barplot(data=people_age_mode_grouped, x="Mode", y="num_people", hue="age_group")
     ax.legend(title="Age group")
-    plt.title("Output - Mode choice by age group")
+    plt.title(f"Output - Mode choice by age group - {name_run}")
 
     return ax
 
 
-def plot_average_travel_expenditure_per_trip_per_mode_over_day(legs_df):
+def plot_average_travel_expenditure_per_trip_per_mode_over_day(legs_df, name_run):
     """Plotting the Averge Travel Expenditure Per Trip and By MOde Over THe Day output
 
     Parameters
     ----------
     legs_df: pandas DataFrame
         parsed and processed xml.files
+
+    name_run: str
+        Name of the run , e.g. "BAU", "Run 1", "Submission"...
 
     Returns
     -------
@@ -679,11 +704,11 @@ def plot_average_travel_expenditure_per_trip_per_mode_over_day(legs_df):
     ax.set_xlabel("Hour of the day")
     ax.set_ylabel("Average Cost [$]")
     ax.legend(loc="upper left", title="Mode")
-    ax.set_title("Output - Average Travel Expenditure per Trip and by mode over the day")
+    ax.set_title(f"Output - Average Travel Expenditure per Trip and by mode over the day - {name_run}")
     return ax
 
 
-def plot_average_bus_crowding_by_bus_route_by_period_of_day(path_df, trip_to_route, seating_capacities, transit_scale_factor):
+def plot_average_bus_crowding_by_bus_route_by_period_of_day(path_df, trip_to_route, seating_capacities, transit_scale_factor, name_run):
     """Plotting the Average hours of bus crowding output
 
     Parameters
@@ -699,6 +724,9 @@ def plot_average_bus_crowding_by_bus_route_by_period_of_day(path_df, trip_to_rou
 
     transit_scale_factor: float
         Downsizing factor defined in the config file (=0.1 for Sioux Faux)
+
+    name_run: str
+        Name of the run , e.g. "BAU", "Run 1", "Submission"...
 
     Returns
     -------
@@ -725,7 +753,7 @@ def plot_average_bus_crowding_by_bus_route_by_period_of_day(path_df, trip_to_rou
     ax.set_ylabel("Hours of bus crowding")
     ax.legend(loc=(1.02, 0.71), title="Service Period")
     ax.grid(True, which="both")
-    ax.set_title("Output - Average Hours of bus crowding by bus route and period of day")
+    ax.set_title(f"Output - Average Hours of bus crowding by bus route and period of day - {name_run}")
     return ax
 
 
@@ -754,12 +782,15 @@ def process_travel_time(travel_time_data_path):
     return travel_time
 
 
-def plot_travel_time_by_mode(travel_time_data_path):
+def plot_travel_time_by_mode(travel_time_data_path, name_run):
     """Plotting the Average Travel Time by Mode output
 
     Parameters
     ----------
     see process_travel_time()
+
+    name_run: str
+        Name of the run , e.g. "BAU", "Run 1", "Submission"...
 
     Returns
     -------
@@ -773,7 +804,7 @@ def plot_travel_time_by_mode(travel_time_data_path):
     sns.barplot(x="mode", y="mean", data=travel_time, palette="Set2")
     plt.xlabel("Mode")
     plt.ylabel("Travel time [min]")
-    plt.title("Output - Average travel time per trip and by mode")
+    plt.title(f"Output - Average travel time per trip and by mode - {name_run}")
 
     return ax
 
@@ -809,12 +840,15 @@ def process_travel_time_over_the_day(travel_time_data_path):
     return melted_travel_time
 
 
-def plot_travel_time_over_the_day(travel_time_data_path):
+def plot_travel_time_over_the_day(travel_time_data_path, name_run):
     """Plotting the Average Travel Time by Mode and by Hour of the Day output
 
     Parameters
     ----------
     see process_travel_time_over_the_day()
+
+    name_run: str
+        Name of the run , e.g. "BAU", "Run 1", "Submission"...
 
     Returns
     -------
@@ -834,12 +868,12 @@ def plot_travel_time_over_the_day(travel_time_data_path):
     plt.yticks(np.arange(0, 151, 10), np.arange(0, 151, 10), fontsize=11)
     plt.xticks(np.arange(0, 31, 1), np.arange(0, 31, 1), fontsize=11)
 
-    plt.title("Output - Average travel time per passenger-trip over the day")
+    plt.title(f"Output - Average travel time per passenger-trip over the day - {name_run}")
 
     return ax
 
 
-def plot_cost_benefits(path_df, legs_df, operational_costs, trip_to_route):
+def plot_cost_benefits(path_df, legs_df, operational_costs, trip_to_route, name_run):
     """Plotting the Costs and Benefits by bus route output
 
     Parameters
@@ -856,6 +890,9 @@ def plot_cost_benefits(path_df, legs_df, operational_costs, trip_to_route):
 
     trip_to_route: dictionary
         Correspondance between trip_ids and route_ids
+
+    name_run: str
+        Name of the run , e.g. "BAU", "Run 1", "Submission"...
 
     Returns
     -------
@@ -877,7 +914,7 @@ def plot_cost_benefits(path_df, legs_df, operational_costs, trip_to_route):
 
     fig, ax = plt.subplots(figsize=(8, 6))
     grouped_data.plot.bar(stacked=True, ax=ax)
-    plt.title("Costs and Benefits by bus route")
+    plt.title(f"Output - Costs and Benefits by bus route - {name_run}")
     plt.xlabel("Bus route")
     plt.ylabel("Amount [$]")
     ax.legend(title="Costs and Benefits")
@@ -909,7 +946,20 @@ def prepare_raw_scores(raw_scores_data):
     return scores
 
 
-def plot_raw_scores(raw_scores_data):
+def plot_raw_scores(raw_scores_data, name_run):
+    """
+
+    Parameters
+    ----------
+    raw_scores_data: pandas DataFrame
+
+    name_run: str
+        Name of the run , e.g. "BAU", "Run 1", "Submission"...
+
+    Returns
+    -------
+
+    """
     raw_scores = prepare_raw_scores(raw_scores_data)
     sns.barplot(x="Raw Score", y="Subscores", data=raw_scores, palette=['steelblue', 'steelblue', 'lightsteelblue',
                                                                         'lightsteelblue', 'lightsteelblue',
@@ -917,7 +967,7 @@ def plot_raw_scores(raw_scores_data):
                                                                         'lightblue', 'paleturquoise'])
     plt.yticks(fontsize=11)
     plt.xlabel("Raw Score")
-    plt.ylabel("Score component name")
+    plt.ylabel(f"Score component name - {name_run}")
     plt.title("Raw Subscores", fontweight="bold", pad=12, fontsize=15)
 
 # def plot_standardized_scores(scores_data_path, ):
