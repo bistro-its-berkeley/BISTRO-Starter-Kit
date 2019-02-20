@@ -70,7 +70,7 @@ Consider using the “1k”-scenario. For more info, please refer to  Part II, S
 </details><br>
 
 <details>
-<summary><strong>A simulation run takes way too long! Why? How can I make the simulation run more quickly? What is the maximum performance that I can expect?</summary>
+<summary><strong>A simulation run takes way too long! Why? How can I make the simulation run more quickly? What is the maximum performance that I can expect?</strong></summary>
 <br>
   
 * This is to be expected. The simulation may run slowly depending on your computational environment. Currently, the primary bottleneck is routing. Even for the 15k scenario, the routing engine generates millions of routes (reflecting multimodal options for agents to choose between) for a single simulation run.  
