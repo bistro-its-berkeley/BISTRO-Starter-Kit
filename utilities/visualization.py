@@ -1001,9 +1001,9 @@ def plot_raw_scores(raw_scores_data, name_run):
 #     # plt.xlim(xmax = 1.4)
 
 
-####### PROCESS AND PLOT SPATIAL DATA ######              --> Need to be run w/ Python 2!
+####### PROCESS AND PLOT SPATIAL DATA  --> ACCESSIBILITY PLOTS######
 
-# Defining matsim_network_to_graph(``)
+#Defining matsim_network_to_graph(``)
 # def convert_crs(c):
 #     return utm.to_latlon(c[0],c[1],14,'N')
 #
@@ -1112,7 +1112,7 @@ def plot_raw_scores(raw_scores_data, name_run):
 #         return poi_dict
 #
 #
-# def plot_accessibility(sample_name, network_file, bau_linkstats_file, population_file, utm_zone, poi_types, time_ranges, max_time, morning_peak, evening_peak):
+# def plot_accessibility(sample_name, network_file, bau_linkstats_file, population_file, utm_zone, poi_types, time_ranges, max_time, morning_peak, evening_peak, name_run):
 #
 #     ttta_bau = bau_ttaa = TravelTimeAccessibilityAnalysis(network_file,bau_linkstats_file,population_file, utm_zone)
 #     nets = bau_ttaa.make_pandana_nets(poi_types,time_ranges,max_time)
@@ -1120,9 +1120,10 @@ def plot_raw_scores(raw_scores_data, name_run):
 #     bau_poi_dict = bau_ttaa._make_poi_dict()
 #     works = bau_poi_dict['work']
 #     secondaries = bau_poi_dict['secondary']
-#     evening_peak,morning_peak = make_traveltime_dfs(bau_linkstats_file, morning_peak, evening_peak)
+#     evening_peak, morning_peak = make_traveltime_dfs(bau_linkstats_file, morning_peak, evening_peak)
 #
 #     bau_gdfs = {}
+#
 #     for label_poi,poi_data in bau_ttaa.poi_dict.items():
 #         fig,ax=plt.subplots()
 #         fig.set_size_inches(10,10)
@@ -1151,6 +1152,8 @@ def plot_raw_scores(raw_scores_data, name_run):
 #         ax.yaxis.set_ticks_position('none')
 #         ax.xaxis.set_ticklabels([])
 #         ax.yaxis.set_ticklabels([])
+#         ax.legend(title="Number of opportunities")
+#         ax.set_title(f"Output - Accessibility of work locations within 15 minutes (from each node) - {name_run}")
 #     return ax
 #
 #
