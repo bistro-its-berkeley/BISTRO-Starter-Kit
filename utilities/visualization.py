@@ -622,12 +622,12 @@ def plot_mode_choice_by_income_group(person_df, trips_df, name_run):
     ax: matplotlib axes object
     """
     person_df = person_df[['PID', 'Age', 'income']]
-    mode_df = trips_df[['PID', 'Mode']]
+    mode_df = trips_df[['PID', 'realizedTripMode']]
     people_age_income_mode = person_df.merge(mode_df, on=['PID'])
     people_age_income_mode['income_group'] = pd.cut(people_age_income_mode.income,
                                                     [0, 10000, 25000, 50000, 75000, 100000, float('inf')],
                                                     right=False)
-    people_income_mode_grouped = people_age_income_mode.groupby(by=['Mode', 'income_group']).agg('count').reset_index()
+    people_income_mode_grouped = people_age_income_mode.groupby(by=['realizedTripMode', 'income_group']).agg('count').reset_index()
 
     # rename df column to num_people due to grouping
     people_income_mode_grouped = people_income_mode_grouped.rename(
@@ -635,8 +635,8 @@ def plot_mode_choice_by_income_group(person_df, trips_df, name_run):
 
     # plot
     fig, ax = plt.subplots(figsize=(8, 6))
-    sns.barplot(data=people_income_mode_grouped, x="Mode", y="num_people", hue="income_group", ax=ax)
-    ax.legend(title="Income group")
+    sns.barplot(data=people_income_mode_grouped, x="realizedTripMode", y="num_people", hue="income_group", ax=ax)
+    ax.legend(title="Income group", bbox_to_anchor=(1.0, 1.01))
     ax.set_title(f"Output - Mode choice by income group - {name_run}")
     return ax
 
@@ -660,7 +660,7 @@ def plot_mode_choice_by_age_group(person_df, trips_df, name_run):
     ax: matplotlib axes object
     """
     person_df = person_df[['PID', 'Age', 'income']]
-    mode_df = trips_df[['PID', 'Mode']]
+    mode_df = trips_df[['PID', 'realizedTripMode']]
     people_age_mode = person_df.merge(mode_df, on=['PID'])
 
     people_age_mode['age_group'] = pd.cut(people_age_mode.Age,
@@ -669,19 +669,19 @@ def plot_mode_choice_by_age_group(person_df, trips_df, name_run):
 
     # group the data and reset index to keep as consistent dataframe
     people_age_mode_grouped = people_age_mode.groupby(
-        by=['Mode', 'age_group']).agg('count').reset_index()
+        by=['realizedTripMode', 'age_group']).agg('count').reset_index()
 
     # rename df column to num_people due to grouping
     people_age_mode_grouped = people_age_mode_grouped.rename(index=str, columns={'PID': 'num_people'})
     fig, ax = plt.subplots(figsize=(9, 6))
-    sns.barplot(data=people_age_mode_grouped, x="Mode", y="num_people", hue="age_group")
-    ax.legend(title="Age group")
+    sns.barplot(data=people_age_mode_grouped, x="realizedTripMode", y="num_people", hue="age_group")
+    ax.legend(title="Age group", bbox_to_anchor=(1.0, 1.01))
     plt.title(f"Output - Mode choice by age group - {name_run}")
 
     return ax
 
 
-def plot_average_travel_expenditure_per_trip_per_mode_over_day(legs_df, name_run):
+def plot_average_travel_expenditure_per_trip_per_mode_over_day(trips_df, name_run):
     """Plotting the Averge Travel Expenditure Per Trip and By MOde Over THe Day output
 
     Parameters
@@ -696,11 +696,11 @@ def plot_average_travel_expenditure_per_trip_per_mode_over_day(legs_df, name_run
     -------
     ax: matplotlib axes object
     """
-    legs_df.loc[:, "trip_cost"] = legs_df.FuelCost.values + legs_df.Fare.values + legs_df.Cost.values - legs_df.Incentive
-    legs_df.loc[:, "hour_of_day"] = np.floor(legs_df.Start_time/3600)
-    grouped_data = legs_df.groupby(by=["Mode", "hour_of_day"]).agg("mean")["trip_cost"].reset_index()
+    trips_df.loc[:, "trip_cost"] = trips_df.FuelCost.values + trips_df.Fare.values
+    trips_df.loc[:, "hour_of_day"] = np.floor(trips_df.Start_time/3600)
+    grouped_data = trips_df.groupby(by=["realizedTripMode", "hour_of_day"]).agg("mean")["trip_cost"].reset_index()
     fig, ax = plt.subplots(figsize=(18, 8))
-    sns.barplot(data=grouped_data, x="hour_of_day", y="trip_cost", hue="Mode", ax=ax, palette="Set2")
+    sns.barplot(data=grouped_data, x="hour_of_day", y="trip_cost", hue="realizedTripMode", ax=ax, palette="Set2")
     ax.set_xlabel("Hour of the day")
     ax.set_ylabel("Average Cost [$]")
     ax.legend(loc="upper left", title="Mode")
@@ -873,7 +873,7 @@ def plot_travel_time_over_the_day(travel_time_data_path, name_run):
     return ax
 
 
-def plot_cost_benefits(path_df, legs_df, operational_costs, trip_to_route, name_run):
+def plot_cost_benefits(trips_df, operational_costs, trip_to_route, name_run):
     """Plotting the Costs and Benefits by bus route output
 
     Parameters
@@ -898,19 +898,17 @@ def plot_cost_benefits(path_df, legs_df, operational_costs, trip_to_route, name_
     -------
     ax: matplotlib axes object
         """
-    bus_slice_df = path_df.loc[lambda df: df["mode"] == "bus"][
-        ["vehicle", "numPassengers", "capacity", "departureTime", "arrivalTime", "fuel", "vehicleType"]]
-    bus_slice_df.loc[:, "route_id"] = bus_slice_df.vehicle.apply(lambda x: trip_to_route[x.split(":")[1]])
-    bus_slice_df.loc[:, "Trip_ID"] = bus_slice_df.vehicle.apply(lambda x: x.split(":")[1])
+    bus_slice_df = trips_df.loc[lambda df: df["realizedTripMode"] == "walk_transit" | "drive_transit"]
+    # [["vehicle", "numPassengers", "capacity", "departureTime", "arrivalTime", "fuel", "vehicleType"]]
+    bus_slice_df.loc[:, "route_id"] = bus_slice_df.Trip_ID.apply(lambda x: trip_to_route[x])
     bus_slice_df.loc[:, "operational_costs_per_bus"] = bus_slice_df.vehicleType.apply(
         lambda x: operational_costs[x])
-    bus_slice_df.loc[:, "serviceTime"] = (bus_slice_df.arrivalTime - bus_slice_df.departureTime) / 3600
+    bus_slice_df.loc[:, "serviceTime"] = (bus_slice_df.End_time - bus_slice_df.Start_time) / 3600
     bus_slice_df.loc[:, "operational_costs"] = bus_slice_df.operational_costs_per_bus * bus_slice_df.serviceTime
-    bus_slice_df.loc[:, "fuelCosts"] = bus_slice_df.fuel * 0.02
 
 
     # return pd.merge(bus_slice_df, trips_df[["Trip_ID", "Fare"]], on="Trip_ID")
-    grouped_data = bus_slice_df.groupby(by="route_id").agg("sum")[["operational_costs", "fuelCosts"]]
+    grouped_data = bus_slice_df.groupby(by="route_id").agg("sum")[["operational_costs", "FuelCost"]]
 
     fig, ax = plt.subplots(figsize=(8, 6))
     grouped_data.plot.bar(stacked=True, ax=ax)
@@ -921,54 +919,90 @@ def plot_cost_benefits(path_df, legs_df, operational_costs, trip_to_route, name_
     return ax
 
 
-def prepare_raw_scores(raw_scores_data):
-    # raw_scores_data = path of the submissionsScores.csv file
-    scores = pd.read_csv(raw_scores_data)
-    scores = scores.loc[:,["Component Name","Raw Score"]]
+# def prepare_raw_scores(raw_scores_data):
+#     # raw_scores_data = path of the submissionsScores.csv file
+#     scores = pd.read_csv(raw_scores_data)
+#     scores = scores.loc[:,["Component Name","Raw Score"]]
+#
+#     # Drop the `subission score` row
+#     scores = scores.drop(index = 10, axis = 0)
+#     scores["Component Name"] = scores["Component Name"].astype('category').cat.reorder_categories([
+#            'Accessibility: Number of secondary locations accessible within 15 minutes',
+#            'Accessibility: Number of work locations accessible within 15 minutes',
+#            'Congestion: average vehicle delay per passenger trip',
+#            'Congestion: total vehicle miles traveled',
+#            'Level of service: average bus crowding experienced',
+#            'Level of service: average on-demand ride wait times',
+#            'Level of service: average trip expenditure - secondary',
+#            'Level of service: average trip expenditure - work',
+#            'Mass transit level of service intervention: costs and benefits',
+#            'Sustainability: Total PM 2.5 Emissions'])
+#
+#     scores = scores.sort_values(by="Component Name")
+#     scores.iloc[:2, 1] = scores.iloc[:2, 1].apply(np.reciprocal)
+#     scores["Subscores"] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+#     return scores
 
-    # Drop the `subission score` row
-    scores = scores.drop(index = 10, axis = 0)
+
+def process_weighted_scores_to_plot(scores_path):
+    scores = pd.read_csv(scores_path)
+    scores = scores.loc[:,["Component Name","Weighted Score"]]
+    scores.set_index("Component Name", inplace = True)
+    #Drop the `submission score` row
+    scores.drop('Level of service: average on-demand ride wait times', axis = 0,inplace=True)
+    scores.reset_index( inplace = True)
+
     scores["Component Name"] = scores["Component Name"].astype('category').cat.reorder_categories([
            'Accessibility: Number of secondary locations accessible within 15 minutes',
            'Accessibility: Number of work locations accessible within 15 minutes',
            'Congestion: average vehicle delay per passenger trip',
            'Congestion: total vehicle miles traveled',
            'Level of service: average bus crowding experienced',
-           'Level of service: average on-demand ride wait times',
            'Level of service: average trip expenditure - secondary',
            'Level of service: average trip expenditure - work',
-           'Mass transit level of service intervention: costs and benefits',
-           'Sustainability: Total PM 2.5 Emissions'])
+           'Level of service: costs and benefits',
+           'Sustainability: Total PM 2.5 Emissions',
+           'Submission Score'])
 
     scores = scores.sort_values(by="Component Name")
-    scores.iloc[:2, 1] = scores.iloc[:2, 1].apply(np.reciprocal)
-    scores["Subscores"] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+#     scores.iloc[:2, 1] = scores.iloc[:2, 1].apply(np.reciprocal)
+#     scores["Subscores"] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
     return scores
 
 
-def plot_raw_scores(raw_scores_data, name_run):
-    """
+def plot_weighted_scores(scores_path, name_run):
+    scores = process_weighted_scores_to_plot(scores_path)
+    fig, ax = plt.subplots(figsize=(7, 5))
+    sns.barplot(data=scores, x="Weighted Score", y="Component Name", color="steelblue")
+    plt.axvline(x=1.0, linewidth=1, color='k', ls='dashed', label="baseline")
+    plt.legend(bbox_to_anchor=(1.01, 1), loc="upper left")
+    plt.xlabel("Weighted Score")
+    plt.ylabel("Score component")
+    plt.title(f"Weighted Subscores and Submission score - {name_run}")
 
-    Parameters
-    ----------
-    raw_scores_data: pandas DataFrame
-
-    name_run: str
-        Name of the run , e.g. "BAU", "Run 1", "Submission"...
-
-    Returns
-    -------
-
-    """
-    raw_scores = prepare_raw_scores(raw_scores_data)
-    sns.barplot(x="Raw Score", y="Subscores", data=raw_scores, palette=['steelblue', 'steelblue', 'lightsteelblue',
-                                                                        'lightsteelblue', 'lightsteelblue',
-                                                                        'lightsteelblue', 'skyblue', 'skyblue',
-                                                                        'lightblue', 'paleturquoise'])
-    plt.yticks(fontsize=11)
-    plt.xlabel("Raw Score")
-    plt.ylabel(f"Score component name - {name_run}")
-    plt.title("Raw Subscores", fontweight="bold", pad=12, fontsize=15)
+# def plot_raw_scores(raw_scores_data, name_run):
+#     """
+#
+#     Parameters
+#     ----------
+#     raw_scores_data: pandas DataFrame
+#
+#     name_run: str
+#         Name of the run , e.g. "BAU", "Run 1", "Submission"...
+#
+#     Returns
+#     -------
+#
+#     """
+#     raw_scores = prepare_raw_scores(raw_scores_data)
+#     sns.barplot(x="Raw Score", y="Subscores", data=raw_scores, palette=['steelblue', 'steelblue', 'lightsteelblue',
+#                                                                         'lightsteelblue', 'lightsteelblue',
+#                                                                         'lightsteelblue', 'skyblue', 'skyblue',
+#                                                                         'lightblue', 'paleturquoise'])
+#     plt.yticks(fontsize=11)
+#     plt.xlabel("Raw Score")
+#     plt.ylabel(f"Score component name - {name_run}")
+#     plt.title("Raw Subscores", fontweight="bold", pad=12, fontsize=15)
 
 # def plot_standardized_scores(scores_data_path, ):
 #     sns.set_context('notebook')
@@ -1001,9 +1035,9 @@ def plot_raw_scores(raw_scores_data, name_run):
 #     # plt.xlim(xmax = 1.4)
 
 
-####### PROCESS AND PLOT SPATIAL DATA ######              --> Need to be run w/ Python 2!
+####### PROCESS AND PLOT SPATIAL DATA  --> ACCESSIBILITY PLOTS######
 
-# Defining matsim_network_to_graph(``)
+#Defining matsim_network_to_graph(``)
 # def convert_crs(c):
 #     return utm.to_latlon(c[0],c[1],14,'N')
 #
@@ -1112,7 +1146,7 @@ def plot_raw_scores(raw_scores_data, name_run):
 #         return poi_dict
 #
 #
-# def plot_accessibility(sample_name, network_file, bau_linkstats_file, population_file, utm_zone, poi_types, time_ranges, max_time, morning_peak, evening_peak):
+# def plot_accessibility(sample_name, network_file, bau_linkstats_file, population_file, utm_zone, poi_types, time_ranges, max_time, morning_peak, evening_peak, name_run):
 #
 #     ttta_bau = bau_ttaa = TravelTimeAccessibilityAnalysis(network_file,bau_linkstats_file,population_file, utm_zone)
 #     nets = bau_ttaa.make_pandana_nets(poi_types,time_ranges,max_time)
@@ -1120,9 +1154,10 @@ def plot_raw_scores(raw_scores_data, name_run):
 #     bau_poi_dict = bau_ttaa._make_poi_dict()
 #     works = bau_poi_dict['work']
 #     secondaries = bau_poi_dict['secondary']
-#     evening_peak,morning_peak = make_traveltime_dfs(bau_linkstats_file, morning_peak, evening_peak)
+#     evening_peak, morning_peak = make_traveltime_dfs(bau_linkstats_file, morning_peak, evening_peak)
 #
 #     bau_gdfs = {}
+#
 #     for label_poi,poi_data in bau_ttaa.poi_dict.items():
 #         fig,ax=plt.subplots()
 #         fig.set_size_inches(10,10)
@@ -1151,6 +1186,8 @@ def plot_raw_scores(raw_scores_data, name_run):
 #         ax.yaxis.set_ticks_position('none')
 #         ax.xaxis.set_ticklabels([])
 #         ax.yaxis.set_ticklabels([])
+#         ax.legend(title="Number of opportunities")
+#         ax.set_title(f"Output - Accessibility of work locations within 15 minutes (from each node) - {name_run}")
 #     return ax
 #
 #
