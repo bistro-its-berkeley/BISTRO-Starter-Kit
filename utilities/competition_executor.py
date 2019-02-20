@@ -517,6 +517,35 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
         return logs
 
     @verify_submission_id
+    def output_simulation_parameters(self, sim_name):
+        """Prints the parameters of the requested simulation
+        
+        Parameters
+        ----------
+        sim_name : str
+            Name of the the requested simulation
+
+        Returns
+        -------
+        str
+            Simulation parameters as bytestring
+        """
+        submission = self.containers[sim_name]
+
+        submission_id = submission._submission_id
+        timestamp = submission._timestamp
+        num_iterations = submission.num_iterations
+        sample_size = submission.sample_size
+        scenario_name = submission.scenario_name
+
+        print("Simulation parameters\n \
+        - Submission id: '{0}'\n \
+        - Timestamp: '{1}'\n \
+        - Scenario Name: '{2}'\n \
+        - Number of Iterations: '{3}'\n \
+        - Sample Size: '{4}'\n".format(submission_id, timestamp, scenario_name, num_iterations, sample_size))
+
+    @verify_submission_id
     def check_if_submission_complete(self, sim_name):
         """ Checks if a given submission is complete.
 
