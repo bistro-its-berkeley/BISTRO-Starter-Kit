@@ -547,7 +547,7 @@ def label_trip_mode(modes):
         print(modes)
 
 
-def merge_legs_trips(legs_df,trips_df):
+def _legs_trips(legs_df,trips_df):
     trips_df = trips_df[ ['PID', 'Trip_ID', 'O_Act_ID', 'D_Act_ID', 'Purpose',
        'Mode']]
     trips_df.columns = ['PID', 'Trip_ID', 'O_Act_ID', 'D_Act_ID', 'Purpose',
