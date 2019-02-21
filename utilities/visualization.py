@@ -60,7 +60,7 @@ def unzip_file(element_path):
         return element_path
 
     else:
-        raise FileNotFoundError(f"{folder_path} does not exist")
+        raise FileNotFoundError(f"{element_path} does not exist")
 
 def open_xml(path):
     # Open xml and xml.gz files into ElementTree
