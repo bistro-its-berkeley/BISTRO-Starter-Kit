@@ -7,7 +7,6 @@ from data_parsing import extract_dataframe
 import gzip
 from collections import defaultdict
 
-
 def open_xml(path):
     # Open xml and xml.gz files into ElementTree
     if str(path).endswith('.gz'):
@@ -30,7 +29,7 @@ def parse_bus_fare_input(bus_fare_datas, route_ids):
     bus_fare_data = pd.read_csv(bus_fare_datas)
     # returns bus_fare_dict: a dataframe with rows = ages and columns = routes
     bus_fare_dict = pd.DataFrame(np.zeros((120, len(route_ids))), columns=route_ids)
-    routes = bus_fare_data['route_id'].unique()
+    routes = bus_fare_data['routeId'].unique()
     for r in routes:
         if np.isnan(r):
             cols = route_ids
@@ -39,7 +38,6 @@ def parse_bus_fare_input(bus_fare_datas, route_ids):
         # get all fare rows for this route:
         r_fares = bus_fare_data.loc[np.isnan(bus_fare_data['routeId']),]
         for i, row in r_fares.iterrows():
-            print(row)
             age_group = row['age']
             left = age_group[0]
             ages = age_group[1:-1].split(':')
@@ -56,7 +54,6 @@ def parse_bus_fare_input(bus_fare_datas, route_ids):
 
     return bus_fare_dict
 
-
 def calc_fuel_costs(legs_df, fuel_cost_dict):
     # legs_df: legs_dataframe
     # fuel_cost_dict: {fuel_type: $/MJoule}
@@ -65,7 +62,8 @@ def calc_fuel_costs(legs_df, fuel_cost_dict):
     legs_df.loc[:, "FuelCost"] = np.zeros(legs_df.shape[0])
     for f in ['Gasoline', 'Diesel']:
         legs_df.loc[legs_df["fuelType"] == f, "FuelCost"] = (pd.to_numeric(
-            legs_df.loc[legs_df["fuelType"] == f, "FuelCost"]) * float(fuel_cost_dict[f])) / 1000000
+            legs_df.loc[legs_df["fuelType"] == f, "fuel"]) * float(fuel_cost_dict[f])) / 1000000
+
     return legs_df
 
 
@@ -78,19 +76,25 @@ def calc_transit_fares(row,bus_fare_dict,person_df,trip_to_route):
     return fare
 
 
-def calc_fares(legs_df, ride_hail_fares):
+def calc_fares(legs_df,ride_hail_fares,bus_fare_dict,person_df, trip_to_route):
     # legs_df: legs_dataframe
     # ride_hail_fares: {'base': $, 'duration': $/hour, 'distance': $/km}
     # transit_fares isnt being used currently - would need to be updated to compute fare based on age
     # returns: legs_df augmented with an additional column of estimated transit and on-demand ride fares
 
     legs_df["Fare"] = np.zeros(legs_df.shape[0])
-    legs_df.loc[legs_df["Mode"] == 'walk_transit', "Fare"] = 1.5
-    legs_df.loc[legs_df["Mode"] == 'drive_transit', "Fare"] = 1.5
+
+    legs_df.loc[legs_df["Mode"] == 'bus', "Fare"] = legs_df.loc[legs_df["Mode"] == 'bus'].apply(
+        lambda row: calc_transit_fares(row, bus_fare_dict, person_df, trip_to_route), axis=1)
+
     legs_df.loc[legs_df["Mode"] == 'OnDemand_ride', "Fare"] = ride_hail_fares['base'] + (
-                pd.to_timedelta(legs_df['Duration']).dt.seconds / 60) * float(ride_hail_fares['duration']) + (                                                           pd.to_numeric(legs_df['Distance']) / 1000) * (
+                pd.to_timedelta(legs_df['Duration']).dt.seconds / 60) * float(ride_hail_fares['duration']) + (
+                                                                          pd.to_numeric(
+                                                                              legs_df['Distance']) / 1000) * (
                                                                   0.621371) * float(ride_hail_fares['distance'])
+
     return legs_df
+
 
 
 def one_path(path_trav, leg_id, pid, trip_id):
@@ -481,7 +485,7 @@ def get_legs_output(events_df, trips_df):
     # convert the leg array to a dataframe
     legs_df = pd.DataFrame(legs_array,
                            columns=['PID', 'Trip_ID', 'Leg_ID', 'Mode', 'Veh', 'Veh_type', 'Start_time', 'End_time',
-                                    'Duration', 'Distance', 'Path', 'Fuel', 'fuelType'])
+                                    'Duration', 'Distance', 'Path', 'fuel', 'fuelType'])
 
     return legs_df, path_traversal_events_full
 
@@ -523,7 +527,7 @@ def extract_legs_dataframes(events_path, trips_df, bus_fare_dict, person_df, tri
     ride_hail_fares = {'base': 0.0, 'distance': 1.0, 'duration': 0.5}
     legs_df_new.to_csv(str(output_folder) + '/legs_df_WIP2.csv')
 
-    legs_df_new_new = calc_fares(legs_df_new, ride_hail_fares)
+    legs_df_new_new = calc_fares(legs_df_new, ride_hail_fares, bus_fare_dict,person_df, trip_to_route)
     legs_df.to_csv(str(output_folder) + '/legs_dataframe.csv')
     return legs_df_new_new
 
@@ -547,7 +551,7 @@ def label_trip_mode(modes):
         print(modes)
 
 
-def _legs_trips(legs_df,trips_df):
+def merge_legs_trips(legs_df,trips_df):
     trips_df = trips_df[ ['PID', 'Trip_ID', 'O_Act_ID', 'D_Act_ID', 'Purpose',
        'Mode']]
     trips_df.columns = ['PID', 'Trip_ID', 'O_Act_ID', 'D_Act_ID', 'Purpose',
@@ -557,6 +561,10 @@ def _legs_trips(legs_df,trips_df):
     unique_modes_df = pd.DataFrame(unique_modes)
     unique_modes_df.columns = ['legModes']
     merged_trips = trips_df.merge(legs_grouped['Duration','Distance','Fuel','FuelCost','Fare'].sum(),on='Trip_ID')
+    legs_transit = legs_df.loc[legs_df['Mode']=='bus',]
+    legs_transit_grouped = legs_transit.groupby("Trip_ID")
+    count_modes = legs_transit_grouped['Mode'].count()
+    merged_trips[count_modes.loc[count_modes.values >1].index,'Fare'] = merged_trips[count_modes.loc[count_modes.values >1].index,'Fare']/count_modes.loc[count_modes.values >1].values
     merged_trips = merged_trips.merge(unique_modes_df,on='Trip_ID')
     legs_grouped_start_min = pd.DataFrame(legs_grouped['Start_time'].min())
     legs_grouped_end_max = pd.DataFrame(legs_grouped['End_time'].max())
@@ -564,7 +572,6 @@ def _legs_trips(legs_df,trips_df):
     merged_trips= merged_trips.merge(legs_grouped_end_max,on='Trip_ID')
     merged_trips['realizedTripMode'] = merged_trips['legModes'].apply(lambda row: label_trip_mode(row))
     return merged_trips
-
 
 def output_parse(output_plans_data, persons_data, hhd_data, plans_data, events_data, bus_fares_data, route_ids, trip_to_route, output_folder):
     person_df = extract_person_dataframes(output_plans_data, persons_data, hhd_data, output_folder)
