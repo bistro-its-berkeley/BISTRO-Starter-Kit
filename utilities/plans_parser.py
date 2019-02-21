@@ -1,4 +1,3 @@
-import datetime
 import pandas as pd
 import numpy as np
 
@@ -9,8 +8,6 @@ import gzip
 from collections import defaultdict
 
 
-
-
 def open_xml(path):
     # Open xml and xml.gz files into ElementTree
     if str(path).endswith('.gz'):
@@ -19,16 +16,66 @@ def open_xml(path):
         return etree.parse(str(path))
 
 
+def unzip_file(path):
+    if path.endswith('.gz'):
+        return gzip.open(path)
+    else:
+        return path
+
+
+def parse_bus_fare_input(bus_fare_datas, route_ids):
+    # bus_fare_data is the path to the submission input csv: "submission-inputs/MassTransitFares.csv"
+    # route_ids is the list of routeIds produced in the Viz notebook
+
+    bus_fare_data = pd.read_csv(bus_fare_datas)
+    # returns bus_fare_dict: a dataframe with rows = ages and columns = routes
+    bus_fare_dict = pd.DataFrame(np.zeros((120, len(route_ids))), columns=route_ids)
+    routes = bus_fare_data['route_id'].unique()
+    for r in routes:
+        if np.isnan(r):
+            cols = route_ids
+        else:
+            cols = int(r)
+        # get all fare rows for this route:
+        r_fares = bus_fare_data.loc[np.isnan(bus_fare_data['routeId']),]
+        for i, row in r_fares.iterrows():
+            print(row)
+            age_group = row['age']
+            left = age_group[0]
+            ages = age_group[1:-1].split(':')
+            right = age_group[-1]
+            if left == '(':
+                min_a = int(ages[0]) + 1
+            else:
+                min_a = int(ages[0])
+            if right == ')':
+                max_a = int(ages[1]) - 1
+            else:
+                max_a = int(ages[1])
+            bus_fare_dict.loc[min_a:max_a, cols] = float(row['amount'])
+
+    return bus_fare_dict
+
+
 def calc_fuel_costs(legs_df, fuel_cost_dict):
     # legs_df: legs_dataframe
     # fuel_cost_dict: {fuel_type: $/MJoule}
     # returns: legs_df augmented with an additional column of estimated fuel costs
 
-    legs_df["FuelCost"] = np.zeros(legs_df.shape[0])
+    legs_df.loc[:, "FuelCost"] = np.zeros(legs_df.shape[0])
     for f in ['Gasoline', 'Diesel']:
-        legs_df.loc[legs_df["FuelType"] == f, "FuelCost"] = (pd.to_numeric(
-            legs_df.loc[legs_df["FuelType"] == f, "Fuel"]) * float(fuel_cost_dict[f])) / 1000000
+        legs_df.loc[legs_df["fuelType"] == f, "FuelCost"] = (pd.to_numeric(
+            legs_df.loc[legs_df["fuelType"] == f, "FuelCost"]) * float(fuel_cost_dict[f])) / 1000000
     return legs_df
+
+
+def calc_transit_fares(row,bus_fare_dict,person_df,trip_to_route):
+    pid = row['PID']
+    age = person_df.loc[person_df['PID']==pid,'Age']
+    vehicle = row['Veh']
+    route = trip_to_route[vehicle.split(':')[1]]
+    fare = bus_fare_dict.loc[age,route]
+    return fare
 
 
 def calc_fares(legs_df, ride_hail_fares):
@@ -127,7 +174,7 @@ def parse_transit_trips(row, path_traversal_events, bus_path_traversal_events, e
                 leg_path = [path['links'] for p, path in bus_path_trav.iterrows()]
                 leg_mode = bus_path_trav['mode'].values[0]
                 leg_fuel = 0
-                leg_fuel_type = 'unknown'
+                leg_fuel_type = 'Diesel'
                 leg_array.append(
                     [pid, trip_id, leg_id_full, leg_mode, veh_id, veh_type, leg_start_time, leg_end_time, leg_duration,
                      distance, leg_path, leg_fuel, leg_fuel_type])
@@ -161,6 +208,7 @@ def parse_walk_car_trips(row, path_traversal_events, enter_veh_events):
     leg_id = 0
 
     # get all path traversals occuring within the time frame of this trip in which the driver is the person making this trip
+
     path_trav = path_traversal_events.loc[
         (path_traversal_events['driver'] == pid) & (path_traversal_events['arrivalTime'] <= end_time) & (
                     path_traversal_events['departureTime'] >= start_time.total_seconds()),]
@@ -382,7 +430,7 @@ def add_event_data_to_library(event, event_data):
         dd[k].append(v)
 
 
-def get_legs_output(events_df, trips_df, output_folder):
+def get_legs_output(events_df, trips_df):
     # creates a dataframe of trip legs using the events dataframe; creates and saves a pathTraversal dataframe to csv
     # outputs the legs dataframe
 
@@ -394,12 +442,19 @@ def get_legs_output(events_df, trips_df, output_folder):
     # get all relevant personEntersVehicle events (those occuring at time ==0 are all ridehail/bus drivers)
     enter_veh_events = events_df.loc[(events_df['type'] == 'PersonEntersVehicle') & (events_df['time'] > 0),]
     # get all path traversal events (all vehicle movements, and all person walk movements)
-    path_traversal_events = events_df.loc[(events_df['type'] == 'PathTraversal') & (events_df['length'] > 0),]
-    path_traversal_events.to_csv(str(output_folder) +"/path_traversals_dataframe.csv")
+    path_traversal_events_full = events_df.loc[(events_df['type'] == 'PathTraversal') & (events_df['length'] > 0),]
+    path_traversal_events_full = path_traversal_events_full.reset_index(drop=True)
+    path_traversal_events_full = path_traversal_events_full[
+        ['time', 'type', 'person', 'vehicle', 'driver', 'vehicleType', 'length',
+         'numPassengers', 'departureTime', 'arrivalTime', 'mode', 'links',
+         'fuelType', 'fuel', 'capacity', 'startX', 'startY', 'endX', 'endY',
+         'endLegFuelLevel', 'seatingCapacity']]
+
     # filter for bus path traversals only
-    bus_path_traversal_events = path_traversal_events.loc[path_traversal_events['vehicleType'] == "BUS-DEFAULT",]
+    bus_path_traversal_events = path_traversal_events_full.loc[
+        path_traversal_events_full['vehicleType'] == "BUS-DEFAULT",]
     # filter for car & body path traversals only
-    path_traversal_events = path_traversal_events.loc[path_traversal_events['vehicleType'] != "BUS-DEFAULT",]
+    path_traversal_events = path_traversal_events_full.loc[path_traversal_events_full['vehicleType'] != "BUS-DEFAULT",]
     # get all PersonCost events (record the expenditures of persons during a trip)
     # person_costs = events_df.loc[events_df['type']=='PersonCost',]
     legs_array = []
@@ -426,9 +481,9 @@ def get_legs_output(events_df, trips_df, output_folder):
     # convert the leg array to a dataframe
     legs_df = pd.DataFrame(legs_array,
                            columns=['PID', 'Trip_ID', 'Leg_ID', 'Mode', 'Veh', 'Veh_type', 'Start_time', 'End_time',
-                                    'Duration', 'Distance', 'Path', 'Fuel', 'FuelType'])
+                                    'Duration', 'Distance', 'Path', 'Fuel', 'fuelType'])
 
-    return legs_df
+    return legs_df, path_traversal_events_full
 
 
 def extract_person_dataframes(out_plans_path, persons_path, hhd_path, output_folder):
@@ -453,19 +508,23 @@ def extract_plans_dataframes(plans_path, output_folder):
     return acts_df, trips_df
 
 
-def extract_legs_dataframes(events_path, trips_df, output_folder):
+def extract_legs_dataframes(events_path, trips_df, bus_fare_dict, person_df, trip_to_route, output_folder):
     # opens the outputevents and passes the xml file to get_legs_output
     # augments the legs dataframe with estimates of the fuelcosts and fares for each leg
     # returns the legs_dataframe
 
     all_events_df = extract_dataframe(str(events_path))
-    legs_df = get_legs_output(all_events_df, trips_df, output_folder)
     fuel_cost_dict = {'Gasoline': 0.03, 'Diesel': 0.02, 'Electricity': 0.01, 'Food': 0}
+    legs_df, path_traversal_df = get_legs_output(all_events_df, trips_df)
+    path_traversal_df_new = calc_fuel_costs(path_traversal_df, fuel_cost_dict)
+    path_traversal_df_new.to_csv(str(output_folder) + '/path_traversals_dataframe.csv')
+    print("path_traversals_dataframe.csv generated")
     legs_df_new = calc_fuel_costs(legs_df, fuel_cost_dict)
     ride_hail_fares = {'base': 0.0, 'distance': 1.0, 'duration': 0.5}
-    legs_df_new.to_csv(output_folder +'/legs_df_WIP2.csv')
+    legs_df_new.to_csv(str(output_folder) + '/legs_df_WIP2.csv')
+
     legs_df_new_new = calc_fares(legs_df_new, ride_hail_fares)
-    legs_df.to_csv(str(output_folder) + "/legs_dataframe.csv")
+    legs_df.to_csv(str(output_folder) + '/legs_dataframe.csv')
     return legs_df_new_new
 
 
@@ -488,7 +547,7 @@ def label_trip_mode(modes):
         print(modes)
 
 
-def merge_legs_trips(legs_df,trips_df):
+def _legs_trips(legs_df,trips_df):
     trips_df = trips_df[ ['PID', 'Trip_ID', 'O_Act_ID', 'D_Act_ID', 'Purpose',
        'Mode']]
     trips_df.columns = ['PID', 'Trip_ID', 'O_Act_ID', 'D_Act_ID', 'Purpose',
@@ -507,13 +566,14 @@ def merge_legs_trips(legs_df,trips_df):
     return merged_trips
 
 
-def output_parse(output_plans_data, persons_data, hhd_data, plans_data, events_data, output_folder):
-    person_df = extract_person_dataframes(output_plans_data,persons_data,hhd_data,output_folder)
+def output_parse(output_plans_data, persons_data, hhd_data, plans_data, events_data, bus_fares_data, route_ids, trip_to_route, output_folder):
+    person_df = extract_person_dataframes(output_plans_data, persons_data, hhd_data, output_folder)
     print("person_dataframe.csv generated")
     activities_df, trips_df = extract_plans_dataframes(plans_data, output_folder)
+    bus_fare_dict = parse_bus_fare_input(bus_fares_data, route_ids)
     print("activities_dataframe.csv generated")
-    legs_df = extract_legs_dataframes(events_data, trips_df, output_folder)
+    legs_df = extract_legs_dataframes(events_data,trips_df,bus_fare_dict, person_df, trip_to_route, output_folder)
     print("legs_dataframe.csv generated")
-    final_t_df = merge_legs_trips(legs_df, trips_df)
-    final_t_df.to_csv(str(output_folder) +'/trips_dataframe.csv')
+    final_trips_df = merge_legs_trips(legs_df, trips_df)
+    final_trips_df.to_csv(str(output_folder) +'/trips_dataframe.csv')
     print("trips_dataframe.csv generated")

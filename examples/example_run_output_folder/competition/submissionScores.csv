@@ -1,12 +1,12 @@
 Component Name,Weight,Raw Score,Weighted Score
-Level of service: costs and benefits,1.0,0.7478323254155731,0.7478323254155731
-Accessibility: Number of work locations accessible within 15 minutes,1.0,0.941632875687095,0.941632875687095
-Accessibility: Number of secondary locations accessible within 15 minutes,1.0,0.9581001649190808,0.9581001649190808
-Sustainability: Total PM 2.5 Emissions,1.0,0.9773354200896097,0.9773354200896097
-Level of service: average on-demand ride wait times,1.0,1.0582454339301326,1.0582454339301326
-Level of service: average bus crowding experienced,1.0,0.4043311031811173,0.4043311031811173
-Level of service: average trip expenditure - secondary,1.0,0.8603105044971724,0.8603105044971724
-Level of service: average trip expenditure - work,1.0,1.0764836874167145,1.0764836874167145
-Congestion: average vehicle delay per passenger trip,1.0,1.0267805169007245,1.0267805169007245
-Congestion: total vehicle miles traveled,1.0,0.9679792402477652,0.9679792402477652
-Submission Score,,,-0.7403009890697613022585427364820382
+Level of service: costs and benefits,1.0,0.9853295038635818,2.9510983462119396
+Accessibility: Number of secondary locations accessible within 15 minutes,1.0,1.0549559066266168,3.2747795331330836
+Accessibility: Number of work locations accessible within 15 minutes,1.0,1.0723804041073093,3.361902020536546
+Sustainability: Total PM 2.5 Emissions,1.0,1.0018007465502865,2.5090037327514323
+Level of service: average trip expenditure - secondary,1.0,1.2560830131108618,2.3121660262217234
+Level of service: average bus crowding experienced,1.0,0.9817282364336521,0.8685869293707247
+Level of service: average trip expenditure - work,1.0,0.8621325616984477,1.5242651233968953
+Congestion: average vehicle delay per passenger trip,1.0,1.0756679434329828,0.750513802640756
+Level of service: average on-demand ride wait times,1.0,0.9407708652675077,0.9341898502972308
+Congestion: total vehicle miles traveled,1.0,1.0018617218172625,8.018617218172626
+Submission Score,,,3.430880995368352011111111111111111
