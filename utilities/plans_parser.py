@@ -69,7 +69,7 @@ def calc_fuel_costs(legs_df, fuel_cost_dict):
 
 def calc_transit_fares(row,bus_fare_dict,person_df,trip_to_route):
     pid = row['PID']
-    age = person_df.loc[person_df['PID']==pid,'Age']
+    age = person_df.loc[pid,'Age']
     vehicle = row['Veh']
     route = trip_to_route[vehicle.split(':')[1]]
     fare = bus_fare_dict.loc[age,route]
@@ -540,7 +540,7 @@ def label_trip_mode(modes):
     elif ('walk' in modes) and ('bus' in modes):
         return 'walk_transit'
     elif ('walk' in modes) and ('car' in modes):
-        return 'drive'
+        return 'car'
     elif ('car' == modes):
         return 'car'
     elif ('OnDemand_ride' in modes):
@@ -560,11 +560,12 @@ def merge_legs_trips(legs_df,trips_df):
     unique_modes = legs_grouped['Mode'].unique()
     unique_modes_df = pd.DataFrame(unique_modes)
     unique_modes_df.columns = ['legModes']
-    merged_trips = trips_df.merge(legs_grouped['Duration','Distance','Fuel','FuelCost','Fare'].sum(),on='Trip_ID')
+    merged_trips = trips_df.merge(legs_grouped['Duration','Distance','fuel','FuelCost','Fare'].sum(),on='Trip_ID')
+    merged_trips.set_index('Trip_ID',inplace=True)
     legs_transit = legs_df.loc[legs_df['Mode']=='bus',]
     legs_transit_grouped = legs_transit.groupby("Trip_ID")
     count_modes = legs_transit_grouped['Mode'].count()
-    merged_trips[count_modes.loc[count_modes.values >1].index,'Fare'] = merged_trips[count_modes.loc[count_modes.values >1].index,'Fare']/count_modes.loc[count_modes.values >1].values
+    merged_trips.loc[count_modes.loc[count_modes.values >1].index.values,'Fare'] = merged_trips.loc[count_modes.loc[count_modes.values >1].index.values,'Fare']/count_modes.loc[count_modes.values >1].values
     merged_trips = merged_trips.merge(unique_modes_df,on='Trip_ID')
     legs_grouped_start_min = pd.DataFrame(legs_grouped['Start_time'].min())
     legs_grouped_end_max = pd.DataFrame(legs_grouped['End_time'].max())
@@ -579,6 +580,7 @@ def output_parse(output_plans_data, persons_data, hhd_data, plans_data, events_d
     activities_df, trips_df = extract_plans_dataframes(plans_data, output_folder)
     bus_fare_dict = parse_bus_fare_input(bus_fares_data, route_ids)
     print("activities_dataframe.csv generated")
+    trips_df.to_csv(str(output_folder) +'/trips_WIP_dataframe.csv')
     legs_df = extract_legs_dataframes(events_data,trips_df,bus_fare_dict, person_df, trip_to_route, output_folder)
     print("legs_dataframe.csv generated")
     final_trips_df = merge_legs_trips(legs_df, trips_df)
