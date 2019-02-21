@@ -207,9 +207,9 @@ def sample_frequency_adjustment_input(num_service_periods, gtfs_manager):
     route_id_list = route_id_list[:num_records]
 
     min_secs = 0
-    max_secs = 86340
+    max_secs = 86400
     min_headway_seconds = 180
-    max_headway_seconds = 7199
+    max_headway_seconds = 7200
 
     # trip_ids = pd.Series(gtfs_manager.trips.sample(num_records).index.values)
 
