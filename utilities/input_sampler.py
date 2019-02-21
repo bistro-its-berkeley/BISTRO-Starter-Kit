@@ -291,7 +291,7 @@ def sample_mode_subsidies_input(num_records, gtfs_manager=None):
         return pd.DataFrame({k: [] for k in df_columns})
     possible_modes = ['OnDemand_ride', 'walk_transit', 'drive_transit']
     modes = np.random.choice(possible_modes, num_records).tolist()
-    ages_range = [i for i in range(5, 120, 5)] + [1,120]
+    ages_range = [i for i in range(5, 120, 5)] + [1]
     ages = [sample_format_range(tuple(sorted(np.random.choice(ages_range, 2)))) for _ in
             range(num_records)]
     incomes = [sample_format_range(tuple(sorted(np.random.choice(range(0, 150000, 5000), 2)))) for _
@@ -344,7 +344,7 @@ def sample_mass_transit_fares_input(num_records, gtfs_manager, max_fare_amount=1
     routes = pd.Series(route_agency_sample.index.values)
     agency = pd.Series(route_agency_sample.agency_id.values)
     amounts = [np.round(np.random.uniform(0.1, max_fare_amount), 1) for _ in range(num_records)]
-    ages_range = [i for i in range(5, 120, 5)] + [1,120]
+    ages_range = [i for i in range(5, 120, 5)] + [1]
     ages = [sample_format_range(tuple(sorted(np.random.choice(ages_range, 2)))) for _ in
             range(num_records)]
     return pd.DataFrame(np.array([agency, routes, ages, amounts]).T,
