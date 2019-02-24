@@ -39,11 +39,13 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from random_search import PT_FARE_FILE
 from utils import lazyprop
 
 from collections import Counter
 from random import shuffle, sample
+
+MASS_TRANSIT_FARE_FILE = "MassTransitFares.csv"
+
 
 def scenario_agencies(data_dir, scenario_name):
     """Given root data directory and scenario name, computes a mapping
@@ -74,7 +76,7 @@ class AgencyGtfsDataManager(object):
 
         Parameters
         ----------
-        agency_gtfs_path : Path
+        agency_gtfs_path : pathlib.Path object
             Directory containing the agency's gtfs data
         """
 
@@ -154,11 +156,12 @@ def _get_valid_start_end_time(min_secs, max_secs, headway_secs):
     else:
         return st, et
 
-def _get_non_overlapping_service_periods(number_of_routes, min_secs, max_secs, min_headway_seconds):
-    picked_st_et = np.sort(np.random.choice(np.arange(min_secs, max_secs, 60), number_of_routes * 2, replace=False))
+
+def _get_non_overlapping_service_periods(number_of_service_periods, min_secs, max_secs, min_headway_seconds):
+    picked_st_et = np.sort(np.random.choice(np.arange(min_secs, max_secs, 60), number_of_service_periods * 2, replace=False))
     service_period_durations = [picked_st_et[i+1] - picked_st_et[i] for i in range(0, len(picked_st_et), 2)]
-    if any([i <= min_headway_seconds for i in service_period_durations]):
-        return _get_non_overlapping_service_periods(number_of_routes, min_secs, max_secs, min_headway_seconds)
+    if any([service_period <= min_headway_seconds for service_period in service_period_durations]):
+        return _get_non_overlapping_service_periods(number_of_service_periods, min_secs, max_secs, min_headway_seconds)
     return picked_st_et
 
 
@@ -202,23 +205,22 @@ def sample_frequency_adjustment_input(num_service_periods, gtfs_manager):
     if num_records == 0:
         return pd.DataFrame({k: [] for k in df_columns})
 
+    # listing all routes_ids "num_service_periods" times
     route_id_list = list(gtfs_manager.routes.index.values) * num_service_periods
+    # shuffle the list to get a random order of the route_ids
     shuffle(route_id_list)
+    # selecting only the first "num_records" route_ids
     route_id_list = route_id_list[:num_records]
 
-    min_secs = 0
-    max_secs = 86400
+    min_secs = 1
+    max_secs = 86399
     min_headway_seconds = 180
-    max_headway_seconds = 7200
-
-    # trip_ids = pd.Series(gtfs_manager.trips.sample(num_records).index.values)
-
-    res_df = []
+    max_headway_seconds = 7199
 
     frequency_data = []
     route_frequency = Counter(route_id_list).items()
-    for route_id, number_entries in route_frequency:
-        start_end_times = _get_non_overlapping_service_periods(number_entries, min_secs, max_secs, min_headway_seconds)
+    for route_id, route_num_service_periods in route_frequency:
+        start_end_times = _get_non_overlapping_service_periods(route_num_service_periods, min_secs, max_secs, min_headway_seconds)
         service_periods = [(start_end_times[i], start_end_times[i + 1]) for i in range(0, len(start_end_times), 2)]
 
         for s in service_periods:
@@ -256,11 +258,11 @@ def sample_format_range(tuple_range):
     return "{}{}:{}{}".format(left_inc, a, b, right_inc)
 
 
-def sample_mode_subsidies_input(num_records, gtfs_manager=None):
-    """Generate random mode subsidies inputs based on modes available for
+def sample_mode_incentives_input(num_records, gtfs_manager=None):
+    """Generate random mode incentives inputs based on modes available for
     subsidies.
 
-    Creates `num_records` ModeSubsidyInput records where fields for each record
+    Creates `num_records` ModeIncentivesInput records where fields for each record
     are randomly sampled as follows:
         * `age` : uniformly from `range(1,120,5)`.
         * `mode` : uniformly from list of available modes for scenario.
@@ -283,7 +285,7 @@ def sample_mode_subsidies_input(num_records, gtfs_manager=None):
     Returns
     -------
     `DataFrame`
-        `num_records` `ModeSubsidyInput` records.
+        `num_records` `ModeIncentivesInput` records.
 
     """
     df_columns = ['mode', 'age', 'income', 'amount']
@@ -296,7 +298,7 @@ def sample_mode_subsidies_input(num_records, gtfs_manager=None):
             range(num_records)]
     incomes = [sample_format_range(tuple(sorted(np.random.choice(range(0, 150000, 5000), 2)))) for _
                in range(num_records)]
-    amounts = [np.round(np.random.uniform(0.1, 10), 1) for _ in range(num_records)]
+    amounts = [np.round(np.random.uniform(0.1, 50), 1) for _ in range(num_records)]
     return pd.DataFrame(np.array([modes, ages, incomes, amounts]).T,
                         columns=df_columns)
 
@@ -333,13 +335,12 @@ def sample_mass_transit_fares_input(num_records, gtfs_manager, max_fare_amount=1
     """
     df_columns = ['agencyId', 'routeId', 'age', 'amount']
     if num_records == 0:
-        return pd.read_csv('../submission-inputs/{0}'.format(PT_FARE_FILE))
+        return pd.read_csv('../submission-inputs/{0}'.format(MASS_TRANSIT_FARE_FILE))
     max_num_routes = gtfs_manager.routes.shape[0]
     if num_records > max_num_routes:
         raise ValueError(
             "More samples requested than the number of routes available in agency; please enter a "
-            "number less than {}".format(
-                max_num_routes))
+            "number less than {}".format(max_num_routes))
     route_agency_sample = gtfs_manager.routes.sample(num_records)
     routes = pd.Series(route_agency_sample.index.values)
     agency = pd.Series(route_agency_sample.agency_id.values)

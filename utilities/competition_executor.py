@@ -241,7 +241,7 @@ class Submission(object):
         return "Submission_id: {}\n\t Scenario name: {}\n\t # iters: {}\n\t sample size: {}".format(self._submission_id,
                                                                                                     self.scenario_name,
                                                                                                     self.num_iterations,
-                                                                                                    self.sample_size)
+                                                                                                 self.sample_size)
 
 def verify_submission_id(func):
     """Checks that the container id exists in the CompetitionContainerExecutor object."""
@@ -290,9 +290,9 @@ class AbstractCompetitionExecutor(ABC):
 
          The dictionary should be structured as follows:
         - "VehicleFleetMix": Bus fleet mix DataFrame
-        - "ModeSubsidies": Subsidies DataFrame
+        - "ModeIncentives": Incentives DataFrame
         - "FrequencyAdjustment": Frequency Adjustment DataFrame
-        - "PtFares": Mass Transit (buses) Fares DataFrame
+        - "MassTransitFares": Mass Transit (buses) Fares DataFrame
 
         The content of the different DataFrames can be understood by refering to the `Uber-Prize-Starter-Kit` repository
         documentation (`docs/Which-inputs-should-I-optimize.ms`)
@@ -305,7 +305,7 @@ class AbstractCompetitionExecutor(ABC):
         """
         input_root = self.input_root
 
-        list_inputs = ["VehicleFleetMix", "ModeSubsidies", "FrequencyAdjustment", "PtFares"]
+        list_inputs = ["VehicleFleetMix", "ModeIncentives", "FrequencyAdjustment", "MassTransitFares"]
 
 
         if input_root is None:

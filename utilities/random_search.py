@@ -17,10 +17,11 @@ CMD_TEMPLATE = "--scenario {0} --sample-size {1} --iters {2}"
 DIR_DELIM = "-"
 
 FREQ_FILE = "FrequencyAdjustment.csv"
-SUB_FILE = "ModeIncentives.csv"
+INCENTIVES_FILE = "ModeIncentives.csv"
 FLEET_FILE = "VehicleFleetMix.csv"
-PT_FARE_FILE = "PtFares.csv"
+MASS_TRANSIT_FILE = "MassTransitFares.csv"
 SCORES_PATH = ("competition", "submissionScores.csv")
+
 
 logger = logging.getLogger(__name__)
 
@@ -50,23 +51,24 @@ def sample_settings(max_num_records, data_root):
     sf_gtfs_manager = sampler.AgencyGtfsDataManager(agency_dict[AGENCY])
     num_records = np.random.randint(0, max_num_records, 3)
     samples = [sampler.sample_frequency_adjustment_input(np.random.randint(0, 5), sf_gtfs_manager),
-               sampler.sample_mode_subsidies_input(num_records[0], sf_gtfs_manager),
+               sampler.sample_mode_incentives_input(num_records[0], sf_gtfs_manager),
                sampler.sample_vehicle_fleet_mix_input(num_records[1], sf_gtfs_manager),
                sampler.sample_mass_transit_fares_input(num_records[2], sf_gtfs_manager)]
 
     return tuple(samples)
 
 
-def save_inputs(input_dir, freq_df=None, mode_subsidy_df=None, vehicle_fleet_mix_df=None, pt_fare_df=None):
+def save_inputs(input_dir, freq_df=None, mode_incentives_df=None, vehicle_fleet_mix_df=None, pt_fare_df=None):
     if freq_df is not None:
         freq_df.to_csv(os.path.join(input_dir, FREQ_FILE), header=True, index=False)
-    if mode_subsidy_df is not None:
-        mode_subsidy_df.to_csv(os.path.join(input_dir, SUB_FILE), header=True, index=False)
+    if mode_incentives_df is not None:
+        mode_incentives_df.to_csv(os.path.join(input_dir, INCENTIVES_FILE), header=True, index=False)
     if vehicle_fleet_mix_df is not None:
         vehicle_fleet_mix_df.to_csv(os.path.join(input_dir, FLEET_FILE), header=True, index=False)
     if pt_fare_df is None:
-        pt_fare_df = pd.read_csv('../submission-inputs/{0}'.format(PT_FARE_FILE))
-    pt_fare_df.to_csv(os.path.join(input_dir, PT_FARE_FILE), header=True, index=False)
+        pt_fare_df = pd.read_csv('../submission-inputs/{0}'.format(MASS_TRANSIT_FILE))
+    pt_fare_df.to_csv(os.path.join(input_dir, MASS_TRANSIT_FILE), header=True, index=False)
+
 
 
 def read_scores(output_dir):
@@ -106,8 +108,7 @@ def search_iteration(docker_cmd, data_root, input_root, output_root):
     #                "/var/run/docker.sock": {"bind": "/var/run/docker.sock", "mode": "rw"}}
 
     docker_dirs = {output_dir: {"bind": "/output", "mode": "rw"},
-                   input_dir: {"bind": "/submission-inputs",
-                                                             "mode": "ro"}}
+                   input_dir: {"bind": "/submission-inputs", "mode": "ro"}}
     assert not docker_exists(submission_name, client)
     logger.info('%s start' % submission_name)
     logs = client.containers.run(DOCKER_IMAGE, command=docker_cmd, auto_remove=True, detach=False,
@@ -151,7 +152,7 @@ def main():
     n_sim_iters = 20
     seed = 123
 
-    n_search_iters = 100
+    n_search_iters = 20
     data_root = abspath2("../reference-data")
     input_root = abspath2("../search-input")
     output_root = abspath2("../search-output")
