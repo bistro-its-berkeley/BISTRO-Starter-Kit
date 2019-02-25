@@ -3,10 +3,10 @@ import lxml
 from lxml import etree
 import gzip
 import pandas as pd
+from pathlib import Path
 
 
-
-def open_xml(path):
+def open_xml(path: Path):
     """
     Open xml and xml.gz files into ElementTree
 
@@ -15,7 +15,7 @@ def open_xml(path):
     path: string
         Absolute path of the file to parse
     """
-    if path.endswith('.gz'):
+    if Path(path).suffix == ".gz":
         return etree.parse(gzip.open(path))
     else:
         return etree.parse(path)

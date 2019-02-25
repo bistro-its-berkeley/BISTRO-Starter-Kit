@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-
+from pathlib import Path
 from data_parsing import extract_dataframe, open_xml
 
 import gzip
@@ -9,7 +9,7 @@ from collections import defaultdict
 
 # ########### 1. INTERMEDIARY FUNCTIONS ###########
 
-def unzip_file(path):
+def unzip_file(path: Path):
     """ Unzips a file ending with .gz
 
     Parameters
@@ -22,7 +22,8 @@ def unzip_file(path):
         Path of the unzipped folder or file
 
     """
-    if path.endswith('.gz'):
+
+    if Path(path).suffix == ".gz":
         return gzip.open(path)
     else:
         return path
@@ -106,9 +107,9 @@ def calc_fares(legs_df, ride_hail_fares, bus_fare_dict, person_df, trip_to_route
         lambda row: calc_transit_fares(row, bus_fare_dict, person_df, trip_to_route), axis=1)
 
     legs_df.loc[legs_df["Mode"] == 'OnDemand_ride', "Fare"] = ride_hail_fares['base'] + (
-                pd.to_timedelta(legs_df['Duration']).dt.seconds / 60) * float(ride_hail_fares['duration']) + (
+                pd.to_timedelta(legs_df['Duration_sec']).dt.seconds / 60) * float(ride_hail_fares['duration']) + (
                                                                           pd.to_numeric(
-                                                                              legs_df['Distance']) / 1000) * (
+                                                                              legs_df['Distance_m']) / 1000) * (
                                                                   0.621371) * float(ride_hail_fares['distance'])
 
     return legs_df
@@ -137,7 +138,7 @@ def one_path(path_trav, leg_id, pid, trip_id):
             leg_path, leg_fuel, leg_fuel_type]
 
 
-def parse_transit_trips(row, path_traversal_events, bus_path_traversal_events, enter_veh_events):
+def parse_transit_trips(row, non_bus_path_traversal_events, bus_path_traversal_events, enter_veh_events):
     # inputs:
     # row: a row from transit_trips_df
     # path_traversal_events: non-transit path traversal df
@@ -147,56 +148,64 @@ def parse_transit_trips(row, path_traversal_events, bus_path_traversal_events, e
     leg_array = []
     pid = row['PID']
     trip_id = row['Trip_ID']
-    start_time = row['Start_time']
-    duration = row['Duration']
+    start_time = row['Start_time'].total_seconds()
+    duration = row['Duration_sec']
     end_time = row['End_time']
     mode = row['Mode']
     # initiate the leg ID counter
     leg_id = 0
+
     # get all path traversals occuring within the time frame of this trip in which the driver is the person making this trip
-    path_trav = path_traversal_events.loc[
-        (path_traversal_events['driver'] == pid) & (path_traversal_events['arrivalTime'] <= end_time) & (
-                path_traversal_events['departureTime'] >= start_time.total_seconds()),]
+    path_trav = non_bus_path_traversal_events[
+        (non_bus_path_traversal_events['driver'] == pid) & (non_bus_path_traversal_events['arrivalTime'] <= end_time) & (
+                non_bus_path_traversal_events['departureTime'] >= start_time)]
     path_trav = path_trav.reset_index(drop=True)
+
     # get the vehicle entry events corresponding to this person during the time frame of this trip
-    veh_entries = enter_veh_events.loc[
-        (enter_veh_events['person'] == pid) & (enter_veh_events['time'] >= start_time.total_seconds()) & (
-                enter_veh_events['time'] <= end_time),]
+    veh_entries = enter_veh_events[
+        (enter_veh_events['person'] == pid) & (enter_veh_events['time'] >= start_time) & (
+                enter_veh_events['time'] <= end_time)]
+
     # get bus entry events for this person & trip
     bus_entries = veh_entries[veh_entries['vehicle'].str.startswith('siouxareametro-sd-us:', na=False)]
     bus_entries = bus_entries.reset_index(drop=True)
+
     if len(bus_entries) > 0:
         prev_entry_time = start_time
-        for indx, bus_entry in bus_entries.iterrows():
-            if indx < len(bus_entry):
-                next_entry = bus_entries.loc[idx + 1]
+        for idx, bus_entry in bus_entries.iterrows():
+            if idx < len(bus_entry):
+                next_entry = bus_entries.loc[idx]
                 next_entry_time = next_entry['time']
             else:
                 next_entry_time = end_time
+
             # get all path traversals occuring before the bus entry
-            prev_path_trav = path_trav.loc[
-                (path_trav['arrivalTime'] <= bus_entry['time']) & (path_trav['arrivalTime'] >= prev_entry_time),]
+            prev_path_trav = path_trav[
+                (path_trav['arrivalTime'] <= bus_entry['time']) & (path_trav['arrivalTime'] >= prev_entry_time)]
+
             # get all path traversals occuring after the bus entry
-            post_path_trav = path_trav.loc[
-                (path_trav['arrivalTime'] > bus_entry['time']) & (path_trav['arrivalTime'] <= next_entry_time),]
+            post_path_trav = path_trav[
+                (path_trav['arrivalTime'] > bus_entry['time']) & (path_trav['arrivalTime'] <= next_entry_time)]
             prev_path_trav = prev_path_trav.reset_index(drop=True)
             post_path_trav = post_path_trav.reset_index(drop=True)
             prev_entry_time = bus_entry['time']
+
             # iterate through the path traversals prior to the bus entry
             these_legs = prev_path_trav.apply(lambda row1: one_path(row1, leg_id, pid, trip_id), axis=1)
             leg_array.extend(these_legs)
 
-            # record transit leg
-            leg_id += 1
-            leg_id_full = trip_id + "_l-" + str(leg_id)
-            veh_id = bus_entry['vehicle']
-            leg_start_time = int(bus_entry['time'])
-            leg_end_time = int(post_path_trav['departureTime'].values[0])
-            leg_duration = int(leg_end_time - bus_entry['time'])
-            # find the path traversals of the bus corresponding to the bus entry for this trip, occuring between the last prev_path_traversal and the first post_path_traversal
-            bus_path_trav = bus_path_traversal_events.loc[(bus_path_traversal_events['vehicle'] == veh_id) & (
-                    bus_path_traversal_events['arrivalTime'] <= leg_end_time) & (bus_path_traversal_events[
-                                                                                     'departureTime'] >= leg_start_time),]
+            if len(post_path_trav) > 0:
+                # record transit leg
+                leg_id += 1
+                leg_id_full = trip_id + "_l-" + str(leg_id)
+                veh_id = bus_entry['vehicle']
+                leg_start_time = int(bus_entry['time'])
+                leg_end_time = int(post_path_trav['departureTime'].values[0])
+                leg_duration = int(leg_end_time - bus_entry['time'])
+                # find the path traversals of the bus corresponding to the bus entry for this trip, occuring between the last prev_path_traversal and the first post_path_traversal
+                bus_path_trav = bus_path_traversal_events[(bus_path_traversal_events['vehicle'] == veh_id) & (
+                        bus_path_traversal_events['arrivalTime'] <= leg_end_time) & (bus_path_traversal_events[
+                                                                                         'departureTime'] >= leg_start_time)]
 
             if len(bus_path_trav) > 0:
                 veh_type = bus_path_trav['vehicleType'].values[0]
@@ -216,7 +225,7 @@ def parse_transit_trips(row, path_traversal_events, bus_path_traversal_events, e
 
     # if the agent underwent replanning, there will be no bus entry
     else:
-        leg_array = parse_walk_car_trips(row, path_traversal_events, enter_veh_events)
+        leg_array = parse_walk_car_trips(row, non_bus_path_traversal_events, enter_veh_events)
 
     return leg_array
 
@@ -232,7 +241,7 @@ def parse_walk_car_trips(row, path_traversal_events, enter_veh_events):
     pid = row['PID']
     trip_id = row['Trip_ID']
     start_time = row['Start_time']
-    duration = row['Duration']
+    duration = row['Duration_sec']
     end_time = row['End_time']
     mode = row['Mode']
     # initiate the leg ID counter
@@ -262,7 +271,7 @@ def parse_ridehail_trips(row, path_traversal_events, enter_veh_events):
     pid = row['PID']
     trip_id = row['Trip_ID']
     start_time = row['Start_time']
-    duration = row['Duration']
+    duration = row['Duration_sec']
     end_time = row['End_time']
     mode = row['Mode']
     # initiate the leg ID counter
@@ -325,7 +334,7 @@ def merge_legs_trips(legs_df, trips_df):
     unique_modes = legs_grouped['Mode'].unique()
     unique_modes_df = pd.DataFrame(unique_modes)
     unique_modes_df.columns = ['legModes']
-    merged_trips = trips_df.merge(legs_grouped['Duration','Distance','fuel','FuelCost','Fare'].sum(),on='Trip_ID')
+    merged_trips = trips_df.merge(legs_grouped['Duration_sec','Distance','fuel','FuelCost','Fare'].sum(),on='Trip_ID')
     merged_trips.set_index('Trip_ID',inplace=True)
     legs_transit = legs_df.loc[legs_df['Mode']=='bus',]
     legs_transit_grouped = legs_transit.groupby("Trip_ID")
@@ -389,6 +398,7 @@ def get_person_output_from_households_xml(households_xml, output_folder_path):
         for person in list_members:
             pid = person.attrib['refId'].strip()
             hhd_array.append([pid, hhd_id, hdd_num_veh, hhd_income])
+
     # convert array to dataframe and save
     households_df = pd.DataFrame(hhd_array, columns=['PID', 'Household_ID', 'Household_num_vehicles', 'Household_income [$]'])
     households_df.to_csv(str(output_folder_path) + "/households_dataframe.csv")
@@ -463,10 +473,11 @@ def get_person_output_from_output_person_attributes_xml(persons_xml):
         population_attributes.append(population_attributes_dict)
 
     # convert attribute array to dataframe
-        person_df_2 = pd.DataFrame(population_attributes)
+    person_df_2 = pd.DataFrame(population_attributes)
 
     return person_df_2
 
+import time
 
 def get_persons_attributes_output(output_plans_xml, persons_xml, households_xml, output_folder_path):
     """Outputs the augmented persons dataframe, including all individual and household attributes for each person
@@ -567,7 +578,7 @@ def get_activities_output(experienced_plans_xml):
     return activities_df, trip_purposes
 
 
-def get_trips_output(experienced_plans_xml):
+def get_trips_output(experienced_plans_xml_path):
     """ Parses the experiencedPlans.xml file to create the trips dataframe, gathering each person's trips' attributes
     (person id, trip id, id of the origin activity of the trip, id of the destination activity of the trip, trip purpose,
     mode used, start time of the trip, duration of the trip, distance of the trip, path of the trip)
@@ -584,8 +595,12 @@ def get_trips_output(experienced_plans_xml):
         Record of each person's trips' attributes
     """
     # get root of experiencedPlans xml file
+    experienced_plans_xml = open_xml(experienced_plans_xml_path)
     plans_root = experienced_plans_xml.getroot()
     trip_array = []
+
+    # Getting the activities dataframe
+    _, trip_purposes = get_activities_output(experienced_plans_xml)
 
     # iterate through persons, recording activities and trips for each person
     for person in plans_root.findall('./person'):
@@ -607,8 +622,7 @@ def get_trips_output(experienced_plans_xml):
             d_act_id = pid + "_a-" + str(trip_id + 1)
 
             # identify the activity type of the trip destination to record as the trip trip_purpose
-            trip_purposes = get_activities_output(experienced_plans_xml)[1]
-            trip_purpose = trip_purposes[trip_id+1][0]
+            trip_purpose = trip_purposes[trip_id][0]
 
             mode = trip.get('mode')
             dep_time = trip.get('dep_time')
@@ -622,7 +636,7 @@ def get_trips_output(experienced_plans_xml):
     # convert the trip_array to a dataframe
     trips_df = pd.DataFrame(trip_array,
                     columns=['PID', 'Trip_ID', 'Origin_Activity_ID', 'Destination_activity_ID', 'Trip_Purpose',
-                             'Mode', 'Start_time', 'Duration [sec]', 'Distance [m]', 'Path [list of links_ids]'])
+                             'Mode', 'Start_time', 'Duration_sec', 'Distance_m', 'Path_linkIds'])
 
     return trips_df
 
@@ -698,7 +712,7 @@ def get_path_traversal_output(events_df):
          'fuelType', 'fuel']]
 
     # get all path traversal events (all vehicle movements, and all person walk movements)
-    path_traversal_events_df = events_df.loc[(events_df['type'] == 'PathTraversal') & (events_df['length'] > 0),]
+    path_traversal_events_df = events_df[(events_df['type'] == 'PathTraversal') & (events_df['length'] > 0)]
     path_traversal_events_df = path_traversal_events_df.reset_index(drop=True)
     path_traversal_events_df = path_traversal_events_df
 
@@ -726,27 +740,27 @@ def get_legs_output(events_df, trips_df):
     """
     # convert trip times to timedelta; calculate end time of trips
     trips_df['Start_time'] = pd.to_timedelta(trips_df['Start_time'])
-    trips_df['Duration'] = pd.to_timedelta(trips_df['Duration'])
-    trips_df['End_time'] = trips_df['Start_time'].dt.seconds + trips_df['Duration'].dt.seconds + (
+    trips_df['Duration_sec'] = pd.to_timedelta(trips_df['Duration_sec'])
+    trips_df['End_time'] = trips_df['Start_time'].dt.seconds + trips_df['Duration_sec'].dt.seconds + (
             3600 * 24 * trips_df['Start_time'].dt.days)
 
     path_traversal_events_full = get_path_traversal_output(events_df)
 
     # get all relevant personEntersVehicle events (those occurring at time ==0 are all ridehail/bus drivers)
-    enter_veh_events = events_df.loc[(events_df['type'] == 'PersonEntersVehicle') & (events_df['time'] > 0),]
+    enter_veh_events = events_df[(events_df['type'] == 'PersonEntersVehicle') & (events_df['time'] > 0)]
 
     # filter for bus path traversals only
-    bus_path_traversal_events = path_traversal_events_full.loc[path_traversal_events_full['mode'] == "bus",]
+    bus_path_traversal_events = path_traversal_events_full[path_traversal_events_full['mode'] == "bus"]
 
     # filter for car & body path traversals only
-    non_bus_path_traversal_events = path_traversal_events_full.loc[path_traversal_events_full['mode'] != "bus",]
+    non_bus_path_traversal_events = path_traversal_events_full[path_traversal_events_full['mode'] != "bus"]
 
     # get all PersonCost events (record the expenditures of persons during a trip)
     # person_costs = events_df.loc[events_df['type']=='PersonCost',]
 
     legs_array = []
     # record all legs corresponding to transit trips
-    transit_trips_df = trips_df.loc[(trips_df['Mode'] == 'drive_transit') | (trips_df['Mode'] == 'walk_transit'),]
+    transit_trips_df = trips_df[(trips_df['Mode'] == 'drive_transit') | (trips_df['Mode'] == 'walk_transit')]
     transit_legs_array = transit_trips_df.apply(
         lambda row: parse_transit_trips(row, non_bus_path_traversal_events, bus_path_traversal_events, enter_veh_events),
         axis=1)
@@ -770,7 +784,7 @@ def get_legs_output(events_df, trips_df):
     # convert the leg array to a dataframe
     legs_df = pd.DataFrame(legs_array,
                            columns=['PID', 'Trip_ID', 'Leg_ID', 'Mode', 'Veh', 'Veh_type', 'Start_time', 'End_time',
-                                    'Duration', 'Distance', 'Path', 'fuel', 'fuelType'])
+                                    'Duration_sec', 'Distance_m', 'Path', 'fuel', 'fuelType'])
 
     return legs_df
 
@@ -834,7 +848,7 @@ def extract_activities_dataframes(experienced_plans_path, output_folder):
     # returns the actitivities_dataframe and trips_dataframe
 
     experienced_plans_xml = open_xml(experienced_plans_path)
-    activities_df = get_activities_output(experienced_plans_xml)
+    activities_df, _ = get_activities_output(experienced_plans_xml)
 
     # convert dataframes into csv files
     activities_df.to_csv(str(output_folder) + "/activities_dataframe.csv")
@@ -899,9 +913,10 @@ def extract_legs_dataframes(events_path, trips_df, person_df, bus_fares_df, trip
 
 def output_parse(events_path, output_plans_path, persons_path, households_path, experienced_plans_path,
                 bus_fares_data_df, route_ids, trip_to_route, fuel_costs, output_folder_path):
-    persons_attributes_df = extract_person_dataframes(output_plans_path, persons_path, households_path)
 
-    activities_df = extract_activities_dataframes(experienced_plans_path, output_folde_path)
+    persons_attributes_df = extract_person_dataframes(output_plans_path, persons_path, households_path, output_folder_path)
+
+    activities_df = extract_activities_dataframes(experienced_plans_path, output_folder_path)
 
     trips_df = get_trips_output(open_xml(experienced_plans_path))
 
@@ -909,5 +924,5 @@ def output_parse(events_path, output_plans_path, persons_path, households_path, 
     legs_df = extract_legs_dataframes(events_path, trips_df, persons_attributes_df, bus_fares_df, trip_to_route, fuel_costs, output_folder_path)
 
     final_trips_df = merge_legs_trips(legs_df, trips_df)
-    final_trips_df.to_csv(str(output_folder) +'/trips_dataframe.csv')
+    final_trips_df.to_csv(str(output_folder_path) +'/trips_dataframe.csv')
     print("trips_dataframe.csv generated")
