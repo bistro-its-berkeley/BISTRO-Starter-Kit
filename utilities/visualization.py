@@ -106,13 +106,13 @@ def splitting_min_max(df, name_column):
     return df
 
 
-def process_incentives_data(incentives_data_path, max_incentive):
+def process_incentives_data(incentives_data, max_incentive):
     """ Processing and reorganizing the data in an input dataframe to be ready for plotting
 
     Parameters
     ----------
-    incentives_data_path: PosixPath
-        Absolute path of the ModeIncentives.csv input file
+    incentives_data: pandas DataFrame
+        from ModeIncentives.csv input file
 
     max_incentive: float
         Maximum amount allowed for an incentive as defined in the Starter Kit "Inputs Specifications" page
@@ -122,7 +122,7 @@ def process_incentives_data(incentives_data_path, max_incentive):
     incentives: pandas dataframe
         Incentives input data that is ready for plotting
     """
-    incentives = pd.read_csv(incentives_data_path)
+    incentives = incentives_data
     incentives["amount"] = incentives["amount"].astype(float)
 
     # Completing the dataframe with the missing subsidized modes (so that they appear in the plot)
@@ -158,13 +158,13 @@ def process_incentives_data(incentives_data_path, max_incentive):
     return incentives
 
 
-def plot_incentives_inputs(incentives_data_path, max_incentive, max_age, max_income, name_run):
+def plot_incentives_inputs(incentives_data, max_incentive, max_age, max_income, name_run):
     """Plot the incentives input
 
     Parameters
     ----------
-    incentives_data_path: PosixPath
-        Absolute path of the ModeIncentives.csv input file
+    incentives_data: pandas DataFrame
+        from the ModeIncentives.csv input file
 
     max_incentive: float
         Maximum amount allowed for an incentive as defined in the Starter Kit "Inputs Specifications" page
@@ -183,7 +183,7 @@ def plot_incentives_inputs(incentives_data_path, max_incentive, max_age, max_inc
     ax: matplotlib axes object
 
     """
-    incentives = process_incentives_data(incentives_data_path, max_incentive)
+    incentives = process_incentives_data(incentives_data, max_incentive)
 
     fig, ax = plt.subplots(1, 2, figsize=(14, 5), sharey=True, gridspec_kw={'width_ratios': [4, 5]})
 
@@ -212,13 +212,13 @@ def plot_incentives_inputs(incentives_data_path, max_incentive, max_age, max_inc
     return ax
 
 
-def process_bus_data(vehicle_fleet_mix_data_path, route_ids, buses_list, agency_ids):
+def process_bus_data(vehicle_fleet_mix_data, route_ids, buses_list, agency_ids):
     """Processing and reorganizing the data in an input dataframe to be ready for plotting
 
     Parameters
     ----------
-    vehicle_fleet_mix_data_path: PosixPath
-        Absolute path of the FleetMix.csv input file
+    vehicle_fleet_mix_data: pandas DataFrame
+        from the FleetMix.csv input file
 
     route_ids: list
         All routes ids where buses operate (from `routes.txt` file in the GTFS data)
@@ -236,7 +236,7 @@ def process_bus_data(vehicle_fleet_mix_data_path, route_ids, buses_list, agency_
         FleetMix input data that is ready for plotting
 
     """
-    fleet_mix = pd.read_csv(vehicle_fleet_mix_data_path)
+    fleet_mix = vehicle_fleet_mix_data
 
     if fleet_mix.empty:
         fleet_mix = pd.DataFrame([[agency_id, f"{route_id}", "BUS-DEFAULT"] for route_id in route_ids for agency_id in agency_ids],
@@ -273,14 +273,14 @@ def process_bus_data(vehicle_fleet_mix_data_path, route_ids, buses_list, agency_
     return fleet_mix
 
 
-def plot_vehicle_fleet_mix_inputs(vehicle_fleet_mix_data_path, route_ids, buses_list, agency_ids, name_run):
+def plot_vehicle_fleet_mix_inputs(vehicle_fleet_mix_data, route_ids, buses_list, agency_ids, name_run):
     """Plot the vehicle fleet mix input
 
     Parameters
     ----------
-   See `process_bus_data()`
+    See `process_bus_data()`
 
-   name_run: str
+    name_run: str
     Name of the run , e.g. "BAU", "Run 1", "Submission"...
 
     Returns
@@ -288,7 +288,7 @@ def plot_vehicle_fleet_mix_inputs(vehicle_fleet_mix_data_path, route_ids, buses_
     ax: matplotlib axes object
 
     """
-    buses = process_bus_data(vehicle_fleet_mix_data_path, route_ids, buses_list, agency_ids)
+    buses = process_bus_data(vehicle_fleet_mix_data, route_ids, buses_list, agency_ids)
 
     fig, ax = plt.subplots(figsize=(6.5, 5))
 
@@ -304,17 +304,17 @@ def plot_vehicle_fleet_mix_inputs(vehicle_fleet_mix_data_path, route_ids, buses_
     return ax
 
 
-def process_fares_data(fares_data_path, bau_fares_data_path, max_fare, route_ids):
+def process_fares_data(fares_data, bau_fares_data, max_fare, route_ids):
     """Processing and reorganizing the data in an input dataframe to be ready for plotting
 
 
     Parameters
     ----------
-    fares_data_path: PosixPath
-        Absolute path of the MassTransitFares.csv input file
+    fares_data: pandas DataFrame
+        From the MassTransitFares.csv input file
 
-    bau_fares_data_path: PosixPath
-        Absolute path of the BAU FleetMix.csv input file
+    bau_fares_data: pandas DataFrame
+        From the BAU FleetMix.csv input file
 
     max_fare: float
         Maximum fare of a bus trip as defined in the Starter Kit "Inputs Specifications" page
@@ -328,8 +328,8 @@ def process_fares_data(fares_data_path, bau_fares_data_path, max_fare, route_ids
     fares: pandas DataFrame
         Mass Transit Fares input data that is ready for plotting
     """
-    fares = pd.read_csv(fares_data_path)
-    fares_bau = pd.read_csv(bau_fares_data_path)
+    fares = fares_data
+    fares_bau = bau_fares_data
 
     fares["age"] = fares["age"].astype(str)
 
@@ -364,7 +364,7 @@ def process_fares_data(fares_data_path, bau_fares_data_path, max_fare, route_ids
     return fares
 
 
-def plot_mass_transit_fares_inputs(fares_data_path, bau_fares_data, max_fare, route_ids, name_run):
+def plot_mass_transit_fares_inputs(fares_data, bau_fares_data, max_fare, route_ids, name_run):
     """Plot the Mass Transit Fares input
 
     Parameters
@@ -379,7 +379,7 @@ def plot_mass_transit_fares_inputs(fares_data_path, bau_fares_data, max_fare, ro
     ax: matplotlib axes object
 
     """
-    fares = process_fares_data(fares_data_path, bau_fares_data, max_fare, route_ids)
+    fares = process_fares_data(fares_data, bau_fares_data, max_fare, route_ids)
 
     fig, ax = plt.subplots(figsize = (7,5))
 
@@ -411,13 +411,13 @@ def plot_mass_transit_fares_inputs(fares_data_path, bau_fares_data, max_fare, ro
     return ax
 
 
-def process_frequency_data(bus_frequencies_path, route_ids):
+def process_frequency_data(bus_frequencies_data, route_ids):
     """Processing and reorganizing the data in an input dataframe to be ready for plotting
 
     Parameters
     ----------
-    bus_frequencies_path : PosixPath
-        Absolute path of the `FrequencyAdjustment.csv` input file
+    bus_frequencies_data : pandas DataFrame
+        From the `FrequencyAdjustment.csv` input file
 
     route_ids: list
         All routes ids where buses operate (from `routes.txt` file in the GTFS data)
@@ -428,29 +428,30 @@ def process_frequency_data(bus_frequencies_path, route_ids):
         Frequency Adjustment input data that is ready for plotting.
 
     """
-    frequency = pd.read_csv(bus_frequencies_path)
+    frequency = bus_frequencies_data
 
     # Add all missing routes (the ones that were not changed) in the DF so that they appear int he plot
     df = pd.DataFrame([0, 0, 0, 1]).T
     df.columns = ["route_id", "start_time", "end_time", "headway_secs"]
 
-    for route in route_ids:
-        if route not in frequency["route_id"].values:
-            df["route_id"] = route
-            frequency = frequency.append(df)
+    if len(frequency["route_id"]) > 0:
+        for route in route_ids:
+            if route not in frequency["route_id"].values:
+                df["route_id"] = route
+                frequency = frequency.append(df)
 
-    frequency["start_time"] = (frequency["start_time"].astype(int) / 3600).round(1)
-    frequency["end_time"] = (frequency["end_time"].astype(int) / 3600).round(1)
-    frequency["headway_secs"] = (frequency["headway_secs"].astype(int) / 3600).round(1)
-    frequency["route_id"] = frequency["route_id"].astype(int)
+        frequency["start_time"] = (frequency["start_time"].astype(int) / 3600).round(1)
+        frequency["end_time"] = (frequency["end_time"].astype(int) / 3600).round(1)
+        frequency["headway_secs"] = (frequency["headway_secs"].astype(int) / 3600).round(1)
+        frequency["route_id"] = frequency["route_id"].astype(int)
 
-    frequency = frequency.sort_values(by="route_id")
-    frequency = frequency.set_index("route_id")
+        frequency = frequency.sort_values(by="route_id")
+        frequency = frequency.set_index("route_id")
 
     return frequency
 
 
-def plot_bus_frequency(bus_frequencies_path, route_ids, name_run):
+def plot_bus_frequency(bus_frequencies_data, route_ids, name_run):
     """Plotting the Frequency Adjustment input
 
     Parameters
@@ -466,7 +467,7 @@ def plot_bus_frequency(bus_frequencies_path, route_ids, name_run):
 
     """
 
-    frequencies = process_frequency_data(bus_frequencies_path, route_ids)
+    frequencies = process_frequency_data(bus_frequencies_data, route_ids)
 
     fig, ax = plt.subplots(figsize=(15, 4))
     plotted_lines = []
@@ -474,19 +475,21 @@ def plot_bus_frequency(bus_frequencies_path, route_ids, name_run):
     # Defines a set of 12 colors for the bus lines
     colors = ['blue', 'red', 'green', 'orange', 'purple', 'yellow', 'pink', 'gold', 'lime', 'steelblue', 'm',
               'limegreen']
-    color_dict = {frequencies.index.unique()[i]: colors[i] for i in range(12)}
+    if len(frequencies) > 0:
+        color_dict = {frequencies.index.unique()[i]: colors[i] for i in range(12)}
 
-    for idx in range(len(frequencies)):
-        row_freq = frequencies.iloc[idx]
-        height = row_freq.headway_secs
-        height = height + np.random.normal(0, 0.03, 1)
-        if row_freq.name not in plotted_lines:
-            ax.plot([row_freq.start_time, row_freq.end_time], [height, height],
-                    label=row_freq.name, linewidth=5, alpha=0.8, color=color_dict[row_freq.name])
-            plotted_lines.append(row_freq.name)
-        else:
-            ax.plot([row_freq.start_time, row_freq.end_time], [height, height],
-                    linewidth=5, alpha=0.8, color=color_dict[row_freq.name])
+        for idx in range(len(frequencies)):
+            row_freq = frequencies.iloc[idx]
+            height = row_freq.headway_secs
+            height = height + np.random.normal(0, 0.03, 1)
+            if row_freq.name not in plotted_lines:
+                ax.plot([row_freq.start_time, row_freq.end_time], [height, height],
+                        label=row_freq.name, linewidth=5, alpha=0.8, color=color_dict[row_freq.name])
+                plotted_lines.append(row_freq.name)
+            else:
+                ax.plot([row_freq.start_time, row_freq.end_time], [height, height],
+                        linewidth=5, alpha=0.8, color=color_dict[row_freq.name])
+
 
     plt.legend(bbox_to_anchor=(1.1, 1.0), title='Bus line')
     plt.ylim(0.0, 2.0)
@@ -500,13 +503,13 @@ def plot_bus_frequency(bus_frequencies_path, route_ids, name_run):
 
 ### 2 - OUTPUTS ###
 
-def process_overall_mode_choice(mode_choice_data_path):
+def process_overall_mode_choice(mode_choice_data):
     """Processing and reorganizing the data in a dataframe ready for plotting
 
     Parameters
     ----------
-    mode_choice_data_path:  PosixPath
-        Absolute path of the `modeChoice.csv` input file (located in the output directory of the simulation)
+    mode_choice_data:  pandas DataFrame
+        From the `modeChoice.csv` input file (located in the output directory of the simulation)
 
     Returns
     -------
@@ -514,7 +517,7 @@ def process_overall_mode_choice(mode_choice_data_path):
         Mode choice data that is ready for plotting.
 
     """
-    mode_choice = pd.read_csv(mode_choice_data_path)
+    mode_choice = mode_choice_data
     # Select columns w/ modes
     mode_choice = mode_choice.iloc[-1,:]
     mode_choice = mode_choice.drop(["iterations"])
@@ -523,7 +526,7 @@ def process_overall_mode_choice(mode_choice_data_path):
     return mode_choice
 
 
-def plot_overall_mode_choice(mode_choice_data_path, name_run):
+def plot_overall_mode_choice(mode_choice_data, name_run):
     """Plotting the Overall Mode choice output
 
     Parameters
@@ -538,7 +541,7 @@ def plot_overall_mode_choice(mode_choice_data_path, name_run):
     ax: matplotlib axes object
 
     """
-    mode_choice = process_overall_mode_choice(mode_choice_data_path)
+    mode_choice = process_overall_mode_choice(mode_choice_data)
     fig, ax = plt.subplots(figsize=(7, 5))
     mode_choice.plot(kind="pie", startangle=90, labels=None, autopct='%1.1f%%', pctdistance=0.8)
     plt.axis("image")
@@ -947,8 +950,8 @@ def plot_cost_benefits(path_df, legs_df, operational_costs, trip_to_route, name_
 #     return scores
 
 
-def process_weighted_scores_to_plot(scores_path):
-    scores = pd.read_csv(scores_path)
+def process_weighted_scores_to_plot(scores_data):
+    scores = scores_data
     scores = scores.loc[:,["Component Name","Weighted Score"]]
     scores.set_index("Component Name", inplace = True)
     #Drop the `submission score` row
@@ -973,11 +976,11 @@ def process_weighted_scores_to_plot(scores_path):
     return scores
 
 
-def plot_weighted_scores(scores_path, name_run):
-    scores = process_weighted_scores_to_plot(scores_path)
+def plot_weighted_scores(scores_data, name_run):
+    scores = process_weighted_scores_to_plot(scores_data)
     fig, ax = plt.subplots(figsize=(7, 5))
     sns.barplot(data=scores, x="Weighted Score", y="Component Name", color="steelblue")
-    plt.axvline(x=1.0, linewidth=1, color='k', ls='dashed', label="baseline")
+    # plt.axvline(x=1.0, linewidth=1, color='k', ls='dashed', label="baseline")
     plt.legend(bbox_to_anchor=(1.01, 1), loc="upper left")
     plt.xlabel("Weighted Score")
     plt.ylabel("Score component")
