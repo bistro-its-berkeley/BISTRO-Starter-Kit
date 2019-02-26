@@ -22,12 +22,12 @@ Sioux Faux), but you can just iterate through the agency mapping if more agencie
 
     {{
     agency = 'sioux_faux_bus_lines'
-    agency_dict = scenario_agencies(DATA_DIR,"siouxfalls")
+    agency_dict = scenario_agencies(DATA_DIR,{}.format(SCENARIO_NAME))
     # Create a lazy cache of GTFS data for the agency:
     sf_gtfs_manager = AgencyGtfsDataManager(agency_dict[agency])
 
     freq_df = sample_frequency_adjustments(num_records, sf_gtfs_manager)
-    mode_subsidy_df = sample_mode_subsidies(num_records)
+    mode_incentive_df = sample_mode_incentives(num_records)
     vehicle_fleet_mix_df = sample_vehicle_fleet_mix(num_records, sf_gtfs_manager)
     }}
 
