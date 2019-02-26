@@ -76,7 +76,7 @@ class AgencyGtfsDataManager(object):
 
         Parameters
         ----------
-        agency_gtfs_path : pathlib.Path object
+        agency_gtfs_path : pahtlib.Path object
             Directory containing the agency's gtfs data
         """
 
@@ -235,7 +235,7 @@ def sample_frequency_adjustment_input(num_service_periods, gtfs_manager):
     return frequency_adjustment_df
 
 
-def sample_format_range(tuple_range):
+def sample_format_range(tuple_range, variable, min_boundary, max_boundary):
     """Randomly select range inclusivity (i.e., inclusive or exclusive on lower
     or upper bound of provided range).
 
@@ -246,6 +246,15 @@ def sample_format_range(tuple_range):
     tuple_range : tuple
          Tuple of exactly two ints, where tuple_range[0] < tuple_range[1]
 
+    variable: str
+        Name of the variable to sampe: "age" or "income"
+
+    min_boundary: float
+        min accepted value of the variable (as defined in the input_specifications page of the Starter Kit)
+
+    max_boundary: float
+        max accepted value of the variable (as defined in the input_specifications page of the Starter Kit)
+
     Returns
     -------
     str
@@ -253,18 +262,39 @@ def sample_format_range(tuple_range):
         setting off the lower and upper bound.
     """
     a, b = tuple_range
-    left_inc = np.random.choice(['(', '['])
-    right_inc = np.random.choice([')', ']'])
+
+    if variable == "age":
+        if a == min_boundary:
+            left_inc = '('
+        else:
+            left_inc = np.random.choice(['(', '['])
+
+        if b == max_boundary:
+            right_inc = ')'
+        else:
+            right_inc = np.random.choice([')', ']'])
+
+    elif variable == "income":
+        if a == min_boundary:
+            left_inc = '['
+        else:
+            left_inc = np.random.choice(['(', '['])
+
+        if b == max_boundary:
+            right_inc = ']'
+        else:
+            right_inc = np.random.choice([')', ']'])
+
     return "{}{}:{}{}".format(left_inc, a, b, right_inc)
 
 
-def sample_mode_incentives_input(num_records, gtfs_manager=None):
+def sample_mode_incentives_input(num_records, gtfs_manager=None, min_incentive=0.1, max_incentive=50):
     """Generate random mode incentives inputs based on modes available for
     subsidies.
 
     Creates `num_records` ModeIncentivesInput records where fields for each record
     are randomly sampled as follows:
-        * `age` : uniformly from `range(1,120,5)`.
+        * `age` : uniformly from `range(0,120,5)`.
         * `mode` : uniformly from list of available modes for scenario.
         * `income` : uniformly from `range(0,150000,5000)`.
         * `amount` : uniformly from `range(0.1,50)`.
@@ -275,8 +305,15 @@ def sample_mode_incentives_input(num_records, gtfs_manager=None):
     ----------
     num_records : int
         Number of randomly sampled records to create.
+
     gtfs_manager : `AgencyGtfsDataManager`, optional
         An instance of the `AgencyGtfsDataManager` for the target agency.
+
+    min_incentive : float
+        Minimum amount accepted for an incentive according to the inputs specifications of the Starter-Kit
+
+    max_incentive : float
+        Maximum amount accepted for an incentive according to the inputs specifications of the Starter-Kit
 
     Notes
     -----
@@ -288,17 +325,23 @@ def sample_mode_incentives_input(num_records, gtfs_manager=None):
         `num_records` `ModeIncentivesInput` records.
 
     """
+    min_age = 0
+    max_age = 120
+    min_income = 0
+    max_income = 150000
+
     df_columns = ['mode', 'age', 'income', 'amount']
     if num_records == 0:
         return pd.DataFrame({k: [] for k in df_columns})
     possible_modes = ['OnDemand_ride', 'walk_transit', 'drive_transit']
     modes = np.random.choice(possible_modes, num_records).tolist()
-    ages_range = [i for i in range(5, 120, 5)] + [1]
-    ages = [sample_format_range(tuple(sorted(np.random.choice(ages_range, 2)))) for _ in
-            range(num_records)]
-    incomes = [sample_format_range(tuple(sorted(np.random.choice(range(0, 150000, 5000), 2)))) for _
-               in range(num_records)]
-    amounts = [np.round(np.random.uniform(0.1, 50), 1) for _ in range(num_records)]
+    ages_range = [i for i in range(min_age, max_age + 1, 5)]
+    ages = [sample_format_range(tuple(sorted(np.random.choice(ages_range, 2, replace=False))), "age", min_age, max_age)
+            for _ in range(num_records)]
+    incomes_range = [i for i in range(min_income, max_income + 1, 5000)]
+    incomes = [sample_format_range(tuple(sorted(np.random.choice(incomes_range, 2, replace=False))), "income", min_income, max_income)
+               for _ in range(num_records)]
+    amounts = [np.round(np.random.uniform(min_incentive, max_incentive), 1) for _ in range(num_records)]
     return pd.DataFrame(np.array([modes, ages, incomes, amounts]).T,
                         columns=df_columns)
 
@@ -333,6 +376,10 @@ def sample_mass_transit_fares_input(num_records, gtfs_manager, max_fare_amount=1
         If the `num_records` is in excess of the number of routes that an agency schedules
         buses on.
     """
+
+    min_age = 0
+    max_age = 120
+
     df_columns = ['agencyId', 'routeId', 'age', 'amount']
     if num_records == 0:
         return pd.read_csv('../submission-inputs/{0}'.format(MASS_TRANSIT_FARE_FILE))
@@ -344,9 +391,12 @@ def sample_mass_transit_fares_input(num_records, gtfs_manager, max_fare_amount=1
     route_agency_sample = gtfs_manager.routes.sample(num_records)
     routes = pd.Series(route_agency_sample.index.values)
     agency = pd.Series(route_agency_sample.agency_id.values)
+
     amounts = [np.round(np.random.uniform(0.1, max_fare_amount), 1) for _ in range(num_records)]
-    ages_range = [i for i in range(5, 120, 5)] + [1]
-    ages = [sample_format_range(tuple(sorted(np.random.choice(ages_range, 2)))) for _ in
-            range(num_records)]
+
+    ages_range = [i for i in range(min_age, max_age + 1, 5)]
+    ages = [sample_format_range(tuple(sorted(np.random.choice(ages_range, 2, replace=False))), "age", min_age, max_age)
+            for _ in range(num_records)]
+
     return pd.DataFrame(np.array([agency, routes, ages, amounts]).T,
                         columns=df_columns)
