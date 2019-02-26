@@ -44,6 +44,8 @@ from utils import lazyprop
 from collections import Counter
 from random import shuffle, sample
 
+import re
+
 MASS_TRANSIT_FARE_FILE = "MassTransitFares.csv"
 
 
@@ -335,12 +337,56 @@ def sample_mode_incentives_input(num_records, gtfs_manager=None, min_incentive=0
         return pd.DataFrame({k: [] for k in df_columns})
     possible_modes = ['OnDemand_ride', 'walk_transit', 'drive_transit']
     modes = np.random.choice(possible_modes, num_records).tolist()
+
     ages_range = [i for i in range(min_age, max_age + 1, 5)]
-    ages = [sample_format_range(tuple(sorted(np.random.choice(ages_range, 2, replace=False))), "age", min_age, max_age)
-            for _ in range(num_records)]
+    ages = []
+    for i in range(num_records):
+        if len(ages) == 0:
+            age_range = sample_format_range(tuple(sorted(np.random.choice(ages_range, 2, replace=False))),
+                                            "age", min_age, max_age)
+        else:
+            age_range = sample_format_range(tuple(sorted(np.random.choice(ages_range, 2, replace=False))),
+                                            "age", min_age, max_age)
+            for element in ages:
+                if (re.findall('\d+', age_range.split(':')[0])[0] == re.findall('\d+', element.split(':')[1])[0]) \
+                        & (element[-1] == ']') & (age_range[0] == '['):
+                    age_range = age_range.replace('[', '(')
+                if (re.findall('\d+', age_range.split(':')[0])[0] == re.findall('\d+', element.split(':')[1])[0]) \
+                        & (element[-1] == ')') & (age_range[0] == '('):
+                    age_range = age_range.replace('(', '[')
+                if (re.findall('\d+', age_range.split(':')[1])[0] == re.findall('\d+', element.split(':')[0])[0]) \
+                        & (element[0] == '[') & (age_range[-1] == ']'):
+                    age_range = age_range.replace(']', ')')
+                if (re.findall('\d+', age_range.split(':')[1])[0] == re.findall('\d+', element.split(':')[0])[0]) \
+                        & (element[0] == '(') & (age_range[-1] == ')'):
+                    age_range = age_range.replace(')', ']')
+
+        ages.append(age_range)
+
     incomes_range = [i for i in range(min_income, max_income + 1, 5000)]
-    incomes = [sample_format_range(tuple(sorted(np.random.choice(incomes_range, 2, replace=False))), "income", min_income, max_income)
-               for _ in range(num_records)]
+    incomes = []
+    for i in range(num_records):
+        if len(incomes) == 0:
+            income_range = sample_format_range(tuple(sorted(np.random.choice(incomes_range, 2, replace=False))),
+                                               "income", min_income, max_income)
+        else:
+            income_range = sample_format_range(tuple(sorted(np.random.choice(incomes_range, 2, replace=False))),
+                                               "income", min_income, max_income)
+            for element in incomes:
+                if (re.findall('\d+', income_range.split(':')[0])[0] == re.findall('\d+', element.split(':')[1])[0]) \
+                        & (element[-1] == ']') & (income_range[0] == '['):
+                    income_range = income_range.replace('[', '(')
+                if (re.findall('\d+', income_range.split(':')[0])[0] == re.findall('\d+', element.split(':')[1])[0]) \
+                        & (element[-1] == ')') & (income_range[0] == '('):
+                    income_range = income_range.replace('(', '[')
+                if (re.findall('\d+', income_range.split(':')[1])[0] == re.findall('\d+', element.split(':')[0])[0]) \
+                        & (element[0] == '[') & (income_range[-1] == ']'):
+                    income_range = income_range.replace(']', ')')
+                if (re.findall('\d+', income_range.split(':')[1])[0] == re.findall('\d+', element.split(':')[0])[0]) \
+                        & (element[0] == '(') & (income_range[-1] == ')'):
+                    income_range = income_range.replace(')', ']')
+        incomes.append(income_range)
+
     amounts = [np.round(np.random.uniform(min_incentive, max_incentive), 1) for _ in range(num_records)]
     return pd.DataFrame(np.array([modes, ages, incomes, amounts]).T,
                         columns=df_columns)
@@ -395,8 +441,29 @@ def sample_mass_transit_fares_input(num_records, gtfs_manager, max_fare_amount=1
     amounts = [np.round(np.random.uniform(0.1, max_fare_amount), 1) for _ in range(num_records)]
 
     ages_range = [i for i in range(min_age, max_age + 1, 5)]
-    ages = [sample_format_range(tuple(sorted(np.random.choice(ages_range, 2, replace=False))), "age", min_age, max_age)
-            for _ in range(num_records)]
+    ages = []
+    for i in range(num_records):
+        if len(ages) == 0:
+            age_range = sample_format_range(tuple(sorted(np.random.choice(ages_range, 2, replace=False))),
+                                            "age", min_age, max_age)
+        else:
+            age_range = sample_format_range(tuple(sorted(np.random.choice(ages_range, 2, replace=False))),
+                                            "age", min_age, max_age)
+            for element in ages:
+                if (re.findall('\d+', age_range.split(':')[0])[0] == re.findall('\d+', element.split(':')[1])[0]) \
+                        & (element[-1] == ']') & (age_range[0] == '['):
+                    age_range = age_range.replace('[', '(')
+                if (re.findall('\d+', age_range.split(':')[0])[0] == re.findall('\d+', element.split(':')[1])[0]) \
+                        & (element[-1] == ')') & (age_range[0] == '('):
+                    age_range = age_range.replace('(', '[')
+                if (re.findall('\d+', age_range.split(':')[1])[0] == re.findall('\d+', element.split(':')[0])[0]) \
+                        & (element[0] == '[') & (age_range[-1] == ']'):
+                    age_range = age_range.replace(']', ')')
+                if (re.findall('\d+', age_range.split(':')[1])[0] == re.findall('\d+', element.split(':')[0])[0]) \
+                        & (element[0] == '(') & (age_range[-1] == ')'):
+                    age_range = age_range.replace(')', ']')
+
+        ages.append(age_range)
 
     return pd.DataFrame(np.array([agency, routes, ages, amounts]).T,
                         columns=df_columns)
