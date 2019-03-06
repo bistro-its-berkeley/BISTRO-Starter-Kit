@@ -34,19 +34,19 @@ Sioux Faux), but you can just iterate through the agency mapping if more agencie
 Write each dataframe of samples to file using <input_df>.to_csv(<filename>, index=None) if desired.
 """
 
+from collections import Counter
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
-
 from utils import lazyprop
 
-from collections import Counter
-from random import shuffle, sample
-
-import re
-
 MASS_TRANSIT_FARE_FILE = "MassTransitFares.csv"
+
+AGE_RANGE_LOWER = np.array([i for i in range(1, 116, 5)])
+AGE_RANGE_UPPER = np.array([i for i in range(5, 120, 5)])
+INCOME_RANGE_LOWER = np.array([0] + [i for i in range(5000, 150000, 5000)])
+INCOME_RANGE_UPPER = np.array([i for i in range(4999, 149999, 5000)] + [150000])
 
 
 def scenario_agencies(data_dir, scenario_name):
@@ -151,20 +151,16 @@ def sample_vehicle_fleet_mix_input(num_records, gtfs_manager, bus_set=None):
     return df
 
 
-def _get_valid_start_end_time(min_secs, max_secs, headway_secs):
-    st, et = sorted(np.random.choice(list(range(min_secs, max_secs, 60)), 2))
-    if (et - st) < headway_secs:
-        return _get_valid_start_end_time(min_secs, max_secs, headway_secs)
+def _sample_census_interval(census_type):
+    if census_type == "age":
+        eps = AGE_RANGE_LOWER, AGE_RANGE_UPPER
+    elif census_type == "income":
+        eps = INCOME_RANGE_LOWER, INCOME_RANGE_UPPER
     else:
-        return st, et
-
-
-def _get_non_overlapping_service_periods(number_of_service_periods, min_secs, max_secs, min_headway_seconds):
-    picked_st_et = np.sort(np.random.choice(np.arange(min_secs, max_secs, 60), number_of_service_periods * 2, replace=False))
-    service_period_durations = [picked_st_et[i+1] - picked_st_et[i] for i in range(0, len(picked_st_et), 2)]
-    if any([service_period <= min_headway_seconds for service_period in service_period_durations]):
-        return _get_non_overlapping_service_periods(number_of_service_periods, min_secs, max_secs, min_headway_seconds)
-    return picked_st_et
+        raise ValueError("Undefined census type!")
+    right_ep = np.random.choice(eps[1])
+    left_ep = np.random.choice(eps[0][eps[0] < right_ep])
+    return "[{}:{}]".format(left_ep, right_ep)
 
 
 def sample_frequency_adjustment_input(num_service_periods, gtfs_manager):
@@ -196,25 +192,17 @@ def sample_frequency_adjustment_input(num_service_periods, gtfs_manager):
         `num_records` `FrequencyAdjustmentInput` records.
     """
     if num_service_periods > 5:
-        raise ValueError("The maximum number of service periods per route is equal to {0} although it should not exceed 5.".format(num_service_periods))
+        raise ValueError(
+            "The maximum number of service periods per route is equal to {0} although it should not exceed 5.".format(
+                num_service_periods))
 
     df_columns = ['route_id', 'start_time', 'end_time', 'headway_secs']
 
-    if num_service_periods == 0:
-        return pd.DataFrame({k: [] for k in df_columns})
+    grouped = [np.random.randint(num_service_periods) * [route_id] for route_id in
+               gtfs_manager.routes.index.values.astype(int)]
+    route_id_list = [i for j in grouped for i in j]
 
-    num_records = np.random.choice(num_service_periods * len(gtfs_manager.routes.values))
-    if num_records == 0:
-        return pd.DataFrame({k: [] for k in df_columns})
-
-    # listing all routes_ids "num_service_periods" times
-    route_id_list = list(gtfs_manager.routes.index.values) * num_service_periods
-    # shuffle the list to get a random order of the route_ids
-    shuffle(route_id_list)
-    # selecting only the first "num_records" route_ids
-    route_id_list = route_id_list[:num_records]
-
-    min_secs = 1
+    min_secs = 0
     max_secs = 86399
     min_headway_seconds = 180
     max_headway_seconds = 7199
@@ -222,72 +210,16 @@ def sample_frequency_adjustment_input(num_service_periods, gtfs_manager):
     frequency_data = []
     route_frequency = Counter(route_id_list).items()
     for route_id, route_num_service_periods in route_frequency:
-        start_end_times = _get_non_overlapping_service_periods(route_num_service_periods, min_secs, max_secs, min_headway_seconds)
-        service_periods = [(start_end_times[i], start_end_times[i + 1]) for i in range(0, len(start_end_times), 2)]
+        st_et_flat = np.sort(
+            np.random.choice(np.arange(min_secs, max_secs, 60), route_num_service_periods, replace=False))
 
-        for s in service_periods:
-            if s[1] - s[0] > max_headway_seconds:
-                headway = np.random.choice(np.arange(min_headway_seconds, max_headway_seconds, 60))
-            else:
-                headway = np.random.choice(np.arange(min_headway_seconds, s[1] - s[0], 60))
-            frequency_data.append([route_id, s[0], s[1], headway])
+        for st, et in zip(st_et_flat, st_et_flat[1:]):
+            headway = np.random.choice(np.arange(min_headway_seconds, max_headway_seconds, 60))
+            frequency_data.append([route_id, st, et, headway])
 
     frequency_adjustment_df = pd.DataFrame(frequency_data, columns=df_columns)
     frequency_adjustment_df['exact_times'] = 0
     return frequency_adjustment_df
-
-
-def sample_format_range(tuple_range, variable, min_boundary, max_boundary):
-    """Randomly select range inclusivity (i.e., inclusive or exclusive on lower
-    or upper bound of provided range).
-
-    As is typical mathematical notation, '(' or ')' means exclusive and '[' or ']' means inclusive.
-
-    Parameters
-    ----------
-    tuple_range : tuple
-         Tuple of exactly two ints, where tuple_range[0] < tuple_range[1]
-
-    variable: str
-        Name of the variable to sampe: "age" or "income"
-
-    min_boundary: float
-        min accepted value of the variable (as defined in the input_specifications page of the Starter Kit)
-
-    max_boundary: float
-        max accepted value of the variable (as defined in the input_specifications page of the Starter Kit)
-
-    Returns
-    -------
-    str
-        The input range formatted as a string in mathematical notation with ':'
-        setting off the lower and upper bound.
-    """
-    a, b = tuple_range
-
-    if variable == "age":
-        if a == min_boundary:
-            left_inc = '('
-        else:
-            left_inc = np.random.choice(['(', '['])
-
-        if b == max_boundary:
-            right_inc = ')'
-        else:
-            right_inc = np.random.choice([')', ']'])
-
-    elif variable == "income":
-        if a == min_boundary:
-            left_inc = '['
-        else:
-            left_inc = np.random.choice(['(', '['])
-
-        if b == max_boundary:
-            right_inc = ']'
-        else:
-            right_inc = np.random.choice([')', ']'])
-
-    return "{}{}:{}{}".format(left_inc, a, b, right_inc)
 
 
 def sample_mode_incentives_input(num_records, gtfs_manager=None, min_incentive=0.1, max_incentive=50):
@@ -296,9 +228,10 @@ def sample_mode_incentives_input(num_records, gtfs_manager=None, min_incentive=0
 
     Creates `num_records` ModeIncentivesInput records where fields for each record
     are randomly sampled as follows:
-        * `age` : uniformly from `range(0,120,5)`.
+        * `age` : an interval with age values sampled uniformly from [1 .. 116]\cup[120] inclusive, in steps of 5.
         * `mode` : uniformly from list of available modes for scenario.
-        * `income` : uniformly from `range(0,150000,5000)`.
+        * `income` : an interval with income values sampled uniformly from integers values
+           [0 to 144,999]\cup[150,000] in steps of 5,000.
         * `amount` : uniformly from `range(0.1,50)`.
 
     The amount of subsidy is rounded to the nearest $0.10.
@@ -327,66 +260,13 @@ def sample_mode_incentives_input(num_records, gtfs_manager=None, min_incentive=0
         `num_records` `ModeIncentivesInput` records.
 
     """
-    min_age = 0
-    max_age = 120
-    min_income = 0
-    max_income = 150000
-
     df_columns = ['mode', 'age', 'income', 'amount']
     if num_records == 0:
         return pd.DataFrame({k: [] for k in df_columns})
     possible_modes = ['OnDemand_ride', 'walk_transit', 'drive_transit']
     modes = np.random.choice(possible_modes, num_records).tolist()
-
-    ages_range = [i for i in range(min_age, max_age + 1, 5)]
-    ages = []
-    for i in range(num_records):
-        if len(ages) == 0:
-            age_range = sample_format_range(tuple(sorted(np.random.choice(ages_range, 2, replace=False))),
-                                            "age", min_age, max_age)
-        else:
-            age_range = sample_format_range(tuple(sorted(np.random.choice(ages_range, 2, replace=False))),
-                                            "age", min_age, max_age)
-            for element in ages:
-                if (re.findall('\d+', age_range.split(':')[0])[0] == re.findall('\d+', element.split(':')[1])[0]) \
-                        & (element[-1] == ']') & (age_range[0] == '['):
-                    age_range = age_range.replace('[', '(')
-                if (re.findall('\d+', age_range.split(':')[0])[0] == re.findall('\d+', element.split(':')[1])[0]) \
-                        & (element[-1] == ')') & (age_range[0] == '('):
-                    age_range = age_range.replace('(', '[')
-                if (re.findall('\d+', age_range.split(':')[1])[0] == re.findall('\d+', element.split(':')[0])[0]) \
-                        & (element[0] == '[') & (age_range[-1] == ']'):
-                    age_range = age_range.replace(']', ')')
-                if (re.findall('\d+', age_range.split(':')[1])[0] == re.findall('\d+', element.split(':')[0])[0]) \
-                        & (element[0] == '(') & (age_range[-1] == ')'):
-                    age_range = age_range.replace(')', ']')
-
-        ages.append(age_range)
-
-    incomes_range = [i for i in range(min_income, max_income + 1, 5000)]
-    incomes = []
-    for i in range(num_records):
-        if len(incomes) == 0:
-            income_range = sample_format_range(tuple(sorted(np.random.choice(incomes_range, 2, replace=False))),
-                                               "income", min_income, max_income)
-        else:
-            income_range = sample_format_range(tuple(sorted(np.random.choice(incomes_range, 2, replace=False))),
-                                               "income", min_income, max_income)
-            for element in incomes:
-                if (re.findall('\d+', income_range.split(':')[0])[0] == re.findall('\d+', element.split(':')[1])[0]) \
-                        & (element[-1] == ']') & (income_range[0] == '['):
-                    income_range = income_range.replace('[', '(')
-                if (re.findall('\d+', income_range.split(':')[0])[0] == re.findall('\d+', element.split(':')[1])[0]) \
-                        & (element[-1] == ')') & (income_range[0] == '('):
-                    income_range = income_range.replace('(', '[')
-                if (re.findall('\d+', income_range.split(':')[1])[0] == re.findall('\d+', element.split(':')[0])[0]) \
-                        & (element[0] == '[') & (income_range[-1] == ']'):
-                    income_range = income_range.replace(']', ')')
-                if (re.findall('\d+', income_range.split(':')[1])[0] == re.findall('\d+', element.split(':')[0])[0]) \
-                        & (element[0] == '(') & (income_range[-1] == ')'):
-                    income_range = income_range.replace(')', ']')
-        incomes.append(income_range)
-
+    ages = [_sample_census_interval("age") for _ in range(num_records)]
+    incomes = [_sample_census_interval("income") for _ in range(num_records)]
     amounts = [np.round(np.random.uniform(min_incentive, max_incentive), 1) for _ in range(num_records)]
     return pd.DataFrame(np.array([modes, ages, incomes, amounts]).T,
                         columns=df_columns)
@@ -399,7 +279,7 @@ def sample_mass_transit_fares_input(num_records, gtfs_manager, max_fare_amount=1
     The fare amount will not exceed the maximum fare amount and cannot be less than $0.10 (else,
     there shouldn't have been a fare assigned in the first place).
 
-    The age will be sampled from 0 to 120 (maximum age in scenario).
+    The age will be sampled from 1 to 120 inclusive (maximum age in scenario).
 
     Parameters
     ----------
@@ -423,9 +303,6 @@ def sample_mass_transit_fares_input(num_records, gtfs_manager, max_fare_amount=1
         buses on.
     """
 
-    min_age = 0
-    max_age = 120
-
     df_columns = ['agencyId', 'routeId', 'age', 'amount']
     if num_records == 0:
         return pd.read_csv('../submission-inputs/{0}'.format(MASS_TRANSIT_FARE_FILE))
@@ -437,33 +314,7 @@ def sample_mass_transit_fares_input(num_records, gtfs_manager, max_fare_amount=1
     route_agency_sample = gtfs_manager.routes.sample(num_records)
     routes = pd.Series(route_agency_sample.index.values)
     agency = pd.Series(route_agency_sample.agency_id.values)
-
     amounts = [np.round(np.random.uniform(0.1, max_fare_amount), 1) for _ in range(num_records)]
-
-    ages_range = [i for i in range(min_age, max_age + 1, 5)]
-    ages = []
-    for i in range(num_records):
-        if len(ages) == 0:
-            age_range = sample_format_range(tuple(sorted(np.random.choice(ages_range, 2, replace=False))),
-                                            "age", min_age, max_age)
-        else:
-            age_range = sample_format_range(tuple(sorted(np.random.choice(ages_range, 2, replace=False))),
-                                            "age", min_age, max_age)
-            for element in ages:
-                if (re.findall('\d+', age_range.split(':')[0])[0] == re.findall('\d+', element.split(':')[1])[0]) \
-                        & (element[-1] == ']') & (age_range[0] == '['):
-                    age_range = age_range.replace('[', '(')
-                if (re.findall('\d+', age_range.split(':')[0])[0] == re.findall('\d+', element.split(':')[1])[0]) \
-                        & (element[-1] == ')') & (age_range[0] == '('):
-                    age_range = age_range.replace('(', '[')
-                if (re.findall('\d+', age_range.split(':')[1])[0] == re.findall('\d+', element.split(':')[0])[0]) \
-                        & (element[0] == '[') & (age_range[-1] == ']'):
-                    age_range = age_range.replace(']', ')')
-                if (re.findall('\d+', age_range.split(':')[1])[0] == re.findall('\d+', element.split(':')[0])[0]) \
-                        & (element[0] == '(') & (age_range[-1] == ')'):
-                    age_range = age_range.replace(')', ']')
-
-        ages.append(age_range)
-
+    ages = [_sample_census_interval("age") for _ in range(num_records)]
     return pd.DataFrame(np.array([agency, routes, ages, amounts]).T,
                         columns=df_columns)

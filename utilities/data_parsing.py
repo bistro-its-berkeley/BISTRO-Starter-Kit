@@ -3,10 +3,9 @@ import lxml
 from lxml import etree
 import gzip
 import pandas as pd
-from pathlib import Path
 
 
-def open_xml(path: Path):
+def open_xml(path):
     """
     Open xml and xml.gz files into ElementTree
 
@@ -15,7 +14,9 @@ def open_xml(path: Path):
     path: string
         Absolute path of the file to parse
     """
-    if Path(path).suffix == ".gz":
+    # Make sure that the path is a string (and not a pathlib.Path object)
+    path = str(path)
+    if path.endswith('.gz'):
         return etree.parse(gzip.open(path))
     else:
         return etree.parse(path)
@@ -49,7 +50,7 @@ def list_attributes(tree):
 
     Parameters
     ----------
-    tree:
+    root:
 
     Returns
     -------
@@ -93,28 +94,16 @@ def create_dataframe(tree, columns, column_types):
             event_data[column_index] = column_types[column_index](attribute_value)
         data.append(event_data)
 
-    data_frame = pd.DataFrame(data=data, columns=columns)
+    output_data = pd.DataFrame(data=data, columns=columns)
 
-    return data_frame
+    return output_data
 
 
 def extract_dataframe(path):
-    """Parse a xml file to a pandas DataFrame
-
-    Parameters
-    ----------
-    path: pathlib.Path object
-        Absolute path of the xml file
-
-    Returns
-    -------
-    data_frame: pandas DataFrame
-
-    """
     tree = open_xml(path)
     columns, column_types = list_attributes(tree)
-    data_frame = create_dataframe(tree, columns, column_types)
-    return data_frame
+    output_data = create_dataframe(tree, columns, column_types)
+    return output_data
 
 
 

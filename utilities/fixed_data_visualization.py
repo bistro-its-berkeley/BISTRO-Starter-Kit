@@ -27,7 +27,7 @@ utm_zone = "14N"
 
 class ReferenceData(object):
 
-    def __init__(self, sample_size, scenario_name="sioux_faux"):
+    def __init__(self, sample_size, scenario_name="sioux_faux", transit_scale_factor=0.1):
         """
 
         Parameters
@@ -35,6 +35,8 @@ class ReferenceData(object):
         reference_data_path : Path
             Directory containing the scenario's reference-data
         """
+        # Scale factor to compare the 15k to the 157k scenario (full population)
+        self.transit_scale_factor = transit_scale_factor
 
         # Importing agencies ids from agency.txt
         agency_ids = pd.read_csv(Path.cwd().parent / REFERENCE_DATA / scenario_name / AGENCY / "gtfs_data/agency.txt")
@@ -79,9 +81,11 @@ class ReferenceData(object):
 
 
 class ResultFiles:
-    def __init__(self, path_output_folder, reference_data: ReferenceData):
+    def __init__(self, path_output_folder, number_iterations, reference_data: ReferenceData):
 
         self.path_output_folder = path_output_folder
+        self.number_iterations = number_iterations
+        self.reference_data = reference_data
 
         # Extracting input data from the submission input csv files
         self.bus_fares_data = pd.read_csv(path_output_folder / COMPETITION / SUBMISSION_INPUTS / "MassTransitFares.csv")
@@ -93,12 +97,19 @@ class ResultFiles:
         self.scores_data = pd.read_csv(path_output_folder/ COMPETITION / "submissionScores.csv")
         self.mode_choice_data = pd.read_csv(path_output_folder / "modeChoice.csv")
 
-    def process_all_xml_files(self):
-        # Importing all xml.gz files from the output folder of the run
+        # Getting the csv data from the xml files
+        self.process_all_xml_files()
 
-        self.events_path = self.path_output_folder / "outputEvents.xml.gz"
+    def process_all_xml_files(self):
+        """ Import all xml.gz files from the output folder of the scenario, parse them and create .csv files"
+
+        """
+
+        self.events_path = self.path_output_folder / ITERS / "it.{0}".format(self.number_iterations) / \
+                           "{0}.events.csv.gz".format(self.number_iterations)
         self.output_plans_path = self.path_output_folder / "outputPlans.xml.gz"
-        self.experienced_plans_path = self.path_output_folder / ITERS / "it.100" / "100.experiencedPlans.xml.gz"
+        self.experienced_plans_path = self.path_output_folder / ITERS / "it.{0}".format(self.number_iterations) \
+                                      / "{0}.experiencedPlans.xml.gz".format(self.number_iterations)
         self.persons_path = self.path_output_folder / "outputPersonAttributes.xml.gz"
         self.households_path = self.path_output_folder / "outputHouseholds.xml.gz"
 
@@ -108,11 +119,9 @@ class ResultFiles:
                                 self.experienced_plans_path, self.bus_fares_data, self.reference_data.route_ids,
                                 self.reference_data.trip_to_route, self.reference_data.fuel_costs, self.path_output_folder)
 
-            # Get the data from the generated csv files
-            self.routes_df = pd.read_csv(
-                Path.cwd().parent / "reference-data/sioux_faux/sioux_faux_bus_lines/gtfs_data/trips.txt")
-            self.trips_df = pd.read_csv(self.path_output_folder / "trips_dataframe.csv")
-            self.person_df = pd.read_csv(self.path_output_folder / "persons_dataframe.csv")
-            self.activities_df = pd.read_csv(self.path_output_folder / "activities_dataframe.csv")
-            self.legs_df = pd.read_csv(self.path_output_folder / "legs_dataframe.csv")
-            self.paths_traversals_df = pd.read_csv(self.path_output_folder / "path_traversals_dataframe.csv")
+        # Get the data from the generated csv files
+        self.trips_df = pd.read_csv(self.path_output_folder / "trips_dataframe.csv")
+        self.person_df = pd.read_csv(self.path_output_folder / "persons_dataframe.csv")
+        self.activities_df = pd.read_csv(self.path_output_folder / "activities_dataframe.csv")
+        self.legs_df = pd.read_csv(self.path_output_folder / "legs_dataframe.csv")
+        self.paths_traversals_df = pd.read_csv(self.path_output_folder / "path_traversals_dataframe.csv")

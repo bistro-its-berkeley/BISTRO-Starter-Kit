@@ -49,7 +49,7 @@ def unzip_file(element_path):
 
     elif Path(str(element_path) + ".zip").exists():
         zip_folder = zipfile.ZipFile(str(element_path) + ".zip", 'r')
-        zip_folder.extractall(element_path)
+        zip_folder.extractall(element_path.resolve().parent)
         zip_folder.close()
         return element_path
 
@@ -735,9 +735,8 @@ def plot_average_bus_crowding_by_bus_route_by_period_of_day(path_df, trip_to_rou
     -------
     ax: matplotlib axes object
         """
-    bus_slice_df = path_df.loc[path_df["mode"] == "bus"][["vehicle", "numPassengers",
-                                                                "capacity", "departureTime",
-                                                                "arrivalTime", "fuel", "vehicleType"]]
+    bus_slice_df = path_df.loc[path_df["mode"] == "bus"][["vehicle", "numPassengers", "departureTime",
+                                                                "arrivalTime", "vehicleType"]]
     bus_slice_df.loc[:, "route_id"] = bus_slice_df.vehicle.apply(lambda x: trip_to_route[x.split(":")[1]])
     bus_slice_df.loc[:, "serviceTime"] = (bus_slice_df.arrivalTime - bus_slice_df.departureTime) / 3600
     bus_slice_df.loc[:, "seatingCapacity"] = bus_slice_df.vehicleType.apply(lambda x: transit_scale_factor * seating_capacities[x])
@@ -876,16 +875,16 @@ def plot_travel_time_over_the_day(travel_time_data_path, name_run):
     return ax
 
 
-def plot_cost_benefits(path_df, legs_df, operational_costs, trip_to_route, name_run):
+def plot_cost_benefits(traversal_path_df, legs_df, operational_costs, trip_to_route, name_run):
     """Plotting the Costs and Benefits by bus route output
 
     Parameters
     ----------
-    path_df: pandas DataFrame
-        parsed and processed xml.files
+    traversal_path_df: pandas DataFrame
+        parsed and processed <num_iterations>.events.csv.gz' file
 
     legs_df: pandas DataFrame
-        parsed and processed xml.files
+        merge of parsed and processed xml.files
 
     operational_costs: dictionary
         Operational costs for each bus vehicle type as defined under "operational_costs" in the
@@ -901,20 +900,20 @@ def plot_cost_benefits(path_df, legs_df, operational_costs, trip_to_route, name_
     -------
     ax: matplotlib axes object
         """
-    bus_slice_df = path_df.loc[path_df["mode"] == "bus"][["vehicle", "numPassengers", "capacity", "departureTime",
+    bus_slice_df = traversal_path_df.loc[traversal_path_df["mode"] == "bus"][["vehicle", "numPassengers", "departureTime",
                                                           "arrivalTime", "FuelCost", "vehicleType"]]
     bus_slice_df.loc[:, "route_id"] = bus_slice_df.vehicle.apply(lambda x: trip_to_route[x.split(":")[-1]])
     bus_slice_df.loc[:, "operational_costs_per_bus"] = bus_slice_df.vehicleType.apply(
         lambda x: operational_costs[x])
     bus_slice_df.loc[:, "serviceTime"] = (bus_slice_df.arrivalTime - bus_slice_df.departureTime) / 3600
-    bus_slice_df.loc[:, "operational_costs"] = bus_slice_df.operational_costs_per_bus * bus_slice_df.serviceTime
+    bus_slice_df.loc[:, "OperationalCosts"] = bus_slice_df.operational_costs_per_bus * bus_slice_df.serviceTime
 
     bus_fare_df = legs_df.loc[legs_df["Mode"] == "bus"][["Veh", "Fare"]]
     bus_fare_df.loc[:, "route_id"] = bus_fare_df.Veh.apply(lambda x: trip_to_route[x.split(":")[-1]])
     merged_df = pd.merge(bus_slice_df,bus_fare_df, on=["route_id"])
 
 
-    grouped_data = merged_df.groupby(by="route_id").agg("sum")[["operational_costs", "FuelCost", "Fare"]]
+    grouped_data = merged_df.groupby(by="route_id").agg("sum")[["OperationalCosts", "FuelCost", "Fare"]]
 
     fig, ax = plt.subplots(figsize=(8, 6))
     grouped_data.plot.bar(stacked=True, ax=ax)
