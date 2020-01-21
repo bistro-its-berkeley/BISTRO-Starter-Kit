@@ -3,7 +3,7 @@
 In the Sioux Faux Benchmark Scenario, you may optimize the transportation network for a *sample of citizens* from a mock city: Sioux Faux. The city’s 157,000 citizens travel between activities using either their personal automobiles, buses provided via a public transit system, taxis enabled via an on-demand carsharing company, active modes such as walking, or a combination of multiple modes in accordance with their preferences. You will compete with other contestants to produce the best transportation outcomes as computed by the [scoring function](./Understanding_the_outputs_and_the%20scoring_function.md).
 
 <img src="/Images/Mode_choice_diagram.png" width="80%"> <br>
-***Figure 1: The transportation modes available to Sioux Faux population*** 
+***Figure 1: A Schematic of Mode Choice Decisions in BEAM*** 
 
 ## Sioux Faux network
 The Sioux Faux road network is shown below (Fig. 1). The twelve bus routes operated by the Sioux Faux Bus Lines (SFBL) transportation company are simulated in the Benchmark Scenario.
@@ -22,6 +22,3 @@ You have access to two sample populations with which you can run simulations:
 * a 1,000 (1k) individuals sample
 * a 15,000 (15k) individuals sample
 
-
-## Problem statement 
-To get a more thorough description of the Sioux Faux Benchmark Scenario, please refer to the [Hackathon bucket](./PS_SD_Uber_hackathon_2019.pdf).
