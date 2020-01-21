@@ -1,6 +1,6 @@
 <!--Logo Goes Here!-->
 
-<!--This repository is a Starter Kit for the **Uber 2019 ML Hackathon** on **[AICrowd](https://www.aicrowd.com/challenges/uber-prize)**. --!>
+<!--This repository is a Starter Kit for the **Uber 2019 ML Hackathon** on **[AICrowd](https://www.aicrowd.com/challenges/uber-prize)**. !-->
 
 ## Competition
 The competition aims at solving and hacking the first round of the inaugural Uber Prize, which will be launched in the Spring 2019. It challenges contestants to optimize the transportation network of a small mock city: Sioux Faux. 
