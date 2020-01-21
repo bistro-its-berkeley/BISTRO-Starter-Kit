@@ -8,7 +8,7 @@ We recommend that you proceed through the documentation in the following order:
 
   * **Introduction to BISTRO: the Berkeley Integrated System for Transportation Optimization**: First, read the brief [introduction to BISTRO](./docs/Introduction_transportation_problem.md), which will give you a general understanding of the framework of a BISTRO scenario. 
 
-  * **Problem statement**: Then, review the [presentation of the Sioux Faux scenario](./docs/The_Sioux_Faux_scenario.md), which introduces the problem setting for the Sioux Faux Benchmark Scenario.
+  * **Problem statement**: Then, review the [presentation of the Sioux Faux Benchmark Scenario](./docs/The_Sioux_Faux_scenario.md), which introduces the problem setting for the Sioux Faux Benchmark Scenario.
   
   * **Inputs to optimize**: Next, please refer to the [input file specification schema](./docs/Which-inputs-should-I-optimize.md), which describes the structure of example input files and their relationship to quantities computed in the context of the virtual transportation environment.
   
@@ -28,7 +28,7 @@ We recommend that you proceed through the documentation in the following order:
   * a note on [how to run a simulation](./docs/How_to_run_a_simulation.md)
   * a description of the [input schema](./docs/Which-inputs-should-I-optimize.md)
   * a description of the [simulation outputs and the scoring function](./docs/Understanding_the_outputs_and_the%20scoring_function.md)
-  * an outline of [the Sioux Faux scenario](./docs/The_Sioux_Faux_scenario.md)
+  * an outline of [the Sioux Faux Benchmark Scenario](./docs/The_Sioux_Faux_scenario.md)
   <!-- * the [problem statement for round 1](./docs/PS_SD_Uber_hackathon_2019.pdf) !-->
    <!-- * the steps to [submit a solution](./docs/What_and_how_to_submit%3F.md) !-->
   * a [FAQ](./docs/FAQ.md) page
