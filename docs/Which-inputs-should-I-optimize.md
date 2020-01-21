@@ -1,27 +1,27 @@
 # Input Specification
 
-To optimize the transportation system of Sioux Faux with BISTRO, you will need to write an algorithm that generates different inputs as `csv`files. This document describes the nature of inputs available to contestants and provides detailed schema for the files comprising a valid competition submission entry.
+To optimize the transportation system of a BISTRO Scenario, you will need to write an algorithm that generates different inputs as `csv`files. This document describes the transportation system optimization problem in the context of a benchmark scenario including example inputs and a detailed schema for the files comprising a valid BISTRO policy submission.
  
 ## Introduction
 
-As detailed in the [problem statement](./The_Sioux_Faux_scenario.md), to help the Sioux Faux Department of Transportation (SFDOT) combat congestion and improve overall mobility in Sioux Faux, you will prepare a set of inputs to the simulation engine, which represent the following transportation system interventions:
+The [Sioux Faux Benchmark Scenario](./The_Sioux_Faux_scenario.md) is designed to enable BISTRO users to familiarize themselves with the transportation system optimization problem through an example policy scenario. The scenario includes a set of example inputs to the simulation engine, which represent the following transportation system interventions:
 
-1. Bus fleet composition;
-2. Distribution of incentives for agents using on-demand carsharing and/or mass transit;
-3. Adjustments to the frequency of buses on routes; and, 
-4. Mass transit fares.
+1. Public transit fleet composition;
+2. Distribution of incentives for agents using on-demand ridehailing and/or public transit;
+3. Adjustments to the frequency of public transit service on particular routes; and, 
+4. Public transit fares.
 
-A submission entry is a set of input files (i.e., `csv`s named according to the input type), which have been collected into a single folder.
+A submission is a set of input files (i.e., `csv`s named according to the input type), which have been collected into a single folder.
 
 The following subsections provide a detailed description of what each input represents as well as technical details for the schema, data types, and constraints that specify the syntax of each input file. Files representing empty inputs can be found in the [`submission-inputs`](/submission-inputs/) folder.
 
 ## Input Types
 
-### **1. Bus Fleet Composition**
+### **1. Public Transit Fleet Composition**
 
 #### 1.1. Description:
 
-Currently, Sioux Faux Bus Lines (SFBL) operates a small fleet of buses on 12 routes in Sioux Faux. Orginally purchased as a group, each bus in the fleet possesses identical attributes of seating capacity, fuel consumption, operations and maintenance cost, etc. SFBL is considering optimizing bus type in order to better match the specific demand characteristics of each route. Four types of buses (including the current one used by SFBL, called `BUS-DEFAULT`) are available from its supplier, each of them with different technical properties ([`availableVehicleTypes.csv`](/../../blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/availableVehicleTypes.csv), see Figure 2) and cost characteristics[`vehicleCosts.csv`](/../../blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/vehicleCosts.csv), see Figure 3). Currently, the number of buses required to service each route is equal to the number of trips: after the headway has expired, a new bus is used. For instance, if the bus frequency on a specific route is 10 minutes, a new bus is used every 10 minutes during the service time on this route. When one bus finishes its (unique) tour, it disappears from the simulation. This does not reflect a realistic scenario combining bus routes into runs, but, for now, it still allows for comparisons to a BAU case.
+In the Sioux Faux Benchmark Scenario, Sioux Faux Bus Lines (SFBL) operates a small fleet of buses on 12 routes in Sioux Faux. Orginally purchased as a group, each bus in the fleet possesses identical attributes of seating capacity, fuel consumption, operations and maintenance cost, etc. SFBL is considering optimizing bus type in order to better match the specific demand characteristics of each route. Four types of buses (including the current one used by SFBL, called `BUS-DEFAULT`) are available from its supplier, each of them with different technical properties ([`availableVehicleTypes.csv`](/../../blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/availableVehicleTypes.csv), see Figure 2) and cost characteristics[`vehicleCosts.csv`](/../../blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/vehicleCosts.csv), see Figure 3). Currently, the number of buses required to service each route is equal to the number of trips: after the headway has expired, a new bus is used. For instance, if the bus frequency on a specific route is 10 minutes, a new bus is used every 10 minutes during the service time on this route. When one bus finishes its (unique) tour, it disappears from the simulation. This does not reflect a realistic scenario combining bus routes into runs, but, for now, it still allows for comparisons to a BAU case.
 
 
 ![Route IDs](/Images/sf_route_guide.png) <br/>
@@ -60,7 +60,7 @@ Your recommendation is to be submitted in a file named `VehicleFleetMix.csv` acc
 
 
 #### 1.3. Example:
-Figure 4 below depicts an example of Vehicle Fleet Mix input file. Only three routes (`1342`, `1350` and `1351`) out of twelve are assigned a new bus type (respectively `BUS-STD-HD`, `BUS-SMALL-HD`, `BUS-STD-ART`); all other routes operate with the default bus type (`BUS-DEFAULT`).
+Figure 4 below depicts an example of Public Transit Vehicle Fleet Mix input file. Only three routes (`1342`, `1350` and `1351`) out of twelve are assigned a new bus type (respectively `BUS-STD-HD`, `BUS-SMALL-HD`, `BUS-STD-ART`); all other routes operate with the default bus type (`BUS-DEFAULT`).
 
 ![Bus fleet](/Images/Input_VehicleFleetMix.png)\
 ***Figure 4: Example of Vehicle Fleet Mix Input.***
