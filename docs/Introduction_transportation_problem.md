@@ -38,11 +38,11 @@ They specify:
 You will find more information on the Sioux Faux simulation inputs, where they are stored, and how to control them on the [inputs to optimize](./Which-inputs-should-I-optimize.md) page.
 
 
-## Evaluation metrics (scoring criteria)
+## Key Performance Metrics (scoring criteria)
 
 The quality of the new policy-based transportation system is evaluated based upon a comparison against the *business as usual (BAU) scenario*. The BAU scenario represents the baseline or "current" status-quo of the Sioux Faux transportation system. In other words, this is a "do-nothing" approach. This comparison answers the following question: **How will the new policy improve over the current state of the transportation system**?
 
-The performance of simulated policies over the baseline is measured using a **scoring function**. The scoring function is comprised of quantitative *metrics* that assess how well policies addressed the following questions:
+The performance of simulated policies over the baseline is measured using a **scoring function**. The scoring function is comprised of one or more quantitative *key performance metrics (KPIs)* that assess how well policies addressed the following questions:
 
 * How much *congestion* did agents and the system as a whole experience during the day?
 * What *level of service* did the transportation system provide to users?
@@ -54,4 +54,4 @@ Overall, this comparison answers the following question: *"How much can your pol
 
 A total submission score less than 1 indicates that, under the evaluated policy portfolio, the system is performing *better* in comparison to the BAU scenario.
 
-You will find more information on the outputs of the BISTRO simulation, how to interpret them, and the scoring function on the [outputs and the scoring function](./Understanding_the_outputs_and_the%20scoring_function.md) page.
+You will find more information on the outputs of BISTRO, how to interpret them, and the scoring function on the [outputs and the scoring function](./Understanding_the_outputs_and_the%20scoring_function.md) page.
