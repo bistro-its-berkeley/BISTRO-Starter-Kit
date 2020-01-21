@@ -71,7 +71,7 @@ Figure 4 below depicts an example of Public Transit Vehicle Fleet Mix input file
 
 #### 2.1. Description
 
-In an effort to encourage the use of sustainable transportation alternatives to private vehicles, SFBL is considering providing incentives to promote mass transit in Sioux Faux. SFBL is exploring options for citizens lacking access to quality transit or means to pay fares, including defraying the cost of certain qualified transit trips and/or on-demand rides. 
+In an effort to encourage the use of sustainable transportation alternatives to private vehicles, SFBL is considering providing incentives to promote public transit in Sioux Faux. SFBL is exploring options for citizens lacking access to quality transit or means to pay fares, including defraying the cost of certain qualified transit trips and/or on-demand rides. 
 
 You may choose to defray the cost of on-demand rides and/or transit based on either age group, income group, or both.
 To do so, the *range of qualifying socio-demographic characteristics* and *value of the incentive provided to each group* must be defined for passengers using each of the following modes of transportation to complete a trip: 
@@ -161,7 +161,7 @@ In this case, two routes will see their bus frequency adjusted: route 1340 and r
 * Buses operating on all other routes follow the original non-frequency schedule.
 
 
-### 4. Mass Transit Fare Adjustment
+### 4. Public Transit Fare Adjustment
 
 #### 4.1. Description
 SFBL would like to use this simulation experiment to explore the effect of changing **bus fares**, i.e. the cost to a passenger of traveling by bus. Currently, the Sioux Faux bus fare policy works as follow: 
@@ -187,10 +187,10 @@ For each new bus fare that you want to introduce, you need to specify the amount
 ***Table 4: Pt Fares input schema and constraint definitions***
 
 #### 4.3. Example
-Figure 8 depicts an example input file for Mass Transit Fare Adjustment.
+Figure 8 depicts an example input file for Public Transit Fare Adjustment.
 
 ![Alt text](/Images/Input_MassTransitFares.png)
-***Figure 8: Example of Mass Transit Fare input***
+***Figure 8: Example of Public Transit Fare input***
 
 The file describes the following fare policy:
 * Passengers older than 5 and up through 25 years pay a reduced fare of $0.50
