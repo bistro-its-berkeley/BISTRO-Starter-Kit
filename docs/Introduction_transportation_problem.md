@@ -1,17 +1,17 @@
 # A Brief Introduction to BISTRO: the Berkeley Integrated System for Transportation Optimization
 
-This document describes the goal and main components of the Uber Prize challenge, that is, the daily travel simulation environment of BISTRO, its inputs, and its outputs.
+This document describes the goal and main components of the BISTRO system, that is, the daily travel simulation environment of BISTRO, its inputs, and its outputs.
 
 
-## Goal of Round I:
+## Overview:
 
-The overall goal of the preliminary round of the Uber Prize is to develop an algorithm that **finds the *policy* that will best improve several indicators of the quality of the transportation system in Sioux Faux**. Here, we use *policy* to refer to a combination of inputs (as `.csv` files) representing changes in mass transit vehicle fleet composition, bus frequencies, and incentives that could reduce the cost of multimodal transport for commuters.
+The primary goals of the BISTRO engine is to enable the optimization of transportation policies and the development of algorithms that **find the *policies* that best improve several indicators of the quality of the transportation system in a given user-defined scenario**. Here, we use *policy* to refer to a combination of inputs (as `.csv` files) representing changes in public transit vehicle fleet composition, service frequencies, and incentives that could improve user-defined metrics representing policy objectives.
 
 Policies are tested via the BISTRO engine (see below), by simulating the daily travels of a synthetic population of individuals called `Agents`, each with their own socio-demographic characteristics. The *agent-based simulation* is hosted by the BEAM simulator. During the simulated day, each *Agent* has a defined `Plan`, i.e. a sequence of activities with specific locations ordered by activity end times. Throughout the day, the `Agents` will make *decisions* on which transportation *modes* they will use, their *departure times*, and the *routes* they take to travel between activities. 
 
 ### What is BISTRO?
 
-The Berkeley Integrated System for Transportation Optimization (BISTRO) is the engine through which the Uber Prize will be run. BISTRO is an analysis and evaluation superlayer that works in concert with an agent-based simulation: Behavior, Energy, Autonomy, and Mobility (BEAM) to enable the open-sourced development and evaluation of transportation optimization methods in response to given policy priorities. 
+The Berkeley Integrated System for Transportation Optimization (BISTRO) is an analysis and evaluation superlayer that works in concert with an agent-based simulation: Behavior, Energy, Autonomy, and Mobility (BEAM) to enable the open-sourced development and evaluation of transportation optimization methods in response to given policy priorities. 
 
 ### What is BEAM?
 
@@ -27,15 +27,15 @@ Once all of the agents in the system have decided on the best travel modes, depa
 
 ## Policy Inputs
 
-Inputs for **Round I** target improving transit operations, vehicle fleet assignment, and incentives to use non-motorized or on-demand transport.
+Inputs may target improving transit operations, vehicle fleet assignment, and/or incentives to use non-motorized or on-demand transport. 
 
-They specify: 
+Example inputs include: 
 * **Bus fleet composition changes**;
 * **Distribution of incentives for agents using on-demand carsharing and/or mass transit**;
 * **Adjustments to the frequency of buses on routes**; and,
 * **Mass transit fares**.
 
-You will find more information on the Sioux Faux simulation inputs, where they are stored, and how to control them on the [inputs to optimize](./Which-inputs-should-I-optimize.md) page.
+You will find more information on the Sioux Faux Benchmark Scenario simulation inputs, where they are stored, and how to control them on the [inputs to optimize](./Which-inputs-should-I-optimize.md) page.
 
 
 ## Key Performance Metrics (scoring criteria)
