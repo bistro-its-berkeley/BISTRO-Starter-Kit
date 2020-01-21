@@ -6,7 +6,7 @@ This document gathers the recurrent questions about the Uber Prize in general, t
 <details>
 <summary><strong>Why are alternatives to the car limited to buses and on-demand rideshare? What about metro, bikes, scooters..etc?</strong></summary>
 <br>
-The goal of Phase I is to evaluate Sioux Faux as a benchmark city. This will provide contestants a first “simple” scenario to discover and familiarize themselves with the optimization problem. Phase II of the Uber Prize will include a broader range of multimodal options.
+The Sioux Faux Scenario Benchmark Scenario provides first time users with a first “simple” scenario to discover and familiarize themselves with the transportation system optimization problem and the BISTRO framework. Additional scenarios under development include a broader range of multimodal options.
 </details><br>
 
 
@@ -20,7 +20,7 @@ The Sioux Falls transportation network has been frequently used in the transport
 
 *2.1. Simulation Variability*
 
-Contestants may notice that their scores vary between runs when using the same inputs combinations. The following items describe the nature of this variance and how we plan to account for it in when differentiating between top-ranked entries.
+Users may notice that their scores vary between runs when using the same inputs combinations. The following items describe the nature of this variance and how we plan to account for it in when differentiating between top-ranked entries.
 
 <details>
 <summary><strong>Is the simulation deterministic?</strong></summary>
@@ -53,7 +53,7 @@ After playing with several policy variants and analyzing the outputs (in particu
 
 ### 3. TROUBLESHOOTING
 
-Contestants may complain that simulations take a long time. The following items suggest some hints to improve execution time or otherwise accelerate search.
+Users may find that simulations take a long time. The following items provide some ideas to improve execution time or otherwise accelerate search.
 
 *3.1. Computational Complexity*
 
@@ -66,8 +66,7 @@ Most likely not! You will have probably seen a validation error if your inputs d
 <details>
 <summary><strong>How can I maximize use of compute resources available to me?</strong></summary>
 <br>
-Consider using the “1k”-scenario. For more info, please refer to  Part II, Section 5 of the [Scoring Document](./docs/PS_SD_Uber_hackathon_2019.pdf): "The Role of and Rationale for Subsampled Scenarios in BISTRO".
-</details><br>
+Consider using the “1k”-scenario to get started. 
 
 <details>
 <summary><strong>A simulation run takes way too long! Why? How can I make the simulation run more quickly? What is the maximum performance that I can expect?</strong></summary>
