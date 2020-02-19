@@ -60,7 +60,7 @@ Exmaple python notebooks demonstrating the use of the `competition_executor.py`,
 <!--TODO: Provide details on announcement process/location-->
 
 In order to expedite bug support, we may periodically push new Docker images to DockerHub as well as update this 
-repository. Whenever such an update is announced, please run `git pull` in this directory (you might wish to move [submission-inputs](./submission-inputs) and update execution paths appropriately. Please also run `docker pull beammodel/beam-competition:0.0.1-SNAPSHOT` to ensure the image is up-to-date as well.
+repository. Whenever such an update is announced, please run `git pull` in this directory (you might wish to move [submission-inputs](./submission-inputs) and update execution paths appropriately. Please also run `docker pull beammodel/beam-competition:0.0.3-SNAPSHOT` (for sioux faux) or `docker pull beammodel/beam-competition:0.0.4.2-SNAPSHOT` (for sf_light) to ensure the image is up-to-date as well.
 
 
 ## Contributing
