@@ -1,8 +1,8 @@
-import re
-import lxml
-from lxml import etree
 import gzip
+import re
+
 import pandas as pd
+from lxml import etree
 
 
 def open_xml(path):
@@ -36,6 +36,9 @@ def guess_type(s):
     data type
 
     """
+    # test sf_light
+    return str
+    
     if re.match("^[0-9.]+$", s):
         return float
     elif re.match("^[0-9]+$", s):
@@ -104,6 +107,3 @@ def extract_dataframe(path):
     columns, column_types = list_attributes(tree)
     output_data = create_dataframe(tree, columns, column_types)
     return output_data
-
-
-
