@@ -1,7 +1,5 @@
 <!--Logo Goes Here!-->
 
-<!--This repository is a Starter Kit for the **Uber 2019 ML Hackathon** on **[AICrowd](https://www.aicrowd.com/challenges/uber-prize)**. !-->
-
 ## How do I get started?
 
 We recommend that you proceed through the documentation in the following order:
@@ -26,6 +24,7 @@ We recommend that you proceed through the documentation in the following order:
 * `docs` folder: 
   * an [introduction to BISTRO: the Berkeley Integrated System for Transportation Optimization](./docs/Introduction_transportation_problem.md)
   * a note on [how to run a simulation](./docs/How_to_run_a_simulation.md)
+  * an instruction on [how to visualize simulation output]
   * a description of the [input schema](./docs/Which-inputs-should-I-optimize.md)
   * a description of the [simulation outputs and the scoring function](./docs/Understanding_the_outputs_and_the%20scoring_function.md)
   * an outline of [the Sioux Faux Benchmark Scenario](./docs/The_Sioux_Faux_scenario.md)
@@ -46,14 +45,15 @@ List of the Sioux Faux GTFS data (General Transit Feed Specification). It is a s
 * `utilities` folder: <br> 
 List of utility scripts provided to simplify the interface with the BISTRO simulator and its inputs / outputs.
   * the [competition_executor.py](./utilities/competition_executor.py) script
-  * the [visualization.py](./utilities/visualization.py) script 
+  * ~~the [visualization.py](./utilities/visualization.py) script~~ deprecated
   * the [random_search.py](./utilities/random_search.py) script
   * the [input_sampler.py](./utilities/input_sampler.py) script
+  * the [simulation_to_db.py] (./utilities/simulation_to_db.py) script
  
 * `examples` folder: <br> 
 Exmaple python notebooks demonstrating the use of the `competition_executor.py`, `input_sampler.py`and `visualization.py` scripts. 
   * the [Starter Kit Utilities Tutorial](./examples/Starter_Kit_Utilities_Tutorial.ipynb) notebook : to run a simulation and generate random inputs
-  * the *Visualization* notebook : to plot input and output parameters
+  * ~~the *Visualization* notebook : to plot input and output parameters~~ deprecated
 
 ## Updates to the Starter Kit
 
