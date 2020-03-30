@@ -24,7 +24,7 @@ We recommend that you proceed through the documentation in the following order:
 * `docs` folder: 
   * an [introduction to BISTRO: the Berkeley Integrated System for Transportation Optimization](./docs/Introduction_transportation_problem.md)
   * a note on [how to run a simulation](./docs/How_to_run_a_simulation.md)
-  * an instruction on [how to visualize simulation output]
+  * an instruction on [how to visualize simulation output](./docs/How_to_visualize_simulation_output.md)
   * a description of the [input schema](./docs/Which-inputs-should-I-optimize.md)
   * a description of the [simulation outputs and the scoring function](./docs/Understanding_the_outputs_and_the%20scoring_function.md)
   * an outline of [the Sioux Faux Benchmark Scenario](./docs/The_Sioux_Faux_scenario.md)

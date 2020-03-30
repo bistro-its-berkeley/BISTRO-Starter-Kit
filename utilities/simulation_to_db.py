@@ -410,8 +410,8 @@ def parse_and_store_data_to_db(
     scenario_n_size = city + '-' + sample_size
 
     bistro_db = BistroDB(
-        db_name='bistro', user_name='bistroclt', db_key='client',
-        host='13.56.123.155')
+        *parse_credential(join(dirname(__file__),'dashboard_profile.ini')
+    ))
 
     for table in TABLES_LIST:
         bistro_db.create_table(table, TABLES[table])
