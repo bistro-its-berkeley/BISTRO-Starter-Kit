@@ -14,13 +14,15 @@ Git clone [BISTRO\_Dashboard](https://github.com/bistro-its-berkeley/BISTRO_Dash
 
 ----
 ## 2. Setup access
-1. Assume MySQL has been installed, and root access has been created. Use`$ mysql -u root -p` to login to database.
-2. Create bistro database inside mysql and configure account access, here we only use `usr` and `pswd` as example. Please use a secure username and password by your choice.
-`mysql> CREATE DATABASE bistro;`
-`mysql> CREATE USER ‘usr’ IDENTIFIED BY ‘pswd’;`
-`mysql> GRANT ALL ON bistro.* TO ‘usr’`
+Assume MySQL has been installed, and root access has been created. Use`$ mysql -u root -p` to login to database.
 
-3. Now that MySQL has been configured, replace the credentials in the `ini` files.
+Create bistro database inside mysql and configure account access, here we only use `usr` and `pswd` as example. Please use a secure username and password by your choice.
+
+- `mysql> CREATE DATABASE bistro;`
+- `mysql> CREATE USER ‘usr’ IDENTIFIED BY ‘pswd’;`
+- `mysql> GRANT ALL ON bistro.* TO ‘usr’`
+
+Now that MySQL has been configured, replace the credentials in the `ini` files.
 
 > To connect to existing database, fill in the blanks in `BISTRO-Starter-Kit/utilities/dashboard_profile.ini` and `BISTRO_Dashboard/dashboard_profile.ini` with the credentials (i.e. `usr` and `pswd`). If the database is not hosted on the local machine, also change DATABASE\_HOST value to the IPv4 address of the intended database server.
 
