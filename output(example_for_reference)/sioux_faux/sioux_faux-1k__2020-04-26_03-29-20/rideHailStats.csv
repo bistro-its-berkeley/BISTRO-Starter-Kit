@@ -1,0 +1,3 @@
+Iteration,onDemandRideRevenue,averageOnDemandRideWaitingTimeInSeconds,totalOnDemandRideWaitingTimeInSeconds,passengerVKT,repositioningVKT,deadHeadingVKT,averageSurgePriceLevel,maxSurgePriceLevel,reservationCount
+0,1379.47677273669,5.408333333333335,594.9166666666669,549.538907,0.0,83.270237,1.0,1.0,110
+1,1339.8835098404807,6.8304012345679,737.6833333333333,528.027456,0.0,88.662303,1.0,1.0,108

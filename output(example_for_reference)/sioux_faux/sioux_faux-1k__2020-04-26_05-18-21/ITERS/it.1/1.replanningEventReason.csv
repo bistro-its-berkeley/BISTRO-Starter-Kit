@@ -1,0 +1,3 @@
+ReplanningReason,Count
+MissedTransitPickup DRIVE_TRANSIT,15
+ResourceUnavailable RIDE_HAIL,15

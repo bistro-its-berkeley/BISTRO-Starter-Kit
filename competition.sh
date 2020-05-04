@@ -67,4 +67,4 @@ if [ -z $(docker ps | grep "beam-competition") -n ]; then
     docker rm beam-competition >> /dev/null
 fi
 
-docker run -it --memory="${MEMORY}" --cpus="${CPUS}" --name=beam-competition -v "${INPUT}":/submission-inputs:ro -v $PWD/output:/output:rw -e "${JJ}" beammodel/beam-competition:0.0.3-SNAPSHOT --scenario "${SCENARIO}" --sample-size "${SIZE}" --iters "${ITERS}"
+docker run -it --memory="${MEMORY}" --cpus="${CPUS}" --name=beam-competition -v "${INPUT}":/submission-inputs:ro -v $PWD/output:/output:rw -e "${JJ}" beammodel/beam-competition:0.0.3-noacc-SNAPSHOT --scenario "${SCENARIO}" --sample-size "${SIZE}" --iters "${ITERS}"

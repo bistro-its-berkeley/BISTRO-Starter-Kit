@@ -1,4 +1,4 @@
-<!--Logo Goes Here!-->
+# `BISTRO` Starter Kit
 
 <!--This repository is a Starter Kit for the **Uber 2019 ML Hackathon** on **[AICrowd](https://www.aicrowd.com/challenges/uber-prize)**. !-->
 
@@ -51,16 +51,18 @@ List of utility scripts provided to simplify the interface with the BISTRO simul
   * the [input_sampler.py](./utilities/input_sampler.py) script
  
 * `examples` folder: <br> 
-Exmaple python notebooks demonstrating the use of the `competition_executor.py`, `input_sampler.py`and `visualization.py` scripts. 
-  * the [Starter Kit Utilities Tutorial](./examples/Starter_Kit_Utilities_Tutorial.ipynb) notebook : to run a simulation and generate random inputs
-  * the *Visualization* notebook : to plot input and output parameters
+Exmaple python notebooks demonstrating the use of the `competition_executor.py`, `input_sampler.py` and `visualization.py` scripts. 
+  * the [Starter-Kit Simulation Tutorial](./examples/BISTRO_Starter-Kit_Simulation_Tutorial.ipynb) notebook : to run your simulation and generate random inputs
+  * the [Simulation Visualization Lite](./examples/BISTRO_Simulation_Visualization_Lite.ipynb)  : to plot input and output parameters
 
 ## Updates to the Starter Kit
 
 <!--TODO: Provide details on announcement process/location-->
 
 In order to expedite bug support, we may periodically push new Docker images to DockerHub as well as update this 
-repository. Whenever such an update is announced, please run `git pull` in this directory (you might wish to move [submission-inputs](./submission-inputs) and update execution paths appropriately. Please also run `docker pull beammodel/beam-competition:0.0.3-SNAPSHOT` (for sioux faux) or `docker pull beammodel/beam-competition:0.0.4.2-SNAPSHOT` (for sf_light) to ensure the image is up-to-date as well.
+repository. Whenever such an update is announced, please run `git pull` in this directory (you might wish to move [submission-inputs](./submission-inputs) and update execution paths appropriately). We will also update the docker image to the latest for running the simulation locally.
+* As of 04/25/2020, the latest docker image `0.0.3-noacc-SNAPSHOT` is updated for no accessibility analysis, please run `docker pull beammodel/beam-competition:0.0.3-noacc-SNAPSHOT` (for sioux faux) or `docker pull beammodel/beam-competition:0.0.4.2-SNAPSHOT` (for sf_light) to ensure the image is up-to-date as well. <br>
+    * If you are using the scripts in `/utilities`, you can directly change the parameter for the latest Docker image in `competition_executor.py`.
 
 
 ## Contributing
@@ -68,9 +70,9 @@ repository. Whenever such an update is announced, please run `git pull` in this 
 We always welcome bug reports and enhancement requests. Guidelines and suggestions on how to contribute code to this repository may be found in [./github/CONTRIBUTING.md](./.github/CONTRIBUTING.md).
 
 ## Contact Information
-If you have any questions concerning the competition, please, review first the [FAQ page](./docs/FAQ.md).
+If you have any questions concerning understanding or running the simulation, please, review first the [FAQ page](./docs/FAQ.md).
 
-If your question was note answered in the FAQ page, you can contact Jessica Lazarus at [jlaz@berkeley.edu](mailto:jlaz@berkeley.edu).
+If your question was note answered in the FAQ page, or you'd like to submit a bug report for the simulation, you can contact Jessica Lazarus [jlaz@berkeley.edu](mailto:jlaz@berkeley.edu) or Jarvis Yuan [jarviskroos7@berkeley.edu](mailto:jarviskroos7@berkeley.edu)
 
 <!-- Alternatively, to contact the Uber Prize working group technical team directly, please e-mail:
 * Sid Feygin: [sfeygi@ext.uber.com](mailto:sfeygin@ext.uber.com)

@@ -1,0 +1,5 @@
+mode,age,income,amount
+walk_transit,[66:80],[75000:89999],6.4
+OnDemand_ride,[96:110],[10000:79999],7.1
+walk_transit,[16:100],[20000:74999],3.9
+walk_transit,[51:120],[105000:124999],7.1
