@@ -1,4 +1,4 @@
-<!--Logo Goes Here!-->
+# `BISTRO` Starter Kit
 
 <!--This repository is a Starter Kit for the **Uber 2019 ML Hackathon** on **[AICrowd](https://www.aicrowd.com/challenges/uber-prize)**. !-->
 
@@ -60,7 +60,7 @@ Exmaple python notebooks demonstrating the use of the `competition_executor.py`,
 <!--TODO: Provide details on announcement process/location-->
 
 In order to expedite bug support, we may periodically push new Docker images to DockerHub as well as update this 
-repository. Whenever such an update is announced, please run `git pull` in this directory (you might wish to move [submission-inputs](./submission-inputs) and update execution paths appropriately. We will also update the docker image to the latest for running the simulation locally.
+repository. Whenever such an update is announced, please run `git pull` in this directory (you might wish to move [submission-inputs](./submission-inputs) and update execution paths appropriately). We will also update the docker image to the latest for running the simulation locally.
 * As of 04/25/2020, the latest docker image `0.0.3-noacc-SNAPSHOT` is updated for no accessibility analysis, please run `docker pull beammodel/beam-competition:0.0.3-noacc-SNAPSHOT` (for sioux faux) or `docker pull beammodel/beam-competition:0.0.4.2-SNAPSHOT` (for sf_light) to ensure the image is up-to-date as well. <br>
     * If you are using the scripts in `/utilities`, you can directly change the parameter for the latest Docker image in `competition_executor.py`.
 

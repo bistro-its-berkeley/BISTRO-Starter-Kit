@@ -238,7 +238,7 @@ gen### Java template
 *.war
 *.nar
 *.ear
-*.zip
+# included .zip files for sf_gtfs in h5/hackathon --> update_0501-jarvis
 *.tar.gz
 *.rar
 
