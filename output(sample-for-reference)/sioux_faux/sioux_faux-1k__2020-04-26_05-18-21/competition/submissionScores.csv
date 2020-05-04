@@ -1,0 +1,13 @@
+Component Name,Weight,Z-Mean,Z-StdDev,Raw Score,Weighted Score
+Accessibility: number of work locations accessible by car within 15 minutes,1.0,0.972,0.045,1.0,0.6222222222222228
+Accessibility: number of work locations accessible by transit within 15 minutes,1.0,1.022,0.029,1.0,-0.758620689655173
+Accessibility: number of secondary locations accessible by car within 15 minutes,1.0,0.998,0.005,1.0,0.40000000000000036
+Accessibility: number of secondary locations accessible by transit within 15 minutes,1.0,0.998,0.003,1.0,0.6666666666666673
+Level of service: costs and benefits,1.0,1.808,1.673,0.05897060097310071,-1.0454449486114161
+Sustainability: Total grams PM 2.5 Emitted,1.0,1.022,0.036,0.0,-28.388888888888893
+Sustainability: Total grams GHGe Emissions,1.0,1.005,0.04,0.3068749912984444,-17.453125217538886
+Congestion: average vehicle delay per passenger trip,1.0,1.054,0.101,0.051381613268896474,-9.926914720109936
+Equity: average travel cost burden - work,1.0,0.728,0.179,0.0027035479431415034,-4.051935486351165
+Level of service: average bus crowding experienced,1.0,1.023,0.061,5.547349682826146,74.16966693157617
+Equity: average travel cost burden -  secondary,1.0,1.203,0.375,0.0015699162957173397,-3.203813556544754
+Submission Score,,,,,1.002710210251348845454545454545455

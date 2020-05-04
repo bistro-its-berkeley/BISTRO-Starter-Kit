@@ -1,0 +1,5 @@
+modeChoiceReplanningEventChain,count
+drive_transit-Replanning-walk,2
+drive_transit-Replanning-walk_transit,7
+ride_hail-Replanning-walk,2
+ride_hail-Replanning-drive_transit-Replanning-walk_transit,11
