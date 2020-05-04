@@ -24,8 +24,7 @@ SCORES_PATH = ("competition", "submissionScores.csv")
 
 IMAGE_REPOSITORY = "beammodel/beam-competition"
 
-# TODO: Make parametric
-IMAGE_TAG = "0.0.1-SNAPSHOT"
+IMAGE_TAG = "0.0.3-noacc-SNAPSHOT" # Change the latest docker image here
 
 IMAGE_NAME = "{}:{}".format(IMAGE_REPOSITORY, IMAGE_TAG)
 
@@ -232,6 +231,7 @@ class Submission(object):
         """
 
         path_submission_scores = path.join(self.output_directory, SUBMISSION_SCORES_DIR, SUBMISSION_SCORES_FILE)
+        print(path_submission_scores)
         return path.exists(path_submission_scores)
 
     def __str__(self):
@@ -263,10 +263,11 @@ def _get_submission_timestamp_from_log(log):
 
     lines = log.split('\n')
     for line in lines:
-        if 'Beam output directory is' in line:
+        if 'Config' in line:
+            # Beam output directory is
             words = line.split(' ')
             output_dir = words[-1]
-            timestamp = output_dir.split('/')[-1].split('__')[-1]
+            timestamp = output_dir.split('/')[-2].split('__')[-1]
             return timestamp
     else:
         raise ValueError("No timestamp found for submission. Error running submission!")
@@ -361,7 +362,8 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
     def find_existing_simulation_containers(self):
         all_containers = self.client.containers.list(all=True)
         if all_containers is not None:
-            return {c.name: c for c in self.client.containers.list(all=True) if c.image.tag('beammodel/beam_competition:0.0.1-SNAPSHOT')}
+            return {c.name: c for c in self.client.containers.list(all=True) if c.image.tag('beammodel/beam_competition:0.0.3-saving-SNAPSHOT')}
+            # change here
         else:
             return {}
 
@@ -383,17 +385,20 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
 
     @verify_submission_id
     def find_last_completed_simulation_path(self, submission_id):
-        lines = self.output_simulation_logs(submission_id).decode("utf-8").split("\n")
+        lines = self.output_simulation_logs(submission_id).split("\n")
+        # .decode("utf-8")
 
         for line in lines:
-            if "Beam output directory is" in line:
+            if "Beam output directory is" not in line:
                 words = line.split(' ')
                 output_dir = words[-1]
                 timestamp = output_dir.split('/')[-1].split('__')[-1]
                 # assumes simulation params stay the same
                 simulation_output_root = path.join(self.output_root, SCENARIO_NAME,
                                                    "{}-{}__{}".format(SCENARIO_NAME, SAMPLE_SIZES[0], timestamp))
+                #print(simulation_output_root)
                 score_path = path.join(simulation_output_root, "competition", "submissionScores.csv")
+                print(score_path)
                 if score_path is not None and path.exists(path):
                     return score_path
                 else:
@@ -532,6 +537,7 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
 
 
         """
+
         return self.containers[sim_name].is_complete()
 
     def run_simulation(self,
@@ -578,7 +584,8 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
 
         """
         output_root = self.output_root
-        input_root = self.input_root
+        input_root = ''
+        #self.input_root
 
         if output_root is None:
             if submission_output_root is not None:
@@ -588,13 +595,13 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
                     "No output location specified. One must be provided by default "
                     "on object instantiation or supplied to this method as an argument.")
 
-        if input_root is None:
-            if submission_input_root is not None:
-                input_root = submission_input_root
-            else:
-                raise ValueError(
-                    "No input location specified. One must be provided by default "
-                    "on object instantiation or supplied to this method as an argument.")
+        #if input_root is None:
+        #    if submission_input_root is not None:
+        #        input_root = submission_input_root
+        #    else:
+        #        raise ValueError(
+        #            "No input location specified. One must be provided by default "
+        #            "on object instantiation or supplied to this method as an argument.")
 
         container = self.client.containers.run(IMAGE_NAME,
                                                cpu_count=num_cpus,
@@ -604,9 +611,9 @@ class CompetitionContainerExecutor(AbstractCompetitionExecutor):
                                                    scenario_name, sample_size, num_iterations),
                                                detach=True,
                                                volumes=
-                                               {output_root: {"bind": "/output", "mode": "rw"},
-                                                input_root: {"bind": "/submission-inputs",
-                                                             "mode": "ro"}})
+                                               {output_root: {"bind": "/output", "mode": "rw"}})
+                                                #input_root: {"bind": "/submission-inputs",
+                                                #             "mode": "ro"}})
 
         self.containers[submission_id] = Submission(submission_id,
                                                     scenario_name,

@@ -30,7 +30,7 @@ There are no strict hardware requirements; however, performance will increase su
 For your convenience, we've provided several interfaces to running simulations.
 
 ### 2.1. Running Using Python API
-A python utility, [`competition_executor.py`](/utilities/competition_executor.py) is available in the [`utilities`](/utilities) folder to simplify the interface to docker. See the accompanying ["Starter Kit Utilities Tutorial" Jupyter notebook](//examples/Starter_Kit_Utilities_Tutorial.ipynb) for instructions on its use.
+A python utility, [`competition_executor.py`](/utilities/competition_executor.py) is available in the [`utilities`](/utilities) folder to simplify the interface to docker. See the accompanying ["Starter-Kit Simulation Tutorial" Jupyter notebook](//examples/Starter-Kit_Simulation_Tutorial.ipynb) for instructions on its use, recommended for first time users to try out the essential features of BISTRO and Beam.
 
 ### 2.2. Running a Container From the Command Line
 

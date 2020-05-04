@@ -1,10 +1,10 @@
-# Technical FAQ
+﻿# Technical FAQ
 
-This document gathers the recurrent questions about the Uber Prize in general, the transportatino problem, the BISTRO simulations and includes also a Troubleshooting page.
+This document gathers the recurrent questions about the transportation problem, the BISTRO simulations and includes also a Troubleshooting page. 
 
-### 1. TRANSPORTATION PROBLEM
+### 1. Transportation Problem
 <details>
-<summary><strong>Why are alternatives to the car limited to buses and on-demand rideshare? What about metro, bikes, scooters..etc?</strong></summary>
+<summary><strong>Why are alternatives to the car limited to buses and on-demand rideshare? What about metro, bikes, scooters, etc?</strong></summary>
 <br>
 The Sioux Faux Scenario Benchmark Scenario provides first time users with a first “simple” scenario to discover and familiarize themselves with the transportation system optimization problem and the BISTRO framework. Additional scenarios under development include a broader range of multimodal options.
 </details><br>
@@ -16,7 +16,7 @@ The Sioux Faux Scenario Benchmark Scenario provides first time users with a firs
 The Sioux Falls transportation network has been frequently used in the transportation modelling domain, and, in particular, has often served as a useful test case in agent-based traffic simulations. Its accessible scale and the large amount of previous research work and data available for the city make it a good candidate to build and test transportation models.
 </details><br>
 
-### 2. SIMULATION
+### 2. Simulation
 
 *2.1. Simulation Variability*
 
@@ -39,19 +39,17 @@ As explained in the answer to the previous question, there is no guarantee which
 <details>
 <summary><strong>What is warm start and how is it used?</strong></summary>
 <br>
-Every simulation run starts from the baseline calibrated scenario (BAU) in order to have a standard of comparison. The BAU scenario itself is the result of dynamic traffic assignment performed by BEAM using a modified version of the MATSim co-evolutionary approach (see < link to documentation />). Warm start avoids having to redo this process, which can add an extra 100 iterations to the simulation. Using this approach is the prevailing practice in the literature, so also permits comparison with similar policy evaluation systems.
+Every simulation run starts from the baseline calibrated scenario (BAU) in order to have a standard of comparison. The BAU scenario itself is the result of dynamic traffic assignment performed by BEAM using a modified version of the [MATSim co-evolutionary approach](https://www.researchgate.net/publication/254059914_Integrating_Power_Systems_Transport_Systems_and_Vehicle_Technology_for_Electric_Mobility_Impact_Assessment_and_Efficient_Control). Warm start avoids having to redo this process, which can add an extra 100 iterations to the simulation. Using this approach is the prevailing practice in the literature, so also permits comparison with similar policy evaluation systems.
 </details><br>
 
 <details>
 <summary><strong>What is the “--iters” option? How many iterations should I choose for my simulation?</strong></summary>
 <br>
-After playing with several policy variants and analyzing the outputs (in particular, paying attention to the scoreStats.png/.txt), you may notice that the agent ensemble average scores get worse at first and then begin to improve after a number of iterations. This process, known as relaxation, may seem familiar to those familiar with reinforcement learning, as it is analogous to the concept of exploration. Agents explore new routes, modes, and activity timings to try to find better plans after policies perturb the travel environment. The number of iterations needed to reach a fixed point will vary between sets of inputs; however, it is likely that you will see some immediate change to highly sensitive indicators such as mode choice. In contrast to MATSim, which (by default) slowly varies agent plans, BEAM’s reactive agents respond rapidly to changes in the transportation system. Thus, while the plans may continue to improve many over iterations, the magnitude of immediate change in behavior following a certain change in policy may provide enough information to pursue or discard a search coordinate. Running for only one iteration could permit rapid exploration of the search space. On the other hand, it is difficult to predict the rate of evolution of scores to a final fixed point. We thus leave it up to the contestant to determine how many fewer iterations (if any) than the official 150 iteration evaluation run could be a useful strategy in accelerating search algorithms. 
+After playing with several policy variants and analyzing the outputs (in particular, paying attention to the `scoreStats.png/.txt`), you may notice that the agent ensemble average scores get worse at first and then begin to improve after a number of iterations. This process, known as relaxation, may seem familiar to those familiar with reinforcement learning, as it is analogous to the concept of exploration. Agents explore new routes, modes, and activity timings to try to find better plans after policies perturb the travel environment. The number of iterations needed to reach a fixed point will vary between sets of inputs; however, it is likely that you will see some immediate change to highly sensitive indicators such as mode choice. In contrast to MATSim, which (by default) slowly varies agent plans, BEAM’s reactive agents respond rapidly to changes in the transportation system. Thus, while the plans may continue to improve many over iterations, the magnitude of immediate change in behavior following a certain change in policy may provide enough information to pursue or discard a search coordinate. Running for only one iteration could permit rapid exploration of the search space. On the other hand, it is difficult to predict the rate of evolution of scores to a final fixed point. We thus leave it up to the contestant to determine how many fewer iterations (if any) than the official 150 iteration evaluation run could be a useful strategy in accelerating search algorithms. 
 </details><br>
 
 
-
-
-### 3. TROUBLESHOOTING
+### 3. Troubleshooting
 
 Users may find that simulations take a long time. The following items provide some ideas to improve execution time or otherwise accelerate search.
 
@@ -60,13 +58,13 @@ Users may find that simulations take a long time. The following items provide so
 <details>
 <summary><strong>Nothing is happening! Is the simulation stuck?</strong></summary>
 <br>
-Most likely not! You will have probably seen a validation error if your inputs do not match the schema specified in <link_to_schema>. In this case, the simulation should end immediately and a “Failed” indicator will appear on the “Submissions” tab next to this submission. You may examine beamLog.out and validation-errors.out files to determine the source of the error.
+Most likely not! You will have probably seen a validation error if your inputs do not match the schema specified [here](docs/Which-inputs-should-I-optimize.md). In this case, the simulation should end immediately and a “Failed” indicator will appear on the “Submissions” tab next to this submission. You may examine `beamLog.out`and `validation-errors.out` files to determine the source of the error.
 </details><br>
 
 <details>
 <summary><strong>How can I maximize use of compute resources available to me?</strong></summary>
 <br>
-Consider using the “1k”-scenario to get started. 
+Consider using the “1k”-scenario to get started, currently running a 15k simulation without accessibility analysis will take from 5 to 10 mins for a single iteration, a detailed chart with estimated running time for development is listed under the next question.
 
 <details>
 <summary><strong>A simulation run takes way too long! Why? How can I make the simulation run more quickly? What is the maximum performance that I can expect?</strong></summary>
@@ -76,7 +74,7 @@ Consider using the “1k”-scenario to get started.
   
 * Routing is highly CPU-bound, so once you’ve met the minimum memory requirements (~8-16GB) the more CPUs you can throw at it, the better! 
 
-* Depending on whether you run on a local machine meeting minimal hardware requirements (4 CPU/8GB)  or a beefy cloud server (72 CPU/148 GB) you should expect the following times for a single simulation run of 100 iterations:
+* Depending on whether you run on a local machine meeting minimal hardware requirements (4 CPU/8GB)  or a beefy cloud server like AWS (72 CPU/148 GB) you should expect the following times for a single simulation run of 100 iterations:
 
 | Sample Size| Computational Environment | Runtime Benchmark |
 | :---:| :---: | :---: |
@@ -87,9 +85,17 @@ Consider using the “1k”-scenario to get started.
 
 As you can see, it is not advised to run the 15k scenario on your local 
 machine. However, it is plausible to develop locally using the 1k scenario, 
-since a single iteration may take only ~30 seconds. 
+since a **single** iteration may take only ~30 seconds. 
 
 <br>
 </details>
 
+<details>
+<summary><strong>Common errors encountered and maybe a debug log?</strong></summary>
+<br>
+Yes, we have a [debug log](https://docs.google.com/document/d/14d0_50TfiszSlDvM7pLQIzUpkV8dK4HZHNtZWJRCE5s/edit?usp=sharing) put together when updating the Starter-Kit. Though so far the issues listed there have been resolved with the latest docker image `0.0.3-noacc-SNAPSHOT`, but you are welcomed to have a look, contact [Jarvis Yuan](mailto: jarviskroos7@berkeley.edu) for any questions.
+</details><br>
 
+<br>
+
+If you feel like your question/concern has not been addressed here in the FAQs, please return to the [contribution page](.github/CONTRIBUTING.md) and submit a bug report to us!

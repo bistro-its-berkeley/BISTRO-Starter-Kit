@@ -191,10 +191,10 @@ def plot_incentives_inputs(incentives_data, max_incentive, max_age, max_income, 
     my_cmap = plt.cm.get_cmap('YlOrRd')
     colors = my_cmap(incentives["amount_normalized"])
 
+    print(incentives.head())
     # plot
-    ax[0].barh(incentives["mode"], incentives["max_age"] - incentives["min_age"], left=incentives["min_age"], color=colors)
-    ax[1].barh(incentives["mode"], incentives["max_income"]-incentives["min_income"], left=incentives["min_income"], color=colors)
-
+    ax[0].barh(incentives["mode"], incentives["max_age"] - incentives["min_age"], color=colors, left=min(incentives["min_income"]))
+    ax[1].barh(incentives["mode"], incentives["max_income"]-incentives["min_income"], color=colors, left=min(incentives["min_income"]))
     ax[0].set_xlabel("age")
     ax[0].set_xlim((0, max_age))
 
@@ -380,6 +380,7 @@ def plot_mass_transit_fares_inputs(fares_data, bau_fares_data, max_fare, route_i
 
     """
     fares = process_fares_data(fares_data, bau_fares_data, max_fare, route_ids)
+    #print(fares.head())
 
     fig, ax = plt.subplots(figsize = (7,5))
 
@@ -387,7 +388,8 @@ def plot_mass_transit_fares_inputs(fares_data, bau_fares_data, max_fare, route_i
     my_cmap = plt.cm.get_cmap('YlOrRd')
     colors = my_cmap(fares["amount_normalized"])
 
-    plt.barh(fares["routeId"], fares["max_age"] - fares["min_age"], left=fares["min_age"], color=colors)
+    y = np.array(fares['routeId'])
+    plt.barh(y=y, width=(fares["max_age"] - fares["min_age"]), color=colors , left=min(fares["min_age"]))
 
     plt.xlabel("Age")
     plt.ylabel("Bus route")
