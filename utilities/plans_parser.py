@@ -1,3 +1,4 @@
+import math
 import gzip
 from pathlib import Path
 
@@ -39,7 +40,7 @@ def get_fleet_mix_df(fleet_mix_data, bus_frequency_data):
     return res.reset_index()
 
 
-def get_bus_fares_df(bus_fares_data_df):
+def get_bus_fares_df(bus_fares_data_df, routes):
     res = []
     bus_fares_data_df = bus_fares_data_df.reset_index()
     for i, row in bus_fares_data_df.iterrows():
@@ -55,7 +56,13 @@ def get_bus_fares_df(bus_fares_data_df):
             max_a = int(ages[1]) - 1
         else:
             max_a = int(ages[1])
-        res.append([row['routeId'], min_a, max_a, row['amount']])
+        if not math.isnan(row['routeId']):
+            res.append([row['routeId'], min_a, max_a, row['amount']])
+        else:
+            # if routeId is empty, then apply price to all routes
+            for _, route in routes[routes['agency_id']==row['agencyId']].iterrows():
+                res.append([route['route_id'], min_a, max_a, row['amount']])
+
     return pd.DataFrame(res, columns=['route_id', 'age_min', 'age_max', 'amount'])
 
 

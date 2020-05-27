@@ -7,7 +7,7 @@ from datetime import datetime as dt
 import pandas as pd
 import utm
 
-from bistro_connect_db import BistroDB
+from bistro_connect_db import BistroDB, parse_credential
 from bistro_dbschema import TABLES, TABLES_LIST
 from data_parsing import open_xml
 from plans_parser import (
@@ -262,8 +262,9 @@ def store_input_bus_fare_data_to_db(
         output_path, simulation_id, route_ids, bistro_db):
     bus_fares_data = pd.read_csv(
         output_path + '/competition/submission-inputs/MassTransitFares.csv')
+    routes = get_r5_df(fixed_data, city, 'routes.txt')
 
-    bus_fares_df = get_bus_fares_df(bus_fares_data)
+    bus_fares_df = get_bus_fares_df(bus_fares_data, routes)
     if len(bus_fares_df) > 0:
         bus_fares_df['run_id'] = simulation_id
         bistro_db.insert(
@@ -308,6 +309,21 @@ def store_input_road_pricing_data_to_db(output_path, simulation_id, bistro_db):
                 ['run_id', 'link_id', 'toll', 'start_time', 'end_time']
             ].values.tolist()
         )
+
+
+def store_toll_circle_to_db(output_path, simulation_id, city, scenario_n_size, bistro_db):
+    with open(output_path+'/../../../../circle_params.txt', 'r') as f:
+        tmp = f.readline().strip()
+    arr = tmp.split(',')
+    easting, northing = float(arr[0].split(':')[1]), float(arr[1].split(':')[1])
+    radius = float(arr[2].split(':')[1])
+    price = float(arr[3].split(':')[1])
+    center_lat, center_lon = convert_utm(easting, northing, city)
+    border_lat, border_lon = convert_utm(easting+radius, northing, city)
+
+    bistro_db.insert(
+            'tollcircle',
+            [[simulation_id,scenario_n_size,'mileage',price,center_lat,center_lon,border_lat,border_lon]])
 
 
 def store_hourly_mode_choice_to_db(
@@ -370,6 +386,27 @@ def store_simulation_scores_to_db(output_path, simulation_id, bistro_db):
     )
 
 
+def store_raw_scores_to_db(output_path, simulation_id, iteration, bistro_db):
+    score_df = pd.read_csv(output_path + '/competition/rawScores.csv',index_col='Iteration').fillna(0.0).loc[iteration,:]
+    standard = pd.read_csv('standardizationParameters.csv',index_col='KPI').fillna(0.0)
+    res = []
+    for idx, score in score_df.items():
+        if idx == 'Congestion: total vehicle miles traveled':
+            continue
+
+        if idx == 'TollRevenue':
+            kpi = 'Toll Revenue'
+        elif idx == 'VMT':
+            kpi = 'Congestion: total vehicle miles traveled'
+        else:
+            kpi = idx
+        mean = standard['MEAN'][idx]
+        std = standard['STD'][idx]
+        norm_score = score if std == 0 else (score-mean)/std
+        res.append([simulation_id, kpi, 1.0, mean, std, score, norm_score])
+    bistro_db.insert('score', res)
+
+
 def store_event_data_to_db(
         output_path, iteration, simulation_id, scenario, fuel_cost,
         detail_incentive_df, detail_bus_fares_df, persons_attributes_df,
@@ -394,7 +431,8 @@ def store_event_data_to_db(
 
 
 def parse_and_store_data_to_db(
-        output_path, fixed_data, city, sample_size, iteration, name='test'):
+        output_path, fixed_data, city, sample_size, iteration, name='test',
+        cordon=False, standardize_score=False):
 
     datetime_pattern = r"__(\d+)-(\d+)-(\d+)_(\d+)-(\d+)-(\d+)"
 
@@ -478,6 +516,10 @@ def parse_and_store_data_to_db(
 
     store_input_road_pricing_data_to_db(output_path, simulation_id, bistro_db)
 
+    if cordon:
+        store_toll_circle_to_db(
+            output_path, simulation_id, city, scenario_n_size, bistro_db)
+
     store_hourly_mode_choice_to_db(output_path, simulation_id, iteration, bistro_db)
 
     store_average_travel_time_to_db(
@@ -488,7 +530,10 @@ def parse_and_store_data_to_db(
     store_realized_mode_choice_stats_to_db(
         output_path, simulation_id, bistro_db)
 
-    store_simulation_scores_to_db(output_path, simulation_id, bistro_db)
+    if standardize_score:
+        store_raw_scores_to_db(output_path, simulation_id, iteration, bistro_db)
+    else:
+        store_simulation_scores_to_db(output_path, simulation_id, bistro_db)
 
     # this will store all trip, leg, pathtraversal, and vehicle data from the
     # simulation to the database
@@ -504,13 +549,13 @@ def parse_and_store_data_to_db(
 
 if __name__ == '__main__':
 
-    city = 'sf_light'
-    sample_size = '25k'
-    iteration = 0
+    # city = 'sf_light'
+    # sample_size = '25k'
+    # iteration = 0
 
-    # city = 'sioux_faux'
-    # sample_size = '15k'
-    # iteration = 1
+    city = 'sioux_faux'
+    sample_size = '15k'
+    iteration = 99
 
     output_root = '/Users/zangnanyu/bistro/BeamCompetitions/output'
     input_root = '/Users/zangnanyu/bistro/BeamCompetitions/submission-inputs'
@@ -533,6 +578,6 @@ if __name__ == '__main__':
 
     # output_root += '/' if output_root[-1] != '/' else ''
     # output_path = (output_root + city + '/' +  city + '-' + sample_size + match.group())
-    output_path = '/Users/zangnanyu/bistro/BeamCompetitions/output/sf_light/sf_light_BAU'
+    output_path = '/Users/zangnanyu/bistro/BeamCompetitions/fixed-data/sioux_faux/bau/warm-start/sioux_faux-15k__warm-start'
 
     parse_and_store_data_to_db(output_path, fixed_data, city, sample_size, iteration)

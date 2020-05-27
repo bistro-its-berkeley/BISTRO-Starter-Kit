@@ -273,12 +273,15 @@ def get_trips_legs_pathtraversals_vehicles_list(
                     pathtraversal_links_list.append(
                         [run_id, v_id, i+1, int(link), scenario]
                     )
+            # BEAM was not very consistent on its output names
+            # different version has different format.
+            fuel_level = path['primaryFuelLevel'] if 'primaryFuelLevel' in path else path['endLegPrimaryFuelLevel']
             pathtraversals_list.append(
                 [run_id, v_id, i+1, path['driver'], path['mode'],
                  float(path['length']), int(path['departureTime']),
                  int(path['arrivalTime']), int(path['numPassengers']),
                  float(path['primaryFuel']),
-                 float(path['primaryFuelLevel']),
+                 float(fuel_level),
                  path['primaryFuelType'],
                  path['fuel_cost'],
                  float(path['startX']),

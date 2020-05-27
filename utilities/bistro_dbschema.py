@@ -6,11 +6,11 @@ INSERT = {}
 # because of the foreign relation, tables cannot be created in random order
 # the partial order below addresses the dependency between foreign key relations.
 TABLES_LIST = [
-    'scenario', 'simulationrun', 'node', 'link', 'household', 'person',
-    'activity', 'vehicletype', 'vehiclecost', 'agency', 'transitroute',
-    'transittrip', 'fleetmix', 'transitfare', 'incentive', 'roadpricing',
-    'tollcircle', 'vehicle', 'trip', 'leg', 'leg_link', 'pathtraversal',
-    'pathtraversal_link', 'leg_pathtraversal', 'modechoice',
+    'scenario', 'simulationrun', 'simulationtag', 'node', 'link', 'household',
+    'person', 'activity', 'vehicletype', 'vehiclecost', 'agency',
+    'transitroute', 'transittrip', 'fleetmix', 'transitfare', 'incentive',
+    'roadpricing', 'tollcircle', 'vehicle', 'trip', 'leg', 'leg_link',
+    'pathtraversal', 'pathtraversal_link', 'leg_pathtraversal', 'modechoice',
     'realizedmodechoice', 'hourlymodechoice', 'traveltime', 'score'
     ]
 
@@ -31,6 +31,14 @@ TABLES['simulationrun'] = """
 """
 COLUMNS['simulationrun'] = '`run_id`, `datetime`, `scenario`, `name`'
 INSERT['simulationrun'] = 'UUID_TO_BIN(%s), %s, %s, %s'
+
+
+TABLES['simulationtag'] = """
+`tag` VARCHAR(100),
+`name` VARCHAR(50)
+"""
+COLUMNS['simulationtag'] = '`tag`, `name`'
+INSERT['simulationtag'] = '%s, %s'
 
 
 TABLES['node'] = """
