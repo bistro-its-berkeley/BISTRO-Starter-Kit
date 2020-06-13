@@ -43,7 +43,7 @@ def vehicle_type_path(fixed_data, city, sample_size):
         path += '/sample/' + sample_size
 
     elif city == 'sf_light':
-        # do nothing
+        # the csv is stored in 'path' itself
         pass
 
     return path + '/vehicleTypes.csv'
@@ -55,7 +55,7 @@ def fuel_type_path(fixed_data, city, sample_size):
         path += '/sample/' + sample_size
 
     elif city == 'sf_light':
-        # do nothing
+        # the csv is stored in 'path' itself
         pass
 
     return path + '/beamFuelTypes.csv'
@@ -391,6 +391,8 @@ def store_raw_scores_to_db(output_path, simulation_id, iteration, bistro_db):
     standard = pd.read_csv('standardizationParameters.csv',index_col='KPI').fillna(0.0)
     res = []
     for idx, score in score_df.items():
+        # The simulation raw score used to have VMT score, but this score disappeared
+        # after a BEAM update.
         if idx == 'Congestion: total vehicle miles traveled':
             continue
 
@@ -425,9 +427,9 @@ def store_event_data_to_db(
     bistro_db.insert('trip', trips_list)
     bistro_db.insert('leg', legs_list)
     bistro_db.insert('pathtraversal', pathtraversals_list)
-    # bistro_db.insert('pathtraversal_link', pathtraversal_links_list, skip_existing=True)
-    # bistro_db.insert('leg_pathtraversal', leg_pathtraversals_list)
-    # bistro_db.insert('leg_link', leg_links_list, skip_existing=True)
+    bistro_db.insert('pathtraversal_link', pathtraversal_links_list, skip_existing=True)
+    bistro_db.insert('leg_pathtraversal', leg_pathtraversals_list)
+    bistro_db.insert('leg_link', leg_links_list, skip_existing=True)
 
 
 def parse_and_store_data_to_db(
@@ -545,6 +547,11 @@ def parse_and_store_data_to_db(
     # commit after all data had been added to DB.
     bistro_db.connection.commit()
     return simulation_id
+
+
+def tpe_path(root, name):
+    import glob
+    return glob.glob(root+ '/'+ name+ '/'+ 'output/*/sioux_faux/*')[0]
 
 
 if __name__ == '__main__':
