@@ -8,14 +8,14 @@ In the Sioux Faux Benchmark Scenario, you may optimize the transportation networ
 ## Sioux Faux network
 The Sioux Faux road network is shown below (Fig. 1). The twelve bus routes operated by the Sioux Faux Bus Lines (SFBL) transportation company are simulated in the Benchmark Scenario.
 
-<img src="/Images/sf_route_guide.png" width="40%"> <br>
+<img src="/Images/sf_route_guide.png" width="30%"> <br>
 ***Figure 2: Sioux Faux Network***
 
 ## Sioux Faux sample population
 
 In order to simulate the activity and travel behavior of the citizens of Sioux Faux, a population of virtual agents and households was generated such that the sociodemographic attributes of these virtual entities are spatially distributed in accordance with real-world census data (see Figure 3). In order to provide realistic distributions of household and individual attributes for Sioux Faux, we expanded publicly-available survey data for the city of Sioux Falls, South Dakota. <br>
 
-<img src="/Images/Demographics.png" width="40%"> <br>
+<img src="/Images/Demographics.png" width="60%"> <br>
 ***Figure 3: Demographics of Sioux Faux***
 <br>
 You have access to two sample populations with which you can run simulations:
