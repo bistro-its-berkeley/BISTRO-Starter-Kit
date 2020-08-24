@@ -23,8 +23,7 @@ The following subsections provide a detailed description of what each input repr
 
 In the Sioux Faux Benchmark Scenario, Sioux Faux Bus Lines (SFBL) operates a small fleet of buses on 12 routes in Sioux Faux. Orginally purchased as a group, each bus in the fleet possesses identical attributes of seating capacity, fuel consumption, operations and maintenance cost, etc. SFBL is considering optimizing bus type in order to better match the specific demand characteristics of each route. Four types of buses (including the current one used by SFBL, called `BUS-DEFAULT`) are available from its supplier, each of them with different technical properties ([`availableVehicleTypes.csv`](/../../blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/availableVehicleTypes.csv), see Figure 2) and cost characteristics[`vehicleCosts.csv`](/../../blob/master/reference-data/sioux_faux/sioux_faux_bus_lines/vehicleCosts.csv), see Figure 3). Currently, the number of buses required to service each route is equal to the number of trips: after the headway has expired, a new bus is used. For instance, if the bus frequency on a specific route is 10 minutes, a new bus is used every 10 minutes during the service time on this route. When one bus finishes its (unique) tour, it disappears from the simulation. This does not reflect a realistic scenario combining bus routes into runs, but, for now, it still allows for comparisons to a BAU case.
 
-
-![Route IDs](/Images/sf_route_guide.png) <br/>
+<img src="/Images/sf_route_guide.png" width="50%"> <br>
 ***Figure 1: Sioux Faux route IDs guide***
 <br/>
 <br/>
